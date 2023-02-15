@@ -17,6 +17,7 @@ android {
     sourceSets {
         main {
             res.srcDirs = [
+                    'src/main/res/layouts/indicators',
                     'src/main/res/layouts/buttons',
                     'src/main/res/layouts/texts',
                     'src/main/res/layouts/fragments',

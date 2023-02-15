@@ -5,6 +5,10 @@
     android:viewportHeight="980">
   <path
       android:pathData="M 0.0 0.0, 980.0 0.0, 980.0 980.0, 0.0 980.0"
+      android:fillColor="#000000"
+      android:strokeColor="#00000000"/>
+  <path
+      android:pathData="M 150.0 200.0, 850.0 200.0, 850.0 780.0, 150.0 780.0"
       android:fillColor="#FFFFFF"
       android:strokeColor="#00000000"/>
   <path

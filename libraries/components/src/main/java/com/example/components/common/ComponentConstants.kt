@@ -9,4 +9,9 @@ object ComponentConstants {
     const val BACKGROUND_COLOR = Color.BLACK
     val TEXT_COLOR_RES = R.color.white
     val BACKGROUND_COLOR_RES = R.color.black
+
+    const val COMPONENT_TYPE_BUTTON = 1
+    const val COMPONENT_TYPE_TEXT = 2
+    const val COMPONENT_TYPE_INDICATOR = 3
+    const val COMPONENT_TYPE_CAROUSEL = 4
 }

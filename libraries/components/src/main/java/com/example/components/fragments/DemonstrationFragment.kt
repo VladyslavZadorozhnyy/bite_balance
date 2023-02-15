@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.components.R
-import com.example.components.buttons.common.BaseButtonModel
+import com.example.components.buttons.common.ButtonModel
+import com.example.components.common.BaseComponentModel
 import com.example.components.databinding.FragmentDemonstrationBinding
-import com.example.components.texts.common.BaseTextModel
+import com.example.components.progress.indicator.ProgressIndicatorModel
+import com.example.components.mocks.MockNutritionModel
+import com.example.components.progress.carousel.ProgressCarouselModel
+import com.example.components.texts.common.TextModel
 
 class DemonstrationFragment : Fragment() {
     private val binding by lazy { FragmentDemonstrationBinding.inflate(layoutInflater) }
@@ -31,11 +35,26 @@ class DemonstrationFragment : Fragment() {
         setupTextIconButtonSample()
         setupTextButtonSample()
         setupIconButtonSample()
+
+        binding.progressCarousel.setup(model = ProgressCarouselModel(
+            consumed = MockNutritionModel(
+                fat = 10F,
+                carb = 14F,
+                ccal = 750F,
+                protein = 10F,
+            ),
+            goalConsumption = MockNutritionModel(
+                fat = 10F,
+                carb = 12F,
+                ccal = 2000F,
+                protein = 10F,
+            )
+        ))
     }
 
     private fun setupTitle() {
         binding.title.setup(
-            model = BaseTextModel(
+            model = TextModel(
                 textValue = "Demonstration Fragment",
                 textColor = Color.WHITE,
                 backgroundColor = Color.BLACK,
@@ -45,7 +64,7 @@ class DemonstrationFragment : Fragment() {
 
     private fun setupTextSample() {
         binding.textSample.setup(
-            model = BaseTextModel(
+            model = TextModel(
                 textValue = "Text sample component",
                 textColor = Color.WHITE,
                 backgroundColor = Color.BLACK,
@@ -55,7 +74,7 @@ class DemonstrationFragment : Fragment() {
 
     private fun setupSlideableTextSample() {
         binding.slideableTextSample.setup(
-            model = BaseTextModel(
+            model = TextModel(
                 textValue = "Very very long text sample component",
                 textColor = Color.WHITE,
                 backgroundColor = Color.BLACK,
@@ -65,7 +84,7 @@ class DemonstrationFragment : Fragment() {
 
     private fun setupTextIconButtonSample() {
         binding.textIconButtonSample.setup(
-            model = BaseButtonModel(
+            model = ButtonModel(
                 iconRes = R.drawable.info_icon,
                 iconSize = 80,
                 labelTextSize = 14,
@@ -81,7 +100,7 @@ class DemonstrationFragment : Fragment() {
 
     private fun setupTextButtonSample() {
         binding.textButtonSample.setup(
-            model = BaseButtonModel(
+            model = ButtonModel(
                 labelTextSize = 20,
                 labelTextRes = R.string.text_button_sample,
                 foregroundColorRes = R.color.white,
@@ -95,7 +114,7 @@ class DemonstrationFragment : Fragment() {
 
     private fun setupIconButtonSample() {
         binding.iconButtonSample.setup(
-            model = BaseButtonModel(
+            model = ButtonModel(
                 iconRes = R.drawable.info_icon,
                 iconSize = 100,
                 foregroundColorRes = R.color.white,
