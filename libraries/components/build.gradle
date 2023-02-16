@@ -17,6 +17,15 @@ android {
     sourceSets {
         main {
             res.srcDirs = [
+                    'src/main/res/drawables/icons/other',
+                    'src/main/res/drawables/icons/carousel',
+                    'src/main/res/drawables/icons/nav',
+                    'src/main/res/drawables/icons',
+                    'src/main/res/drawables/shapes',
+                    'src/main/res/drawables',
+
+                    'src/main/res/layouts/checkbox',
+                    'src/main/res/layouts/nav',
                     'src/main/res/layouts/indicators',
                     'src/main/res/layouts/buttons',
                     'src/main/res/layouts/texts',

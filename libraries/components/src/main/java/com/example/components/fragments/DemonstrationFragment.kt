@@ -2,6 +2,7 @@ package com.example.components.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,11 @@ import com.example.components.common.BaseComponentModel
 import com.example.components.databinding.FragmentDemonstrationBinding
 import com.example.components.progress.indicator.ProgressIndicatorModel
 import com.example.components.mocks.MockNutritionModel
+import com.example.components.nav_bar.NavigationBarModel
 import com.example.components.progress.carousel.ProgressCarouselModel
 import com.example.components.texts.common.TextModel
 
+// TODO: remove this fragment, put all fragments to com.example.layouts.fragments package
 class DemonstrationFragment : Fragment() {
     private val binding by lazy { FragmentDemonstrationBinding.inflate(layoutInflater) }
 
@@ -35,21 +38,14 @@ class DemonstrationFragment : Fragment() {
         setupTextIconButtonSample()
         setupTextButtonSample()
         setupIconButtonSample()
+        setupCarousel()
+        setupNavigation()
 
-        binding.progressCarousel.setup(model = ProgressCarouselModel(
-            consumed = MockNutritionModel(
-                fat = 10F,
-                carb = 14F,
-                ccal = 750F,
-                protein = 10F,
-            ),
-            goalConsumption = MockNutritionModel(
-                fat = 10F,
-                carb = 12F,
-                ccal = 2000F,
-                protein = 10F,
+        binding.checkboxComponent.setup(
+            BaseComponentModel(
+                componentType = 1
             )
-        ))
+        )
     }
 
     private fun setupTitle() {
@@ -123,6 +119,44 @@ class DemonstrationFragment : Fragment() {
                     Toast.makeText(activity,"IconButton clicked!", Toast.LENGTH_SHORT).show()
                 }
             )
+        )
+    }
+
+    private fun setupCarousel() {
+        binding.progressCarousel.setup(model = ProgressCarouselModel(
+            consumed = MockNutritionModel(
+                fat = 10F,
+                carb = 14F,
+                ccal = 750F,
+                protein = 10F,
+            ),
+            goalConsumption = MockNutritionModel(
+                fat = 10F,
+                carb = 12F,
+                ccal = 2000F,
+                protein = 10F,
+            )
+        ))
+    }
+
+    private fun setupNavigation() {
+        binding.navigationComponent.setup(
+            NavigationBarModel(
+                nonActiveIconsRes = listOf(
+                    R.drawable.nav_home_not_active,
+                    R.drawable.nav_stats_not_active,
+                    R.drawable.nav_menu_not_active,
+                    R.drawable.nav_settings_not_active
+                ),
+                activeIconsRes = listOf(
+                    R.drawable.nav_home_active,
+                    R.drawable.nav_stats_active,
+                    R.drawable.nav_menu_active,
+                    R.drawable.nav_settings_active
+                ),
+            ) {
+                Log.d("AAADIP", "menu item chosen it: $it")
+            }
         )
     }
 }

@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//        Move to separate component later
+//        TODO: Move to separate component later
         supportFragmentManager.beginTransaction().apply {
             replace(binding.fragmentContainer.id, DemonstrationFragment())
             addToBackStack(null)
