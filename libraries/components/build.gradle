@@ -25,6 +25,8 @@ android {
                     'src/main/res/drawables/shapes',
                     'src/main/res/drawables',
 
+                    'src/main/res/layouts/dialogs',
+                    'src/main/res/layouts/input_form',
                     'src/main/res/layouts/checkbox',
                     'src/main/res/layouts/nav',
                     'src/main/res/layouts/indicators',

@@ -12,6 +12,7 @@ import com.example.components.R
 import com.example.components.buttons.common.ButtonModel
 import com.example.components.checkbox.CheckBoxModel
 import com.example.components.databinding.FragmentDemonstrationBinding
+import com.example.components.input_form.InputFormModel
 import com.example.components.mocks.MockNutritionModel
 import com.example.components.nav_bar.NavigationBarModel
 import com.example.components.progress.carousel.ProgressCarouselModel
@@ -39,24 +40,10 @@ class DemonstrationFragment : Fragment() {
         setupIconButtonSample()
         setupCarousel()
         setupNavigation()
+        setupCheckBox()
+        setupInputForm()
 
-        binding.checkboxText.setup(
-            TextModel(
-                textValue = "Checkbox text",
-                textSize = 20,
-                textColor = R.color.black,
-                backgroundColor = Color.TRANSPARENT,
-            )
-        )
 
-        binding.checkboxComponent.setup(
-            model = CheckBoxModel(
-                checked = false,
-                active = true,
-                onChecked = { binding.checkboxText.strikeThrough() },
-                onUnchecked = { binding.checkboxText.unstrikeThrough() }
-            )
-        )
     }
 
     private fun setupTitle() {
@@ -168,6 +155,36 @@ class DemonstrationFragment : Fragment() {
             ) {
                 Log.d("AAADIP", "menu item chosen it: $it")
             }
+        )
+    }
+
+    private fun setupCheckBox() {
+        binding.checkboxText.setup(
+            TextModel(
+                textValue = "Checkbox text",
+                textSize = 20,
+                textColor = R.color.black,
+                backgroundColor = Color.TRANSPARENT,
+            )
+        )
+
+        binding.checkboxComponent.setup(
+            model = CheckBoxModel(
+                checked = false,
+                active = true,
+                onChecked = { binding.checkboxText.strikeThrough() },
+                onUnchecked = { binding.checkboxText.unstrikeThrough() }
+            )
+        )
+    }
+
+    private fun setupInputForm() {
+        binding.inputForm.setup(
+            model = InputFormModel(
+                active = true,
+                hint = "Hint",
+                onInputChange = { Log.d("AAADIP", "onInputChange called with: $it") }
+            )
         )
     }
 }

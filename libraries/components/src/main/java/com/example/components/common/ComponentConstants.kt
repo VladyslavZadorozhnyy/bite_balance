@@ -15,5 +15,7 @@ object ComponentConstants {
     const val COMPONENT_TYPE_INDICATOR = 3
     const val COMPONENT_TYPE_CAROUSEL = 4
     const val COMPONENT_TYPE_NAV_BAR = 5
-    const val COMPONENT_TYPE_CHECKBOX = 5
+    const val COMPONENT_TYPE_CHECKBOX = 6
+    const val COMPONENT_TYPE_INPUT = 7
+    const val COMPONENT_TYPE_DIALOG = 8
 }
