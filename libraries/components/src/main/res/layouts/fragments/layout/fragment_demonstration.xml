@@ -88,11 +88,22 @@
 
             <com.example.components.checkbox.Checkbox
                 android:id="@+id/checkbox_component"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="50dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginBottom="50dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/navigation_component"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <com.example.components.texts.text.Text
+                android:id="@+id/checkbox_text"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintStart_toEndOf="@id/checkbox_component"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/navigation_component"
                 app:layout_constraintBottom_toBottomOf="parent"/>

@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.components.R
 import com.example.components.buttons.common.ButtonModel
-import com.example.components.common.BaseComponentModel
+import com.example.components.checkbox.CheckBoxModel
 import com.example.components.databinding.FragmentDemonstrationBinding
-import com.example.components.progress.indicator.ProgressIndicatorModel
 import com.example.components.mocks.MockNutritionModel
 import com.example.components.nav_bar.NavigationBarModel
 import com.example.components.progress.carousel.ProgressCarouselModel
@@ -41,9 +40,21 @@ class DemonstrationFragment : Fragment() {
         setupCarousel()
         setupNavigation()
 
+        binding.checkboxText.setup(
+            TextModel(
+                textValue = "Checkbox text",
+                textSize = 20,
+                textColor = R.color.black,
+                backgroundColor = Color.TRANSPARENT,
+            )
+        )
+
         binding.checkboxComponent.setup(
-            BaseComponentModel(
-                componentType = 1
+            model = CheckBoxModel(
+                checked = false,
+                active = true,
+                onChecked = { binding.checkboxText.strikeThrough() },
+                onUnchecked = { binding.checkboxText.unstrikeThrough() }
             )
         )
     }

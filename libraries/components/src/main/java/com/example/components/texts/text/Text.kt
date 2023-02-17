@@ -42,4 +42,12 @@ class Text(
             binding.background.setTint(model.backgroundColor)
         }
     }
+
+    fun strikeThrough() {
+        binding.paintFlags = binding.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
+    fun unstrikeThrough() {
+        binding.paintFlags = binding.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+    }
 }
