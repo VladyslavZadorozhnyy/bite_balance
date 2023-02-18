@@ -12,6 +12,10 @@ import com.example.components.R
 import com.example.components.buttons.common.ButtonModel
 import com.example.components.checkbox.CheckBoxModel
 import com.example.components.databinding.FragmentDemonstrationBinding
+import com.example.components.dialogs.common.BaseDialogModel
+import com.example.components.dialogs.confirm_dialog.ConfirmDialog
+import com.example.components.dialogs.input_dialog.InputDialog
+import com.example.components.dialogs.yes_no_dialog.YesNoDialog
 import com.example.components.input_form.InputFormModel
 import com.example.components.mocks.MockNutritionModel
 import com.example.components.nav_bar.NavigationBarModel
@@ -44,6 +48,43 @@ class DemonstrationFragment : Fragment() {
         setupInputForm()
 
 
+
+        binding.confirmDialogButton.setOnClickListener {
+            ConfirmDialog(
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    backgroundColorRes = R.color.white,
+                    textColor = Color.BLACK,
+                    title = "Confirm dialog"
+                )
+            ).show()
+        }
+
+        binding.yesNoDialogButton.setOnClickListener {
+            YesNoDialog(
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    backgroundColorRes = R.color.white,
+                    textColor = Color.BLACK,
+                    title = "Yes/No dialog",
+                    onPositiveClicked = { Log.d("AAADIP", "onPositive clicked") },
+                    onNegativeClicked = { Log.d("AAADIP", "onNegative clicked") }
+                )
+            ).show()
+        }
+
+        binding.inputDialogButton.setOnClickListener {
+            Log.d("AAADIP", "confirmDialogButton called")
+            InputDialog(
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    backgroundColorRes = R.color.black,
+                    textColor = Color.WHITE,
+                    title = "My next goal is to :",
+                    onInputConfirmed = { Log.d("AAADIP", "confirmButton clicked: $it") },
+                )
+            ).show()
+        }
     }
 
     private fun setupTitle() {
@@ -182,7 +223,6 @@ class DemonstrationFragment : Fragment() {
         binding.inputForm.setup(
             model = InputFormModel(
                 active = true,
-                hint = "Hint",
                 onInputChange = { Log.d("AAADIP", "onInputChange called with: $it") }
             )
         )
