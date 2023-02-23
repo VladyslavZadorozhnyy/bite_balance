@@ -18,4 +18,5 @@ object ComponentConstants {
     const val COMPONENT_TYPE_CHECKBOX = 6
     const val COMPONENT_TYPE_INPUT = 7
     const val COMPONENT_TYPE_DIALOG = 8
+    const val COMPONENT_TYPE_GRAPH = 9
 }

@@ -3,11 +3,11 @@ package com.example.components.fragments
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.components.R
 import com.example.components.buttons.common.ButtonModel
 import com.example.components.checkbox.CheckBoxModel
@@ -16,11 +16,13 @@ import com.example.components.dialogs.common.BaseDialogModel
 import com.example.components.dialogs.confirm_dialog.ConfirmDialog
 import com.example.components.dialogs.input_dialog.InputDialog
 import com.example.components.dialogs.yes_no_dialog.YesNoDialog
+import com.example.components.graph.component.GraphModel
 import com.example.components.input_form.InputFormModel
 import com.example.components.mocks.MockNutritionModel
 import com.example.components.nav_bar.NavigationBarModel
 import com.example.components.progress.carousel.ProgressCarouselModel
 import com.example.components.texts.common.TextModel
+
 
 // TODO: remove this fragment, put all fragments to com.example.layouts.fragments package
 class DemonstrationFragment : Fragment() {
@@ -46,44 +48,82 @@ class DemonstrationFragment : Fragment() {
         setupNavigation()
         setupCheckBox()
         setupInputForm()
+        setupDialogs()
 
-
-
-        binding.confirmDialogButton.setOnClickListener {
-            ConfirmDialog(
-                activity = requireActivity(),
-                model = BaseDialogModel(
-                    backgroundColorRes = R.color.white,
-                    textColor = Color.BLACK,
-                    title = "Confirm dialog"
+        binding.chartButton.setOnClickListener {
+            binding.chart.setup(
+                GraphModel(
+                    consumption = listOf(
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            2000F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1800F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1700F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1600F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1500F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        )
+                    ),
+                    consumptionGoal = MockNutritionModel(
+                        10F,
+                        40F,
+                        8F,
+                        1500F
+                    ),
+                    screenSpan = 7
                 )
-            ).show()
-        }
-
-        binding.yesNoDialogButton.setOnClickListener {
-            YesNoDialog(
-                activity = requireActivity(),
-                model = BaseDialogModel(
-                    backgroundColorRes = R.color.white,
-                    textColor = Color.BLACK,
-                    title = "Yes/No dialog",
-                    onPositiveClicked = { Log.d("AAADIP", "onPositive clicked") },
-                    onNegativeClicked = { Log.d("AAADIP", "onNegative clicked") }
-                )
-            ).show()
-        }
-
-        binding.inputDialogButton.setOnClickListener {
-            Log.d("AAADIP", "confirmDialogButton called")
-            InputDialog(
-                activity = requireActivity(),
-                model = BaseDialogModel(
-                    backgroundColorRes = R.color.black,
-                    textColor = Color.WHITE,
-                    title = "My next goal is to :",
-                    onInputConfirmed = { Log.d("AAADIP", "confirmButton clicked: $it") },
-                )
-            ).show()
+            )
         }
     }
 
@@ -204,7 +244,7 @@ class DemonstrationFragment : Fragment() {
             TextModel(
                 textValue = "Checkbox text",
                 textSize = 20,
-                textColor = R.color.black,
+                textColor = Color.BLACK,
                 backgroundColor = Color.TRANSPARENT,
             )
         )
@@ -226,5 +266,44 @@ class DemonstrationFragment : Fragment() {
                 onInputChange = { Log.d("AAADIP", "onInputChange called with: $it") }
             )
         )
+    }
+
+    private fun setupDialogs() {
+        binding.confirmDialogButton.setOnClickListener {
+            ConfirmDialog(
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    backgroundColorRes = R.color.white,
+                    textColor = Color.BLACK,
+                    title = "Confirm dialog"
+                )
+            ).show()
+        }
+
+        binding.yesNoDialogButton.setOnClickListener {
+            YesNoDialog(
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    backgroundColorRes = R.color.white,
+                    textColor = Color.BLACK,
+                    title = "Yes/No dialog",
+                    onPositiveClicked = { Log.d("AAADIP", "onPositive clicked") },
+                    onNegativeClicked = { Log.d("AAADIP", "onNegative clicked") }
+                )
+            ).show()
+        }
+
+        binding.inputDialogButton.setOnClickListener {
+            Log.d("AAADIP", "confirmDialogButton called")
+            InputDialog(
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    backgroundColorRes = R.color.black,
+                    textColor = Color.WHITE,
+                    title = "My next goal is to :",
+                    onInputConfirmed = { Log.d("AAADIP", "confirmButton clicked: $it") },
+                )
+            ).show()
+        }
     }
 }
