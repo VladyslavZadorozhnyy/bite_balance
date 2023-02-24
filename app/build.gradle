@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.bitebalance'
+    namespace 'com.bitebalance'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.bitebalance"
+        applicationId "com.bitebalance"
         minSdk 28
         targetSdk 33
         versionCode 1
@@ -44,9 +44,9 @@ dependencies {
 //    Android UI dependencies
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation project(':libraries:ui')
 
 //    Own modules dependencies
-    implementation project(':libraries:components')
 
 //    Android test dependencies
     testImplementation 'junit:junit:4.13.2'

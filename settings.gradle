@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "BiteBalance"
 include ':app'
 include ':libraries'
-include ':libraries:components'
+include ':libraries:ui'
