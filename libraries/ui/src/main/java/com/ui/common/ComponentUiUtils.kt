@@ -27,5 +27,6 @@ enum class ComponentUiType {
     Checkbox,
     Input,
     Dialog,
-    Graph
+    Graph,
+    Recycler
 }

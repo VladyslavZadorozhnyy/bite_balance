@@ -6,25 +6,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.checkbox.CheckBoxModel
+import com.ui.basic.input_form.InputFormModel
+import com.ui.basic.nav_bar.NavigationBarModel
+import com.ui.basic.recycler_views.goal_recycler.GoalAdapter
+import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
+import com.ui.basic.texts.common.TextModel
+import com.ui.components.R
+import com.ui.components.databinding.FragmentDemonstrationBinding
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.input_dialog.InputDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import com.ui.components.graph.component.GraphModel
-import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.nav_bar.NavigationBarModel
 import com.ui.components.progress.carousel.ProgressCarouselModel
-import com.ui.basic.texts.common.TextModel
-import com.ui.components.R
-import com.ui.components.databinding.FragmentDemonstrationBinding
 
 
 // TODO: remove this fragment, put all fragments to com.example.layouts.fragments package
 class DemonstrationFragment : Fragment() {
-    private val binding by lazy { FragmentDemonstrationBinding.inflate(layoutInflater) }
+    private val binding by lazy {
+        FragmentDemonstrationBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,82 +55,14 @@ class DemonstrationFragment : Fragment() {
         setupCheckBox()
         setupInputForm()
         setupDialogs()
+        setupChartButton()
 
-        binding.chartButton.setOnClickListener {
-            binding.chart.setup(
-                GraphModel(
-                    consumption = listOf(
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            2000F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1900F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1800F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1700F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1600F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1500F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1900F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1900F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1900F
-                        ),
-                        MockNutritionModel(
-                            10F,
-                            20F,
-                            15F,
-                            1900F
-                        )
-                    ),
-                    consumptionGoal = MockNutritionModel(
-                        10F,
-                        40F,
-                        8F,
-                        1500F
-                    ),
-                    screenSpan = 7
-                )
+        binding.textRecyclerView.setup(
+            GoalRecyclerModel(
+                items = listOf("One", "Two", "Three", "Four", "Five"),
+                backgroundColorRes = R.color.black
             )
-        }
+        )
     }
 
     private fun setupTitle() {
@@ -297,6 +237,84 @@ class DemonstrationFragment : Fragment() {
                     onInputConfirmed = { Log.d("AAADIP", "confirmButton clicked: $it") },
                 )
             ).show()
+        }
+    }
+
+    private fun setupChartButton() {
+        binding.chartButton.setOnClickListener {
+            binding.chart.setup(
+                GraphModel(
+                    consumption = listOf(
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            2000F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1800F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1700F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1600F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1500F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        ),
+                        MockNutritionModel(
+                            10F,
+                            20F,
+                            15F,
+                            1900F
+                        )
+                    ),
+                    consumptionGoal = MockNutritionModel(
+                        10F,
+                        40F,
+                        8F,
+                        1500F
+                    ),
+                    screenSpan = 7
+                )
+            )
         }
     }
 }
