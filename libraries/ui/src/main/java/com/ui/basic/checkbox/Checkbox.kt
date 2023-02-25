@@ -36,7 +36,12 @@ class Checkbox(
                 }
             } else {
                 binding.imageView.backgroundTintList = getColorStateList(context, R.color.gray)
-                binding.imageView.setImageDrawable(crossIcon)
+
+                if (it.checked) {
+                    binding.imageView.setImageDrawable(tickIcon)
+                } else {
+                    binding.imageView.setImageDrawable(crossIcon)
+                }
             }
 
             binding.imageView.setOnClickListener { (it as ImageView)

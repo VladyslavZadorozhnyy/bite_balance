@@ -12,10 +12,11 @@ import com.ui.basic.checkbox.Checkbox
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
+import com.ui.mocks.MockGoalModel
 
 
 class GoalAdapter(
-    private var items: List<String>,
+    private var items: List<MockGoalModel>,
 ): RecyclerView.Adapter<GoalAdapter.GoalViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalViewHolder {
@@ -43,7 +44,7 @@ class GoalAdapter(
         private val buttonView = view.findViewById<IconButton>(R.id.button_icon)
         private val checkboxView = view.findViewById<Checkbox>(R.id.checkbox_view)
 
-        fun bind(item: String) {
+        fun bind(item: MockGoalModel) {
             buttonView.setup(
                 model = ButtonModel(
                     iconRes = R.drawable.bin_icon,
@@ -54,21 +55,22 @@ class GoalAdapter(
 
             textView.setup(
                 model = TextModel(
-                    textValue = item,
+                    textValue = item.textValue,
                     textSize = 30,
                     textColorRes = R.color.black,
                     backgroundColor = R.color.white
                 )
             )
-
             checkboxView.setup(
                 model = CheckBoxModel(
-                    checked = false,
-                    active = true,
+                    checked = item.achieved,
+                    active = item.active,
                     onChecked = { textView.strikeThrough() },
                     onUnchecked = { textView.unstrikeThrough() },
                 )
             )
+
+            if (item.achieved || !item.active) { textView.strikeThrough() }
             checkboxView.bringToFront()
         }
     }

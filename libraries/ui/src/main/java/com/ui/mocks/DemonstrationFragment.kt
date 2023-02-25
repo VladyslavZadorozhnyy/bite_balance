@@ -59,7 +59,13 @@ class DemonstrationFragment : Fragment() {
 
         binding.textRecyclerView.setup(
             GoalRecyclerModel(
-                items = listOf("One", "Two", "Three", "Four", "Five"),
+                items = listOf(
+                    MockGoalModel(textValue = "One", active = true, achieved = true),
+                    MockGoalModel(textValue = "Two", active = false, achieved = true),
+                    MockGoalModel(textValue = "Three", active = false, achieved = false),
+                    MockGoalModel(textValue = "Four", active = false, achieved = false),
+                    MockGoalModel(textValue = "Five", active = true, achieved = false)
+                ),
                 backgroundColorRes = R.color.black
             )
         )
