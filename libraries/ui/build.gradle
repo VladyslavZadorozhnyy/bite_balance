@@ -17,6 +17,7 @@ android {
     sourceSets {
         main {
             res.srcDirs = [
+                    'src/main/res/drawables/icons/recycler',
                     'src/main/res/drawables/icons/checkbox',
                     'src/main/res/drawables/icons/other',
                     'src/main/res/drawables/icons/carousel',

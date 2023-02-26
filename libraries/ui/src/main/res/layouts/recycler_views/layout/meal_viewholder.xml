@@ -11,11 +11,11 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <com.ui.basic.checkbox.Checkbox
-            android:id="@+id/checkbox_view"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
+        <com.ui.basic.buttons.icon_button.IconButton
+            android:id="@+id/meal_icon"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -26,6 +26,15 @@
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ui.basic.buttons.icon_button.IconButton
+            android:id="@+id/clock_icon"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="@id/goal_text_view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

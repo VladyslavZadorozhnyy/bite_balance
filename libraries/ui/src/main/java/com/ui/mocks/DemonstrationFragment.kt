@@ -6,17 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.input_form.InputFormModel
 import com.ui.basic.nav_bar.NavigationBarModel
-import com.ui.basic.recycler_views.goal_recycler.GoalAdapter
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
+import com.ui.basic.recycler_views.meal_recycler.MealRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.FragmentDemonstrationBinding
@@ -56,15 +52,16 @@ class DemonstrationFragment : Fragment() {
         setupInputForm()
         setupDialogs()
         setupChartButton()
+        setupGoalRecycler()
 
-        binding.textRecyclerView.setup(
-            GoalRecyclerModel(
+        binding.mealRecycler.setup(
+            MealRecyclerModel(
                 items = listOf(
-                    MockGoalModel(textValue = "One", active = true, achieved = true),
-                    MockGoalModel(textValue = "Two", active = false, achieved = true),
-                    MockGoalModel(textValue = "Three", active = false, achieved = false),
-                    MockGoalModel(textValue = "Four", active = false, achieved = false),
-                    MockGoalModel(textValue = "Five", active = true, achieved = false)
+                    MockMealModel(mealTime = "One", dish = "dish 1"),
+                    MockMealModel(mealTime = "Two", dish = "dish 2"),
+                    MockMealModel(mealTime = "Three", dish = "dish 3"),
+                    MockMealModel(mealTime = "Four", dish = "dish 4"),
+                    MockMealModel(mealTime = "Five", dish = "dish 5")
                 ),
                 backgroundColorRes = R.color.black
             )
@@ -322,5 +319,20 @@ class DemonstrationFragment : Fragment() {
                 )
             )
         }
+    }
+
+    private fun setupGoalRecycler() {
+        binding.goalRecycler.setup(
+            GoalRecyclerModel(
+                items = listOf(
+                    MockGoalModel(textValue = "One", active = true, achieved = true),
+                    MockGoalModel(textValue = "Two", active = false, achieved = true),
+                    MockGoalModel(textValue = "Three", active = false, achieved = false),
+                    MockGoalModel(textValue = "Four", active = false, achieved = false),
+                    MockGoalModel(textValue = "Five", active = true, achieved = false)
+                ),
+                backgroundColorRes = R.color.black
+            )
+        )
     }
 }

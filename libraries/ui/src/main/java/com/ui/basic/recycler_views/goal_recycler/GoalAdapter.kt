@@ -3,7 +3,6 @@ package com.ui.basic.recycler_views.goal_recycler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
@@ -41,7 +40,7 @@ class GoalAdapter(
 
     class GoalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val textView = view.findViewById<Text>(R.id.goal_text_view)
-        private val buttonView = view.findViewById<IconButton>(R.id.button_icon)
+        private val buttonView = view.findViewById<IconButton>(R.id.delete_button_icon)
         private val checkboxView = view.findViewById<Checkbox>(R.id.checkbox_view)
 
         fun bind(item: MockGoalModel) {
@@ -52,7 +51,6 @@ class GoalAdapter(
                     strokeWidth = 5,
                 )
             )
-
             textView.setup(
                 model = TextModel(
                     textValue = item.textValue,
