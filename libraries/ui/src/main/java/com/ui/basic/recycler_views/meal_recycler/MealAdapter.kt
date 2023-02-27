@@ -73,7 +73,7 @@ class MealAdapter (
 
             textView.setup(
                 model = TextModel(
-                    textValue = "Meal view",
+                    textValue = item.dish.name,
                     textSize = 20,
                     textColorRes = R.color.black,
                     backgroundColor = R.color.white
@@ -82,7 +82,7 @@ class MealAdapter (
 
             timeView.setup(
                 model = TextModel(
-                    textValue = "24:30",
+                    textValue = item.mealTime,
                     textSize = 17,
                     textColorRes = R.color.black,
                     backgroundColor = R.color.white
