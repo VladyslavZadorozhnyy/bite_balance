@@ -1,13 +1,11 @@
 package com.ui.basic.recycler_views.meal_recycler
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.checkbox.Checkbox
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
@@ -38,9 +36,10 @@ class MealAdapter (
     }
 
     class MealViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val timeView = view.findViewById<Text>(R.id.time_text_view)
+        private val textView = view.findViewById<Text>(R.id.meal_text_view)
         private val mealIcon = view.findViewById<IconButton>(R.id.meal_icon)
         private val clockIcon = view.findViewById<IconButton>(R.id.clock_icon)
-        private val textView = view.findViewById<Text>(R.id.goal_text_view)
         private val buttonView = view.findViewById<IconButton>(R.id.delete_button_icon)
 
         fun bind(item: MockMealModel) {
@@ -53,18 +52,16 @@ class MealAdapter (
                     backgroundColorRes = R.color.white
                 )
             )
-            mealIcon.bringToFront()
 
             clockIcon.setup(
                 model = ButtonModel(
-                    iconRes = R.drawable.breakfast_icon,
-                    iconSize = 120,
+                    iconRes = R.drawable.clock_icon,
+                    iconSize = 90,
                     strokeWidth = 0,
                     foregroundColorRes = R.color.black,
                     backgroundColorRes = R.color.white
                 )
             )
-            clockIcon.bringToFront()
 
             buttonView.setup(
                 model = ButtonModel(
@@ -73,10 +70,20 @@ class MealAdapter (
                     strokeWidth = 5,
                 )
             )
+
             textView.setup(
                 model = TextModel(
                     textValue = "Meal view",
-                    textSize = 30,
+                    textSize = 20,
+                    textColorRes = R.color.black,
+                    backgroundColor = R.color.white
+                )
+            )
+
+            timeView.setup(
+                model = TextModel(
+                    textValue = "24:30",
+                    textSize = 17,
                     textColorRes = R.color.black,
                     backgroundColor = R.color.white
                 )
