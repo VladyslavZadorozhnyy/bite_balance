@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getColorStateList
 import androidx.fragment.app.Fragment
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.input_form.InputFormModel
 import com.ui.basic.nav_bar.NavigationBarModel
+import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
 import com.ui.basic.recycler_views.meal_recycler.MealRecyclerModel
 import com.ui.basic.texts.common.TextModel
@@ -53,17 +55,44 @@ class DemonstrationFragment : Fragment() {
         setupDialogs()
         setupChartButton()
         setupGoalRecycler()
+        setupMealRecycler()
 
-        binding.mealRecycler.setup(
-            MealRecyclerModel(
+        binding.dishRecycler.backgroundTintList = getColorStateList(requireContext(), R.color.white)
+
+        binding.dishRecycler.setup(
+            model = DishRecyclerModel(
                 items = listOf(
-                    MockMealModel(mealTime = "One", dish = "dish 1"),
-                    MockMealModel(mealTime = "Two", dish = "dish 2"),
-                    MockMealModel(mealTime = "Three", dish = "dish 3"),
-                    MockMealModel(mealTime = "Four", dish = "dish 4"),
-                    MockMealModel(mealTime = "Five", dish = "dish 5")
-                ),
-                backgroundColorRes = R.color.black
+                    MockDishModel(
+                        name = "Dish 1",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 2",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 3",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 4",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 5",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 6",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    )
+                )
             )
         )
     }
@@ -330,6 +359,61 @@ class DemonstrationFragment : Fragment() {
                     MockGoalModel(textValue = "Three", active = false, achieved = false),
                     MockGoalModel(textValue = "Four", active = false, achieved = false),
                     MockGoalModel(textValue = "Five", active = true, achieved = false)
+                ),
+                backgroundColorRes = R.color.black
+            )
+        )
+    }
+
+    private fun setupMealRecycler() {
+        binding.mealRecycler.setup(
+            MealRecyclerModel(
+                items = listOf(
+                    MockMealModel(
+                        mealTime = "08:30",
+                        dish = MockDishModel(
+                            name = "dish 1",
+                            iconRes = R.drawable.dinner_icon,
+                            nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                        ),
+                        amount = 100
+                    ),
+                    MockMealModel(
+                        mealTime = "10:30",
+                        dish = MockDishModel(
+                            name = "dish 2",
+                            iconRes = R.drawable.dinner_icon,
+                            nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                        ),
+                        amount = 100
+                    ),
+                    MockMealModel(
+                        mealTime = "12:30",
+                        dish = MockDishModel(
+                            name = "dish 3",
+                            iconRes = R.drawable.dinner_icon,
+                            nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                        ),
+                        amount = 100
+                    ),
+                    MockMealModel(
+                        mealTime = "14:30",
+                        dish = MockDishModel(
+                            name = "dish 4",
+                            iconRes = R.drawable.dinner_icon,
+                            nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                        ),
+                        amount = 100
+                    ),
+                    MockMealModel(
+                        mealTime = "18:30",
+                        dish = MockDishModel(
+                            name = "dish 5",
+                            iconRes = R.drawable.dinner_icon,
+                            nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                        ),
+                        amount = 100
+                    ),
                 ),
                 backgroundColorRes = R.color.black
             )

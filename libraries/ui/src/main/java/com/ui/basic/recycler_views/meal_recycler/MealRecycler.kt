@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.components.databinding.MealRecyclerBinding
+import com.ui.components.databinding.RecyclerViewBinding
 
 class MealRecycler(
     context: Context,
     attrs: AttributeSet? = null,
 ) : BaseUiComponent(context, attrs) {
     private val binding by lazy {
-        MealRecyclerBinding.inflate(LayoutInflater.from(context), this)
+        RecyclerViewBinding.inflate(LayoutInflater.from(context), this)
     }
 
     override fun setup(model: BaseUiComponentModel) {
