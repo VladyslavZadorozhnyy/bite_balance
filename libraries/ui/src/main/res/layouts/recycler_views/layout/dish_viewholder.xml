@@ -16,7 +16,7 @@
         android:layout_gravity="center"/>
 
     <com.ui.basic.texts.text.Text
-        android:id="@+id/dish_name_view"
+        android:id="@+id/metric_name_view"
         android:layout_height="wrap_content"
         android:layout_width="160dp"
         android:textColor="@color/black"/>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="#AA0AA0"
+    android:layout_marginTop="10dp"
+    android:orientation="horizontal">
+
+    <com.ui.basic.checkbox.Checkbox
+        android:id="@+id/checkbox_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="center_vertical" />
+
+    <com.ui.basic.texts.text.Text
+        android:id="@+id/metric_name_view"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:paddingStart="10dp" />
+
+    <com.ui.basic.texts.text.Text
+        android:id="@+id/metric_value_view"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:paddingStart="10dp"/>
+
+    <com.ui.basic.texts.text.Text
+        android:id="@+id/metric_label_view"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:paddingStart="10dp"/>
+
+</LinearLayout>

@@ -35,7 +35,7 @@ class DishAdapter(
     }
 
     class DishViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val textView = view.findViewById<Text>(R.id.dish_name_view)
+        private val textView = view.findViewById<Text>(R.id.metric_name_view)
         private val dishIconView = view.findViewById<IconButton>(R.id.dish_icon_view)
 
         init {

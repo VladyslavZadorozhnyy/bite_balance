@@ -15,6 +15,7 @@ import com.ui.basic.nav_bar.NavigationBarModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
 import com.ui.basic.recycler_views.meal_recycler.MealRecyclerModel
+import com.ui.basic.recycler_views.metric_recycler.MetricRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.FragmentDemonstrationBinding
@@ -56,41 +57,38 @@ class DemonstrationFragment : Fragment() {
         setupChartButton()
         setupGoalRecycler()
         setupMealRecycler()
+        setupDishRecycler()
 
-        binding.dishRecycler.backgroundTintList = getColorStateList(requireContext(), R.color.white)
-
-        binding.dishRecycler.setup(
-            model = DishRecyclerModel(
+        binding.metricRecycler.setup(
+            MetricRecyclerModel(
                 items = listOf(
-                    MockDishModel(
-                        name = "Dish 1",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    MockMetricModel(
+                        name = "name",
+                        value = "value"
                     ),
-                    MockDishModel(
-                        name = "Dish 2",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    MockMetricModel(
+                        name = "name 2",
+                        value = "value 2"
                     ),
-                    MockDishModel(
-                        name = "Dish 3",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    MockMetricModel(
+                        name = "name 3",
+                        value = "value 3"
                     ),
-                    MockDishModel(
-                        name = "Dish 4",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    MockMetricModel(
+                        name = "name 4",
+                        value = "value 4"
                     ),
-                    MockDishModel(
-                        name = "Dish 5",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    MockMetricModel(
+                        name = "name 5",
+                        value = "value 5"
                     ),
-                    MockDishModel(
-                        name = "Dish 6",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    MockMetricModel(
+                        name = "name 6",
+                        value = "value 6"
+                    ),
+                    MockMetricModel(
+                        name = "name 7",
+                        value = "value 7"
                     )
                 )
             )
@@ -416,6 +414,46 @@ class DemonstrationFragment : Fragment() {
                     ),
                 ),
                 backgroundColorRes = R.color.black
+            )
+        )
+    }
+
+    private fun setupDishRecycler() {
+        binding.dishRecycler.backgroundTintList = getColorStateList(requireContext(), R.color.white)
+        binding.dishRecycler.setup(
+            model = DishRecyclerModel(
+                items = listOf(
+                    MockDishModel(
+                        name = "Dish 1",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 2",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 3",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 4",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 5",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    ),
+                    MockDishModel(
+                        name = "Dish 6",
+                        iconRes = R.drawable.breakfast_icon,
+                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+                    )
+                )
             )
         )
     }
