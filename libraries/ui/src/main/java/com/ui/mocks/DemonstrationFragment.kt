@@ -63,34 +63,52 @@ class DemonstrationFragment : Fragment() {
             MetricRecyclerModel(
                 items = listOf(
                     MockMetricModel(
-                        name = "name",
-                        value = "value"
+                        name = "Name:",
+                        editable = true
                     ),
                     MockMetricModel(
-                        name = "name 2",
-                        value = "value 2"
+                        name = "Prots:",
+                        hint = "value",
+                        suffix = "g in 100g"
                     ),
                     MockMetricModel(
-                        name = "name 3",
-                        value = "value 3"
+                        name = "Fats:",
+                        hint = "value",
+                        suffix = "g in 100g"
                     ),
                     MockMetricModel(
-                        name = "name 4",
-                        value = "value 4"
+                        name = "Carbs:",
+                        hint = "value",
+                        suffix = "g in 100g"
                     ),
                     MockMetricModel(
-                        name = "name 5",
-                        value = "value 5"
+                        name = "Kcal:",
+                        hint = "value",
+                        suffix = "kcal in 100g"
                     ),
                     MockMetricModel(
-                        name = "name 6",
-                        value = "value 6"
-                    ),
-                    MockMetricModel(
-                        name = "name 7",
-                        value = "value 7"
+                        name = "Eaten:",
+                        hint = "value",
+                        suffix = "in g"
                     )
                 )
+            )
+        )
+
+        binding.metricRecycler.backgroundTintList = getColorStateList(requireContext(), R.color.white)
+
+        binding.getInputValue.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.info_icon,
+                iconSize = 80,
+                labelTextSize = 14,
+                labelTextRes = R.string.get_input_button,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener =  {
+                    Log.d("AAADIP", "getValue called")
+                    Log.d("AAADIP", "getInputValues: ${binding.metricRecycler.getInputValues()}")
+                }
             )
         )
     }

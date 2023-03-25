@@ -46,7 +46,6 @@ class InputForm (
                     model.onInputChange.invoke(it?.toString() ?: "")
                 }
             } else {
-                binding.isFocusable = false
                 binding.background = inactiveBackgroundRes
                 binding.setHintTextColor(whiteColor)
             }

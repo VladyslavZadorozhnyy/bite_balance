@@ -25,4 +25,8 @@ class MetricRecycler(
             }
         }
     }
+
+    fun getInputValues(): List<String> {
+        return (binding.recyclerView.adapter as? MetricAdapter)?.getInputValues() ?: listOf()
+    }
 }

@@ -2,7 +2,7 @@ package com.ui.mocks
 
 class MockMetricModel(
     val name: String,
-    val value: String = "",
+    val hint: String = "",
+    val suffix: String = "",
     val editable: Boolean = false,
-    val checkBoxVisible: Boolean = false,
 )
