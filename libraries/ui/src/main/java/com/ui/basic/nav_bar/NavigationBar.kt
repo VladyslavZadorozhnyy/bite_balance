@@ -15,6 +15,8 @@ class NavigationBar(
     context: Context,
     attrs: AttributeSet? = null,
 ) : BaseUiComponent(context, attrs) {
+    private var lastSelectedId = -1
+
     private val binding by lazy {
         NavigationBarBinding.inflate(LayoutInflater.from(context), this).navView
     }
@@ -28,7 +30,10 @@ class NavigationBar(
                 disableAllItems(navBarModel)
                 enableItem(navBarModel, chosen)
 
-                navBarModel.onItemSelected.invoke(chosen.itemId)
+                if (lastSelectedId == -1 || lastSelectedId != chosen.itemId) {
+                    lastSelectedId = chosen.itemId
+                    navBarModel.onItemSelected.invoke(chosen.itemId)
+                }
                 return@setOnItemSelectedListener true
             }
 

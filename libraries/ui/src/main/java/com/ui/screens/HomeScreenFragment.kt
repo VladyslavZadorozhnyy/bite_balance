@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.FragmentHomeScreenBinding
-import com.ui.components.databinding.RecyclerViewBinding
 import com.ui.components.progress.carousel.ProgressCarouselModel
-import com.ui.components.progress.indicator.ProgressIndicatorModel
 import com.ui.mocks.MockNutritionModel
 
 class HomeScreenFragment : Fragment() {
@@ -18,14 +18,18 @@ class HomeScreenFragment : Fragment() {
         FragmentHomeScreenBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setupGreetings()
+        setupCarousel()
+        setupButtons()
+
+        return binding.root
+    }
+
+    private fun setupGreetings() {
         binding.greetings.setup(
             model = TextModel(
                 textValue = "Good morning",
@@ -34,7 +38,9 @@ class HomeScreenFragment : Fragment() {
                 backgroundColor = R.color.white
             )
         )
+    }
 
+    private fun setupCarousel() {
         binding.progressCarousel.setup(
             model = ProgressCarouselModel(
                 consumed = MockNutritionModel(
@@ -51,9 +57,55 @@ class HomeScreenFragment : Fragment() {
                 )
             )
         )
+    }
 
+    private fun setupButtons() {
+        binding.infoButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.info_icon,
+                iconSize = 100,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener =  {
+                    Toast.makeText(activity,"InfoButton clicked!", Toast.LENGTH_SHORT).show()
+                }
+            )
+        )
 
+        binding.todayMealsButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.meals_icon,
+                iconSize = 80,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener =  {
+                    Toast.makeText(activity,"TodayMealsButton clicked!", Toast.LENGTH_SHORT).show()
+                }
+            )
+        )
 
-        return binding.root
+        binding.resetProgressButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.reset_icon,
+                iconSize = 100,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener =  {
+                    Toast.makeText(activity,"ResetProgressButton clicked!", Toast.LENGTH_SHORT).show()
+                }
+            )
+        )
+
+        binding.addMealButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.add_icon,
+                iconSize = 100,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener =  {
+                    Toast.makeText(activity,"AddMealButton clicked!", Toast.LENGTH_SHORT).show()
+                }
+            )
+        )
     }
 }

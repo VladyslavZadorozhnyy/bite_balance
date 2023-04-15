@@ -14,25 +14,70 @@
             android:id="@+id/greetings"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginVertical="20dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"
             android:layout_gravity="center_horizontal" />
 
         <com.ui.components.progress.carousel.ProgressCarousel
             android:id="@+id/progress_carousel"
-            android:layout_width="315dp"
-            android:layout_height="575dp"
+            android:layout_width="330dp"
+            android:layout_height="590dp"
             android:layout_gravity="center"
             android:background="@drawable/sublayout_shape"/>
 
         <LinearLayout
             android:id="@+id/buttons_layout"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:background="#0FFFF0">
-        </LinearLayout>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="26dp">
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <com.ui.basic.buttons.icon_button.IconButton
+                android:id="@+id/info_button"
+                android:layout_width="55dp"
+                android:layout_height="60dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <com.ui.basic.buttons.icon_button.IconButton
+                android:id="@+id/today_meals_button"
+                android:layout_width="55dp"
+                android:layout_height="60dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <com.ui.basic.buttons.icon_button.IconButton
+                android:id="@+id/reset_progress_button"
+                android:layout_width="55dp"
+                android:layout_height="60dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <com.ui.basic.buttons.icon_button.IconButton
+                android:id="@+id/add_meal_button"
+                android:layout_width="55dp"
+                android:layout_height="60dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

@@ -1,0 +1,56 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:clickable="true"
+    tools:context="com.ui.screens.InfoScreenFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sublayout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="12dp"
+        android:background="@drawable/sublayout_shape">
+
+        <com.ui.basic.buttons.icon_button.IconButton
+            android:id="@+id/back_button"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="40dp" />
+
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/headline"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="35dp"
+            app:layout_constraintStart_toEndOf="@id/back_button"
+            app:layout_constraintTop_toTopOf="@id/back_button"
+            app:layout_constraintBottom_toBottomOf="@id/back_button"/>
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headline" />
+
+        <com.ui.basic.recycler_views.instruction_recycler.InstructionRecycler
+            android:id="@+id/icons_legends"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
