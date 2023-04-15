@@ -22,6 +22,7 @@ android {
                     'src/main/res/drawables/icons/other',
                     'src/main/res/drawables/icons/carousel',
                     'src/main/res/drawables/icons/nav',
+                    'src/main/res/drawables/images',
                     'src/main/res/drawables/icons',
                     'src/main/res/drawables/shapes',
                     'src/main/res/drawables',

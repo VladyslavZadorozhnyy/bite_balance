@@ -182,20 +182,21 @@ class DemonstrationFragment : Fragment() {
     }
 
     private fun setupCarousel() {
-        binding.progressCarousel.setup(model = ProgressCarouselModel(
-            consumed = MockNutritionModel(
-                fat = 10F,
-                carb = 14F,
-                kcal = 750F,
-                protein = 10F,
-            ),
-            goalConsumption = MockNutritionModel(
-                fat = 10F,
-                carb = 12F,
-                kcal = 2000F,
-                protein = 10F,
+        binding.progressCarousel.setup(
+            model = ProgressCarouselModel(
+                consumed = MockNutritionModel(
+                    fat = 10F,
+                    carb = 14F,
+                    kcal = 750F,
+                    protein = 10F,
+                ),
+                goalConsumption = MockNutritionModel(
+                    fat = 10F,
+                    carb = 12F,
+                    kcal = 2000F,
+                    protein = 10F,
+                )
             )
-        )
         )
     }
 

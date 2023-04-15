@@ -3,5 +3,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/ic_splash</item>
     </style>
 </resources>
