@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
+    android:paddingVertical="8dp"
     android:background="@drawable/input_form_active_shape">
 
     <com.ui.basic.buttons.icon_button.IconButton
         android:id="@+id/dropdown_button"
         android:layout_width="30dp"
-        android:layout_height="0dp"
+        android:layout_height="40dp"
         android:layout_marginHorizontal="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

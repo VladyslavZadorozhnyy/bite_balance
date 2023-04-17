@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import androidx.core.content.ContextCompat
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
@@ -31,8 +32,7 @@ class InfoScreenFragment : Fragment() {
     }
 
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList =
-            ContextCompat.getColorStateList(requireContext(), R.color.white)
+        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.white)
     }
 
     private fun setupHeader() {

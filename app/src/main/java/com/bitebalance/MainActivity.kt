@@ -5,9 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.bitebalance.databinding.ActivityMainBinding
-import com.ui.screens.HomeScreenFragment
-import com.ui.screens.InfoScreenFragment
-import com.ui.screens.NavigationFragment
+import com.ui.mocks.DemonstrationFragment
+import com.ui.screens.*
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -35,11 +34,28 @@ class MainActivity : AppCompatActivity() {
 //            commit()
 //        }
 
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, InfoScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, ProgressScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, AddMealScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+
         supportFragmentManager.beginTransaction().apply {
-            replace(binding.fragmentContainer.id, InfoScreenFragment())
+            replace(binding.fragmentContainer.id, StatsScreenFragment())
             addToBackStack(null)
             commit()
         }
-
     }
 }
