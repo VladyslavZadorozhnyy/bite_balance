@@ -15,9 +15,9 @@
     <com.ui.basic.texts.text.Text
         android:id="@+id/metric_name_view"
         android:layout_height="match_parent"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:paddingBottom="2dp"
-        android:paddingStart="5dp"/>
+        android:paddingStart="5dp" />
 
     <com.ui.basic.input_form.InputForm
         android:id="@+id/metric_value_view_input"

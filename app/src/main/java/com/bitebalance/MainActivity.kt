@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 //            addToBackStack(null)
 //            commit()
 //        }
-
+//
 //        supportFragmentManager.beginTransaction().apply {
 //            replace(binding.fragmentContainer.id, HomeScreenFragment())
 //            addToBackStack(null)
@@ -51,9 +51,39 @@ class MainActivity : AppCompatActivity() {
 //            addToBackStack(null)
 //            commit()
 //        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, StatsScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, MenuScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, SettingsScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, TodaysMealsScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, CreateNewScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
 
         supportFragmentManager.beginTransaction().apply {
-            replace(binding.fragmentContainer.id, StatsScreenFragment())
+            replace(binding.fragmentContainer.id, ChooseDishScreenFragment())
             addToBackStack(null)
             commit()
         }

@@ -1,4 +1,4 @@
-package com.ui.basic.recycler_views.metric_recycler
+package com.ui.basic.recycler_views.settings_recycler
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,8 +8,7 @@ import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import com.ui.components.databinding.RecyclerViewBinding
 
-
-class MetricRecycler(
+class SettingsRecycler(
     context: Context,
     attrs: AttributeSet? = null,
 ) : BaseUiComponent(context, attrs) {
@@ -19,15 +18,11 @@ class MetricRecycler(
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? MetricRecyclerModel)?.let { recyclerModel ->
+        (model as? SettingsRecyclerModel)?.let { recyclerModel ->
             binding.recyclerView.apply {
-                adapter = MetricAdapter(recyclerModel.items)
+                adapter = SettingsAdapter(recyclerModel.items)
                 layoutManager = LinearLayoutManager(context)
             }
         }
-    }
-
-    fun getInputValues(): List<String> {
-        return (binding.recyclerView.adapter as? MetricAdapter)?.getInputValues() ?: listOf()
     }
 }

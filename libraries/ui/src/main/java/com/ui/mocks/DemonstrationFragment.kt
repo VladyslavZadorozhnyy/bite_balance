@@ -58,44 +58,7 @@ class DemonstrationFragment : Fragment() {
         setupGoalRecycler()
         setupMealRecycler()
         setupDishRecycler()
-
-        binding.metricRecycler.setup(
-            MetricRecyclerModel(
-                items = listOf(
-                    MockMetricModel(
-                        name = "Name:",
-                        editable = true
-                    ),
-                    MockMetricModel(
-                        name = "Prots:",
-                        hint = "value",
-                        suffix = "g in 100g"
-                    ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        hint = "value",
-                        suffix = "g in 100g"
-                    ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        hint = "value",
-                        suffix = "g in 100g"
-                    ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        hint = "value",
-                        suffix = "kcal in 100g"
-                    ),
-                    MockMetricModel(
-                        name = "Eaten:",
-                        hint = "value",
-                        suffix = "in g"
-                    )
-                )
-            )
-        )
-
-        binding.metricRecycler.backgroundTintList = getColorStateList(requireContext(), R.color.white)
+        setupMetricRecycler()
 
         binding.getInputValue.setup(
             model = ButtonModel(
@@ -384,7 +347,7 @@ class DemonstrationFragment : Fragment() {
 
     private fun setupMealRecycler() {
         binding.mealRecycler.setup(
-            MealRecyclerModel(
+            model = MealRecyclerModel(
                 items = listOf(
                     MockMealModel(
                         mealTime = "08:30",
@@ -475,5 +438,45 @@ class DemonstrationFragment : Fragment() {
                 )
             )
         )
+    }
+
+    private fun setupMetricRecycler() {
+        binding.metricRecycler.setup(
+            MetricRecyclerModel(
+                items = listOf(
+                    MockMetricModel(
+                        name = "Name:",
+                        editable = true
+                    ),
+                    MockMetricModel(
+                        name = "Prots:",
+                        hint = "value",
+                        suffix = "g in 100g"
+                    ),
+                    MockMetricModel(
+                        name = "Fats:",
+                        hint = "value",
+                        suffix = "g in 100g"
+                    ),
+                    MockMetricModel(
+                        name = "Carbs:",
+                        hint = "value",
+                        suffix = "g in 100g"
+                    ),
+                    MockMetricModel(
+                        name = "Kcal:",
+                        hint = "value",
+                        suffix = "kcal in 100g"
+                    ),
+                    MockMetricModel(
+                        name = "Eaten:",
+                        hint = "value",
+                        suffix = "in g"
+                    )
+                )
+            )
+        )
+
+        binding.metricRecycler.backgroundTintList = getColorStateList(requireContext(), R.color.white)
     }
 }

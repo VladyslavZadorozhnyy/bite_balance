@@ -57,7 +57,7 @@ class DishAdapter(
             dishIconView.setup(
                 model = ButtonModel(
                     iconRes = item.iconRes,
-                    iconSize = 300,
+                    iconSize = 270,
                     foregroundColorRes = R.color.white,
                     backgroundColorRes = R.color.black
                 )

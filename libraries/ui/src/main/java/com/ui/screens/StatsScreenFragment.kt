@@ -25,109 +25,8 @@ class StatsScreenFragment : Fragment() {
     ): View {
         setupStyling()
         setupHeader()
-
-        binding.backwardButton.setup(
-            model = ButtonModel(
-                iconRes = R.drawable.back_button_icon,
-                iconSize = 105,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
-                onClickListener = {
-                    binding.chart.setup(
-                        GraphModel(
-                            consumption = listOf(
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    2000F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1900F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1800F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1700F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1600F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1500F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1900F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1900F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1900F
-                                ),
-                                MockNutritionModel(
-                                    10F,
-                                    20F,
-                                    15F,
-                                    1900F
-                                )
-                            ),
-                            consumptionGoal = MockNutritionModel(
-                                10F,
-                                40F,
-                                8F,
-                                1500F
-                            ),
-                            screenSpan = 7
-                        )
-                    )
-                }
-            )
-        )
-
-        binding.forwardButton.setup(
-            model = ButtonModel(
-                iconRes = R.drawable.back_button_icon,
-                iconSize = 105,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
-            )
-        )
-
-        binding.monthTextview.setup(
-            model = TextModel(
-                textValue = "January 2023",
-                textSize = 25,
-                textColorRes = R.color.white,
-                backgroundColor = R.color.black,
-            )
-        )
+        setupButtons()
+        setupChart()
 
         return binding.root
     }
@@ -163,6 +62,113 @@ class StatsScreenFragment : Fragment() {
                 textSize = 30,
                 textColorRes = R.color.black,
                 backgroundColor = R.color.white,
+            )
+        )
+    }
+
+    private fun setupButtons() {
+        binding.backwardButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.back_button_icon,
+                iconSize = 105,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+            )
+        )
+
+        binding.forwardButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.back_button_icon,
+                iconSize = 105,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+            )
+        )
+    }
+
+    private fun setupChart() {
+        binding.monthTextview.setup(
+            model = TextModel(
+                textValue = "January 2023",
+                textSize = 25,
+                textColorRes = R.color.white,
+                backgroundColor = R.color.black,
+            )
+        )
+
+        binding.chart.setup(
+            GraphModel(
+                consumption = listOf(
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        2000F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1900F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1800F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1700F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1600F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1500F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1900F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1900F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1900F
+                    ),
+                    MockNutritionModel(
+                        10F,
+                        20F,
+                        15F,
+                        1900F
+                    )
+                ),
+                consumptionGoal = MockNutritionModel(
+                    10F,
+                    40F,
+                    8F,
+                    1500F
+                ),
+                screenSpan = 7
             )
         )
     }
