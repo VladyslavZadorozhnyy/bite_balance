@@ -26,7 +26,38 @@ class CreateNewScreenFragment : Fragment() {
     ): View {
         setupStyling()
         setupHeadline()
+        setupSubtitles()
+        setupRecycler()
 
+        return binding.root
+    }
+
+    private fun setupStyling() {
+        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.white)
+    }
+
+    private fun setupHeadline() {
+        binding.headline.setup(
+            model = TextModel(
+                textValue = "Create new",
+                textSize = 30,
+                textColorRes = R.color.black,
+                backgroundColor = R.color.white
+            )
+        )
+
+        binding.backButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.back_button_icon,
+                iconSize = 70,
+                foregroundColorRes = R.color.white,
+                backgroundColorRes = R.color.black,
+                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+            )
+        )
+    }
+
+    private fun setupSubtitles() {
         binding.specifyDish.setup(
             model = TextModel(
                 textValue = "Specify nutritional value, please:",
@@ -44,7 +75,9 @@ class CreateNewScreenFragment : Fragment() {
                 backgroundColor = R.color.white
             )
         )
+    }
 
+    private fun setupRecycler() {
         binding.metricRecycler.setup(
             MetricRecyclerModel(
                 items = listOf(
@@ -88,33 +121,6 @@ class CreateNewScreenFragment : Fragment() {
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
                 onClickListener = {}
-            )
-        )
-
-        return binding.root
-    }
-
-    private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.white)
-    }
-
-    private fun setupHeadline() {
-        binding.headline.setup(
-            model = TextModel(
-                textValue = "Create new",
-                textSize = 30,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white
-            )
-        )
-
-        binding.backButton.setup(
-            model = ButtonModel(
-                iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
             )
         )
     }

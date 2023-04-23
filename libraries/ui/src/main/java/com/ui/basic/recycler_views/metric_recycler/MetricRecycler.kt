@@ -13,7 +13,6 @@ class MetricRecycler(
     context: Context,
     attrs: AttributeSet? = null,
 ) : BaseUiComponent(context, attrs) {
-
     private val binding by lazy {
         RecyclerViewBinding.inflate(LayoutInflater.from(context), this)
     }

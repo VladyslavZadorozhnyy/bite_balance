@@ -81,9 +81,15 @@ class MainActivity : AppCompatActivity() {
 //            addToBackStack(null)
 //            commit()
 //        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, ChooseDishScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
 
         supportFragmentManager.beginTransaction().apply {
-            replace(binding.fragmentContainer.id, ChooseDishScreenFragment())
+            replace(binding.fragmentContainer.id, MyGoalsScreenFragment())
             addToBackStack(null)
             commit()
         }
