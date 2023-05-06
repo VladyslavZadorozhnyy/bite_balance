@@ -1,1 +1,7 @@
 /build
+/gradle
+/.gradle
+/.idea
+/libraries/ui/.gitignore
+/libraries/ui/consumer-rules.pro
+/libraries/ui/proguard-rules.pro
