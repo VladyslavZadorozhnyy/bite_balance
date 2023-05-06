@@ -21,12 +21,11 @@ class MainActivity : AppCompatActivity() {
 //            addToBackStack(null)
 //            commit()
 //        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, HomeScreenFragment())
-//            addToBackStack(null)
-//            commit()
-//        }
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(binding.fragmentContainer.id, HomeScreenFragment())
+            commit()
+        }
 //
 //        supportFragmentManager.beginTransaction().apply {
 //            replace(binding.fragmentContainer.id, NavigationFragment())
@@ -88,11 +87,11 @@ class MainActivity : AppCompatActivity() {
 //            commit()
 //        }
 //
-        supportFragmentManager.beginTransaction().apply {
-            replace(binding.fragmentContainer.id, MyGoalsScreenFragment())
-            addToBackStack(null)
-            commit()
-        }
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, MyGoalsScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
 //
 //        supportFragmentManager.beginTransaction().apply {
 //            replace(binding.fragmentContainer.id, DishScreenFragment())
