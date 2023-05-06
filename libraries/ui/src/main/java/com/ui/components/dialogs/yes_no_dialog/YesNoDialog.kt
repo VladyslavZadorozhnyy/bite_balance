@@ -42,7 +42,7 @@ class YesNoDialog(
                     textSize = 20,
                     textValue = model.title,
                     textColorRes = model.textColorRes,
-                    backgroundColor = getColor(context, model.backgroundColorRes)
+                    backgroundColor = model.backgroundColorRes
                 )
             )
 

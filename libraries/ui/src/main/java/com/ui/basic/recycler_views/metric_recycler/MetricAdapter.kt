@@ -1,5 +1,6 @@
 package com.ui.basic.recycler_views.metric_recycler
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,8 +55,17 @@ class MetricAdapter(
 
         fun bind(model: MockMetricModel, inputValues: MutableList<String>) {
             setupMetricName(model.name)
-            if (model.editable) { setupCheckBox(inputValues) }
-            if (model.suffix.isNotEmpty()) { setupMetricSuffix(model.suffix) }
+            if (model.editable) {
+                setupCheckBox(inputValues)
+            } else {
+                checkBoxView.visibility = View.INVISIBLE
+            }
+
+            if (model.suffix.isNotEmpty()) {
+                setupMetricSuffix(model.suffix)
+            } else {
+                metricSuffixView.visibility = View.GONE
+            }
 
             if (model.editable) {
                 setupMetricValueInput(true, inputValues)

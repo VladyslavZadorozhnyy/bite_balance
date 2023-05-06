@@ -87,11 +87,48 @@ class MainActivity : AppCompatActivity() {
 //            addToBackStack(null)
 //            commit()
 //        }
-
+//
         supportFragmentManager.beginTransaction().apply {
             replace(binding.fragmentContainer.id, MyGoalsScreenFragment())
             addToBackStack(null)
             commit()
         }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, DishScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, AppearanceScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, TextScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, SupportFeedbackScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+//
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, SupportFeedbackScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
+
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentContainer.id, MealDetailsScreenFragment())
+//            addToBackStack(null)
+//            commit()
+//        }
     }
 }

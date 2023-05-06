@@ -13,18 +13,11 @@ import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.FragmentMyGoalsScreenBinding
+import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.dialogs.input_dialog.InputDialog
 import com.ui.mocks.MockGoalModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MyGoalsScreenFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MyGoalsScreenFragment : Fragment() {
     private val binding by lazy {
         FragmentMyGoalsScreenBinding.inflate(layoutInflater)
@@ -98,9 +91,22 @@ class MyGoalsScreenFragment : Fragment() {
                 iconSize = 120,
                 strokeWidth = 5,
                 foregroundColorRes = R.color.black,
-                backgroundColorRes = R.color.white
+                backgroundColorRes = R.color.white,
+                onClickListener = { showInputDialog() }
             )
         )
+    }
+
+    private fun showInputDialog() {
+        InputDialog(
+            activity = requireActivity(),
+            model = BaseDialogModel(
+                backgroundColorRes = R.color.black,
+                textColorRes = R.color.white,
+                title = "My next goal is to :",
+                onInputConfirmed = { Log.d("AAADIP", "confirmButton clicked: $it") },
+            )
+        ).show()
     }
 
     private fun setupRecycler() {

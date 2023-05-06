@@ -5,9 +5,13 @@
     <string name="text_icon_button_sample">Text Icon Button</string>
     <string name="add_new">Add new</string>
     <string name="get_input_button">Get input</string>
+    <string name="commit">Commit</string>
+    <string name="send">Send</string>
 
 <!--TODO: later split string resources for different components, like it was done with drawables and layouts-->
     <string name="done">Done</string>
+    <string name="back">Back</string>
+    <string name="update">Update</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="add">Add</string>

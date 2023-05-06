@@ -3,6 +3,7 @@ package com.ui.basic.texts.text
 import android.content.Context
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat.getDrawable
@@ -39,6 +40,7 @@ class Text(
             } else {
                 getDrawable(context, R.drawable.text_shape)
             }
+            Log.d("AAADIP", "received model.backgroundColor: ${model.backgroundColor}")
             binding.background.setTint(getColor(context, model.backgroundColor))
         }
     }
