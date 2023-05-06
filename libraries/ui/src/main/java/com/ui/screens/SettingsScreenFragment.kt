@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
-import androidx.core.content.ContextCompat
 import com.ui.basic.recycler_views.settings_recycler.SettingsRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
@@ -22,14 +21,22 @@ class SettingsScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupHeadline()
+        setupStyling()
+        setupHeader()
         setupRecycler()
 
         return binding.root
     }
 
-    private fun setupHeadline() {
-        binding.headline.setup(
+    private fun setupStyling() {
+        binding.settingsSublayout.backgroundTintList = getColorStateList(requireContext(), R.color.black)
+    }
+
+    private fun setupHeader() {
+        binding.toolbar.backButton.visibility = View.GONE
+        binding.toolbar.forwardButton.visibility = View.GONE
+
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Settings",
                 textSize = 30,
@@ -40,8 +47,6 @@ class SettingsScreenFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        binding.settingsSublayout.backgroundTintList = getColorStateList(requireContext(), R.color.black)
-
         binding.settingRecycler.setup(
             model = SettingsRecyclerModel(
                 items = listOf(

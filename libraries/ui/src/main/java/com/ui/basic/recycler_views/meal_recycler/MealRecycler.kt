@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,7 @@ class MealRecycler(
 
     override fun setup(model: BaseUiComponentModel) {
         (model as? MealRecyclerModel)?.let { recyclerModel ->
-            val backgroundColor = ContextCompat.getColor(context, recyclerModel.backgroundColorRes)
+            val backgroundColor = getColor(context, recyclerModel.backgroundColorRes)
 
             binding.recyclerView.apply {
                 setBackgroundColor(backgroundColor)

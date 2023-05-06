@@ -1,13 +1,11 @@
 package com.ui.screens
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.texts.common.TextModel
@@ -25,7 +23,7 @@ class MenuScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupHeadline()
+        setupHeader()
         setupDishRecycler()
 
         binding.textIconButtonSample.setup(
@@ -46,8 +44,11 @@ class MenuScreenFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupHeadline() {
-        binding.headline.setup(
+    private fun setupHeader() {
+        binding.toolbar.backButton.visibility = View.GONE
+        binding.toolbar.forwardButton.visibility = View.GONE
+
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Menu",
                 textSize = 30,

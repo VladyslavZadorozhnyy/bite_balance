@@ -35,7 +35,7 @@ class AddMealScreenFragment : Fragment() {
     }
 
     private fun setupHeader() {
-        binding.backButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
@@ -45,7 +45,7 @@ class AddMealScreenFragment : Fragment() {
             )
         )
 
-        binding.headline.setup(
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Add meal",
                 textSize = 30,

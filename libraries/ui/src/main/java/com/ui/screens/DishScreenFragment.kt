@@ -26,7 +26,7 @@ class DishScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setupStyling()
-        setupHeadline()
+        setupHeader()
         setupEditButton(editButtonChecked)
         setupRecycler()
 
@@ -38,8 +38,8 @@ class DishScreenFragment : Fragment() {
             AppCompatResources.getColorStateList(requireContext(), R.color.white)
     }
 
-    private fun setupHeadline() {
-        binding.headline.setup(
+    private fun setupHeader() {
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "*Dish name*",
                 textSize = 30,
@@ -48,7 +48,7 @@ class DishScreenFragment : Fragment() {
             )
         )
 
-        binding.backButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,

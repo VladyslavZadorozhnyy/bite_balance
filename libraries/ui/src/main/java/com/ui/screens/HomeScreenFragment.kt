@@ -22,15 +22,18 @@ class HomeScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupGreetings()
+        setupHeader()
         setupCarousel()
         setupButtons()
 
         return binding.root
     }
 
-    private fun setupGreetings() {
-        binding.greetings.setup(
+    private fun setupHeader() {
+        binding.toolbar.backButton.visibility = View.GONE
+        binding.toolbar.forwardButton.visibility = View.GONE
+
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Good morning",
                 textSize = 35,

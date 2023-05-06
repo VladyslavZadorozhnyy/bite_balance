@@ -27,6 +27,7 @@ class MyGoalsScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setupStyling()
         setupHeader()
         setupButtons()
         setupRecycler()
@@ -34,8 +35,12 @@ class MyGoalsScreenFragment : Fragment() {
         return binding.root
     }
 
+    private fun setupStyling() {
+        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.black)
+    }
+
     private fun setupHeader() {
-        binding.backButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
@@ -45,7 +50,7 @@ class MyGoalsScreenFragment : Fragment() {
             )
         )
 
-        binding.headline.setup(
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "My Goals",
                 textSize = 30,
@@ -65,7 +70,7 @@ class MyGoalsScreenFragment : Fragment() {
     }
 
     private fun setupButtons() {
-        binding.backwardButton.setup(
+        binding.prvMonthButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,
@@ -75,7 +80,7 @@ class MyGoalsScreenFragment : Fragment() {
             )
         )
 
-        binding.forwardButton.setup(
+        binding.nxtMonthButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,
@@ -110,8 +115,6 @@ class MyGoalsScreenFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.black)
-
         binding.goalRecycler.setup(
             GoalRecyclerModel(
                 items = listOf(

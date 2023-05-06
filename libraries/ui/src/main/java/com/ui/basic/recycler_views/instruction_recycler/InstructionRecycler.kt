@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
@@ -19,7 +20,7 @@ class InstructionRecycler(
 
     override fun setup(model: BaseUiComponentModel) {
         (model as? InstructionRecyclerModel)?.let { recyclerModel ->
-            val backgroundColor = ContextCompat.getColor(context, recyclerModel.backgroundColorRes)
+            val backgroundColor = getColor(context, recyclerModel.backgroundColorRes)
 
             binding.recyclerView.apply {
                 setBackgroundColor(backgroundColor)

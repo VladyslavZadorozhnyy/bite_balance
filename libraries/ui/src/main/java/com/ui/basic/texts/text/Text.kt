@@ -40,7 +40,6 @@ class Text(
             } else {
                 getDrawable(context, R.drawable.text_shape)
             }
-            Log.d("AAADIP", "received model.backgroundColor: ${model.backgroundColor}")
             binding.background.setTint(getColor(context, model.backgroundColor))
         }
     }

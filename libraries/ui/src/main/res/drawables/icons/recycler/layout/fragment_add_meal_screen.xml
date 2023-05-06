@@ -7,129 +7,117 @@
     android:clickable="true"
     tools:context="com.ui.screens.AddMealScreenFragment">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sublayout_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="12dp"
+        android:layout_marginHorizontal="12dp"
         android:background="@drawable/sublayout_shape">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/line_view"/>
 
-            <com.ui.basic.buttons.icon_button.IconButton
-                android:id="@+id/back_button"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/headline"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="13dp" />
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-            <com.ui.basic.texts.text.Text
-                android:id="@+id/headline"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                app:layout_constraintStart_toEndOf="@id/back_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/back_button"
-                app:layout_constraintBottom_toBottomOf="@id/back_button"/>
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/specify_meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@id/toolbar"
+            app:layout_constraintEnd_toEndOf="@id/toolbar"
+            app:layout_constraintTop_toBottomOf="@id/line_view"
+            app:layout_constraintBottom_toTopOf="@id/meal_icon" />
 
-            <View
-                android:id="@+id/line_view"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/black"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headline" />
+        <ImageView
+            android:id="@+id/meal_icon"
+            android:layout_width="300dp"
+            android:layout_height="273dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/breakfast_icon"
+            app:layout_constraintTop_toBottomOf="@id/specify_meal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.ui.basic.texts.text.Text
-                android:id="@+id/specify_meal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:layout_constraintStart_toStartOf="@id/back_button"
-                app:layout_constraintEnd_toEndOf="@id/headline"
-                app:layout_constraintTop_toBottomOf="@id/line_view"
-                app:layout_constraintBottom_toTopOf="@id/meal_icon" />
+        <com.ui.basic.buttons.icon_button.IconButton
+            android:id="@+id/create_new_button"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/choose_from_menu"
+            app:layout_constraintTop_toBottomOf="@id/meal_icon" />
 
-            <ImageView
-                android:id="@+id/meal_icon"
-                android:layout_width="300dp"
-                android:layout_height="273dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/breakfast_icon"
-                app:layout_constraintTop_toBottomOf="@id/specify_meal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+        <com.ui.basic.buttons.icon_button.IconButton
+            android:id="@+id/choose_from_menu"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintStart_toEndOf="@id/create_new_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/meal_icon" />
 
-            <com.ui.basic.buttons.icon_button.IconButton
-                android:id="@+id/create_new_button"
-                android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="100dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/choose_from_menu"
-                app:layout_constraintTop_toBottomOf="@id/meal_icon" />
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/create_new_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/choose_from_menu_label"
+            app:layout_constraintTop_toBottomOf="@id/create_new_button" />
 
-            <com.ui.basic.buttons.icon_button.IconButton
-                android:id="@+id/choose_from_menu"
-                android:layout_width="80dp"
-                android:layout_height="70dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="40dp"
-                app:layout_constraintStart_toEndOf="@id/create_new_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/meal_icon" />
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/choose_from_menu_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/create_new_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/choose_from_menu" />
 
-            <com.ui.basic.texts.text.Text
-                android:id="@+id/create_new_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/choose_from_menu_label"
-                app:layout_constraintTop_toBottomOf="@id/create_new_button" />
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/meals_today_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toStartOf="@id/meal_icon"
+            app:layout_constraintEnd_toStartOf="@id/meals_today_value"
+            app:layout_constraintTop_toBottomOf="@id/choose_from_menu_label"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <com.ui.basic.texts.text.Text
-                android:id="@+id/choose_from_menu_label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintStart_toEndOf="@id/create_new_label"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/choose_from_menu" />
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/meals_today_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toEndOf="@id/meals_today_label"
+            app:layout_constraintEnd_toEndOf="@id/choose_from_menu_label"
+            app:layout_constraintTop_toBottomOf="@id/choose_from_menu_label"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <com.ui.basic.texts.text.Text
-                android:id="@+id/meals_today_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintStart_toStartOf="@id/meal_icon"
-                app:layout_constraintEnd_toStartOf="@id/meals_today_value"
-                app:layout_constraintTop_toBottomOf="@id/choose_from_menu_label"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <com.ui.basic.texts.text.Text
-                android:id="@+id/meals_today_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="20dp"
-                app:layout_constraintStart_toEndOf="@id/meals_today_label"
-                app:layout_constraintEnd_toEndOf="@id/choose_from_menu_label"
-                app:layout_constraintTop_toBottomOf="@id/choose_from_menu_label"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

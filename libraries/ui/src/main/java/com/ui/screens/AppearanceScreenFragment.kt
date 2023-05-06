@@ -1,6 +1,5 @@
 package com.ui.screens
 
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
@@ -8,14 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.FragmentAppearanceScreenBinding
-import com.ui.mocks.MockGoalModel
 
 
 class AppearanceScreenFragment : Fragment() {
@@ -27,6 +23,7 @@ class AppearanceScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setupStyling()
         setupHeader()
         setupPrimaryColor()
         setupSecondaryColor()
@@ -35,11 +32,12 @@ class AppearanceScreenFragment : Fragment() {
         return binding.root
     }
 
-    private fun setupHeader() {
-        binding.sublayoutContainer.backgroundTintList =
-            getColorStateList(requireContext(), R.color.black)
+    private fun setupStyling() {
+        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.black)
+    }
 
-        binding.headline.setup(
+    private fun setupHeader() {
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Appearance",
                 textSize = 30,
@@ -48,7 +46,7 @@ class AppearanceScreenFragment : Fragment() {
             )
         )
 
-        binding.backButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,

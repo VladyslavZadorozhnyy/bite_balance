@@ -24,7 +24,7 @@ class MealDetailsScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setupStyling()
-        setupHeadline()
+        setupHeader()
         setupSubtitles()
         setupRecycler()
 
@@ -36,8 +36,8 @@ class MealDetailsScreenFragment : Fragment() {
             AppCompatResources.getColorStateList(requireContext(), R.color.white)
     }
 
-    private fun setupHeadline() {
-        binding.headline.setup(
+    private fun setupHeader() {
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Dish #1",
                 textSize = 30,
@@ -46,7 +46,7 @@ class MealDetailsScreenFragment : Fragment() {
             )
         )
 
-        binding.backButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
@@ -61,7 +61,7 @@ class MealDetailsScreenFragment : Fragment() {
         binding.details.setup(
             model = TextModel(
                 textValue = "Details:",
-                textSize = 15,
+                textSize = 25,
                 textColorRes = R.color.black,
                 backgroundColor = R.color.white
             )

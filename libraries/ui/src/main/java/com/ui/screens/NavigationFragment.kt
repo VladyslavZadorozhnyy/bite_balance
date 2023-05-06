@@ -41,9 +41,9 @@ class NavigationFragment : Fragment() {
             ) { chosenItemId ->
                 val nextFragment = when (chosenItemId) {
                     R.id.nav_home -> HomeScreenFragment()
-//                    R.id.nav_stats -> StatsFragment()
-//                    R.id.nav_menu -> MenuFragment()
-                    else -> DemonstrationFragment()
+                    R.id.nav_stats -> StatsScreenFragment()
+                    R.id.nav_menu -> MenuScreenFragment()
+                    else -> SettingsScreenFragment()
                 }
                 activity?.supportFragmentManager?.beginTransaction()?.apply {
                     replace(binding.contentFragment.id, nextFragment)

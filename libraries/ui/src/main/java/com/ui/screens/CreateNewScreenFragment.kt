@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
-import androidx.core.content.ContextCompat
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.MetricRecyclerModel
 import com.ui.basic.texts.common.TextModel
@@ -25,7 +24,7 @@ class CreateNewScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setupStyling()
-        setupHeadline()
+        setupHeaded()
         setupSubtitles()
         setupRecycler()
 
@@ -36,8 +35,10 @@ class CreateNewScreenFragment : Fragment() {
         binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.white)
     }
 
-    private fun setupHeadline() {
-        binding.headline.setup(
+    private fun setupHeaded() {
+        binding.toolbar.forwardButton.visibility = View.GONE
+
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Create new",
                 textSize = 30,
@@ -46,7 +47,7 @@ class CreateNewScreenFragment : Fragment() {
             )
         )
 
-        binding.backButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,

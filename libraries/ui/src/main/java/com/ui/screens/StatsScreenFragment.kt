@@ -36,7 +36,7 @@ class StatsScreenFragment : Fragment() {
     }
 
     private fun setupHeader() {
-        binding.questionButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.question_mark_icon,
                 iconSize = 70,
@@ -46,7 +46,7 @@ class StatsScreenFragment : Fragment() {
             )
         )
 
-        binding.goalButton.setup(
+        binding.toolbar.forwardButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.goal_icon,
                 iconSize = 70,
@@ -56,7 +56,7 @@ class StatsScreenFragment : Fragment() {
             )
         )
 
-        binding.headline.setup(
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Statistics",
                 textSize = 30,
@@ -67,7 +67,7 @@ class StatsScreenFragment : Fragment() {
     }
 
     private fun setupButtons() {
-        binding.backwardButton.setup(
+        binding.prvMonthButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,
@@ -77,7 +77,7 @@ class StatsScreenFragment : Fragment() {
             )
         )
 
-        binding.forwardButton.setup(
+        binding.nxtMonthButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,

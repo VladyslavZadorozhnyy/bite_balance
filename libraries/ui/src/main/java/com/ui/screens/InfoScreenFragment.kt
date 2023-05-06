@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
-import androidx.core.content.ContextCompat
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
 import com.ui.basic.texts.common.TextModel
@@ -36,7 +35,9 @@ class InfoScreenFragment : Fragment() {
     }
 
     private fun setupHeader() {
-        binding.backButton.setup(
+        binding.toolbar.forwardButton.visibility = View.GONE
+
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
@@ -46,7 +47,7 @@ class InfoScreenFragment : Fragment() {
             )
         )
 
-        binding.headline.setup(
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Icons Legend",
                 textSize = 30,

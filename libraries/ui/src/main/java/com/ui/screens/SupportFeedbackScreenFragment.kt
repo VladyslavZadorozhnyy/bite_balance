@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.input_form.InputFormModel
@@ -25,15 +24,15 @@ class SupportFeedbackScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupHeadline()
+        setupHeader()
         setupSubtexts()
         setupButton()
 
         return binding.root
     }
 
-    private fun setupHeadline() {
-        binding.headline.setup(
+    private fun setupHeader() {
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Support Us",
                 textSize = 30,
@@ -42,7 +41,7 @@ class SupportFeedbackScreenFragment : Fragment() {
             )
         )
 
-        binding.backButton.setup(
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
-import androidx.core.content.ContextCompat
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.meal_recycler.MealRecyclerModel
 import com.ui.basic.texts.common.TextModel
@@ -26,16 +25,19 @@ class TodaysMealsScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupHeadline()
+        setupStyling()
+        setupHeader()
         setupRecycler()
 
         return binding.root
     }
 
-    private fun setupHeadline() {
+    private fun setupStyling() {
         binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.black)
+    }
 
-        binding.backButton.setup(
+    private fun setupHeader() {
+        binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
@@ -45,7 +47,7 @@ class TodaysMealsScreenFragment : Fragment() {
             )
         )
 
-        binding.headline.setup(
+        binding.toolbar.headline.setup(
             model = TextModel(
                 textValue = "Icons Legend",
                 textSize = 30,
