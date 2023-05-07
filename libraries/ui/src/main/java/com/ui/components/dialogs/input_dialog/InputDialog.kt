@@ -58,7 +58,7 @@ class InputDialog(
                     labelTextRes = R.string.add,
                     labelTextSize = 15,
                     foregroundColorRes = model.backgroundColorRes,
-                    backgroundColorRes = R.color.white,
+                    backgroundColorRes = model.textColorRes,
                     onClickListener = {
                         model.onInputConfirmed(inputValue)
                         dismiss()

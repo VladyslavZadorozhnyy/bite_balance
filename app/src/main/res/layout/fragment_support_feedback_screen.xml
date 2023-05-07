@@ -1,0 +1,64 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:clickable="true"
+    tools:context="com.bitebalance.presentation.ui.fragments.SupportFeedbackScreenFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/subtext"/>
+
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/subtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="30dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/sublayout_shape"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <com.ui.basic.input_form.InputForm
+            android:id="@+id/input_subtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintTop_toBottomOf="@id/subtext" />
+
+        <com.ui.basic.texts.text.Text
+            android:id="@+id/donation_plan_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="30dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/sublayout_shape"
+            app:layout_constraintTop_toBottomOf="@id/input_subtext" />
+
+        <com.ui.basic.buttons.text_icon_button.TextIconButton
+            android:id="@+id/commit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
