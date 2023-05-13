@@ -19,7 +19,7 @@ class DishRecycler(
     override fun setup(model: BaseUiComponentModel) {
         (model as? DishRecyclerModel)?.let { recyclerModel ->
             binding.recyclerView.apply {
-                adapter = DishAdapter(recyclerModel.items)
+                adapter = DishAdapter(recyclerModel.items, recyclerModel.onClickListener)
                 layoutManager = GridLayoutManager(context, 2)
             }
         }

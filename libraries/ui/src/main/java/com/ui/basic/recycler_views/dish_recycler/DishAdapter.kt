@@ -15,7 +15,8 @@ import com.ui.mocks.MockDishModel
 
 
 class DishAdapter(
-    private val items: List<MockDishModel>
+    private val items: List<MockDishModel>,
+    private val onClickListener: (MockDishModel) -> Unit
 ): RecyclerView.Adapter<DishAdapter.DishViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
@@ -28,6 +29,7 @@ class DishAdapter(
 
     override fun onBindViewHolder(holder: DishViewHolder, position: Int) {
         holder.bind(items[position])
+        holder.itemView.setOnClickListener { onClickListener(items[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -59,7 +61,8 @@ class DishAdapter(
                     iconRes = item.iconRes,
                     iconSize = 270,
                     foregroundColorRes = R.color.white,
-                    backgroundColorRes = R.color.black
+                    backgroundColorRes = R.color.black,
+                    onClickListener = { itemView.callOnClick() }
                 )
             )
         }

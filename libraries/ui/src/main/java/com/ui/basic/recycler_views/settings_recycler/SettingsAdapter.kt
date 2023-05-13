@@ -10,9 +10,11 @@ import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 import com.ui.mocks.MockInstructionModel
+import com.ui.mocks.MockMealModel
 
 class SettingsAdapter(
     private val items: List<MockInstructionModel>,
+    private val onClickListener: (MockInstructionModel) -> Unit
 ): RecyclerView.Adapter<SettingsAdapter.SettingViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingViewHolder {
@@ -28,6 +30,7 @@ class SettingsAdapter(
 
     override fun onBindViewHolder(holder: SettingViewHolder, position: Int) {
         holder.bind(items[position])
+        holder.itemView.setOnClickListener { onClickListener(items[position]) }
     }
 
     class SettingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -40,7 +43,8 @@ class SettingsAdapter(
                     iconRes = model.iconRes,
                     iconSize = 120,
                     foregroundColorRes = R.color.black,
-                    backgroundColorRes = R.color.white
+                    backgroundColorRes = R.color.white,
+                    onClickListener = { itemView.callOnClick() }
                 )
             )
 

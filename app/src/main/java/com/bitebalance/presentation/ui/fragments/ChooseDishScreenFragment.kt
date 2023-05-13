@@ -1,25 +1,28 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import com.bitebalance.databinding.FragmentChooseDishScreenBinding
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.mocks.MockDishModel
 import com.ui.mocks.MockNutritionModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ChooseDishScreenFragment : Fragment() {
     private val binding by lazy {
         FragmentChooseDishScreenBinding.inflate(layoutInflater)
     }
+
+    private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +56,7 @@ class ChooseDishScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+                onClickListener = { navigationVm.popScreen() }
             )
         )
     }
@@ -152,7 +155,8 @@ class ChooseDishScreenFragment : Fragment() {
                         iconRes = R.drawable.breakfast_icon,
                         nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
                     )
-                )
+                ),
+                onClickListener = {}
             )
         )
     }

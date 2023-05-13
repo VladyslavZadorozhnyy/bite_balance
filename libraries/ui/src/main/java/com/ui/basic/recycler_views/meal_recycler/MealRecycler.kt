@@ -26,7 +26,7 @@ class MealRecycler(
 
             binding.recyclerView.apply {
                 setBackgroundColor(backgroundColor)
-                adapter = MealAdapter(recyclerModel.items)
+                adapter = MealAdapter(recyclerModel.items, recyclerModel.onClickListener)
                 layoutManager = LinearLayoutManager(context)
             }
 

@@ -7,6 +7,7 @@ import com.ui.mocks.MockMealModel
 data class MealRecyclerModel(
     val items: List<MockMealModel>,
     val backgroundColorRes: Int,
+    val onClickListener: (MockMealModel) -> Unit
 ): BaseUiComponentModel(
     componentType = ComponentUiType.Recycler
 )

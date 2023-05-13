@@ -395,7 +395,8 @@ class DemonstrationFragment : Fragment() {
                         amount = 100
                     ),
                 ),
-                backgroundColorRes = R.color.black
+                backgroundColorRes = R.color.black,
+                onClickListener = {}
             )
         )
     }
@@ -435,7 +436,8 @@ class DemonstrationFragment : Fragment() {
                         iconRes = R.drawable.breakfast_icon,
                         nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
                     )
-                )
+                ),
+                onClickListener = {}
             )
         )
     }

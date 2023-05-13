@@ -1,4 +1,4 @@
-package com.ui.basic.recycler_views.settings_recycler
+package com.ui.basic.recycler_views.text_recycler
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,7 +8,7 @@ import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import com.ui.components.databinding.RecyclerViewBinding
 
-class SettingsRecycler(
+class TextRecycler(
     context: Context,
     attrs: AttributeSet? = null,
 ) : BaseUiComponent(context, attrs) {
@@ -18,9 +18,9 @@ class SettingsRecycler(
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? SettingsRecyclerModel)?.let { recyclerModel ->
+        (model as? TextRecyclerModel)?.let { recyclerModel ->
             binding.recyclerView.apply {
-                adapter = SettingsAdapter(recyclerModel.items, model.onClickListener)
+                adapter = TextAdapter(recyclerModel.items, model.onClickListener)
                 layoutManager = LinearLayoutManager(context)
             }
         }

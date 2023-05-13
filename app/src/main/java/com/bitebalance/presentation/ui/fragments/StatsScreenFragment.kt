@@ -2,22 +2,29 @@ package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
+import androidx.fragment.app.Fragment
+import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentStatsScreenBinding
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
+import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.graph.component.GraphModel
 import com.ui.mocks.MockNutritionModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class StatsScreenFragment : Fragment() {
     private val binding by lazy {
         FragmentStatsScreenBinding.inflate(layoutInflater)
     }
+
+    private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +49,7 @@ class StatsScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+                onClickListener = { showConfirmDialog() }
             )
         )
 
@@ -52,7 +59,9 @@ class StatsScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+                onClickListener = {
+                    navigationVm.navigateTo(MyGoalsScreenFragment(), NavigationAction.ADD)
+                }
             )
         )
 
@@ -171,5 +180,16 @@ class StatsScreenFragment : Fragment() {
                 screenSpan = 7
             )
         )
+    }
+
+    private fun showConfirmDialog() {
+        ConfirmDialog(
+            activity = requireActivity(),
+            model = BaseDialogModel(
+                backgroundColorRes = R.color.white,
+                textColorRes = R.color.black,
+                title = "Here you can see..."
+            )
+        ).show()
     }
 }

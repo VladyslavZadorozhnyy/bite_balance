@@ -2,22 +2,25 @@ package com.bitebalance.presentation.ui.fragments
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentAppearanceScreenBinding
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class AppearanceScreenFragment : Fragment() {
     private val binding by lazy {
         FragmentAppearanceScreenBinding.inflate(layoutInflater)
     }
+
+    private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +55,7 @@ class AppearanceScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+                onClickListener = { navigationVm.popScreen() }
             )
         )
     }

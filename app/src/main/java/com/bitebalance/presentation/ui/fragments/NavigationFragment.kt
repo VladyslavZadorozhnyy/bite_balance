@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bitebalance.databinding.FragmentNavigationBinding
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.nav_bar.NavigationBarModel
 import com.ui.components.R
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NavigationFragment : Fragment() {
     private val binding by lazy {

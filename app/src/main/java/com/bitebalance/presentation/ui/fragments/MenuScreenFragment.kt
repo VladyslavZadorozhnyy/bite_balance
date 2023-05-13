@@ -1,23 +1,27 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentMenuScreenBinding
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.mocks.MockDishModel
 import com.ui.mocks.MockNutritionModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MenuScreenFragment : Fragment() {
     private val binding by lazy {
         FragmentMenuScreenBinding.inflate(layoutInflater)
     }
+
+    private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +30,7 @@ class MenuScreenFragment : Fragment() {
         setupHeader()
         setupDishRecycler()
 
-        binding.textIconButtonSample.setup(
+        binding.createNewMealButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.add_icon,
                 iconSize = 80,
@@ -36,7 +40,7 @@ class MenuScreenFragment : Fragment() {
                 foregroundColorRes = R.color.black,
                 backgroundColorRes = R.color.white,
                 onClickListener =  {
-                    Toast.makeText(activity,"TextIconButton clicked!", Toast.LENGTH_SHORT).show()
+                    navigationVm.navigateTo(CreateNewScreenFragment(), NavigationAction.ADD)
                 }
             )
         )
@@ -182,8 +186,13 @@ class MenuScreenFragment : Fragment() {
                         iconRes = R.drawable.breakfast_icon,
                         nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
                     )
-                )
+                ),
+                onClickListener = { processDishClick(it) }
             )
         )
+    }
+
+    private fun processDishClick(dish: MockDishModel) {
+        navigationVm.navigateTo(DishScreenFragment(), NavigationAction.ADD)
     }
 }

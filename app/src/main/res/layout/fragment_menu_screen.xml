@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <com.ui.basic.buttons.text_icon_button.TextIconButton
-            android:id="@+id/text_icon_button_sample"
+            android:id="@+id/create_new_meal_button"
             android:layout_width="130dp"
             android:layout_height="60dp"
             android:layout_marginEnd="10dp"

@@ -6,6 +6,7 @@ import com.ui.mocks.MockInstructionModel
 
 data class SettingsRecyclerModel(
     val items: List<MockInstructionModel>,
+    val onClickListener: (MockInstructionModel) -> Unit
 ): BaseUiComponentModel(
     componentType = ComponentUiType.Recycler
 )

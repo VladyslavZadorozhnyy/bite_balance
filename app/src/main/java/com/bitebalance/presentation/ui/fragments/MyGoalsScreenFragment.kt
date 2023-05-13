@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentMyGoalsScreenBinding
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
 import com.ui.basic.texts.common.TextModel
@@ -15,12 +16,15 @@ import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.input_dialog.InputDialog
 import com.ui.mocks.MockGoalModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class MyGoalsScreenFragment : Fragment() {
     private val binding by lazy {
         FragmentMyGoalsScreenBinding.inflate(layoutInflater)
     }
+
+    private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +49,7 @@ class MyGoalsScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+                onClickListener = { navigationVm.popScreen() }
             )
         )
 

@@ -5,7 +5,8 @@ import com.ui.common.ComponentUiType
 import com.ui.mocks.MockDishModel
 
 data class DishRecyclerModel(
-    val items: List<MockDishModel>
+    val items: List<MockDishModel>,
+    val onClickListener: (MockDishModel) -> Unit
 ) : BaseUiComponentModel(
     componentType = ComponentUiType.Recycler
 )

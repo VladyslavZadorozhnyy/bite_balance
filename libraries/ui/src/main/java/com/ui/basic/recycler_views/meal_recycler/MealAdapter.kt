@@ -13,6 +13,7 @@ import com.ui.mocks.MockMealModel
 
 class MealAdapter (
     private var items: List<MockMealModel>,
+    private val onClickListener: (MockMealModel) -> Unit
 ): RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
@@ -24,6 +25,7 @@ class MealAdapter (
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         holder.bind(items[position])
+        holder.itemView.setOnClickListener { onClickListener(items[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -49,7 +51,8 @@ class MealAdapter (
                     iconSize = 120,
                     strokeWidth = 0,
                     foregroundColorRes = R.color.black,
-                    backgroundColorRes = R.color.white
+                    backgroundColorRes = R.color.white,
+                    onClickListener = { itemView.callOnClick() }
                 )
             )
 
@@ -59,7 +62,8 @@ class MealAdapter (
                     iconSize = 90,
                     strokeWidth = 0,
                     foregroundColorRes = R.color.black,
-                    backgroundColorRes = R.color.white
+                    backgroundColorRes = R.color.white,
+                    onClickListener = { itemView.callOnClick() }
                 )
             )
 
