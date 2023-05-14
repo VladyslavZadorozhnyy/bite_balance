@@ -2,10 +2,15 @@ package com.bitebalance.presentation.ui.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.viewModelScope
+import androidx.room.Room
 import com.ui.components.R
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.ActivityMainBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.database.db.AppDatabase
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +23,14 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigationObserving()
         setContentView(binding.root)
+
+        navigationVm.viewModelScope.launch {
+            val db = Room.databaseBuilder(
+                applicationContext, AppDatabase::class.java, "app-database").build()
+
+            Log.d("AAADIP", "db is: $db")
+            Log.d("AAADIP", "db.iconLegendDao() is: ${db.iconLegendDao()}")
+        }
 
 //        TODO: Move to separate component later
 //        supportFragmentManager.beginTransaction().apply {

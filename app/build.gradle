@@ -47,11 +47,15 @@ dependencies {
 
 //    Own modules dependencies
     implementation project(':libraries:ui')
+    implementation project(':libraries:database')
 
 //    Koin dependencies
     implementation "io.insert-koin:koin-android:3.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+//    Room dependencies
+    implementation 'androidx.room:room-ktx:2.5.1'
 
 //    Android test dependencies
     testImplementation 'junit:junit:4.13.2'

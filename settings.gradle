@@ -17,3 +17,4 @@ rootProject.name = "BiteBalance"
 include ':app'
 include ':libraries'
 include ':libraries:ui'
+include ':libraries:database'
