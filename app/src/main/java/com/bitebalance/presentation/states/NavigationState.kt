@@ -6,5 +6,5 @@ import com.bitebalance.presentation.ui.fragments.NavigationFragment
 
 data class NavigationState(
     val fragment: Fragment? = NavigationFragment(),
-    val action: NavigationAction = NavigationAction.ADD,
+    val action: NavigationAction = NavigationAction.REPLACE,
 )

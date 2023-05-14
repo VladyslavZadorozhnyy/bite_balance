@@ -2,11 +2,9 @@ package com.bitebalance.presentation.ui.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.FragmentTransaction
+import com.ui.components.R
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.ActivityMainBinding
-import com.bitebalance.presentation.ui.fragments.NavigationFragment
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -123,6 +121,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigationObserving() {
         navigationVm.state.observe(this) { state ->
             val transaction = supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.slide_in, R.anim.slide_out)
 
             when (state.action) {
                 NavigationAction.POP ->
@@ -135,14 +134,6 @@ class MainActivity : AppCompatActivity() {
                     state.fragment?.let {
                         transaction.add(binding.fragmentContainer.id, it).addToBackStack(null) }
             }
-
-//            if (state.action == NavigationAction.POP) {
-//                supportFragmentManager.fragments.lastOrNull()?.let { transaction.remove(it) }
-//            } else if (state.action == NavigationAction.REPLACE) {
-//                transaction.replace(binding.fragmentContainer.id, NavigationFragment())
-//            } else {
-//                transaction.add(binding.fragmentContainer.id, NavigationFragment())
-//            }
 
             transaction.commit()
         }
