@@ -4,5 +4,7 @@
 /.idea
 /libraries/ui/build
 /libraries/ui/.gitignore
+/libraries/ui/build
+/libraries/database/.gitignore
 /libraries/ui/consumer-rules.pro
 /libraries/ui/proguard-rules.pro
