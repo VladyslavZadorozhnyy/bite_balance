@@ -1,0 +1,15 @@
+package com.database.entities
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.database.common.Constants
+
+@Entity(tableName = Constants.GOAL_TABLE_NAME)
+data class GoalEntity(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "text_value") val textValue: String,
+    @ColumnInfo(name = "active") val active: Boolean,
+    @ColumnInfo(name = "achieved") val achieved: Boolean,
+    @ColumnInfo(name = "date_created_id") val dateCreatedId: Int
+)
