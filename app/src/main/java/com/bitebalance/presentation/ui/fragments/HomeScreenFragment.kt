@@ -123,7 +123,7 @@ class HomeScreenFragment : Fragment() {
             model = BaseDialogModel(
                 backgroundColorRes = R.color.white,
                 textColorRes = R.color.black,
-                title = "Would you like to reset progress?\n\nToday’s data will be removed.",
+                title = "Would you like to reset progress?\n\nTodays data will be removed.",
                 onPositiveClicked = { Log.d("AAADIP", "onPositive clicked") },
                 onNegativeClicked = { Log.d("AAADIP", "onNegative clicked") }
             )
