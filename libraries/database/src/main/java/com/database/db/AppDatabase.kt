@@ -1,11 +1,7 @@
 package com.database.db
 
-import android.content.Context
-import android.util.Log
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.database.common.Constants
 import com.database.dao.*
 import com.database.entities.*
 
@@ -13,17 +9,22 @@ import com.database.entities.*
     DateEntity::class,
     DishEntity::class,
     GoalEntity::class,
+    GoalMetricsEntity::class,
     IconLegendEntity::class,
     MealEntity::class,
     MetricEntity::class,
     NutritionValueEntity::class,
-    SettingEntity::class], version = 3)
+    SettingEntity::class],
+    exportSchema = false,
+    version = 5)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun dateDao(): DateDao
 
     abstract fun dishDao(): DishDao
 
     abstract fun goalDao(): GoalDao
+
+    abstract fun goalMetricsDao(): GoalMetricsDao
 
     abstract fun iconLegendDao(): IconLegendDao
 

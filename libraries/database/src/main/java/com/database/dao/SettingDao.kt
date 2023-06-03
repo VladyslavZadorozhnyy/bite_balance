@@ -10,7 +10,7 @@ import com.database.entities.SettingEntity
 @Dao
 interface SettingDao {
     @Insert
-    fun insert(settingEntity: SettingEntity)
+    fun insert(settingEntity: SettingEntity): Long
 
     @Update
     fun updateItem(settingEntity: SettingEntity)
@@ -19,10 +19,10 @@ interface SettingDao {
     fun getAll(): List<SettingEntity>
 
     @Query("SELECT * FROM ${Constants.SETTING_TABLE_NAME} WHERE id=:id")
-    fun getById(id: Int): SettingEntity?
+    fun getById(id: Long): SettingEntity?
 
     @Query("DELETE FROM ${Constants.SETTING_TABLE_NAME} WHERE id=:id")
-    fun deleteById(id: Int)
+    fun deleteById(id: Long)
 
     @Query("DELETE FROM ${Constants.SETTING_TABLE_NAME}")
     fun deleteAll()

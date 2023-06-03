@@ -10,7 +10,7 @@ import com.database.entities.GoalEntity
 @Dao
 interface GoalDao {
     @Insert
-    fun insert(goalEntity: GoalEntity)
+    fun insert(goalEntity: GoalEntity): Long
 
     @Update
     fun updateItem(goalEntity: GoalEntity)
@@ -19,10 +19,10 @@ interface GoalDao {
     fun getAll(): List<GoalEntity>
 
     @Query("SELECT * FROM ${Constants.GOAL_TABLE_NAME} WHERE id=:id")
-    fun getById(id: Int): GoalEntity?
+    fun getById(id: Long): GoalEntity?
 
     @Query("DELETE FROM ${Constants.GOAL_TABLE_NAME} WHERE id=:id")
-    fun deleteById(id: Int)
+    fun deleteById(id: Long)
 
     @Query("DELETE FROM ${Constants.GOAL_TABLE_NAME}")
     fun deleteAll()

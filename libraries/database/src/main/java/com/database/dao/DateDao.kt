@@ -10,7 +10,7 @@ import com.database.entities.DateEntity
 @Dao
 interface DateDao {
     @Insert
-    fun insert(dateEntity: DateEntity)
+    fun insert(dateEntity: DateEntity): Long
 
     @Update
     fun updateItem(dateEntity: DateEntity)
@@ -19,10 +19,10 @@ interface DateDao {
     fun getAll(): List<DateEntity>
 
     @Query("SELECT * FROM ${Constants.DATE_TABLE_NAME} WHERE id=:id")
-    fun getById(id: Int): DateEntity?
+    fun getById(id: Long): DateEntity?
 
     @Query("DELETE FROM ${Constants.DATE_TABLE_NAME} WHERE id=:id")
-    fun deleteById(id: Int)
+    fun deleteById(id: Long)
 
     @Query("DELETE FROM ${Constants.DATE_TABLE_NAME}")
     fun deleteAll()

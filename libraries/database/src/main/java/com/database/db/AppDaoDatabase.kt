@@ -10,6 +10,8 @@ interface AppDaoDatabase {
 
     fun getGoalDao(): GoalDao
 
+    fun getGoalMetricsDao(): GoalMetricsDao
+
     fun getIconLegendDao(): IconLegendDao
 
     fun getMealDao(): MealDao

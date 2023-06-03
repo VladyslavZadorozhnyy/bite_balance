@@ -7,9 +7,9 @@ import com.database.common.Constants
 
 @Entity(tableName = Constants.NUTRITION_VALUE_TABLE_NAME)
 data class NutritionValueEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int,
     @ColumnInfo(name = "prots") val prots: Float,
     @ColumnInfo(name = "fats") val fats: Float,
     @ColumnInfo(name = "carbs") val carbs: Float,
-    @ColumnInfo(name = "kcals") val kcals: Float
+    @ColumnInfo(name = "kcals") val kcals: Float,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
 )

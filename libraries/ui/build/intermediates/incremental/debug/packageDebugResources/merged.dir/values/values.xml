@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="gray">#555555</color>
+    <color name="indicator_green">#3E9E48</color>
+    <color name="indicator_red">#B91818</color>
+    <color name="indicator_yellow">#B6B918</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <string name="act_consumption">Actual consumption</string>
+    <string name="add">Add</string>
+    <string name="add_new">Add new</string>
+    <string name="app_name">BiteBalance</string>
+    <string name="back">Back</string>
+    <string name="carbs_consumption">Carbs consumption</string>
+    <string name="carbs_name">Carbohydrates</string>
+    <string name="commit">Commit</string>
+    <string name="done">Done</string>
+    <string name="eaten_today">Eaten today:</string>
+    <string name="fats_consumption">Fats consumption</string>
+    <string name="fats_name">Fats</string>
+    <string name="from_limit">From limit:</string>
+    <string name="get_input_button">Get input</string>
+    <string name="goal_consumption">Goal consumption</string>
+    <string name="grams_label">g</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kcal_consumption">Kcal consumption</string>
+    <string name="kcal_label">kcal</string>
+    <string name="kcal_name">Calories</string>
+    <string name="no">No</string>
+    <string name="out_of">out of</string>
+    <string name="prots_consumption">Prots consumption</string>
+    <string name="prots_name">Proteins</string>
+    <string name="send">Send</string>
+    <string name="text_button_sample">Text Button</string>
+    <string name="text_icon_button_sample">Text Icon Button</string>
+    <string name="update">Update</string>
+    <string name="yes">Yes</string>
+    <style name="Theme.BiteBalance" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/ic_splash</item>
+        <item name="android:navigationBarColor">@color/black</item>
+    </style>
+</resources>

@@ -10,7 +10,7 @@ import com.database.entities.MealEntity
 @Dao
 interface MealDao {
     @Insert
-    fun insert(mealEntity: MealEntity)
+    fun insert(mealEntity: MealEntity): Long
 
     @Update
     fun updateItem(mealEntity: MealEntity)
@@ -19,10 +19,10 @@ interface MealDao {
     fun getAll(): List<MealEntity>
 
     @Query("SELECT * FROM ${Constants.MEAL_TABLE_NAME} WHERE id=:id")
-    fun getById(id: Int): MealEntity?
+    fun getById(id: Long): MealEntity?
 
     @Query("DELETE FROM ${Constants.MEAL_TABLE_NAME} WHERE id=:id")
-    fun deleteById(id: Int)
+    fun deleteById(id: Long)
 
     @Query("DELETE FROM ${Constants.MEAL_TABLE_NAME}")
     fun deleteAll()

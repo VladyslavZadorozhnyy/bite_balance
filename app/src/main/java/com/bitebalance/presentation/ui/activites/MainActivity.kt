@@ -2,17 +2,10 @@ package com.bitebalance.presentation.ui.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.viewModelScope
-import androidx.room.Room
 import com.ui.components.R
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.ActivityMainBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.database.db.AppDaoDatabase
-import com.database.db.AppDatabase
-import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -25,115 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         setupNavigationObserving()
         setContentView(binding.root)
-
-        navigationVm.a()
-        //navigationVm.viewModelScope.launch {
-            // val db = Room.databaseBuilder(
-            //    applicationContext, AppDatabase::class.java, "app-database").build()
-            //
-            // Log.d("AAADIP", "db is: $db")
-            // Log.d("AAADIP", "db.iconLegendDao() is: ${db.iconLegendDao()}")
-
-
-            //}
-
-//        TODO: Move to separate component later
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, DemonstrationFragment())
-//            addToBackStack(null)
-//            commit()
-//        }
-
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, HomeScreenFragment())
-//            commit()
-//        }
-
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, NavigationFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, InfoScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, ProgressScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, AddMealScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, StatsScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, MenuScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, SettingsScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, TodaysMealsScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, CreateNewScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, ChooseDishScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, MyGoalsScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, DishScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, AppearanceScreenFragment())
-//            commit()
-//        }
-//
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, TextScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, SupportFeedbackScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, SupportFeedbackScreenFragment())
-//            commit()
-//        }
-//
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(binding.fragmentContainer.id, MealDetailsScreenFragment())
-//            commit()
-//        }
     }
 
     private fun setupNavigationObserving() {

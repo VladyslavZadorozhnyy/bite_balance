@@ -35,6 +35,10 @@ class AppDaoDatabaseImpl(
         return getInstance().goalDao()
     }
 
+    override fun getGoalMetricsDao(): GoalMetricsDao {
+        return getInstance().goalMetricsDao()
+    }
+
     override fun getIconLegendDao(): IconLegendDao {
         return getInstance().iconLegendDao()
     }
