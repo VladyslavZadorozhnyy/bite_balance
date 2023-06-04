@@ -1,16 +1,19 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentCreateNewScreenBinding
+import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.MetricRecyclerModel
 import com.ui.basic.texts.common.TextModel
+import com.ui.common.ComponentUiUtils
 import com.ui.components.R
 import com.ui.mocks.MockMetricModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -21,6 +24,8 @@ class CreateNewScreenFragment : Fragment() {
     }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+
+    private val dishVm by sharedViewModel<DishViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,27 +97,32 @@ class CreateNewScreenFragment : Fragment() {
                     MockMetricModel(
                         name = "Prots:",
                         suffix = "g in 100g",
-                        editable = true
+                        editable = true,
+                        onlyNumbers = true
                     ),
                     MockMetricModel(
                         name = "Fats:",
                         suffix = "g in 100g",
-                        editable = true
+                        editable = true,
+                        onlyNumbers = true
                     ),
                     MockMetricModel(
                         name = "Carbs:",
                         suffix = "g in 100g",
-                        editable = true
+                        editable = true,
+                        onlyNumbers = true
                     ),
                     MockMetricModel(
                         name = "Kcal:",
                         suffix = "kcal in 100g",
-                        editable = true
+                        editable = true,
+                        onlyNumbers = true
                     ),
                     MockMetricModel(
                         name = "Eaten:",
                         suffix = "in g",
-                        editable = true
+                        editable = true,
+                        onlyNumbers = true
                     )
                 )
             )
@@ -124,7 +134,20 @@ class CreateNewScreenFragment : Fragment() {
                 labelTextSize = 20,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { navigationVm.popScreen() }
+                onClickListener = {
+                    ComponentUiUtils.hideKeyBoard(requireActivity())
+                    val inputValues = binding.metricRecycler.getInputValues()
+
+
+                    dishVm.createDish(
+                        inputValues[0],
+                        inputValues[1].toFloat(),
+                        inputValues[2].toFloat(),
+                        inputValues[3].toFloat(),
+                        inputValues[4].toFloat(),
+                        inputValues[5].toFloat()
+                    )
+                }
             )
         )
     }

@@ -21,6 +21,9 @@ interface DishDao {
     @Query("SELECT * FROM ${Constants.DISH_TABLE_NAME} WHERE id=:id")
     fun getById(id: Long): DishEntity?
 
+    @Query("SELECT * FROM ${Constants.DISH_TABLE_NAME} WHERE name=:name")
+    fun getByName(name: String): DishEntity
+
     @Query("DELETE FROM ${Constants.DISH_TABLE_NAME} WHERE id=:id")
     fun deleteById(id: Long)
 

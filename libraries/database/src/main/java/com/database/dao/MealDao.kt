@@ -21,6 +21,9 @@ interface MealDao {
     @Query("SELECT * FROM ${Constants.MEAL_TABLE_NAME} WHERE id=:id")
     fun getById(id: Long): MealEntity?
 
+    @Query("SELECT * FROM ${Constants.MEAL_TABLE_NAME} WHERE meal_time_id=:mealTimeId")
+    fun getByMealTime(mealTimeId: Int): List<MealEntity>
+
     @Query("DELETE FROM ${Constants.MEAL_TABLE_NAME} WHERE id=:id")
     fun deleteById(id: Long)
 

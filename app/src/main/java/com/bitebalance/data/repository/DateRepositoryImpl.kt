@@ -20,8 +20,8 @@ class DateRepositoryImpl(
         )
     }
 
-    override fun addDate(dateModel: DateModel) {
-        appDaoDatabase.getDateDao().insert(dateModel.toEntity())
+    override fun addDate(dateModel: DateModel): Long {
+        return appDaoDatabase.getDateDao().insert(dateModel.toEntity())
     }
 
     private fun getCurrentMinute(): Int {

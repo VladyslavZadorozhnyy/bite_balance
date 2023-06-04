@@ -4,5 +4,5 @@ import com.bitebalance.domain.model.DateModel
 
 interface DateRepository {
     fun getCurrentDate(): DateModel
-    fun addDate(dateModel: DateModel)
+    fun addDate(dateModel: DateModel): Long
 }

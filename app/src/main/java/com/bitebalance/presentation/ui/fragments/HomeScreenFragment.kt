@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentHomeScreenBinding
+import com.bitebalance.presentation.viewmodels.ConsumedGoalViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
@@ -24,6 +25,7 @@ class HomeScreenFragment : Fragment() {
     }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val consumedGoalVm by sharedViewModel<ConsumedGoalViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +36,11 @@ class HomeScreenFragment : Fragment() {
         setupButtons()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        consumedGoalVm.getConsumedGoalValues()
     }
 
     private fun setupHeader() {
@@ -123,7 +130,7 @@ class HomeScreenFragment : Fragment() {
             model = BaseDialogModel(
                 backgroundColorRes = R.color.white,
                 textColorRes = R.color.black,
-                title = "Would you like to reset progress?\n\nTodays data will be removed.",
+                title = "Would you like to reset progress?\n\nToday’s data will be removed.",
                 onPositiveClicked = { Log.d("AAADIP", "onPositive clicked") },
                 onNegativeClicked = { Log.d("AAADIP", "onNegative clicked") }
             )

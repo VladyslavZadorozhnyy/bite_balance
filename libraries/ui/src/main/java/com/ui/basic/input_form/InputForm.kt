@@ -2,6 +2,7 @@ package com.ui.basic.input_form
 
 import android.content.Context
 import android.graphics.Paint
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat.getColorStateList
@@ -52,4 +53,8 @@ class InputForm (
         }
     }
 
+    fun setupOnlyNumbers() {
+        binding.inputType =
+            InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED
+    }
 }

@@ -1,4 +1,29 @@
 package com.bitebalance.data.repository
 
-class MealRepositoryImpl {
+import com.bitebalance.domain.model.MealModel
+import com.bitebalance.domain.model.fromEntity
+import com.bitebalance.domain.model.toEntity
+import com.bitebalance.domain.repository.MealRepository
+import com.database.db.AppDaoDatabase
+
+class MealRepositoryImpl(
+    private val appDaoDatabase: AppDaoDatabase,
+) : MealRepository {
+    override fun addMeal(mealModel: MealModel) {
+        appDaoDatabase.getMealDao().insert(mealModel.toEntity())
+    }
+
+    override fun getAllMeals(): List<MealModel> {
+        return appDaoDatabase
+            .getMealDao()
+            .getAll()
+            .map { MealModel.Companion.fromEntity(it) }
+    }
+
+    override fun getMealsByDate(dateModelId: Int): List<MealModel> {
+        return appDaoDatabase
+            .getMealDao()
+            .getByMealTime(dateModelId)
+            .map { MealModel.Companion.fromEntity(it) }
+    }
 }

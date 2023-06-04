@@ -16,7 +16,7 @@ import com.database.entities.*
     NutritionValueEntity::class,
     SettingEntity::class],
     exportSchema = false,
-    version = 5)
+    version = 6)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun dateDao(): DateDao
 

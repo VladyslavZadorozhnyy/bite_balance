@@ -1,6 +1,5 @@
 package com.ui.basic.recycler_views.metric_recycler
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,6 +73,8 @@ class MetricAdapter(
                 setupMetricValueText(value = model.hint)
                 metricValueViewText.visibility = View.VISIBLE
             }
+
+            if (model.onlyNumbers) { setupOnlyNumbers() }
         }
 
         private fun setupCheckBox(inputValues: MutableList<String>) {
@@ -103,6 +104,10 @@ class MetricAdapter(
                     onInputChange = { inputValues[position] = it }
                 )
             )
+        }
+
+        fun setupOnlyNumbers() {
+            metricValueViewInput.setupOnlyNumbers()
         }
 
         private fun setupMetricValueText(value: String) {
