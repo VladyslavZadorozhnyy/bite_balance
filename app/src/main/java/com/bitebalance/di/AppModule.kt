@@ -11,10 +11,8 @@ import com.bitebalance.domain.repository.NutritionValueRepository
 import com.bitebalance.domain.usecase.AddNewDishAndMealUseCase
 import com.bitebalance.domain.usecase.GetAllDishesUseCase
 import com.bitebalance.domain.usecase.GetConsumedGoalUseCase
-import com.bitebalance.presentation.viewmodels.ConsumedGoalViewModel
-import com.bitebalance.presentation.viewmodels.DishViewModel
-import com.bitebalance.presentation.viewmodels.MenuViewModel
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.bitebalance.domain.usecase.GetNutritionValueUseCase
+import com.bitebalance.presentation.viewmodels.*
 import com.database.db.AppDaoDatabase
 import com.database.db.AppDaoDatabaseImpl
 import org.koin.android.ext.koin.androidApplication
@@ -26,11 +24,13 @@ val appModule = module {
     viewModel { NavigationViewModel() }
     viewModel { DishViewModel(get(), get()) }
     viewModel { MenuViewModel(get()) }
+    viewModel { NutritionViewModel(get()) }
     viewModel { ConsumedGoalViewModel(get()) }
 
 //  UseCases
     single { GetConsumedGoalUseCase(get(), get(), get()) }
     single { GetAllDishesUseCase(get()) }
+    single { GetNutritionValueUseCase(get()) }
     single { AddNewDishAndMealUseCase(get(), get(), get(), get()) }
     single<AppDaoDatabase> { AppDaoDatabaseImpl(androidApplication()) }
 

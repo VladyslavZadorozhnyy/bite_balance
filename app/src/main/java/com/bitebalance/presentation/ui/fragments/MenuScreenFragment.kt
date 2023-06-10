@@ -115,6 +115,6 @@ class MenuScreenFragment : Fragment() {
     }
 
     private fun processDishClick(dish: DishModel) {
-        navigationVm.navigateTo(DishScreenFragment(), NavigationAction.ADD)
+        navigationVm.navigateTo(DishScreenFragment.newInstance(dish), NavigationAction.ADD)
     }
 }

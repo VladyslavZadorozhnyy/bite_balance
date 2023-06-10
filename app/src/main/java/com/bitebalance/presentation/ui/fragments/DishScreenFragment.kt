@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import com.bitebalance.databinding.FragmentDishScreenBinding
+import com.bitebalance.domain.model.NutritionValueModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.MetricRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.mocks.MockMetricModel
+import com.ui.model.DishModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DishScreenFragment : Fragment() {
@@ -21,6 +24,11 @@ class DishScreenFragment : Fragment() {
     }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val nutritionVm by sharedViewModel<NutritionViewModel>()
+
+    private lateinit var dishModel: DishModel
+    private var dishNutritionValue: NutritionValueModel? = null
+
     private var editButtonChecked = false
 
     override fun onCreateView(
@@ -30,12 +38,19 @@ class DishScreenFragment : Fragment() {
         setupStyling()
         setupHeader()
         setupEditButton(editButtonChecked)
-        setupRecycler()
 
+        nutritionVm.state.observe(this) {
+            dishNutritionValue = it.nutritionValue
+            setupRecycler()
+        }
+
+        nutritionVm.getNutritionValue(dishModel.nutritionValId)
         return binding.root
     }
 
     private fun setupStyling() {
+        binding.dishIcon.setBackgroundResource(dishModel.iconRes)
+
         binding.sublayoutContainer.backgroundTintList =
             AppCompatResources.getColorStateList(requireContext(), R.color.white)
     }
@@ -43,7 +58,7 @@ class DishScreenFragment : Fragment() {
     private fun setupHeader() {
         binding.toolbar.headline.setup(
             model = TextModel(
-                textValue = "*Dish name*",
+                textValue = dishModel.name,
                 textSize = 30,
                 textColorRes = R.color.black,
                 backgroundColor = R.color.white
@@ -100,38 +115,27 @@ class DishScreenFragment : Fragment() {
             MetricRecyclerModel(
                 items = listOf(
                     MockMetricModel(
-                        name = "Name:",
-                        hint = "hint",
-                        editable = editButtonChecked
-                    ),
-                    MockMetricModel(
                         name = "Prots:",
-                        hint = "hint",
+                        hint = dishNutritionValue?.prots?.toString() ?: "-",
                         suffix = "g in 100g",
                         editable = editButtonChecked
                     ),
                     MockMetricModel(
                         name = "Fats:",
-                        hint = "hint",
+                        hint = dishNutritionValue?.prots?.toString() ?: "-",
                         suffix = "g in 100g",
                         editable = editButtonChecked
                     ),
                     MockMetricModel(
                         name = "Carbs:",
-                        hint = "hint",
+                        hint = dishNutritionValue?.carbs?.toString() ?: "-",
                         suffix = "g in 100g",
                         editable = editButtonChecked
                     ),
                     MockMetricModel(
                         name = "Kcal:",
-                        hint = "hint",
+                        hint = dishNutritionValue?.kcals?.toString() ?: "-",
                         suffix = "kcal in 100g",
-                        editable = editButtonChecked
-                    ),
-                    MockMetricModel(
-                        name = "Eaten:",
-                        hint = "hint",
-                        suffix = "in g",
                         editable = editButtonChecked
                     )
                 )
@@ -147,5 +151,14 @@ class DishScreenFragment : Fragment() {
                 onClickListener = { if (editButtonChecked) {} else { navigationVm.popScreen() } }
             )
         )
+    }
+
+    companion object {
+        fun newInstance(dishModel: DishModel): DishScreenFragment {
+            val result = DishScreenFragment()
+            result.dishModel = dishModel
+
+            return result
+        }
     }
 }
