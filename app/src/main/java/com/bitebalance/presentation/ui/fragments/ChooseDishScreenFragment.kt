@@ -12,8 +12,6 @@ import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
-import com.ui.mocks.MockDishModel
-import com.ui.mocks.MockNutritionModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -65,97 +63,97 @@ class ChooseDishScreenFragment : Fragment() {
         binding.dishRecycler.setup(
             model = DishRecyclerModel(
                 items = listOf(
-                    MockDishModel(
-                        name = "Dish 1",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 2",
-                        iconRes = R.drawable.lunch_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 3",
-                        iconRes = R.drawable.dinner_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 4",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 5",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 6",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 1",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 2",
-                        iconRes = R.drawable.lunch_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 3",
-                        iconRes = R.drawable.dinner_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 4",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 5",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 6",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 1",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 2",
-                        iconRes = R.drawable.lunch_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 3",
-                        iconRes = R.drawable.dinner_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 4",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 5",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    ),
-                    MockDishModel(
-                        name = "Dish 6",
-                        iconRes = R.drawable.breakfast_icon,
-                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-                    )
-                ),
+//                    MockDishModel(
+//                        name = "Dish 1",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 2",
+//                        iconRes = R.drawable.lunch_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 3",
+//                        iconRes = R.drawable.dinner_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 4",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 5",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 6",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 1",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 2",
+//                        iconRes = R.drawable.lunch_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 3",
+//                        iconRes = R.drawable.dinner_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 4",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 5",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 6",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 1",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 2",
+//                        iconRes = R.drawable.lunch_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 3",
+//                        iconRes = R.drawable.dinner_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 4",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 5",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    ),
+//                    MockDishModel(
+//                        name = "Dish 6",
+//                        iconRes = R.drawable.breakfast_icon,
+//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
+//                    )
+              ),
                 onClickListener = {}
             )
         )

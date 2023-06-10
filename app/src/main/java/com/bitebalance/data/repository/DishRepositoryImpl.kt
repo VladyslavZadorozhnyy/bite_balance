@@ -1,10 +1,10 @@
 package com.bitebalance.data.repository
 
-import com.bitebalance.domain.model.DishModel
 import com.bitebalance.domain.model.fromEntity
 import com.bitebalance.domain.model.toEntity
 import com.bitebalance.domain.repository.DishRepository
 import com.database.db.AppDaoDatabase
+import com.ui.model.DishModel
 
 class DishRepositoryImpl(
     private val appDaoDatabase: AppDaoDatabase

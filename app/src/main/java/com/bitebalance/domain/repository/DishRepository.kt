@@ -1,6 +1,7 @@
 package com.bitebalance.domain.repository
 
-import com.bitebalance.domain.model.DishModel
+import com.ui.model.DishModel
+
 
 interface DishRepository {
     fun addDish(dishModel: DishModel): Long

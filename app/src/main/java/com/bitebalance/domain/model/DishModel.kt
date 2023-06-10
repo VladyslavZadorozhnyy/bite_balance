@@ -1,13 +1,7 @@
 package com.bitebalance.domain.model
 
 import com.database.entities.DishEntity
-import com.database.entities.MealEntity
-
-data class DishModel(
-    val name: String,
-    val iconRes: Int,
-    val nutritionValId: Long
-) { companion object }
+import com.ui.model.DishModel
 
 fun DishModel.Companion.fromEntity(entity: DishEntity): DishModel {
     return DishModel(

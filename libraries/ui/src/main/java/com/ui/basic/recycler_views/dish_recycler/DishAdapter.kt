@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.text.Text
+import com.ui.basic.texts.slideable_text.SlideableText
 import com.ui.components.R
-import com.ui.mocks.MockDishModel
+import com.ui.model.DishModel
 
 
 class DishAdapter(
-    private val items: List<MockDishModel>,
-    private val onClickListener: (MockDishModel) -> Unit
+    private val items: List<DishModel>,
+    private val onClickListener: (DishModel) -> Unit
 ): RecyclerView.Adapter<DishAdapter.DishViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
@@ -37,16 +37,14 @@ class DishAdapter(
     }
 
     class DishViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val textView = view.findViewById<Text>(R.id.metric_name_view)
+        private val textView = view.findViewById<SlideableText>(R.id.dish_name_view)
         private val dishIconView = view.findViewById<IconButton>(R.id.dish_icon_view)
 
         init {
-            view.setOnClickListener {
-                Log.d("AAADIP", "setOnClickListener called")
-            }
+            view.setOnClickListener { Log.d("AAADIP", "setOnClickListener called") }
         }
 
-        fun bind(item: MockDishModel) {
+        fun bind(item: DishModel) {
             textView.setup(
                 model = TextModel(
                     textValue = item.name,

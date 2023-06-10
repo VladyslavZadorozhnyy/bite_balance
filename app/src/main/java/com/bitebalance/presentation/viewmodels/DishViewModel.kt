@@ -4,11 +4,14 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bitebalance.domain.usecase.AddNewDishAndMealUseCase
+import com.bitebalance.domain.usecase.GetAllDishesUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+// AAADIP remove later TODO
 class DishViewModel(
     private val addNewDishAndMealUseCase: AddNewDishAndMealUseCase,
+    private val getAllDishesUseCase: GetAllDishesUseCase,
 ): ViewModel() {
 
     fun createDish(
@@ -19,7 +22,7 @@ class DishViewModel(
         kcals: Float,
         eaten: Float
     ) {
-        addNewDishAndMealUseCase.invoke(name, prots, fats, carbs, kcals, eaten).onEach { result ->
+        addNewDishAndMealUseCase(name, prots, fats, carbs, kcals, eaten).onEach { result ->
             Log.d("AAADIP", "Result from addNewDishAndMealUseCase is: $result")
         }.launchIn(viewModelScope)
     }
