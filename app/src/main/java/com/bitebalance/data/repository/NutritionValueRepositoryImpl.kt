@@ -24,6 +24,14 @@ class NutritionValueRepositoryImpl(
         return appDaoDatabase.getNutritionValueDao().insert(nutritionValueModel.toEntity())
     }
 
+    override fun removeNutritionValue(nutritionValueModel: NutritionValueModel) {
+        return appDaoDatabase.getNutritionValueDao().deleteItem(nutritionValueModel.toEntity())
+    }
+
+    override fun removeNutritionValueById(id: Long) {
+        return appDaoDatabase.getNutritionValueDao().deleteById(id)
+    }
+
     override fun getGoalConsumption(): NutritionValueModel? {
         val goalConsumptionEntity = appDaoDatabase
             .getGoalMetricsDao()

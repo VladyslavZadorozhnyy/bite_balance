@@ -43,6 +43,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line_view" />
 
+        <com.ui.basic.buttons.icon_button.IconButton
+            android:id="@+id/delete_button"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_view" />
+
         <ImageView
             android:id="@+id/dish_icon"
             android:layout_width="200dp"

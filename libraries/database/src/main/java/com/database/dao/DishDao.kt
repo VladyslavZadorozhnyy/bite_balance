@@ -1,9 +1,6 @@
 package com.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.database.common.Constants
 import com.database.entities.DishEntity
 
@@ -26,6 +23,9 @@ interface DishDao {
 
     @Query("DELETE FROM ${Constants.DISH_TABLE_NAME} WHERE id=:id")
     fun deleteById(id: Long)
+
+    @Query("DELETE FROM ${Constants.DISH_TABLE_NAME} WHERE name=:name")
+    fun deleteByName(name: String)
 
     @Query("DELETE FROM ${Constants.DISH_TABLE_NAME}")
     fun deleteAll()

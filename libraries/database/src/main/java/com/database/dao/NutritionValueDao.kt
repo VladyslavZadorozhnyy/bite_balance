@@ -1,9 +1,6 @@
 package com.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.database.common.Constants
 import com.database.entities.NutritionValueEntity
 
@@ -23,6 +20,9 @@ interface NutritionValueDao {
 
     @Query("DELETE FROM ${Constants.NUTRITION_VALUE_TABLE_NAME} WHERE id=:id")
     fun deleteById(id: Long)
+
+    @Delete
+    fun deleteItem(entity: NutritionValueEntity)
 
     @Query("DELETE FROM ${Constants.NUTRITION_VALUE_TABLE_NAME}")
     fun deleteAll()

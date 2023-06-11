@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import com.bitebalance.databinding.FragmentDishScreenBinding
 import com.bitebalance.domain.model.NutritionValueModel
+import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.buttons.common.ButtonModel
@@ -23,12 +24,11 @@ import com.ui.model.DishModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DishScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentDishScreenBinding.inflate(layoutInflater)
-    }
+    private val binding by lazy { FragmentDishScreenBinding.inflate(layoutInflater) }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
     private val nutritionVm by sharedViewModel<NutritionViewModel>()
+    private val dishVm by sharedViewModel<DishViewModel>()
 
     private lateinit var dishModel: DishModel
     private var dishNutritionValue: NutritionValueModel? = null
@@ -41,6 +41,7 @@ class DishScreenFragment : Fragment() {
     ): View {
         setupStyling()
         setupHeader()
+        setupDeleteButton()
         setupEditButton(editButtonChecked)
         setupViewModelsObservation()
 
@@ -50,15 +51,59 @@ class DishScreenFragment : Fragment() {
 
     private fun setupViewModelsObservation() {
         nutritionVm.state.observe(this) { state ->
-            if (state.successMessage.isNotEmpty()) {
-                binding.editButton.click()
-                setupConfirmDialog(state.successMessage)
-            } else if (state.errorMessage.isNotEmpty()) {
-                setupConfirmDialog(state.errorMessage)
-            }
-
             dishNutritionValue = state.nutritionValue
             setupRecycler()
+
+            if (state.successMessage.isNotEmpty()) {
+                binding.editButton.click()
+                ConfirmDialog(
+                    activity = requireActivity(),
+                    model = BaseDialogModel(
+                        backgroundColorRes = R.color.white,
+                        textColorRes = R.color.black,
+                        title = state.successMessage,
+                        buttonTextRes = R.string.done
+                    )
+                ).show()
+            } else if (state.errorMessage.isNotEmpty()) {
+                ConfirmDialog(
+                    activity = requireActivity(),
+                    model = BaseDialogModel(
+                        backgroundColorRes = R.color.white,
+                        textColorRes = R.color.black,
+                        title = state.errorMessage,
+                        buttonTextRes = R.string.done
+                    )
+                ).show()
+            }
+        }
+
+        dishVm.state.observe(this) { state ->
+            if (!state.isSuccess && state.data == null) { return@observe; }
+            if (state.isLoading) { return@observe; }
+
+            if (!state.isSuccess) {
+                ConfirmDialog(
+                    activity = requireActivity(),
+                    model = BaseDialogModel(
+                        backgroundColorRes = R.color.white,
+                        textColorRes = R.color.black,
+                        title = state.data ?: "Unknown error happened",
+                        buttonTextRes = R.string.done
+                    )
+                ).show()
+            } else {
+                activity?.onBackPressedDispatcher?.onBackPressed()
+                ConfirmDialog(
+                    activity = requireActivity(),
+                    model = BaseDialogModel(
+                        backgroundColorRes = R.color.white,
+                        textColorRes = R.color.black,
+                        title = state.data ?: "Dish removed successfully",
+                        buttonTextRes = R.string.done
+                    )
+                ).show()
+            }
         }
     }
 
@@ -105,6 +150,29 @@ class DishScreenFragment : Fragment() {
         binding.toggleCheckbox.visibility = if (editButtonChecked) View.VISIBLE else View.GONE
     }
 
+    private fun setupDeleteButton() {
+        binding.deleteButton.setup(
+            model = ButtonModel(
+                iconRes = R.drawable.bin_icon,
+                iconSize = 70,
+                strokeWidth = 5,
+                foregroundColorRes = if (editButtonChecked) R.color.black else R.color.white,
+                backgroundColorRes = if (editButtonChecked) R.color.white else R.color.black,
+                onClickListener = {
+                    YesNoDialog(
+                        activity = requireActivity(),
+                        model = BaseDialogModel(
+                            backgroundColorRes = R.color.white,
+                            textColorRes = R.color.black,
+                            title = "Do you want to delete this dish?",
+                            onPositiveClicked = { dishVm.removeDish(dishModel) },
+                        )
+                    ).show()
+                }
+            )
+        )
+    }
+
     private fun setupEditButton(isChecked: Boolean) {
         editButtonChecked = isChecked
 
@@ -129,30 +197,6 @@ class DishScreenFragment : Fragment() {
             id = dishModel.nutritionValId,
             inputValues = binding.metricRecycler.getInputValues()
         )
-    }
-
-    private fun setupEnsureDialog() {
-        YesNoDialog(
-            activity = requireActivity(),
-            model = BaseDialogModel(
-                backgroundColorRes = R.color.white,
-                textColorRes = R.color.black,
-                title = "Some fields are empty. They will be filled with '0'",
-                onPositiveClicked = { processUpdate() },
-            )
-        ).show()
-    }
-
-    private fun setupConfirmDialog(message: String) {
-        ConfirmDialog(
-            activity = requireActivity(),
-            model = BaseDialogModel(
-                backgroundColorRes = R.color.white,
-                textColorRes = R.color.black,
-                title = message,
-                buttonTextRes = R.string.done
-            )
-        ).show()
     }
 
     private fun setupRecycler() {
@@ -201,7 +245,19 @@ class DishScreenFragment : Fragment() {
                     ComponentUiUtils.hideKeyBoard(requireActivity())
                     if (editButtonChecked) {
                         val allInputFilled = binding.metricRecycler.getInputValues().all { it.isNotEmpty() }
-                        if (allInputFilled) { processUpdate() } else { setupEnsureDialog() }
+                        if (allInputFilled) {
+                            processUpdate()
+                        } else {
+                            YesNoDialog(
+                                activity = requireActivity(),
+                                model = BaseDialogModel(
+                                    backgroundColorRes = R.color.white,
+                                    textColorRes = R.color.black,
+                                    title = "Some fields are empty. They will be filled with '0'",
+                                    onPositiveClicked = { processUpdate() },
+                                )
+                            ).show()
+                        }
                     } else {
                         navigationVm.popScreen()
                     }

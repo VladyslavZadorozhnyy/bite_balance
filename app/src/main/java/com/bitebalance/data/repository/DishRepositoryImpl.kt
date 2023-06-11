@@ -13,6 +13,10 @@ class DishRepositoryImpl(
         return appDaoDatabase.getDishDao().insert(dishModel.toEntity())
     }
 
+    override fun removeDish(dishModel: DishModel) {
+        return appDaoDatabase.getDishDao().deleteByName(dishModel.name)
+    }
+
     override fun getAllDishes(): List<DishModel> {
         return appDaoDatabase.getDishDao().getAll().map { DishModel.fromEntity(it) }
     }
