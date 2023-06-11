@@ -28,4 +28,6 @@ class IconButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponen
             model.onClickListener?.let { binding.setOnClickListener(it) }
         }
     }
+
+    fun click() { binding.performClick() }
 }

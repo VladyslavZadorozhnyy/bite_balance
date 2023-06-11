@@ -49,7 +49,7 @@ class ConfirmDialog(
 
             binding.confirmButton.setup(
                 ButtonModel(
-                    labelTextRes = R.string.text_button_sample,
+                    labelTextRes = model.buttonTextRes,
                     labelTextSize = 10,
                     foregroundColorRes = model.backgroundColorRes,
                     backgroundColorRes = R.color.black,

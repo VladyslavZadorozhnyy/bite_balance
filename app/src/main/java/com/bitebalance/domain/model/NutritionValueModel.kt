@@ -26,3 +26,13 @@ fun NutritionValueModel.toEntity(): NutritionValueEntity {
         this.kcals,
     )
 }
+
+fun NutritionValueModel.toEntity(id: Long): NutritionValueEntity {
+    return NutritionValueEntity(
+        this.prots,
+        this.fats,
+        this.carbs,
+        this.kcals,
+        id = id
+    )
+}

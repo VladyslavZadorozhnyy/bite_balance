@@ -13,7 +13,11 @@ import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.MetricRecyclerModel
 import com.ui.basic.texts.common.TextModel
+import com.ui.common.ComponentUiUtils
 import com.ui.components.R
+import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
+import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import com.ui.mocks.MockMetricModel
 import com.ui.model.DishModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -38,14 +42,24 @@ class DishScreenFragment : Fragment() {
         setupStyling()
         setupHeader()
         setupEditButton(editButtonChecked)
-
-        nutritionVm.state.observe(this) {
-            dishNutritionValue = it.nutritionValue
-            setupRecycler()
-        }
+        setupViewModelsObservation()
 
         nutritionVm.getNutritionValue(dishModel.nutritionValId)
         return binding.root
+    }
+
+    private fun setupViewModelsObservation() {
+        nutritionVm.state.observe(this) { state ->
+            if (state.successMessage.isNotEmpty()) {
+                binding.editButton.click()
+                setupConfirmDialog(state.successMessage)
+            } else if (state.errorMessage.isNotEmpty()) {
+                setupConfirmDialog(state.errorMessage)
+            }
+
+            dishNutritionValue = state.nutritionValue
+            setupRecycler()
+        }
     }
 
     private fun setupStyling() {
@@ -110,6 +124,37 @@ class DishScreenFragment : Fragment() {
         )
     }
 
+    private fun processUpdate() {
+        nutritionVm.updateNutritionValue(
+            id = dishModel.nutritionValId,
+            inputValues = binding.metricRecycler.getInputValues()
+        )
+    }
+
+    private fun setupEnsureDialog() {
+        YesNoDialog(
+            activity = requireActivity(),
+            model = BaseDialogModel(
+                backgroundColorRes = R.color.white,
+                textColorRes = R.color.black,
+                title = "Some fields are empty. They will be filled with '0'",
+                onPositiveClicked = { processUpdate() },
+            )
+        ).show()
+    }
+
+    private fun setupConfirmDialog(message: String) {
+        ConfirmDialog(
+            activity = requireActivity(),
+            model = BaseDialogModel(
+                backgroundColorRes = R.color.white,
+                textColorRes = R.color.black,
+                title = message,
+                buttonTextRes = R.string.done
+            )
+        ).show()
+    }
+
     private fun setupRecycler() {
         binding.metricRecycler.setup(
             MetricRecyclerModel(
@@ -118,25 +163,29 @@ class DishScreenFragment : Fragment() {
                         name = "Prots:",
                         hint = dishNutritionValue?.prots?.toString() ?: "-",
                         suffix = "g in 100g",
-                        editable = editButtonChecked
+                        editable = editButtonChecked,
+                        onlyNumbers = true,
                     ),
                     MockMetricModel(
                         name = "Fats:",
-                        hint = dishNutritionValue?.prots?.toString() ?: "-",
+                        hint = dishNutritionValue?.fats?.toString() ?: "-",
                         suffix = "g in 100g",
-                        editable = editButtonChecked
+                        editable = editButtonChecked,
+                        onlyNumbers = true,
                     ),
                     MockMetricModel(
                         name = "Carbs:",
                         hint = dishNutritionValue?.carbs?.toString() ?: "-",
                         suffix = "g in 100g",
-                        editable = editButtonChecked
+                        editable = editButtonChecked,
+                        onlyNumbers = true,
                     ),
                     MockMetricModel(
                         name = "Kcal:",
                         hint = dishNutritionValue?.kcals?.toString() ?: "-",
                         suffix = "kcal in 100g",
-                        editable = editButtonChecked
+                        editable = editButtonChecked,
+                        onlyNumbers = true,
                     )
                 )
             )
@@ -148,7 +197,15 @@ class DishScreenFragment : Fragment() {
                 labelTextSize = 20,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { if (editButtonChecked) {} else { navigationVm.popScreen() } }
+                onClickListener = {
+                    ComponentUiUtils.hideKeyBoard(requireActivity())
+                    if (editButtonChecked) {
+                        val allInputFilled = binding.metricRecycler.getInputValues().all { it.isNotEmpty() }
+                        if (allInputFilled) { processUpdate() } else { setupEnsureDialog() }
+                    } else {
+                        navigationVm.popScreen()
+                    }
+                }
             )
         )
     }

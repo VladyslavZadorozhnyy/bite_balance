@@ -1,4 +1,4 @@
-package com.bitebalance.domain.usecase
+package com.bitebalance.domain.usecase.add
 
 import com.bitebalance.common.Resource
 import com.bitebalance.domain.model.MealModel

@@ -1,4 +1,4 @@
-package com.bitebalance.domain.usecase
+package com.bitebalance.domain.usecase.get
 
 import com.bitebalance.common.Resource
 import com.bitebalance.domain.repository.DishRepository

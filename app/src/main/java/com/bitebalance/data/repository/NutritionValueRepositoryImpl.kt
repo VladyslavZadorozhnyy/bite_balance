@@ -16,6 +16,10 @@ class NutritionValueRepositoryImpl(
             ?.let { NutritionValueModel.fromEntity(it) }
     }
 
+    override fun updateNutritionValueById(id: Long, nutritionValueModel: NutritionValueModel) {
+        return appDaoDatabase.getNutritionValueDao().updateItem(nutritionValueModel.toEntity(id))
+    }
+
     override fun addNutritionValue(nutritionValueModel: NutritionValueModel): Long {
         return appDaoDatabase.getNutritionValueDao().insert(nutritionValueModel.toEntity())
     }

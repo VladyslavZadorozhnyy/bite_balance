@@ -8,10 +8,11 @@ import com.bitebalance.domain.repository.DateRepository
 import com.bitebalance.domain.repository.DishRepository
 import com.bitebalance.domain.repository.MealRepository
 import com.bitebalance.domain.repository.NutritionValueRepository
-import com.bitebalance.domain.usecase.AddNewDishAndMealUseCase
-import com.bitebalance.domain.usecase.GetAllDishesUseCase
-import com.bitebalance.domain.usecase.GetConsumedGoalUseCase
-import com.bitebalance.domain.usecase.GetNutritionValueUseCase
+import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
+import com.bitebalance.domain.usecase.get.GetAllDishesUseCase
+import com.bitebalance.domain.usecase.get.GetConsumedGoalUseCase
+import com.bitebalance.domain.usecase.get.GetNutritionValueUseCase
+import com.bitebalance.domain.usecase.update.UpdateNutritionValueUseCase
 import com.bitebalance.presentation.viewmodels.*
 import com.database.db.AppDaoDatabase
 import com.database.db.AppDaoDatabaseImpl
@@ -24,13 +25,14 @@ val appModule = module {
     viewModel { NavigationViewModel() }
     viewModel { DishViewModel(get(), get()) }
     viewModel { MenuViewModel(get()) }
-    viewModel { NutritionViewModel(get()) }
+    viewModel { NutritionViewModel(get(), get()) }
     viewModel { ConsumedGoalViewModel(get()) }
 
 //  UseCases
     single { GetConsumedGoalUseCase(get(), get(), get()) }
     single { GetAllDishesUseCase(get()) }
     single { GetNutritionValueUseCase(get()) }
+    single { UpdateNutritionValueUseCase(get()) }
     single { AddNewDishAndMealUseCase(get(), get(), get(), get()) }
     single<AppDaoDatabase> { AppDaoDatabaseImpl(androidApplication()) }
 

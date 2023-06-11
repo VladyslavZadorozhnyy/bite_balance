@@ -3,8 +3,8 @@ package com.bitebalance.presentation.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bitebalance.domain.usecase.AddNewDishAndMealUseCase
-import com.bitebalance.domain.usecase.GetAllDishesUseCase
+import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
+import com.bitebalance.domain.usecase.get.GetAllDishesUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 

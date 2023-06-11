@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bitebalance.domain.usecase.GetAllDishesUseCase
+import com.bitebalance.domain.usecase.get.GetAllDishesUseCase
 import com.bitebalance.presentation.states.MenuState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
