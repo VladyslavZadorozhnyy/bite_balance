@@ -2,11 +2,11 @@ package com.bitebalance.common
 
 sealed class Resource<T>(
     val data: T? = null,
-    val errorMessage: String = "",
-    val successMessage: String = "",
-    val isLoading: Boolean = false
+    val message: String = "",
+    val isLoading: Boolean = false,
+    val isSuccessful: Boolean = true
 ) {
-    class Success<T>(data: T, message: String = "") : Resource<T>(data, successMessage = message)
-    class Error<T>(message: String, data: T? = null) : Resource<T>(data, errorMessage = message)
-    class Loading<T>() : Resource<T>(isLoading = true)
+    class Success<T>(message: String = "", data: T? = null) : Resource<T>(data, message, isSuccessful = true)
+    class Error<T>(message: String, data: T? = null) : Resource<T>(data, message, isSuccessful = false)
+    class Loading<T> : Resource<T>(isLoading = true)
 }

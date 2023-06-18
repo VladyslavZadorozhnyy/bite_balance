@@ -1,6 +1,5 @@
 package com.bitebalance.domain.usecase.remove
 
-import android.util.Log
 import com.bitebalance.common.Resource
 import com.bitebalance.domain.repository.DishRepository
 import com.bitebalance.domain.repository.NutritionValueRepository
@@ -14,7 +13,7 @@ class RemoveDishUseCase(
     private val dishRepository: DishRepository,
     private val nutritionValueRepository: NutritionValueRepository,
 ) {
-    operator fun invoke(dishModel: DishModel): Flow<Resource<String>> = flow {
+    operator fun invoke(dishModel: DishModel): Flow<Resource<List<DishModel>>> = flow {
         var resultMessage = ""
         emit(Resource.Loading())
 
@@ -28,9 +27,9 @@ class RemoveDishUseCase(
         }
 
         if (resultMessage.isNotEmpty()) {
-            emit(Resource.Error(resultMessage))
+            emit(Resource.Error(message = resultMessage))
         } else {
-            emit(Resource.Success("Removed successfully"))
+            emit(Resource.Success(message = "Removed successfully"))
         }
     }
 }

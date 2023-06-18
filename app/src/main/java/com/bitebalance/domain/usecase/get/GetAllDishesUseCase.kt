@@ -17,6 +17,6 @@ class GetAllDishesUseCase(
         val result = withContext(Dispatchers.IO) {
             return@withContext dishRepository.getAllDishes()
         }
-        emit(Resource.Success(result))
+        emit(Resource.Success(data = result))
     }
 }

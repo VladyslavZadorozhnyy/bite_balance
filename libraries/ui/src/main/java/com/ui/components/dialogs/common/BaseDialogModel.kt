@@ -5,10 +5,11 @@ import com.ui.common.ComponentUiType
 import com.ui.components.R
 
 data class BaseDialogModel(
-    val backgroundColorRes: Int,
-    val textColorRes: Int,
     val title: String,
+    val backgroundColorRes: Int = R.color.white,
+    val textColorRes: Int = R.color.black,
     val buttonTextRes: Int = R.string.text_button_sample,
+    val onConfirmClicked: () -> Unit = {},
     val onPositiveClicked: () -> Unit = {},
     val onNegativeClicked: () -> Unit = {},
     val onInputConfirmed: (value: String) -> Unit = {}

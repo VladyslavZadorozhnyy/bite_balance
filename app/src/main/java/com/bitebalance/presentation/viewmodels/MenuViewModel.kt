@@ -19,7 +19,7 @@ class MenuViewModel(
         getAllDishesUseCase().onEach { result ->
             _state.value = MenuState(
                 dishes = result.data,
-                errorMessage = result.errorMessage
+                errorMessage = result.message
             )
         }.launchIn(viewModelScope)
     }

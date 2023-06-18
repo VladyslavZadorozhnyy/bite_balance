@@ -7,5 +7,5 @@ interface DishRepository {
     fun addDish(dishModel: DishModel): Long
     fun removeDish(dishModel: DishModel)
     fun getAllDishes(): List<DishModel>
-    fun getDishByName(name: String): DishModel
+    fun getDishByName(name: String): DishModel?
 }

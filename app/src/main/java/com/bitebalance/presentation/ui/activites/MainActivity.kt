@@ -40,4 +40,9 @@ class MainActivity : AppCompatActivity() {
             transaction.commit()
         }
     }
+
+    override fun onBackPressed() {
+        onBackPressedDispatcher.onBackPressed()
+        supportFragmentManager.fragments.lastOrNull()?.onResume()
+    }
 }

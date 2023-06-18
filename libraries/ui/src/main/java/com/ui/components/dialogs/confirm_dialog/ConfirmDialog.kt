@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
@@ -20,11 +19,9 @@ class ConfirmDialog(
     activity: Activity,
     private val model: BaseUiComponentModel
 ) : Dialog(activity) {
-    private val transparentBackground = ColorDrawable(getColor(context, R.color.transparent))
+    private val binding by lazy { ConfirmDialogBinding.inflate(LayoutInflater.from(context)) }
 
-    private val binding by lazy {
-        ConfirmDialogBinding.inflate(LayoutInflater.from(context))
-    }
+    private val transparentBackground = ColorDrawable(getColor(context, R.color.transparent))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +51,7 @@ class ConfirmDialog(
                     foregroundColorRes = model.backgroundColorRes,
                     backgroundColorRes = R.color.black,
                     onClickListener = {
-                        Log.d("AAADIP", "Confirm button clicked")
+                        model.onConfirmClicked()
                         dismiss()
                     }
                 )

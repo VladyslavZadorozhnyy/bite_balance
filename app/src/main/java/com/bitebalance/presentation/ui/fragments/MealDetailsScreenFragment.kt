@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.bitebalance.databinding.FragmentMealDetailsScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.recycler_views.metric_recycler.MetricRecyclerModel
+import com.ui.basic.recycler_views.metric_recycler.MealMetricsModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.mocks.MockMetricModel
@@ -72,46 +72,6 @@ class MealDetailsScreenFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        binding.metricRecycler.setup(
-            MetricRecyclerModel(
-                items = listOf(
-                    MockMetricModel(
-                        name = "Dish:",
-                        editable = true
-                    ),
-                    MockMetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
-                        editable = true
-                    ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
-                        editable = true
-                    ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
-                        editable = true
-                    ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
-                        editable = true
-                    ),
-                    MockMetricModel(
-                        name = "Eaten:",
-                        suffix = "in g",
-                        editable = true
-                    ),
-                    MockMetricModel(
-                        name = "Eaten:",
-                        hint = "100",
-                        suffix = "grams",
-                        editable = false
-                    )
-                )
-            )
-        )
+        binding.metricRecycler.setup(MealMetricsModel())
     }
 }

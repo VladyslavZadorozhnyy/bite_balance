@@ -29,7 +29,7 @@ class AddNewDishAndMealUseCase(
         carbs: Float,
         kcals: Float,
         eaten: Float
-    ): Flow<Resource<String>> = flow {
+    ): Flow<Resource<List<DishModel>>> = flow {
         emit(Resource.Loading())
 
         withContext(Dispatchers.IO) {

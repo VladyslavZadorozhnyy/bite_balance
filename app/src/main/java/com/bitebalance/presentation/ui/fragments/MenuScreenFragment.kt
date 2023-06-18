@@ -1,6 +1,7 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,8 +41,15 @@ class MenuScreenFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("AAADIP", "onResume() called")
+        menuVm.getAllDishes()
+    }
+
     private fun observeViewModel() {
         menuVm.state.observe(this) { state ->
+            Log.d("AAADIP", "state: $state")
             if (state.dishes == null) { return@observe }
 
             if (state.dishes.isEmpty()) {
@@ -50,8 +58,6 @@ class MenuScreenFragment : Fragment() {
                 setupDishRecycler(state.dishes)
             }
         }
-
-        menuVm.getAllDishes()
     }
 
     private fun setupHeader() {
@@ -92,7 +98,10 @@ class MenuScreenFragment : Fragment() {
                 foregroundColorRes = R.color.black,
                 backgroundColorRes = R.color.white,
                 onClickListener =  {
-                    navigationVm.navigateTo(CreateNewScreenFragment(), NavigationAction.ADD)
+                    navigationVm.navigateTo(
+                        CreateNewScreenFragment.newInstance(createDish = true),
+                        NavigationAction.ADD
+                    )
                 }
             )
         )
@@ -115,6 +124,6 @@ class MenuScreenFragment : Fragment() {
     }
 
     private fun processDishClick(dish: DishModel) {
-        navigationVm.navigateTo(DishScreenFragment.newInstance(dish), NavigationAction.ADD)
+        navigationVm.navigateTo(DishScreenFragment.newInstance(dish.name), NavigationAction.ADD)
     }
 }

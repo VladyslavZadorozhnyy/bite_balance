@@ -21,7 +21,7 @@ class GetNutritionValueUseCase(
         if (result == null) {
             emit(Resource.Error("Nutrition not found"))
         } else {
-            emit(Resource.Success(result))
+            emit(Resource.Success(data = result))
         }
     }
 }

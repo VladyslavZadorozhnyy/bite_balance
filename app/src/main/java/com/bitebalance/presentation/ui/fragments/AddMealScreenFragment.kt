@@ -75,7 +75,10 @@ class AddMealScreenFragment : Fragment() {
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
                 onClickListener = {
-                    navigationVm.navigateTo(CreateNewScreenFragment(), NavigationAction.ADD)
+                    navigationVm.navigateTo(
+                        CreateNewScreenFragment.newInstance(createDish = false),
+                        NavigationAction.ADD
+                    )
                 }
             )
         )

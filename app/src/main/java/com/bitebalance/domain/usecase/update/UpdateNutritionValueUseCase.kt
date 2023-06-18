@@ -35,7 +35,7 @@ class UpdateNutritionValueUseCase(
                 nutritionValueData = nutritionValueRepository.getNutritionValueById(id)
             }
 
-            emit(Resource.Success(nutritionValueData, "Dish updated successfully"))
+            emit(Resource.Success("Dish updated successfully", nutritionValueData))
         } catch (e: Exception) {
             emit(Resource.Error(message = "Error occurred: ${e.message}"))
         }

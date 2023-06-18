@@ -28,8 +28,8 @@ class NutritionViewModel(
         updateNutritionValueUseCase(id, inputValues).onEach { result ->
             _state.value = NutritionValueState(
                 nutritionValue = result.data,
-                successMessage = result.successMessage,
-                errorMessage = result.errorMessage
+                successMessage = result.message,
+                errorMessage = result.message
             )
         }.launchIn(viewModelScope)
     }

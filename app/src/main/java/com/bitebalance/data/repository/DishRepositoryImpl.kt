@@ -21,9 +21,7 @@ class DishRepositoryImpl(
         return appDaoDatabase.getDishDao().getAll().map { DishModel.fromEntity(it) }
     }
 
-    override fun getDishByName(name: String): DishModel {
-        return DishModel.Companion.fromEntity(
-            appDaoDatabase.getDishDao().getByName(name)
-        )
+    override fun getDishByName(name: String): DishModel? {
+        return appDaoDatabase.getDishDao().getByName(name)?.let { DishModel.Companion.fromEntity(it) }
     }
 }
