@@ -12,6 +12,7 @@ import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
 import com.bitebalance.domain.usecase.add.AddNewDishUseCase
 import com.bitebalance.domain.usecase.get.GetAllDishesUseCase
 import com.bitebalance.domain.usecase.get.GetConsumedGoalUseCase
+import com.bitebalance.domain.usecase.get.GetDishByNameUseCase
 import com.bitebalance.domain.usecase.get.GetNutritionValueUseCase
 import com.bitebalance.domain.usecase.remove.RemoveDishUseCase
 import com.bitebalance.domain.usecase.update.UpdateNutritionValueUseCase
@@ -25,7 +26,7 @@ import org.koin.dsl.module
 val appModule = module {
 //  ViewModels
     viewModel { NavigationViewModel() }
-    viewModel { DishViewModel(get(), get(), get(), get()) }
+    viewModel { DishViewModel(get(), get(), get(), get(), get()) }
     viewModel { MenuViewModel(get()) }
     viewModel { NutritionViewModel(get(), get()) }
     viewModel { ConsumedGoalViewModel(get()) }
@@ -33,9 +34,10 @@ val appModule = module {
 //  UseCases
     single { GetConsumedGoalUseCase(get(), get(), get()) }
     single { GetAllDishesUseCase(get()) }
+    single { GetDishByNameUseCase(get()) }
     single { GetNutritionValueUseCase(get()) }
     single { RemoveDishUseCase(get(), get()) }
-    single { UpdateNutritionValueUseCase(get()) }
+    single { UpdateNutritionValueUseCase(get(), get()) }
     single { AddNewDishAndMealUseCase(get(), get(), get(), get()) }
     single { AddNewDishUseCase(get(), get(), get()) }
     single<AppDaoDatabase> { AppDaoDatabaseImpl(androidApplication()) }

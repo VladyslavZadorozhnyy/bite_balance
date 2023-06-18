@@ -13,14 +13,16 @@ class RemoveDishUseCase(
     private val dishRepository: DishRepository,
     private val nutritionValueRepository: NutritionValueRepository,
 ) {
-    operator fun invoke(dishModel: DishModel): Flow<Resource<List<DishModel>>> = flow {
+    operator fun invoke(dishName: String): Flow<Resource<List<DishModel>>> = flow {
         var resultMessage = ""
         emit(Resource.Loading())
 
         withContext(Dispatchers.IO) {
             try {
-                nutritionValueRepository.removeNutritionValueById(dishModel.nutritionValId)
-                dishRepository.removeDish(dishModel)
+                dishRepository.getDishByName(dishName)?.let {
+                    nutritionValueRepository.removeNutritionValueById(it.nutritionValId)
+                    dishRepository.removeDish(it)
+                }
             } catch (exception: Exception) {
                 resultMessage = exception.message ?: "Unknown error"
             }

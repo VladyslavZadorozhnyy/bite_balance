@@ -1,7 +1,6 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,99 +9,74 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.bitebalance.databinding.FragmentDishScreenBinding
 import com.bitebalance.domain.model.NutritionValueModel
 import com.bitebalance.presentation.viewmodels.DishViewModel
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.recycler_views.metric_recycler.MetricRecyclerModel
+import com.ui.basic.recycler_views.metric_recycler.DishMetricsModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
-import com.ui.mocks.MockMetricModel
 import com.ui.model.DishModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DishScreenFragment : Fragment() {
     private val binding by lazy { FragmentDishScreenBinding.inflate(layoutInflater) }
 
-    private val navigationVm by sharedViewModel<NavigationViewModel>()
     private val nutritionVm by sharedViewModel<NutritionViewModel>()
     private val dishVm by sharedViewModel<DishViewModel>()
 
     private lateinit var dishName: String
     private var editButtonChecked = false
+    private lateinit var dishNutritionValue: NutritionValueModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         setupStyling()
+        setupEditButton()
         setupDeleteButton()
-        setupEditButton(editButtonChecked)
         setupViewModelsObservation()
 
-        // nutritionVm.getNutritionValue(dishModel.nutritionValId)
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dishVm.getDishByName(dishName)
     }
 
     private fun setupViewModelsObservation() {
         nutritionVm.state.observe(this) { state ->
-            // dishNutritionValue = state.nutritionValue
-            // setupRecycler()
+            if (state.message.isEmpty() && state.data == null) { return@observe }
 
-            if (state.successMessage.isNotEmpty()) {
-                binding.editButton.click()
-                ConfirmDialog(
-                    activity = requireActivity(),
-                    model = BaseDialogModel(
-                        backgroundColorRes = R.color.white,
-                        textColorRes = R.color.black,
-                        title = state.successMessage,
-                        buttonTextRes = R.string.done
-                    )
-                ).show()
-            } else if (state.errorMessage.isNotEmpty()) {
-                ConfirmDialog(
-                    activity = requireActivity(),
-                    model = BaseDialogModel(
-                        backgroundColorRes = R.color.white,
-                        textColorRes = R.color.black,
-                        title = state.errorMessage,
-                        buttonTextRes = R.string.done
-                    )
-                ).show()
+            if (state.data != null) {
+                if (editButtonChecked) { binding.editButton.click() }
+                dishNutritionValue = state.data.first()
+                setupRecycler()
+            }
+            if (state.message.isNotEmpty()) {
+                ConfirmDialog(requireActivity(), BaseDialogModel(
+                    state.message,
+                    buttonTextRes = R.string.done,
+                )).show()
             }
         }
 
         dishVm.state.observe(this) { state ->
-            // if (state.isLoading || state.message.isEmpty()) { return@observe; }
+            if (state.message.isEmpty() && state.data == null) { return@observe; }
 
-            Log.d("AAADIP", "state: $state")
-            //setupHeader
-
-            if (!state.isSuccessful) {
-                ConfirmDialog(
-                    activity = requireActivity(),
-                    model = BaseDialogModel(
-                        backgroundColorRes = R.color.white,
-                        textColorRes = R.color.black,
-                        title = state.message.ifEmpty { "Unknown error happened" },
-                        buttonTextRes = R.string.done
-                    )
-                ).show()
+            if (state.message.isEmpty()) {
+                setupHeader(state.data!!.first())
+                nutritionVm.getNutritionValue(state.data.first().nutritionValId)
             } else {
-                activity?.onBackPressed()
-                ConfirmDialog(
-                    activity = requireActivity(),
-                    model = BaseDialogModel(
-                        backgroundColorRes = R.color.white,
-                        textColorRes = R.color.black,
-                        title = state.message.ifEmpty { "Dish removed successfully" },
-                        buttonTextRes = R.string.done
-                    )
-                ).show()
+                ConfirmDialog(requireActivity(), BaseDialogModel(
+                    title = state.message,
+                    buttonTextRes = R.string.done,
+                    onConfirmClicked = { activity?.onBackPressed() }
+                )).show()
             }
         }
     }
@@ -128,7 +102,7 @@ class DishScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { navigationVm.popScreen() }
+                onClickListener = { activity?.onBackPressed() }
             )
         )
 
@@ -159,23 +133,16 @@ class DishScreenFragment : Fragment() {
                 foregroundColorRes = if (editButtonChecked) R.color.black else R.color.white,
                 backgroundColorRes = if (editButtonChecked) R.color.white else R.color.black,
                 onClickListener = {
-                    YesNoDialog(
-                        activity = requireActivity(),
-                        model = BaseDialogModel(
-                            backgroundColorRes = R.color.white,
-                            textColorRes = R.color.black,
+                    YesNoDialog(requireActivity(), BaseDialogModel(
                             title = "Do you want to delete this dish?",
-                            // onPositiveClicked = { dishVm.removeDish(dishModel) },
-                        )
-                    ).show()
+                            onPositiveClicked = { dishVm.removeDish(dishName) },
+                        )).show()
                 }
             )
         )
     }
 
-    private fun setupEditButton(isChecked: Boolean) {
-        editButtonChecked = isChecked
-
+    private fun setupEditButton() {
         binding.editButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.edit_icon,
@@ -184,54 +151,28 @@ class DishScreenFragment : Fragment() {
                 foregroundColorRes = if (editButtonChecked) R.color.black else R.color.white,
                 backgroundColorRes = if (editButtonChecked) R.color.white else R.color.black,
                 onClickListener = {
-                    setupEditButton(!editButtonChecked)
-                    // setupRecycler()
+                    ComponentUiUtils.hideKeyBoard(requireActivity())
+                    editButtonChecked = !editButtonChecked
+                    setupEditButton()
                     setupSubtitles()
+                    setupRecycler()
                 }
             )
         )
     }
 
     private fun processUpdate() {
-//        nutritionVm.updateNutritionValue(
-//            id = dishModel.nutritionValId,
-//            inputValues = binding.metricRecycler.getInputValues()
-//        )
+        nutritionVm.updateNutritionValue(dishName, binding.metricRecycler.getInputValues())
     }
 
-    private fun setupRecycler(dishNutritionValue: NutritionValueModel) {
+    private fun setupRecycler() {
         binding.metricRecycler.setup(
-            MetricRecyclerModel(
-                items = listOf(
-                    MockMetricModel(
-                        name = "Prots:",
-                        hint = dishNutritionValue?.prots?.toString() ?: "-",
-                        suffix = "g in 100g",
-                        editable = editButtonChecked,
-                        onlyNumbers = true,
-                    ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        hint = dishNutritionValue?.fats?.toString() ?: "-",
-                        suffix = "g in 100g",
-                        editable = editButtonChecked,
-                        onlyNumbers = true,
-                    ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        hint = dishNutritionValue?.carbs?.toString() ?: "-",
-                        suffix = "g in 100g",
-                        editable = editButtonChecked,
-                        onlyNumbers = true,
-                    ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        hint = dishNutritionValue?.kcals?.toString() ?: "-",
-                        suffix = "kcal in 100g",
-                        editable = editButtonChecked,
-                        onlyNumbers = true,
-                    )
-                )
+            DishMetricsModel.newInstance(
+                editable = editButtonChecked,
+                dishNutritionValue.prots.toString(),
+                dishNutritionValue.fats.toString(),
+                dishNutritionValue.carbs.toString(),
+                dishNutritionValue.kcals.toString(),
             )
         )
 
@@ -243,23 +184,19 @@ class DishScreenFragment : Fragment() {
                 backgroundColorRes = R.color.black,
                 onClickListener = {
                     ComponentUiUtils.hideKeyBoard(requireActivity())
-                    if (editButtonChecked) {
-                        val allInputFilled = binding.metricRecycler.getInputValues().all { it.isNotEmpty() }
-                        if (allInputFilled) {
-                            processUpdate()
-                        } else {
-                            YesNoDialog(
-                                activity = requireActivity(),
-                                model = BaseDialogModel(
-                                    backgroundColorRes = R.color.white,
-                                    textColorRes = R.color.black,
-                                    title = "Some fields are empty. They will be filled with '0'",
-                                    onPositiveClicked = { processUpdate() },
-                                )
-                            ).show()
-                        }
+                    if (!editButtonChecked) {
+                        activity?.onBackPressed()
+                        return@ButtonModel
+                    }
+
+                    val inputValues = binding.metricRecycler.getInputValues()
+                    if (inputValues.any { it.isEmpty() }) {
+                        YesNoDialog(requireActivity(), BaseDialogModel(
+                            title = "Some fields are empty. They will be filled with '0'",
+                            onPositiveClicked = { processUpdate() },
+                        )).show()
                     } else {
-                        navigationVm.popScreen()
+                        processUpdate()
                     }
                 }
             )
@@ -268,7 +205,7 @@ class DishScreenFragment : Fragment() {
 
     override fun onDestroy() {
         dishVm.resetState()
-        navigationVm.state.removeObservers(this)
+        nutritionVm.resetState()
         nutritionVm.state.removeObservers(this)
         dishVm.state.removeObservers(this)
         super.onDestroy()

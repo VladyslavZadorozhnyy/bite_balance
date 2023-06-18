@@ -9,7 +9,7 @@ import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentCreateNewScreenBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.recycler_views.metric_recycler.DishMetricsModel
+import com.ui.basic.recycler_views.metric_recycler.DishNameMetricsModel
 import com.ui.basic.recycler_views.metric_recycler.MealMetricsModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.common.ComponentUiUtils
@@ -92,7 +92,8 @@ class CreateNewScreenFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        binding.metricRecycler.setup( if (createDish) DishMetricsModel() else MealMetricsModel() )
+        binding.metricRecycler.setup( if (createDish)
+            DishNameMetricsModel.newInstance() else MealMetricsModel() )
 
         binding.doneButton.setup(
             model = ButtonModel(

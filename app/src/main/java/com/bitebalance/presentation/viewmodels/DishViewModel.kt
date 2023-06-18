@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
 import com.bitebalance.domain.usecase.add.AddNewDishUseCase
 import com.bitebalance.domain.usecase.get.GetAllDishesUseCase
+import com.bitebalance.domain.usecase.get.GetDishByNameUseCase
 import com.bitebalance.domain.usecase.remove.RemoveDishUseCase
 import com.bitebalance.presentation.states.BasicState
 import com.ui.model.DishModel
@@ -19,6 +20,7 @@ class DishViewModel(
     private val addNewDishUseCase: AddNewDishUseCase,
     private val getAllDishesUseCase: GetAllDishesUseCase,
     private val removeDishUseCase: RemoveDishUseCase,
+    private val getDishByNameUseCase: GetDishByNameUseCase,
 ): ViewModel() {
     private val _state = MutableLiveData(BasicState<List<DishModel>>())
     val state: LiveData<BasicState<List<DishModel>>> = _state
@@ -34,8 +36,8 @@ class DishViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun removeDish(dishModel: DishModel) {
-        removeDishUseCase(dishModel).onEach { result ->
+    fun removeDish(dishName: String) {
+        removeDishUseCase(dishName).onEach { result ->
             _state.value = BasicState(
                 data = result.data,
                 message = result.message,
@@ -47,6 +49,21 @@ class DishViewModel(
 
     fun removeDishByName(dishName: String) {
 
+    }
+
+    fun getDishByName(dishName: String) {
+        getDishByNameUseCase.invoke(dishName).onEach { result ->
+            if (result.data != null) {
+                _state.value = BasicState(data = listOf(result.data))
+            } else {
+                _state.value = BasicState(
+                    isSuccessful = false,
+                    message = result.message,
+                    isLoading = result.isLoading,
+                )
+            }
+
+        }.launchIn(viewModelScope)
     }
 
     fun resetState() { _state.value = BasicState() }
