@@ -1,6 +1,5 @@
 package com.bitebalance.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +25,7 @@ class DishViewModel(
     val state: LiveData<BasicState<List<DishModel>>> = _state
 
     fun createDish(name: String, prots: Float, fats: Float, carbs: Float, kcals: Float) {
-        addNewDishUseCase.invoke(name, prots, fats, carbs, kcals).onEach { result ->
+        addNewDishUseCase(name, prots, fats, carbs, kcals).onEach { result ->
             _state.value = BasicState(
                 result.data,
                 result.message,
@@ -47,12 +46,19 @@ class DishViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun removeDishByName(dishName: String) {
-
+    fun getAllDishes() {
+        getAllDishesUseCase().onEach { result ->
+            _state.value = BasicState(
+                data = result.data,
+                message = result.message,
+                isLoading = result.isLoading,
+                isSuccessful = result.isSuccessful
+            )
+        }.launchIn(viewModelScope)
     }
 
     fun getDishByName(dishName: String) {
-        getDishByNameUseCase.invoke(dishName).onEach { result ->
+        getDishByNameUseCase(dishName).onEach { result ->
             if (result.data != null) {
                 _state.value = BasicState(data = listOf(result.data))
             } else {
@@ -62,7 +68,6 @@ class DishViewModel(
                     isLoading = result.isLoading,
                 )
             }
-
         }.launchIn(viewModelScope)
     }
 

@@ -1,14 +1,13 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentMenuScreenBinding
-import com.bitebalance.presentation.viewmodels.MenuViewModel
+import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
@@ -19,16 +18,11 @@ import com.ui.model.DishModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MenuScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentMenuScreenBinding.inflate(layoutInflater)
-    }
-
-    private val noItemsLayoutBinding by lazy {
-        NoItemsLayoutBinding.bind(binding.root)
-    }
+    private val binding by lazy { FragmentMenuScreenBinding.inflate(layoutInflater) }
+    private val noItemsLayoutBinding by lazy { NoItemsLayoutBinding.bind(binding.root) }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
-    private val menuVm by sharedViewModel<MenuViewModel>()
+    private val dishVm by sharedViewModel<DishViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,27 +30,20 @@ class MenuScreenFragment : Fragment() {
     ): View {
         setupHeader()
         setupCreateNewButton()
-        observeViewModel()
+        setupViewModelsObservation()
 
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("AAADIP", "onResume() called")
-        menuVm.getAllDishes()
+        dishVm.getAllDishes()
     }
 
-    private fun observeViewModel() {
-        menuVm.state.observe(this) { state ->
-            Log.d("AAADIP", "state: $state")
-            if (state.dishes == null) { return@observe }
-
-            if (state.dishes.isEmpty()) {
-                setupNoItemsView()
-            } else {
-                setupDishRecycler(state.dishes)
-            }
+    private fun setupViewModelsObservation() {
+        dishVm.state.observe(this) { state ->
+            if (state.data == null) { return@observe }
+            if (state.data.isEmpty()) { setupNoItemsView() } else { setupDishRecycler(state.data) }
         }
     }
 
@@ -125,5 +112,12 @@ class MenuScreenFragment : Fragment() {
 
     private fun processDishClick(dish: DishModel) {
         navigationVm.navigateTo(DishScreenFragment.newInstance(dish.name), NavigationAction.ADD)
+    }
+
+    override fun onDestroy() {
+        dishVm.resetState()
+        dishVm.state.removeObservers(this)
+        navigationVm.state.removeObservers(this)
+        super.onDestroy()
     }
 }

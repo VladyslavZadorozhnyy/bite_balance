@@ -27,7 +27,6 @@ val appModule = module {
 //  ViewModels
     viewModel { NavigationViewModel() }
     viewModel { DishViewModel(get(), get(), get(), get(), get()) }
-    viewModel { MenuViewModel(get()) }
     viewModel { NutritionViewModel(get(), get()) }
     viewModel { ConsumedGoalViewModel(get()) }
 
