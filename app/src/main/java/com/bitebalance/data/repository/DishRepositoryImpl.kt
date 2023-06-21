@@ -24,4 +24,8 @@ class DishRepositoryImpl(
     override fun getDishByName(name: String): DishModel? {
         return appDaoDatabase.getDishDao().getByName(name)?.let { DishModel.Companion.fromEntity(it) }
     }
+
+    override fun getDishById(id: Long): DishModel? {
+        return appDaoDatabase.getDishDao().getById(id)?.let { DishModel.Companion.fromEntity(it) }
+    }
 }

@@ -2,7 +2,7 @@ package com.bitebalance.domain.usecase.add
 
 import com.bitebalance.common.Resource
 import com.bitebalance.domain.model.MealModel
-import com.bitebalance.domain.model.NutritionValueModel
+import com.ui.model.NutritionValueModel
 import com.bitebalance.domain.repository.DateRepository
 import com.bitebalance.domain.repository.DishRepository
 import com.bitebalance.domain.repository.MealRepository
@@ -10,7 +10,6 @@ import com.bitebalance.domain.repository.NutritionValueRepository
 import com.ui.components.R
 import com.ui.model.DishModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext

@@ -1,7 +1,7 @@
 package com.bitebalance.domain.usecase.add
 
 import com.bitebalance.common.Resource
-import com.bitebalance.domain.model.NutritionValueModel
+import com.ui.model.NutritionValueModel
 import com.bitebalance.domain.repository.DateRepository
 import com.bitebalance.domain.repository.DishRepository
 import com.bitebalance.domain.repository.NutritionValueRepository

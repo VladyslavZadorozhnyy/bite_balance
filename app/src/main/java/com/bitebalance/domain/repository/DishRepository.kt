@@ -8,4 +8,5 @@ interface DishRepository {
     fun removeDish(dishModel: DishModel)
     fun getAllDishes(): List<DishModel>
     fun getDishByName(name: String): DishModel?
+    fun getDishById(id: Long): DishModel?
 }

@@ -13,6 +13,10 @@ class MealRepositoryImpl(
         appDaoDatabase.getMealDao().insert(mealModel.toEntity())
     }
 
+    override fun removeAllMeals() {
+        appDaoDatabase.getMealDao().deleteAll()
+    }
+
     override fun getAllMeals(): List<MealModel> {
         return appDaoDatabase
             .getMealDao()

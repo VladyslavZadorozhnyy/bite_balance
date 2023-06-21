@@ -1,6 +1,7 @@
 package com.bitebalance.data.repository
 
 import com.bitebalance.domain.model.DateModel
+import com.bitebalance.domain.model.fromEntity
 import com.bitebalance.domain.model.toEntity
 import com.bitebalance.domain.repository.DateRepository
 import com.database.db.AppDaoDatabase
@@ -11,25 +12,49 @@ class DateRepositoryImpl(
 ) : DateRepository {
 
     override fun getCurrentDate(): DateModel {
+        appDaoDatabase.getDateDao().getDate(
+            getCurrentDay(),
+            getCurrentMonth(),
+            getCurrentYear(),
+        )?.let { return DateModel.fromEntity(it) }
+
+        val currentDateId = appDaoDatabase.getDateDao().insert(
+            DateModel(
+                getCurrentMinute(),
+                getCurrentHour(),
+                getCurrentDay(),
+                getCurrentMonth(),
+                getCurrentYear(),
+            ).toEntity())
+
         return DateModel(
             getCurrentMinute(),
             getCurrentHour(),
             getCurrentDay(),
             getCurrentMonth(),
-            getCurrentYear()
+            getCurrentYear(),
+            id = currentDateId
         )
+    }
+
+    override fun getCurrentDateId(): Long {
+        return getCurrentDate().id
     }
 
     override fun addDate(dateModel: DateModel): Long {
         return appDaoDatabase.getDateDao().insert(dateModel.toEntity())
     }
 
-    private fun getCurrentMinute(): Int {
-        return Calendar.getInstance().get(Calendar.MINUTE)
+    override fun getDateById(id: Long): DateModel? {
+        return appDaoDatabase.getDateDao().getById(id)?.let { DateModel.fromEntity(it) }
     }
 
-    private fun getCurrentHour(): Int {
-        return Calendar.getInstance().get(Calendar.HOUR)
+    override fun getCurrentHour(): Int {
+        return Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    }
+
+    private fun getCurrentMinute(): Int {
+        return Calendar.getInstance().get(Calendar.MINUTE)
     }
 
     private fun getCurrentDay(): Int {

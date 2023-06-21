@@ -8,7 +8,8 @@ data class DateModel(
     val day: Int,
     val month: Int,
     val year: Int,
-    val additions: String = ""
+    val additions: String = "",
+    val id: Long = -1,
 ) { companion object }
 
 fun DateModel.Companion.fromEntity(entity: DateEntity): DateModel {
@@ -18,7 +19,8 @@ fun DateModel.Companion.fromEntity(entity: DateEntity): DateModel {
         entity.day,
         entity.month,
         entity.year,
-        entity.additions
+        entity.additions,
+        entity.id,
     )
 }
 

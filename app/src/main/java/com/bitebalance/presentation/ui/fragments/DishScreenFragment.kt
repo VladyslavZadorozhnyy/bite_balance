@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import com.bitebalance.databinding.FragmentDishScreenBinding
-import com.bitebalance.domain.model.NutritionValueModel
+import com.ui.model.NutritionValueModel
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.buttons.common.ButtonModel

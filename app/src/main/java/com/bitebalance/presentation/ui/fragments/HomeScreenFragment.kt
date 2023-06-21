@@ -8,48 +8,59 @@ import android.view.View
 import android.view.ViewGroup
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentHomeScreenBinding
-import com.bitebalance.presentation.viewmodels.ConsumedGoalViewModel
+import com.bitebalance.presentation.states.BasicState
+import com.bitebalance.presentation.viewmodels.DateViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import com.ui.components.progress.carousel.ProgressCarouselModel
-import com.ui.mocks.MockNutritionModel
+import com.ui.model.NutritionValueModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class HomeScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentHomeScreenBinding.inflate(layoutInflater)
-    }
+    private val binding by lazy { FragmentHomeScreenBinding.inflate(layoutInflater) }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
-    private val consumedGoalVm by sharedViewModel<ConsumedGoalViewModel>()
+    private val nutritionVm by sharedViewModel<NutritionViewModel>()
+    private val dateVm by sharedViewModel<DateViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupHeader()
-        setupCarousel()
         setupButtons()
+        setupViewModelsObservation()
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        consumedGoalVm.getConsumedGoalValues()
+    override fun onResume() {
+        super.onResume()
+        nutritionVm.getConsumedGoalValues()
+        dateVm.getGreetingsValue()
     }
 
-    private fun setupHeader() {
+    private fun setupViewModelsObservation() {
+        nutritionVm.state.observe(this) { state: BasicState<List<NutritionValueModel>> ->
+            state.data?.let { data -> setupCarousel(data) }
+        }
+
+        dateVm.state.observe(this) { state: String ->
+            setupHeader(state)
+        }
+    }
+
+    private fun setupHeader(greetingValue: String) {
         binding.toolbar.backButton.visibility = View.GONE
         binding.toolbar.forwardButton.visibility = View.GONE
 
         binding.toolbar.headline.setup(
             model = TextModel(
-                textValue = "Good morning",
+                textValue = greetingValue,
                 textSize = 35,
                 textColorRes = R.color.black,
                 backgroundColor = R.color.white
@@ -57,21 +68,11 @@ class HomeScreenFragment : Fragment() {
         )
     }
 
-    private fun setupCarousel() {
+    private fun setupCarousel(consumedGoalValues: List<NutritionValueModel>) {
         binding.progressCarousel.setup(
             model = ProgressCarouselModel(
-                consumed = MockNutritionModel(
-                    fat = 10F,
-                    carb = 14F,
-                    kcal = 750F,
-                    protein = 10F,
-                ),
-                goalConsumption = MockNutritionModel(
-                    fat = 10F,
-                    carb = 12F,
-                    kcal = 2000F,
-                    protein = 10F,
-                )
+                consumed = consumedGoalValues[0],
+                goalConsumption = consumedGoalValues[1],
             )
         )
     }
@@ -135,5 +136,12 @@ class HomeScreenFragment : Fragment() {
                 onNegativeClicked = { Log.d("AAADIP", "onNegative clicked") }
             )
         ).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navigationVm.state.removeObservers(this)
+        nutritionVm.state.removeObservers(this)
+        dateVm.state.removeObservers(this)
     }
 }

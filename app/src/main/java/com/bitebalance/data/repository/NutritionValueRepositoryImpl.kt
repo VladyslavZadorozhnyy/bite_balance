@@ -1,12 +1,12 @@
 package com.bitebalance.data.repository
 
-import com.bitebalance.domain.model.NutritionValueModel
 import com.bitebalance.domain.model.fromEntity
 import com.bitebalance.domain.model.toEntity
 import com.bitebalance.domain.repository.NutritionValueRepository
 import com.database.common.Constants
 import com.database.db.AppDaoDatabase
 import com.database.entities.GoalMetricsEntity
+import com.ui.model.NutritionValueModel
 
 class NutritionValueRepositoryImpl(
     private val appDaoDatabase: AppDaoDatabase

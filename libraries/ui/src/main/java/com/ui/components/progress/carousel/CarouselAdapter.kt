@@ -38,13 +38,13 @@ class CarouselAdapter(
 
     private fun bindView(view: ProgressIndicator, position: Int, container: ViewGroup) {
         val progressModel = when (position) {
-            0 -> ProgressIndicatorModel(model.consumed.kcal, model.goalConsumption.kcal,
+            0 -> ProgressIndicatorModel(model.goalConsumption.kcals, model.consumed.kcals,
                 kcalLabel, kcalName)
-            1 -> ProgressIndicatorModel(model.consumed.protein, model.goalConsumption.protein,
+            1 -> ProgressIndicatorModel(model.goalConsumption.prots, model.consumed.prots,
                 gramLabel, protsName)
-            2 -> ProgressIndicatorModel(model.consumed.fat, model.goalConsumption.fat,
+            2 -> ProgressIndicatorModel(model.goalConsumption.fats, model.consumed.fats,
                 gramLabel, fatsName)
-            else -> ProgressIndicatorModel(model.consumed.carb, model.goalConsumption.carb,
+            else -> ProgressIndicatorModel(model.goalConsumption.carbs, model.consumed.carbs,
                 gramLabel, carbsName)
         }
 

@@ -1,13 +1,7 @@
 package com.bitebalance.domain.model
 
 import com.database.entities.NutritionValueEntity
-
-data class NutritionValueModel(
-    val prots: Float,
-    val fats: Float,
-    val carbs: Float,
-    val kcals: Float
-) { companion object }
+import com.ui.model.NutritionValueModel
 
 fun NutritionValueModel.Companion.fromEntity(entity: NutritionValueEntity): NutritionValueModel {
     return NutritionValueModel(

@@ -1,6 +1,6 @@
 package com.bitebalance.domain.repository
 
-import com.bitebalance.domain.model.NutritionValueModel
+import com.ui.model.NutritionValueModel
 
 interface NutritionValueRepository {
     fun getNutritionValueById(id: Long): NutritionValueModel?

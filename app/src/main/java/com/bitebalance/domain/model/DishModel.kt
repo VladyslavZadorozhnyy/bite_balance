@@ -7,7 +7,8 @@ fun DishModel.Companion.fromEntity(entity: DishEntity): DishModel {
     return DishModel(
         entity.name,
         entity.iconRes,
-        entity.nutritionModelId
+        entity.nutritionModelId,
+        entity.id
     )
 }
 
