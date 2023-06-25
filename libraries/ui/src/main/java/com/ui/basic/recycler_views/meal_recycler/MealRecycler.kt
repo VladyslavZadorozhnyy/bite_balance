@@ -3,7 +3,6 @@ package com.ui.basic.recycler_views.meal_recycler
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,15 +31,15 @@ class MealRecycler(
 
             val touchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
+                    rV: RecyclerView, vH: RecyclerView.ViewHolder, t: RecyclerView.ViewHolder
                 ): Boolean {
                     return false
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-                    (binding.recyclerView.adapter as? MealAdapter)?.removeAt(viewHolder.adapterPosition)
+                    (binding.recyclerView.adapter as? MealAdapter)?.let {
+                        recyclerModel.onSwipeListener(it.getAt(viewHolder.adapterPosition))
+                    }
                 }
             }
 

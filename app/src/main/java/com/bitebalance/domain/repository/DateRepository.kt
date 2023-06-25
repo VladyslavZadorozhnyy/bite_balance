@@ -7,5 +7,6 @@ interface DateRepository {
     fun getCurrentDateId(): Long
     fun getDateById(id: Long): DateModel?
     fun getCurrentHour(): Int
+    fun removeById(id: Long)
     fun addDate(dateModel: DateModel): Long
 }

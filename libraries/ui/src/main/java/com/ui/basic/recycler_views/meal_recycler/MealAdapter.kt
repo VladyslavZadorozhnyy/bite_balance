@@ -9,11 +9,11 @@ import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
-import com.ui.mocks.MockMealModel
+import com.ui.model.MealModelUnboxed
 
 class MealAdapter (
-    private var items: List<MockMealModel>,
-    private val onClickListener: (MockMealModel) -> Unit
+    private var items: List<MealModelUnboxed>,
+    private val onClickListener: (MealModelUnboxed) -> Unit
 ): RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
@@ -34,8 +34,11 @@ class MealAdapter (
 
     fun removeAt(position: Int) {
         items = items.subList(0, position) + items.subList(position + 1, items.size)
-        notifyDataSetChanged()
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position,  items.size - position)
     }
+
+    fun getAt(position: Int) = items[position]
 
     class MealViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val timeView = view.findViewById<Text>(R.id.time_text_view)
@@ -44,7 +47,7 @@ class MealAdapter (
         private val clockIcon = view.findViewById<IconButton>(R.id.clock_icon)
         private val buttonView = view.findViewById<IconButton>(R.id.delete_button_icon)
 
-        fun bind(item: MockMealModel) {
+        fun bind(item: MealModelUnboxed) {
             mealIcon.setup(
                 model = ButtonModel(
                     iconRes = R.drawable.breakfast_icon,
@@ -77,7 +80,7 @@ class MealAdapter (
 
             textView.setup(
                 model = TextModel(
-                    textValue = item.dish.name,
+                    textValue = item.dishName,
                     textSize = 20,
                     textColorRes = R.color.black,
                     backgroundColor = R.color.white

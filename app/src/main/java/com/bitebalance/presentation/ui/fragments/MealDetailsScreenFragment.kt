@@ -16,10 +16,7 @@ import com.ui.mocks.MockMetricModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MealDetailsScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentMealDetailsScreenBinding.inflate(layoutInflater)
-    }
-
+    private val binding by lazy { FragmentMealDetailsScreenBinding.inflate(layoutInflater) }
     private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     override fun onCreateView(
@@ -73,5 +70,13 @@ class MealDetailsScreenFragment : Fragment() {
 
     private fun setupRecycler() {
         binding.metricRecycler.setup(MealMetricsModel())
+    }
+
+    companion object {
+        fun newInstance(): MealDetailsScreenFragment {
+            return MealDetailsScreenFragment().also {
+
+            }
+        }
     }
 }

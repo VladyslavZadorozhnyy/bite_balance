@@ -97,7 +97,7 @@ class HomeScreenFragment : Fragment() {
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
                 onClickListener =  {
-                    navigationVm.navigateTo(TodaysMealsScreenFragment(), NavigationAction.ADD)
+                    navigationVm.navigateTo(TodayMealsScreenFragment(), NavigationAction.ADD)
                 }
             )
         )

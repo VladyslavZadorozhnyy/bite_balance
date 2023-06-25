@@ -17,6 +17,10 @@ class MealRepositoryImpl(
         appDaoDatabase.getMealDao().deleteAll()
     }
 
+    override fun removeMealById(id: Long) {
+        appDaoDatabase.getMealDao().deleteById(id)
+    }
+
     override fun getAllMeals(): List<MealModel> {
         return appDaoDatabase
             .getMealDao()

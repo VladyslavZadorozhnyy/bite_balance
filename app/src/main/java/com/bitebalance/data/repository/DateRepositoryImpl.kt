@@ -53,6 +53,10 @@ class DateRepositoryImpl(
         return Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     }
 
+    override fun removeById(id: Long) {
+        appDaoDatabase.getDateDao().deleteById(id)
+    }
+
     private fun getCurrentMinute(): Int {
         return Calendar.getInstance().get(Calendar.MINUTE)
     }
