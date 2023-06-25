@@ -12,12 +12,14 @@ import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.MealMetricsModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
-import com.ui.mocks.MockMetricModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MealDetailsScreenFragment : Fragment() {
     private val binding by lazy { FragmentMealDetailsScreenBinding.inflate(layoutInflater) }
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+
+    private var mealId: Long = 0
+    private var eatenAmount: Float = 0F
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,9 +75,10 @@ class MealDetailsScreenFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): MealDetailsScreenFragment {
+        fun newInstance(mealId: Long, eatenAmount: Float): MealDetailsScreenFragment {
             return MealDetailsScreenFragment().also {
-
+                it.mealId = mealId
+                it.eatenAmount = eatenAmount
             }
         }
     }

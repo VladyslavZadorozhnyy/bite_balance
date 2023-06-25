@@ -86,7 +86,10 @@ class TodayMealsScreenFragment : Fragment() {
     }
 
     private fun processMealClick(meal: MealModelUnboxed) {
-        navigationVm.navigateTo(MealDetailsScreenFragment(), NavigationAction.ADD)
+        navigationVm.navigateTo(
+            MealDetailsScreenFragment.newInstance(meal.id, meal.amount),
+            NavigationAction.ADD
+        )
     }
 
     private fun processSwipe(swipedMeal: MealModelUnboxed) {
