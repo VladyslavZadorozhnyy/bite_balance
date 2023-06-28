@@ -139,9 +139,9 @@ class HomeScreenFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         navigationVm.state.removeObservers(this)
         nutritionVm.state.removeObservers(this)
         dateVm.state.removeObservers(this)
+        super.onDestroy()
     }
 }

@@ -110,40 +110,56 @@ data class DishMetricsModel(
 }
 
 data class MealMetricsModel(
-    val mealItems: List<MockMetricModel> = listOf(
-        MockMetricModel(
-            name = "Name:",
-            editable = true
-        ),
-        MockMetricModel(
-            name = "Prots:",
-            suffix = "g in 100g",
-            editable = true,
-            onlyNumbers = true
-        ),
-        MockMetricModel(
-            name = "Fats:",
-            suffix = "g in 100g",
-            editable = true,
-            onlyNumbers = true
-        ),
-        MockMetricModel(
-            name = "Carbs:",
-            suffix = "g in 100g",
-            editable = true,
-            onlyNumbers = true
-        ),
-        MockMetricModel(
-            name = "Kcal:",
-            suffix = "kcal in 100g",
-            editable = true,
-            onlyNumbers = true
-        ),
-        MockMetricModel(
-            name = "Eaten:",
-            suffix = "in g",
-            editable = true,
-            onlyNumbers = true
-        )
-    ),
-) : MetricRecyclerModel(mealItems)
+    val mealItems: List<MockMetricModel> = listOf()
+) : MetricRecyclerModel(mealItems) {
+    companion object {
+        fun newInstance(
+            editable: Boolean = true,
+            prots: Float = 0F,
+            fats: Float = 0F,
+            carbs: Float = 0F,
+            kcal: Float = 0F,
+            eaten: Float = 0F,
+        ): DishNameMetricsModel {
+            return DishNameMetricsModel(
+                listOf(
+                    MockMetricModel(
+                        name = "Prots:",
+                        suffix = "g in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                        hint = "${prots * eaten}"
+                    ),
+                    MockMetricModel(
+                        name = "Fats:",
+                        suffix = "g in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                        hint = "${fats * eaten}"
+                    ),
+                    MockMetricModel(
+                        name = "Carbs:",
+                        suffix = "g in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                        hint = "${carbs * eaten}"
+                    ),
+                    MockMetricModel(
+                        name = "Kcal:",
+                        suffix = "kcal in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                        hint = "${kcal * eaten}"
+                    ),
+                    MockMetricModel(
+                        name = "Eaten:",
+                        suffix = "in g",
+                        editable = editable,
+                        onlyNumbers = true,
+                        hint = "$eaten"
+                    )
+                )
+            )
+        }
+    }
+}

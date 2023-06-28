@@ -87,12 +87,18 @@ class TodayMealsScreenFragment : Fragment() {
 
     private fun processMealClick(meal: MealModelUnboxed) {
         navigationVm.navigateTo(
-            MealDetailsScreenFragment.newInstance(meal.id, meal.amount),
+            MealDetailsScreenFragment.newInstance(meal.dishName, meal.amount),
             NavigationAction.ADD
         )
     }
 
     private fun processSwipe(swipedMeal: MealModelUnboxed) {
         mealVm.removeMeal(swipedMeal)
+    }
+
+    override fun onDestroy() {
+        navigationVm.state.removeObservers(this)
+        mealVm.state.removeObservers(this)
+        super.onDestroy()
     }
 }
