@@ -31,19 +31,31 @@ class AddNewDishAndMealUseCase(
     ): Flow<Resource<List<DishModel>>> = flow {
         emit(Resource.Loading())
 
+        var resultMessage = ""
+        var errorMessage = ""
         withContext(Dispatchers.IO) {
-            val nutritionValueModel = NutritionValueModel(prots, fats, carbs, kcals)
-            val nutritionValueModelId: Long = nutritionValueRepository.addNutritionValue(nutritionValueModel)
+            try {
+                val nutritionValueModel = NutritionValueModel(prots, fats, carbs, kcals)
+                val nutritionValueModelId: Long = nutritionValueRepository.addNutritionValue(nutritionValueModel)
 
-            val dishIcon = getDishIconRes()
-            val dishModel = DishModel(name, dishIcon, nutritionValueModelId)
-            val dishModelId = dishRepository.addDish(dishModel)
+                val dishIcon = getDishIconRes()
+                val dishModel = DishModel(name, dishIcon, nutritionValueModelId)
+                val dishModelId = dishRepository.addDish(dishModel)
 
-            val currentTimeId = dateRepository.addDate(dateRepository.getCurrentDate())
-            mealRepository.addMeal(MealModel(currentTimeId, dishModelId, eaten))
+                val currentTimeId = dateRepository.addDate(dateRepository.getCurrentDate())
+                mealRepository.addMeal(MealModel(currentTimeId, dishModelId, eaten))
+
+                resultMessage = "Meal and dish created successfully"
+            } catch (exception: Exception) {
+                errorMessage = exception.message ?: "Unknown error"
+            }
         }
 
-        emit(Resource.Success("Success"))
+        if (errorMessage.isNotEmpty()) {
+            emit(Resource.Error(message = errorMessage))
+        } else {
+            emit(Resource.Success(message = resultMessage))
+        }
     }
 
     private fun getDishIconRes(): Int {

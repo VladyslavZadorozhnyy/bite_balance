@@ -163,3 +163,58 @@ data class MealMetricsModel(
         }
     }
 }
+
+data class CreateMealMetricsModel(
+    val mealItems: List<MockMetricModel> = listOf()
+) : MetricRecyclerModel(mealItems) {
+    companion object {
+        fun newInstance(
+            editable: Boolean = true,
+            prots: Float = 0F,
+            fats: Float = 0F,
+            carbs: Float = 0F,
+            kcal: Float = 0F,
+            eaten: Float = 0F,
+        ): DishNameMetricsModel {
+            return DishNameMetricsModel(
+                listOf(
+                    MockMetricModel(
+                        name = "Name:",
+                        editable = editable,
+                        onlyNumbers = false,
+                    ),
+                    MockMetricModel(
+                        name = "Prots:",
+                        suffix = "g in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                    ),
+                    MockMetricModel(
+                        name = "Fats:",
+                        suffix = "g in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                    ),
+                    MockMetricModel(
+                        name = "Carbs:",
+                        suffix = "g in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                    ),
+                    MockMetricModel(
+                        name = "Kcal:",
+                        suffix = "kcal in 100g",
+                        editable = editable,
+                        onlyNumbers = true,
+                    ),
+                    MockMetricModel(
+                        name = "Eaten:",
+                        suffix = "in g",
+                        editable = editable,
+                        onlyNumbers = true,
+                    )
+                )
+            )
+        }
+    }
+}

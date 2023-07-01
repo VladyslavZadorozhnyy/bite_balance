@@ -155,11 +155,20 @@ class HomeScreenFragment : Fragment() {
         ).show()
     }
 
-    override fun onDestroy() {
+    override fun onStop() {
         navigationVm.state.removeObservers(this)
         nutritionVm.state.removeObservers(this)
         dateVm.state.removeObservers(this)
         mealVm.state.removeObservers(this)
-        super.onDestroy()
+        super.onStop()
     }
+
+//    override fun onDestroy() {
+//        Log.d("AAADIP", "onDestroy in HomeScreenFragment called")
+//        navigationVm.state.removeObservers(this)
+//        nutritionVm.state.removeObservers(this)
+//        dateVm.state.removeObservers(this)
+//        mealVm.state.removeObservers(this)
+//        super.onDestroy()
+//    }
 }

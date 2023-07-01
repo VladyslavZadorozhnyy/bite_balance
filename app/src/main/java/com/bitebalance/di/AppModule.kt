@@ -25,7 +25,7 @@ import org.koin.dsl.module
 val appModule = module {
 //  ViewModels
     viewModel { NavigationViewModel() }
-    viewModel { MealViewModel(get(), get(), get()) }
+    viewModel { MealViewModel(get(), get(), get(), get()) }
     viewModel { DateViewModel(get()) }
     viewModel { NutritionViewModel(get(), get(), get()) }
     viewModel { DishViewModel(get(), get(), get(), get(), get()) }

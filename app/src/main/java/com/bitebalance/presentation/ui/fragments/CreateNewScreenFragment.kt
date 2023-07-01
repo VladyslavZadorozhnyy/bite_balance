@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentCreateNewScreenBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
+import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.ui.basic.buttons.common.ButtonModel
+import com.ui.basic.recycler_views.metric_recycler.CreateMealMetricsModel
 import com.ui.basic.recycler_views.metric_recycler.DishNameMetricsModel
-import com.ui.basic.recycler_views.metric_recycler.MealMetricsModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R
@@ -20,11 +21,10 @@ import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class CreateNewScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentCreateNewScreenBinding.inflate(layoutInflater)
-    }
+    private val binding by lazy { FragmentCreateNewScreenBinding.inflate(layoutInflater) }
 
     private val dishVm by sharedViewModel<DishViewModel>()
+    private val mealVm by sharedViewModel<MealViewModel>()
     private var createDish = false
 
     override fun onCreateView(
@@ -42,6 +42,8 @@ class CreateNewScreenFragment : Fragment() {
 
     override fun onDestroy() {
         dishVm.resetState()
+        mealVm.resetState()
+        mealVm.state.removeObservers(this)
         dishVm.state.removeObservers(this)
         super.onDestroy()
     }
@@ -55,7 +57,7 @@ class CreateNewScreenFragment : Fragment() {
 
         binding.toolbar.headline.setup(
             model = TextModel(
-                textValue = if (createDish) { "New dish" } else { "New meal" },
+                textValue = if (createDish) "New dish" else "New meal",
                 textSize = 30,
                 textColorRes = R.color.black,
                 backgroundColor = R.color.white
@@ -92,8 +94,13 @@ class CreateNewScreenFragment : Fragment() {
     }
 
     private fun setupRecycler() {
-        binding.metricRecycler.setup( if (createDish)
-            DishNameMetricsModel.newInstance() else MealMetricsModel() )
+        binding.metricRecycler.setup(
+            if (createDish) {
+                DishNameMetricsModel.newInstance()
+            } else {
+                CreateMealMetricsModel.newInstance()
+            }
+        )
 
         binding.doneButton.setup(
             model = ButtonModel(
@@ -132,7 +139,14 @@ class CreateNewScreenFragment : Fragment() {
                 if (inputValues[4].isNotEmpty()) inputValues[4].toFloat() else 0.0f,
             )
         } else {
-// AAADIP change later
+            mealVm.createNewDishAndMeal(
+                inputValues[0].ifEmpty { "0" },
+                if (inputValues[1].isNotEmpty()) inputValues[1].toFloat() else 0.0f,
+                if (inputValues[2].isNotEmpty()) inputValues[2].toFloat() else 0.0f,
+                if (inputValues[3].isNotEmpty()) inputValues[3].toFloat() else 0.0f,
+                if (inputValues[4].isNotEmpty()) inputValues[4].toFloat() else 0.0f,
+                if (inputValues[5].isNotEmpty()) inputValues[5].toFloat() else 0.0f,
+            )
         }
     }
 
@@ -143,7 +157,18 @@ class CreateNewScreenFragment : Fragment() {
             ConfirmDialog(
                 requireActivity(),
                 BaseDialogModel(state.message, buttonTextRes = R.string.done,
-                    onConfirmClicked = { if (state.isSuccessful) { activity?.onBackPressed() } })
+                    onConfirmClicked = { if (state.isSuccessful) activity?.onBackPressed() })
+            ).show()
+        }
+
+        mealVm.state.observe(this) { state ->
+            if (state.isLoading || state.message.isEmpty()) { return@observe }
+
+            ConfirmDialog(
+                requireActivity(),
+                BaseDialogModel(state.message, buttonTextRes = R.string.done,
+                    onConfirmClicked = { if (state.isSuccessful) activity?.onBackPressed() }
+                )
             ).show()
         }
     }

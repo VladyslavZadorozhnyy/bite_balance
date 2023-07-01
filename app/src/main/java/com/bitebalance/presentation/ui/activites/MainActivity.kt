@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                         transaction.add(binding.fragmentContainer.id, it).addToBackStack(null) }
             }
 
+            supportFragmentManager.fragments.lastOrNull()?.onStop()
             transaction.commit()
         }
     }

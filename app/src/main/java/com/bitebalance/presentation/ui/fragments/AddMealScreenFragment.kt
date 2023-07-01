@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentAddMealScreenBinding
+import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
@@ -15,11 +16,9 @@ import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class AddMealScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentAddMealScreenBinding.inflate(layoutInflater)
-    }
-
+    private val binding by lazy { FragmentAddMealScreenBinding.inflate(layoutInflater) }
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val mealVm by sharedViewModel<MealViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +27,18 @@ class AddMealScreenFragment : Fragment() {
         setupStyling()
         setupHeader()
         setupButtons()
-        setupMealCounter()
+        setupViewModelsObservation()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mealVm.getMeals()
+    }
+
+    private fun setupViewModelsObservation() {
+        mealVm.state.observe(this) { state -> setupMealCounter(state.data?.size ?: 0) }
     }
 
     private fun setupStyling() {
@@ -114,7 +122,7 @@ class AddMealScreenFragment : Fragment() {
         )
     }
 
-    private fun setupMealCounter() {
+    private fun setupMealCounter(mealsNumber: Int) {
         binding.mealsTodayLabel.setup(
             model = TextModel(
                 textValue = "Meals eaten today: ",
@@ -126,11 +134,17 @@ class AddMealScreenFragment : Fragment() {
 
         binding.mealsTodayValue.setup(
             model = TextModel(
-                textValue = "1",
+                textValue = mealsNumber.toString(),
                 textSize = 20,
                 textColorRes = R.color.black,
                 backgroundColor = R.color.white,
             )
         )
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navigationVm.state.removeObservers(this)
+        mealVm.state.removeObservers(this)
     }
 }
