@@ -1,7 +1,6 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,14 @@ import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentHomeScreenBinding
 import com.bitebalance.presentation.states.BasicState
 import com.bitebalance.presentation.viewmodels.DateViewModel
+import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import com.ui.components.progress.carousel.ProgressCarouselModel
 import com.ui.model.NutritionValueModel
@@ -26,6 +27,7 @@ class HomeScreenFragment : Fragment() {
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
     private val nutritionVm by sharedViewModel<NutritionViewModel>()
+    private val mealVm by sharedViewModel<MealViewModel>()
     private val dateVm by sharedViewModel<DateViewModel>()
 
     override fun onCreateView(
@@ -51,6 +53,22 @@ class HomeScreenFragment : Fragment() {
 
         dateVm.state.observe(this) { state: String ->
             setupHeader(state)
+        }
+
+        mealVm.state.observe(this) { state ->
+            if (state.message.isNotEmpty()) {
+                ConfirmDialog(
+                    requireActivity(),
+                    BaseDialogModel(
+                        state.message,
+                        buttonTextRes = R.string.done
+                    )
+                ).show()
+            }
+
+            if (state.message.isNotEmpty() && state.isSuccessful) {
+                nutritionVm.getConsumedGoalValues()
+            }
         }
     }
 
@@ -132,8 +150,7 @@ class HomeScreenFragment : Fragment() {
                 backgroundColorRes = R.color.white,
                 textColorRes = R.color.black,
                 title = "Would you like to reset progress?\n\nToday’s data will be removed.",
-                onPositiveClicked = { Log.d("AAADIP", "onPositive clicked") },
-                onNegativeClicked = { Log.d("AAADIP", "onNegative clicked") }
+                onPositiveClicked = { mealVm.removeAllMeals() },
             )
         ).show()
     }
@@ -142,6 +159,7 @@ class HomeScreenFragment : Fragment() {
         navigationVm.state.removeObservers(this)
         nutritionVm.state.removeObservers(this)
         dateVm.state.removeObservers(this)
+        mealVm.state.removeObservers(this)
         super.onDestroy()
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bitebalance.domain.usecase.get.GetAllMealsUseCase
+import com.bitebalance.domain.usecase.remove.RemoveAllMealsUseCase
 import com.bitebalance.domain.usecase.remove.RemoveMealUseCase
 import com.bitebalance.presentation.states.BasicState
 import com.ui.model.MealModelUnboxed
@@ -13,7 +14,8 @@ import kotlinx.coroutines.flow.onEach
 
 class MealViewModel(
     private val getAllMealsUseCase: GetAllMealsUseCase,
-    private val removeMealUseCase: RemoveMealUseCase
+    private val removeMealUseCase: RemoveMealUseCase,
+    private val removeAllMealsUseCase: RemoveAllMealsUseCase,
 ): ViewModel() {
     private val _state = MutableLiveData(BasicState<List<MealModelUnboxed>>())
     val state: LiveData<BasicState<List<MealModelUnboxed>>> = _state
@@ -31,6 +33,16 @@ class MealViewModel(
 
     fun removeMeal(meal: MealModelUnboxed) {
         removeMealUseCase(meal).onEach {
+            _state.value = BasicState(
+                message = if (it.isSuccessful && it.data != null) it.data else it.message,
+                isLoading = it.isLoading,
+                isSuccessful = it.isSuccessful,
+            )
+        }.launchIn(viewModelScope)
+    }
+
+    fun removeAllMeals() {
+        removeAllMealsUseCase().onEach {
             _state.value = BasicState(
                 message = if (it.isSuccessful && it.data != null) it.data else it.message,
                 isLoading = it.isLoading,
