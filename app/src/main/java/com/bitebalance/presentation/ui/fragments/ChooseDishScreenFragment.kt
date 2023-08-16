@@ -16,10 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ChooseDishScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentChooseDishScreenBinding.inflate(layoutInflater)
-    }
-
+    private val binding by lazy { FragmentChooseDishScreenBinding.inflate(layoutInflater) }
     private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     override fun onCreateView(

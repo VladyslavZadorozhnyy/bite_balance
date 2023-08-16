@@ -41,19 +41,19 @@ class Graph(
 
     private fun indexToConsumptionValues(metricsIndex: Int, model: GraphModel): List<Float> {
         return when(metricsIndex) {
-            0 -> model.consumption.map { it.kcal ?: 0F }.toList()
-            1 -> model.consumption.map { it.protein ?: 0F }.toList()
-            2 -> model.consumption.map { it.fat ?: 0F }.toList()
-            else -> model.consumption.map { it.carb ?: 0F }.toList()
+            0 -> model.consumption.map { it.kcals }.toList()
+            1 -> model.consumption.map { it.prots }.toList()
+            2 -> model.consumption.map { it.fats }.toList()
+            else -> model.consumption.map { it.carbs }.toList()
         }
     }
 
     private fun indexToGoalValues(metricsIndex: Int, model: GraphModel): List<Float> {
         return when(metricsIndex) {
-            0 -> model.consumption.map { model.consumptionGoal.kcal ?: 0F }.toList()
-            1 -> model.consumption.map { model.consumptionGoal.protein ?: 0F }.toList()
-            2 -> model.consumption.map { model.consumptionGoal.fat ?: 0F }.toList()
-            else -> model.consumption.map { model.consumptionGoal.carb ?: 0F }.toList()
+            0 -> model.consumption.map { model.consumptionGoal.kcals }.toList()
+            1 -> model.consumption.map { model.consumptionGoal.prots }.toList()
+            2 -> model.consumption.map { model.consumptionGoal.fats }.toList()
+            else -> model.consumption.map { model.consumptionGoal.carbs }.toList()
         }
     }
 }

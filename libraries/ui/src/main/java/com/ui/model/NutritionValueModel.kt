@@ -5,4 +5,14 @@ data class NutritionValueModel(
     val fats: Float,
     val carbs: Float,
     val kcals: Float
-) { companion object }
+) {
+    operator fun plus(other: NutritionValueModel): NutritionValueModel {
+        return NutritionValueModel(
+            prots = this.prots + other.prots,
+            fats = this.fats + other.fats,
+            carbs = this.carbs + other.carbs,
+            kcals = this.kcals + other.kcals,
+        )
+    }
+    companion object
+}

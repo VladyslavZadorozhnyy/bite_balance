@@ -51,7 +51,7 @@ class ChartSubComponent(
 
             it.setColors(lineColor)
             it.setCircleColor(lineColor)
-            it.setCircleHoleColor(lineColor)
+            it.circleHoleColor = lineColor
         }
 
         val barData = BarData(barDataSet).also { it.barWidth = 0.5f }
@@ -76,6 +76,7 @@ class ChartSubComponent(
             xAxis.spaceMin = barData.barWidth
             xAxis.spaceMax = barData.barWidth
             xAxis.axisMinimum = 0.5F
+            axisLeft.axisMinimum = 0F
 
             xAxis.granularity = 1.0f
             xAxis.isGranularityEnabled = true

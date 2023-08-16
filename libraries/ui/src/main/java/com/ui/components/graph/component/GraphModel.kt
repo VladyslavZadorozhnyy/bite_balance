@@ -2,12 +2,12 @@ package com.ui.components.graph.component
 
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.ComponentUiType
-import com.ui.mocks.MockNutritionModel
+import com.ui.model.NutritionValueModel
 
 data class GraphModel(
-    val consumption: List<MockNutritionModel>,
-    val consumptionGoal: MockNutritionModel,
-    val screenSpan: Int
+    val consumption: List<NutritionValueModel>,
+    val consumptionGoal: NutritionValueModel,
+    val screenSpan: Int = 7
 ) : BaseUiComponentModel(
     componentType = ComponentUiType.Graph
 )

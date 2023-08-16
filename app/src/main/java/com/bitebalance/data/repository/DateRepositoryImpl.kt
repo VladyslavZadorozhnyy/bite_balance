@@ -41,6 +41,15 @@ class DateRepositoryImpl(
         return getCurrentDate().id
     }
 
+    override fun getDaysCountInMonth(month: Int, year: Int): Int {
+        val calendar = Calendar.getInstance().also {
+            it[Calendar.YEAR] = year
+            it[Calendar.MONTH] = month
+        }
+
+        return calendar.getActualMaximum(Calendar.DATE)
+    }
+
     override fun addDate(dateModel: DateModel): Long {
         return appDaoDatabase.getDateDao().insert(dateModel.toEntity())
     }

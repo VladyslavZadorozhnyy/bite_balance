@@ -27,6 +27,7 @@ val appModule = module {
     viewModel { NavigationViewModel() }
     viewModel { MealViewModel(get(), get(), get(), get()) }
     viewModel { DateViewModel(get()) }
+    viewModel { StatsViewModel(get()) }
     viewModel { NutritionViewModel(get(), get(), get()) }
     viewModel { DishViewModel(get(), get(), get(), get(), get()) }
 
@@ -39,6 +40,7 @@ val appModule = module {
     single { RemoveDishUseCase(get(), get()) }
     single { RemoveMealUseCase(get(), get()) }
     single { RemoveAllMealsUseCase(get()) }
+    single { GetNutritionValuesByDateUseCase(get(), get(), get(), get()) }
     single { GetAllMealsUseCase(get(), get(), get()) }
     single { UpdateNutritionValueUseCase(get(), get()) }
     single { AddNewDishAndMealUseCase(get(), get(), get(), get()) }

@@ -41,7 +41,7 @@ class NavigationFragment : Fragment() {
                 val nextFragment = when (chosenItemId) {
                     R.id.nav_home -> HomeScreenFragment()
                     R.id.nav_stats -> StatsScreenFragment()
-                    R.id.nav_menu -> MenuScreenFragment()
+                    R.id.nav_menu -> MenuScreenFragment.newInstance(creatingNewMeal = false)
                     else -> SettingsScreenFragment()
                 }
                 activity?.supportFragmentManager?.beginTransaction()?.apply {

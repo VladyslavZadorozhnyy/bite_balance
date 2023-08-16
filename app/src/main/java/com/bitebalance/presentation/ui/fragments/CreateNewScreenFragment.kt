@@ -53,7 +53,7 @@ class CreateNewScreenFragment : Fragment() {
     }
 
     private fun setupHeader() {
-        binding.toolbar.forwardButton.visibility = View.GONE
+        binding.toolbar.forwardButton.visibility = View.INVISIBLE
 
         binding.toolbar.headline.setup(
             model = TextModel(

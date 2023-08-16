@@ -35,13 +35,12 @@ class HomeScreenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setupButtons()
-        setupViewModelsObservation()
-
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
+        setupViewModelsObservation()
         nutritionVm.getConsumedGoalValues()
         dateVm.getGreetingsValue()
     }

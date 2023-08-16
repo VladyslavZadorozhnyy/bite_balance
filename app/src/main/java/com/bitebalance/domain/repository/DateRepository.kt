@@ -4,6 +4,7 @@ import com.bitebalance.domain.model.DateModel
 
 interface DateRepository {
     fun getCurrentDate(): DateModel
+    fun getDaysCountInMonth(month: Int, year: Int): Int
     fun getCurrentDateId(): Long
     fun getDateById(id: Long): DateModel?
     fun getCurrentHour(): Int

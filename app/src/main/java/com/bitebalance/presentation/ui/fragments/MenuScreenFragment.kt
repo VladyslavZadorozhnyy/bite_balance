@@ -23,6 +23,7 @@ class MenuScreenFragment : Fragment() {
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
     private val dishVm by sharedViewModel<DishViewModel>()
+    private var creatingNewMeal = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -111,7 +112,11 @@ class MenuScreenFragment : Fragment() {
     }
 
     private fun processDishClick(dish: DishModel) {
-        navigationVm.navigateTo(DishScreenFragment.newInstance(dish.name), NavigationAction.ADD)
+        if (creatingNewMeal) {
+            navigationVm.navigateTo(CreateNewScreenFragment.newInstance(createDish = false), NavigationAction.ADD)
+        } else {
+            navigationVm.navigateTo(DishScreenFragment.newInstance(dish.name), NavigationAction.ADD)
+        }
     }
 
     override fun onDestroy() {
@@ -119,5 +124,11 @@ class MenuScreenFragment : Fragment() {
         dishVm.state.removeObservers(this)
         navigationVm.state.removeObservers(this)
         super.onDestroy()
+    }
+
+    companion object {
+        fun newInstance(creatingNewMeal: Boolean): MenuScreenFragment {
+            return MenuScreenFragment().also { it.creatingNewMeal = creatingNewMeal }
+        }
     }
 }

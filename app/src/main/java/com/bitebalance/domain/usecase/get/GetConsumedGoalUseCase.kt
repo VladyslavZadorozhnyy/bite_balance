@@ -33,7 +33,13 @@ class GetConsumedGoalUseCase(
 
         withContext(Dispatchers.IO) {
             try {
-                val todayMeals = mealRepository.getAllMeals().filter { it.mealTimeId == dateRepository.getCurrentDateId() }
+                val currentDate = dateRepository.getCurrentDate()
+
+                val todayMeals = mealRepository.getAllMeals().filter {
+                    dateRepository.getDateById(it.mealTimeId)?.day == currentDate.day
+                            && dateRepository.getDateById(it.mealTimeId)?.month == currentDate.month
+                            && dateRepository.getDateById(it.mealTimeId)?.year == currentDate.year
+                }
                 val todayDishes = todayMeals.map { dishRepository.getDishById(it.dishId) }
 
                 val todayNutrition = todayDishes.map {it?.let {
