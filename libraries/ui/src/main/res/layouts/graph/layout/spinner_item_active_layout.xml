@@ -4,7 +4,8 @@
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="12dp"
     android:background="@drawable/input_form_active_shape">
 
     <com.ui.basic.buttons.icon_button.IconButton

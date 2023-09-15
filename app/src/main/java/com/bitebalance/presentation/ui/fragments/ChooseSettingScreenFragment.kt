@@ -40,8 +40,6 @@ class ChooseSettingScreenFragment : Fragment() {
     }
 
     private fun setupHeader() {
-        binding.toolbar.forwardButton.visibility = View.GONE
-
         binding.toolbar.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
