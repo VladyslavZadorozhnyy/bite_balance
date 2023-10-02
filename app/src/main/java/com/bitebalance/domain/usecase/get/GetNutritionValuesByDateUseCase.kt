@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 
 class GetNutritionValuesByDateUseCase(
     private val dateRepository: DateRepository,
@@ -17,47 +18,33 @@ class GetNutritionValuesByDateUseCase(
     private val dishRepository: DishRepository,
     private val nutritionValueRepository: NutritionValueRepository,
 ) {
+    private val emptyNutritionValue = NutritionValueModel(0F, 0F, 0F, 0F)
     operator fun invoke(
-        month: Int?,
-        year: Int?,
-        getNextDate: Boolean,
+        dateFormat: SimpleDateFormat,
+        dateValue: String,
     ): Flow<Resource<Pair<List<NutritionValueModel>, NutritionValueModel>>> = flow {
         emit(Resource.Loading())
 
-        //val result: List<NutritionValueModel>
         val dayConsumptionMap: MutableMap<Int, NutritionValueModel> = mutableMapOf()
         var goalConsumption: NutritionValueModel? = null
         var errorMessage = ""
 
         withContext(Dispatchers.IO) {
             try {
-                val neededMonth = if (month == null || year == null) {
-                    dateRepository.getCurrentDate().month
-                } else if (getNextDate) {
-                    if (month < 11) (month + 1) else 0
-                } else {
-                    if (month > 0) (month - 1) else 11
-                }
+                val dateModel = dateRepository.getDateFromString(dateFormat, dateValue)
+                val daysCount = dateRepository.getDaysCountInMonth(dateModel.month, dateModel.year)
 
-                var neededYear = if (month == null || year == null) dateRepository.getCurrentDate().year else year
-                neededYear = when (neededMonth) {
-                    0 -> neededYear + 1
-                    11 -> neededYear - 1
-                    else -> neededYear
-                }
-
-                val daysCount = dateRepository.getDaysCountInMonth(neededMonth, neededYear)
                 for (i in 0 until daysCount) {
-                    dayConsumptionMap[i] = NutritionValueModel(0F, 0F, 0F, 0F)
+                    dayConsumptionMap[i] = emptyNutritionValue
                 }
 
                 mealRepository.getAllMeals()
-                    .filter { dateRepository.getDateById(it.mealTimeId)?.month == neededMonth &&
-                            dateRepository.getDateById(it.mealTimeId)?.year == neededYear }
+                    .filter { dateRepository.getDateById(it.mealTimeId)?.month == dateModel.month &&
+                            dateRepository.getDateById(it.mealTimeId)?.year == dateModel.year }
                     .groupBy {
                         dateRepository.getDateById(it.mealTimeId)?.day
                     }.asIterable().forEach { mapEntry ->
-                        var summedNutritionValue = NutritionValueModel(0F, 0F, 0F, 0F)
+                        var summedNutritionValue = emptyNutritionValue
 
                         mapEntry.value.map { mealModel ->
                             dishRepository.getDishById(mealModel.dishId)
@@ -68,7 +55,6 @@ class GetNutritionValuesByDateUseCase(
                         }
                         mapEntry.key?.let { dayConsumptionMap[it] = summedNutritionValue }
                     }
-
                 nutritionValueRepository.getGoalConsumption()?.let { goalConsumption = it }
             } catch (exception: Throwable) {
                 errorMessage = exception.message ?: "Unknown error"

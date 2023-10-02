@@ -167,7 +167,12 @@ class CreateNewScreenFragment : Fragment() {
             ConfirmDialog(
                 requireActivity(),
                 BaseDialogModel(state.message, buttonTextRes = R.string.done,
-                    onConfirmClicked = { if (state.isSuccessful) activity?.onBackPressed() }
+                    onConfirmClicked = {
+                        if (state.isSuccessful) {
+                            activity?.onBackPressed()
+                            activity?.onBackPressed()
+                        }
+                    }
                 )
             ).show()
         }

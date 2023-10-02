@@ -17,8 +17,13 @@ class AddNewDishUseCase(
     private val dateRepository: DateRepository,
     private val nutritionValueRepository: NutritionValueRepository,
 ) {
-    operator fun invoke(name: String, prots: Float, fats: Float,
-        carbs: Float, kcals: Float): Flow<Resource<List<DishModel>>> = flow {
+    operator fun invoke(
+        name: String,
+        prots: Float,
+        fats: Float,
+        carbs: Float,
+        kcals: Float
+    ): Flow<Resource<List<DishModel>>> = flow {
         var resultMessage = ""
         emit(Resource.Loading())
 

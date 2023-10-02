@@ -5,13 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import androidx.fragment.app.Fragment
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentStatsScreenBinding
 import com.bitebalance.presentation.viewmodels.DateViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.bitebalance.presentation.viewmodels.StatsViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModel
@@ -19,15 +19,19 @@ import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.graph.component.GraphModel
-import com.ui.mocks.MockNutritionModel
 import com.ui.model.NutritionValueModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class StatsScreenFragment : Fragment() {
     private val binding by lazy { FragmentStatsScreenBinding.inflate(layoutInflater) }
+    private val dateFormat = SimpleDateFormat("MMMM yyyy", Locale.US)
+
     private val statsVm by sharedViewModel<StatsViewModel>()
-    private val nutritionVm by sharedViewModel<NutritionViewModel>()
+    private val dateVm by sharedViewModel<DateViewModel>()
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private var mToast: Toast? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,23 +45,28 @@ class StatsScreenFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        statsVm.getStatsByMonthAndYear(false)
-    }
-
     private fun setupStyling() {
         binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.white)
     }
 
     private fun setupViewModelsObservation() {
         statsVm.state.observe(this) { state ->
-            Log.d("AAADIP", "n, statsState: $state")
             if (state.monthNutrition != null && state.goalConsumption != null) {
                 setupChart(state.monthNutrition, state.goalConsumption)
             }
         }
-        nutritionVm.state.observe(this) {}
+
+        dateVm.state.observe(this) { state ->
+            binding.monthTextview.setup(
+                model = TextModel(
+                    textValue = state,
+                    textSize = 25,
+                    textColorRes = R.color.white,
+                    backgroundColor = R.color.black,
+                )
+            )
+            statsVm.getStatsByMonthAndYear(dateFormat, state)
+        }
     }
 
     private fun setupHeader() {
@@ -91,6 +100,7 @@ class StatsScreenFragment : Fragment() {
                 backgroundColor = R.color.white,
             )
         )
+        dateVm.getCurrentMonth(dateFormat)
     }
 
     private fun setupButtons() {
@@ -100,7 +110,10 @@ class StatsScreenFragment : Fragment() {
                 iconSize = 105,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+                onClickListener = {
+                    mToast?.cancel()
+                    dateVm.getPrevMonth(dateFormat, dateVm.state.value ?: "")
+                }
             )
         )
 
@@ -110,7 +123,10 @@ class StatsScreenFragment : Fragment() {
                 iconSize = 105,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { Log.d("AAADIP", "Back button clicked") }
+                onClickListener = {
+                    mToast?.cancel()
+                    dateVm.getNextMonth(dateFormat, dateVm.state.value ?: "")
+                }
             )
         )
     }
@@ -119,89 +135,18 @@ class StatsScreenFragment : Fragment() {
         monthNutritionValues: List<NutritionValueModel>,
         goalNutritionValue: NutritionValueModel,
     ) {
-        binding.monthTextview.setup(
-            model = TextModel(
-                textValue = "January 2023",
-                textSize = 25,
-                textColorRes = R.color.white,
-                backgroundColor = R.color.black,
-            )
-        )
-
         binding.chart.setup(
             GraphModel(
-//                consumption = listOf(
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        2000F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1900F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1800F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1700F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1600F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1500F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1900F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1900F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        1900F
-//                    ),
-//                    MockNutritionModel(
-//                        10F,
-//                        20F,
-//                        15F,
-//                        0F
-//                    )
-//                ),
                 consumption = monthNutritionValues,
                 consumptionGoal = goalNutritionValue,
-//                consumptionGoal = MockNutritionModel(
-//                    10F,
-//                    40F,
-//                    8F,
-//                    1500F
-//                ),
             )
         )
+        monthNutritionValues.any { it == statsVm.emptyNutritionValue }.let { emptyValPresent ->
+            if (emptyValPresent) {
+                mToast = Toast.makeText(activity, "Some days do not have data", Toast.LENGTH_LONG)
+                mToast?.show()
+            }
+        }
     }
 
     private fun showConfirmDialog() {
@@ -217,7 +162,6 @@ class StatsScreenFragment : Fragment() {
 
     override fun onDestroy() {
         statsVm.state.removeObservers(this)
-        nutritionVm.state.removeObservers(this)
         navigationVm.state.removeObservers(this)
         super.onDestroy()
     }

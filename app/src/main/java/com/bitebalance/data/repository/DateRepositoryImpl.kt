@@ -5,11 +5,25 @@ import com.bitebalance.domain.model.fromEntity
 import com.bitebalance.domain.model.toEntity
 import com.bitebalance.domain.repository.DateRepository
 import com.database.db.AppDaoDatabase
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DateRepositoryImpl(
     private val appDaoDatabase: AppDaoDatabase
 ) : DateRepository {
+    override fun getDateFromString(dateFormat: SimpleDateFormat, dateValue: String): DateModel {
+        val cal: Calendar = Calendar.getInstance().apply {
+            time = dateFormat.parse(dateValue) as Date
+        }
+
+        return DateModel(
+            minute = 0,
+            hour = 0,
+            day = 1,
+            month = cal.get(Calendar.MONTH),
+            year = cal.get(Calendar.YEAR)
+        )
+    }
 
     override fun getCurrentDate(): DateModel {
         appDaoDatabase.getDateDao().getDate(

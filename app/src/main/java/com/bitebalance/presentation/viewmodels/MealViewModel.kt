@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
+import com.bitebalance.domain.usecase.add.AddNewMealUseCase
 import com.bitebalance.domain.usecase.get.GetAllMealsUseCase
 import com.bitebalance.domain.usecase.remove.RemoveAllMealsUseCase
 import com.bitebalance.domain.usecase.remove.RemoveMealUseCase
@@ -18,6 +19,7 @@ class MealViewModel(
     private val removeMealUseCase: RemoveMealUseCase,
     private val removeAllMealsUseCase: RemoveAllMealsUseCase,
     private val addNewDishAndMealUseCase: AddNewDishAndMealUseCase,
+    private val addNewMealUseCase: AddNewMealUseCase,
 ): ViewModel() {
     private val _state = MutableLiveData(BasicState<List<MealModelUnboxed>>())
     val state: LiveData<BasicState<List<MealModelUnboxed>>> = _state
@@ -62,6 +64,19 @@ class MealViewModel(
         eaten: Float,
     ) {
         addNewDishAndMealUseCase(name, prots, fats, carbs, kcals, eaten).onEach {
+            _state.value = BasicState(
+                message = it.message,
+                isLoading = it.isLoading,
+                isSuccessful = it.isSuccessful,
+            )
+        }.launchIn(viewModelScope)
+    }
+
+    fun createNewMeal(
+        dishName: String,
+        eaten: Float
+    ) {
+        addNewMealUseCase(dishName, eaten).onEach {
             _state.value = BasicState(
                 message = it.message,
                 isLoading = it.isLoading,

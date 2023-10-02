@@ -6,18 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentChooseDishScreenBinding
+import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
+import com.ui.components.databinding.NoItemsLayoutBinding
+import com.ui.model.DishModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class ChooseDishScreenFragment : Fragment() {
     private val binding by lazy { FragmentChooseDishScreenBinding.inflate(layoutInflater) }
+    private val noItemsLayoutBinding by lazy { NoItemsLayoutBinding.bind(binding.root) }
+
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val dishVm by sharedViewModel<DishViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,9 +32,54 @@ class ChooseDishScreenFragment : Fragment() {
     ): View {
         setupStyling()
         setupHeader()
-        setupRecycler()
+        setupViewModelsObservation()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        dishVm.getAllDishes()
+    }
+
+    private fun setupViewModelsObservation() {
+        dishVm.state.observe(this) { state ->
+            if (state.data == null) { return@observe }
+            if (state.data.isEmpty()) { setupNoItemsView() } else { setupDishRecycler(state.data) }
+        }
+    }
+
+    private fun setupNoItemsView() {
+        noItemsLayoutBinding.imageView.visibility = View.VISIBLE
+        noItemsLayoutBinding.messageView.visibility = View.VISIBLE
+        binding.dishRecycler.visibility = View.INVISIBLE
+
+        noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.empty_menu_icon)
+        noItemsLayoutBinding.messageView.setup(
+            model = TextModel(
+                textValue = "Seems that you have no dishes yet. \n Start by adding one.",
+                textSize = 25,
+                textColorRes = R.color.black,
+                backgroundColor = R.color.white,
+            )
+        )
+    }
+
+    private fun setupDishRecycler(dishItems: List<DishModel>) {
+        noItemsLayoutBinding.imageView.visibility = View.INVISIBLE
+        noItemsLayoutBinding.messageView.visibility = View.INVISIBLE
+        binding.dishRecycler.visibility = View.VISIBLE
+
+        binding.dishRecycler.setup(
+            model = DishRecyclerModel(
+                items = dishItems,
+                onClickListener = { processDishClick(it) }
+            )
+        )
+    }
+
+    private fun processDishClick(dish: DishModel) {
+        navigationVm.navigateTo(DishScreenFragment.newInstance(dish.name, createDish = true), NavigationAction.ADD)
     }
 
     private fun setupStyling() {
@@ -56,103 +108,7 @@ class ChooseDishScreenFragment : Fragment() {
         )
     }
 
-    private fun setupRecycler() {
-        binding.dishRecycler.setup(
-            model = DishRecyclerModel(
-                items = listOf(
-//                    MockDishModel(
-//                        name = "Dish 1",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 2",
-//                        iconRes = R.drawable.lunch_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 3",
-//                        iconRes = R.drawable.dinner_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 4",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 5",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 6",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 1",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 2",
-//                        iconRes = R.drawable.lunch_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 3",
-//                        iconRes = R.drawable.dinner_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 4",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 5",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 6",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 1",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 2",
-//                        iconRes = R.drawable.lunch_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 3",
-//                        iconRes = R.drawable.dinner_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 4",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 5",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    ),
-//                    MockDishModel(
-//                        name = "Dish 6",
-//                        iconRes = R.drawable.breakfast_icon,
-//                        nutritionVal = MockNutritionModel(0F, 0F, 0F, 0F)
-//                    )
-              ),
-                onClickListener = {}
-            )
-        )
+    companion object {
+        fun newInstance(): ChooseDishScreenFragment = ChooseDishScreenFragment()
     }
 }

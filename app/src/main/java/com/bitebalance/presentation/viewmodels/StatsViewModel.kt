@@ -10,6 +10,7 @@ import com.bitebalance.presentation.states.StatsState
 import com.ui.model.NutritionValueModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.text.SimpleDateFormat
 
 class StatsViewModel(
     private val getNutritionValuesByDateUseCase: GetNutritionValuesByDateUseCase
@@ -17,12 +18,13 @@ class StatsViewModel(
     private val _state = MutableLiveData(StatsState())
     val state: LiveData<StatsState> = _state
 
-    fun getStatsByMonthAndYear(getNextMonth: Boolean) {
-        getNutritionValuesByDateUseCase(
-            state.value?.month,
-            state.value?.year,
-            getNextMonth
-        ).onEach {
+    val emptyNutritionValue = NutritionValueModel(0F, 0F, 0F, 0F)
+
+    fun getStatsByMonthAndYear(
+        dateFormat: SimpleDateFormat,
+        dateValue: String,
+    ) {
+        getNutritionValuesByDateUseCase(dateFormat, dateValue).onEach {
             _state.value = StatsState(
                 monthNutrition = it.data?.first,
                 goalConsumption = it.data?.second,

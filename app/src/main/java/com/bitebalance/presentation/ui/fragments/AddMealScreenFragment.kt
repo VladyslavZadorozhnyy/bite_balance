@@ -52,7 +52,7 @@ class AddMealScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
-                onClickListener = { navigationVm.popScreen() }
+                onClickListener = { activity?.onBackPressed() }
             )
         )
 
@@ -98,7 +98,7 @@ class AddMealScreenFragment : Fragment() {
                 foregroundColorRes = R.color.white,
                 backgroundColorRes = R.color.black,
                 onClickListener = {
-                    navigationVm.navigateTo(MenuScreenFragment.newInstance(creatingNewMeal = true), NavigationAction.ADD)
+                    navigationVm.navigateTo(ChooseDishScreenFragment.newInstance(), NavigationAction.ADD)
                 }
             )
         )
