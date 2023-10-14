@@ -19,12 +19,14 @@ import com.bitebalance.domain.usecase.update.UpdateNutritionValueUseCase
 import com.bitebalance.presentation.viewmodels.*
 import com.database.db.AppDaoDatabase
 import com.database.db.AppDaoDatabaseImpl
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
 //  ViewModels
+    viewModel { ThemeViewModel(get()) }
     viewModel { NavigationViewModel() }
     viewModel { MealViewModel(get(), get(), get(), get(), get()) }
     viewModel { DateViewModel(get(), get()) }

@@ -17,8 +17,6 @@ class GetMonthUseCase {
         getPrevMonth: Boolean = false,
         getNextMonth: Boolean = false,
     ): Flow<Resource<String>> = flow {
-        emit(Resource.Loading())
-
         var errorMessage = ""
         var result = ""
 
@@ -46,7 +44,8 @@ class GetMonthUseCase {
         if (errorMessage.isNotEmpty()) {
             emit(Resource.Error(message = errorMessage))
         } else {
-            emit(Resource.Success(data = result))
+            if (result != currentMonth || !getNextMonth)
+                emit(Resource.Success(data = result))
         }
     }
 }

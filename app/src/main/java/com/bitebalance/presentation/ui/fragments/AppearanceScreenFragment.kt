@@ -1,60 +1,68 @@
 package com.bitebalance.presentation.ui.fragments
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentAppearanceScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModel
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
+import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import yuku.ambilwarna.AmbilWarnaDialog
 
 
 class AppearanceScreenFragment : Fragment() {
-    private val binding by lazy {
-        FragmentAppearanceScreenBinding.inflate(layoutInflater)
-    }
+    private val binding by lazy { FragmentAppearanceScreenBinding.inflate(layoutInflater) }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val themeViewModel by sharedViewModel<ThemeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupStyling()
-        setupHeader()
-        setupPrimaryColor()
-        setupSecondaryColor()
-        setupFontLayout()
-
+        setupViewModelsObservation()
         return binding.root
     }
 
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.black)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
+    }
+
+    private fun setupViewModelsObservation() {
+        themeViewModel.state.observe(this) {
+            setupHeader()
+            setupStyling()
+            setupPrimaryColor()
+            setupSecondaryColor()
+            setupFontLayout()
+        }
     }
 
     private fun setupHeader() {
         binding.toolbar.headline.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Appearance",
                 textSize = 30,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
 
         binding.toolbar.backButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
+                foregroundColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
                 onClickListener = { navigationVm.popScreen() }
             )
         )
@@ -63,47 +71,93 @@ class AppearanceScreenFragment : Fragment() {
     private fun setupPrimaryColor() {
         (binding.color1ColorView.background as? GradientDrawable)?.let {
             it.mutate()
-            it.setStroke(5, getColorStateList(requireContext(), R.color.black))
-            it.color = getColorStateList(requireContext(), R.color.black)
+            it.setStroke(5, ColorStateList.valueOf(Color.BLACK))
+            it.color = ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
             binding.color1ColorView.background = it
+            binding.color1Bar.setBackgroundColor(themeViewModel.state.value!!.primaryColor)
+            binding.color1.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
         }
 
         binding.color1TextView.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Primary color",
                 textSize = 25,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
+
+        binding.color1.setOnClickListener {
+            setupColorPickingDialog(changePrimaryColor = true, changeSecondaryColor = false)
+        }
     }
 
     private fun setupSecondaryColor() {
         (binding.color2ColorView.background as? GradientDrawable)?.let {
             it.mutate()
-            it.setStroke(5, getColorStateList(requireContext(), R.color.black))
-            it.color = getColorStateList(requireContext(), R.color.white)
+            it.setStroke(5, ColorStateList.valueOf(Color.BLACK))
+            it.color = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
             binding.color2ColorView.background = it
+            binding.color2Bar.setBackgroundColor(themeViewModel.state.value!!.primaryColor)
+            binding.color2.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
         }
 
         binding.color2TextView.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Secondary color",
                 textSize = 25,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
+
+        binding.color2.setOnClickListener {
+            setupColorPickingDialog(changePrimaryColor = false, changeSecondaryColor = true)
+        }
     }
 
     private fun setupFontLayout() {
         binding.fontTextView.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Font",
                 textSize = 25,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
+        binding.fontLayout.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
+        binding.fontBar.setBackgroundColor(themeViewModel.state.value!!.primaryColor)
+        binding.fontIcon.setColorFilter(themeViewModel.state.value!!.primaryColor)
+    }
+
+    private fun setupColorPickingDialog(
+        changePrimaryColor: Boolean = false,
+        changeSecondaryColor: Boolean = false,
+    ) {
+        val dialogTitle = if (changePrimaryColor)
+            "Choose primary color"
+        else if (changeSecondaryColor)
+            "Choose secondary color"
+        else
+            ""
+
+        val defaultColor: Int = if (changePrimaryColor)
+            themeViewModel.state.value?.primaryColor ?: -1
+        else
+            themeViewModel.state.value?.secondaryColor ?: -1
+
+        AmbilWarnaDialog(requireContext(), defaultColor, object : AmbilWarnaDialog.OnAmbilWarnaListener {
+            override fun onCancel(dialog: AmbilWarnaDialog?) {}
+
+            override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
+                if (changePrimaryColor)
+                    themeViewModel.primaryColor = color
+                else if (changeSecondaryColor)
+                    themeViewModel.secondaryColor = color
+            }
+        }).apply {
+            this.dialog.setTitle(dialogTitle)
+            this.show()
+        }
     }
 }

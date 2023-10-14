@@ -57,6 +57,9 @@ dependencies {
 //    Room dependencies
     implementation 'androidx.room:room-ktx:2.5.1'
 
+//    Color picker dependencies
+    implementation 'com.github.yukuku:ambilwarna:2.0.1'
+
 //    Android test dependencies
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

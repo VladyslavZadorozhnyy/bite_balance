@@ -1,7 +1,6 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -161,6 +160,7 @@ class StatsScreenFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        mToast?.cancel()
         statsVm.state.removeObservers(this)
         navigationVm.state.removeObservers(this)
         super.onDestroy()

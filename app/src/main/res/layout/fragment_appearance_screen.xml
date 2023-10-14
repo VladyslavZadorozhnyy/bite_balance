@@ -50,6 +50,7 @@
                 android:background="@drawable/checkbox_shape"/>
 
             <View
+                android:id="@+id/color_1_bar"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:background="@color/black"
@@ -79,6 +80,7 @@
                 android:background="@drawable/checkbox_shape"/>
 
             <View
+                android:id="@+id/color_2_bar"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:background="@color/black"
@@ -101,12 +103,14 @@
             app:layout_constraintTop_toBottomOf="@id/color_2">
 
             <ImageView
+                android:id="@+id/font_icon"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/font_icon"
                 android:layout_gravity="center_vertical" />
 
             <View
+                android:id="@+id/font_bar"
                 android:layout_width="2dp"
                 android:layout_height="match_parent"
                 android:background="@color/black"

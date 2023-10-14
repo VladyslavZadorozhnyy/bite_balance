@@ -1,5 +1,6 @@
 package com.ui.basic.texts.slideable_text
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.text.TextUtils
@@ -13,6 +14,7 @@ import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.ComponentUiConstants
 import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.TextBinding
 
@@ -24,6 +26,7 @@ class SlideableText(
         TextBinding.inflate(LayoutInflater.from(context), this).textView
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun setup(model: BaseUiComponentModel) {
         (model as? TextModel)?.let {
             binding.text = model.textValue
@@ -37,6 +40,25 @@ class SlideableText(
 
             binding.background = getDrawable(context, R.drawable.text_shape)
             binding.background.setTint(getColor(context, model.backgroundColor))
+            binding.marqueeRepeatLimit = -1
+
+            binding.ellipsize = TextUtils.TruncateAt.MARQUEE
+            binding.isSelected = true
+            binding.isSingleLine = true
+        }
+
+        (model as? TextModelNew)?.let {
+            binding.text = model.textValue
+            binding.textSize = model.textSize.toFloat()
+            binding.typeface = getFont(context, R.font.ultra_regular_font)
+            binding.setTextColor(model.textColor)
+
+            binding.gravity = Gravity.CENTER
+            binding.paint.style = Paint.Style.STROKE
+            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+
+            binding.background = getDrawable(context, R.drawable.text_shape)
+            binding.background.setTint(model.backgroundColor)
             binding.marqueeRepeatLimit = -1
 
             binding.ellipsize = TextUtils.TruncateAt.MARQUEE
