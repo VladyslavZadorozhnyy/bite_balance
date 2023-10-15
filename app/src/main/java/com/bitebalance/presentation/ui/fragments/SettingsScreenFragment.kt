@@ -1,42 +1,47 @@
 package com.bitebalance.presentation.ui.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentSettingsScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.recycler_views.settings_recycler.SettingsRecyclerModel
-import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.mocks.MockInstructionModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SettingsScreenFragment : Fragment() {
-
-    private val binding by lazy {
-        FragmentSettingsScreenBinding.inflate(layoutInflater)
-    }
+    private val binding by lazy { FragmentSettingsScreenBinding.inflate(layoutInflater) }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val themeViewModel by sharedViewModel<ThemeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupStyling()
-        setupHeader()
-        setupRecycler()
-
+        setupViewModelsObservation()
         return binding.root
     }
 
+    private fun setupViewModelsObservation() {
+        themeViewModel.state.observe(this) {
+            setupStyling()
+            setupHeader()
+            setupRecycler()
+        }
+    }
+
     private fun setupStyling() {
-        binding.settingsSublayout.backgroundTintList = getColorStateList(requireContext(), R.color.black)
+        binding.settingsSublayout.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
+        binding.settingRecycler.setBackgroundColor(themeViewModel.state.value!!.primaryColor)
     }
 
     private fun setupHeader() {
@@ -44,11 +49,11 @@ class SettingsScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.GONE
 
         binding.toolbar.headline.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Settings",
                 textSize = 30,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
     }
@@ -86,6 +91,8 @@ class SettingsScreenFragment : Fragment() {
                         instructionText = "Feedback"
                     ),
                 ),
+                primaryColor = themeViewModel.state.value!!.primaryColor,
+                secondaryColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = { processInstructionClicked(it) }
             )
         )
@@ -100,7 +107,6 @@ class SettingsScreenFragment : Fragment() {
             "Instruction" -> navigationVm.navigateTo(TextScreenFragment(), NavigationAction.ADD)
             "Support Us" -> navigationVm.navigateTo(SupportFeedbackScreenFragment(), NavigationAction.ADD)
             "Feedback" -> navigationVm.navigateTo(SupportFeedbackScreenFragment(), NavigationAction.ADD)
-            else -> Log.d("AAADIP", "HERE")
         }
     }
 }

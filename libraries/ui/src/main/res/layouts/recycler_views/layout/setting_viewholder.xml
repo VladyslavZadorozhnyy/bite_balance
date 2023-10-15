@@ -14,6 +14,7 @@
         android:layout_marginStart="13dp" />
 
     <View
+        android:id="@+id/setting_bar"
         android:layout_width="3dp"
         android:layout_height="50dp"
         android:background="@color/black"

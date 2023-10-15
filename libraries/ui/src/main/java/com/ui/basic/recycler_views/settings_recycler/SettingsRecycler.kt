@@ -20,8 +20,14 @@ class SettingsRecycler(
     override fun setup(model: BaseUiComponentModel) {
         (model as? SettingsRecyclerModel)?.let { recyclerModel ->
             binding.recyclerView.apply {
-                adapter = SettingsAdapter(recyclerModel.items, model.onClickListener)
+                adapter = SettingsAdapter(
+                    recyclerModel.items,
+                    recyclerModel.primaryColor,
+                    recyclerModel.secondaryColor,
+                    model.onClickListener,
+                )
                 layoutManager = LinearLayoutManager(context)
+                setBackgroundColor(recyclerModel.primaryColor)
             }
         }
     }

@@ -4,16 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModel
+import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 import com.ui.mocks.MockInstructionModel
-import com.ui.mocks.MockMealModel
 
 class SettingsAdapter(
     private val items: List<MockInstructionModel>,
+    private val primaryColor: Int,
+    private val secondaryColor: Int,
     private val onClickListener: (MockInstructionModel) -> Unit
 ): RecyclerView.Adapter<SettingsAdapter.SettingViewHolder>() {
 
@@ -29,31 +30,36 @@ class SettingsAdapter(
     }
 
     override fun onBindViewHolder(holder: SettingViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], primaryColor, secondaryColor)
         holder.itemView.setOnClickListener { onClickListener(items[position]) }
     }
 
     class SettingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val settingIconButton = view.findViewById<IconButton>(R.id.setting_icon)
         private val settingText = view.findViewById<Text>(R.id.setting_text)
+        private val settingBar = view.findViewById<View>(R.id.setting_bar)
 
-        fun bind(model: MockInstructionModel) {
+        fun bind(model: MockInstructionModel, primaryColor: Int, secondaryColor: Int) {
+            itemView.setBackgroundColor(secondaryColor)
+            settingBar.setBackgroundColor(primaryColor)
+
             settingIconButton.setup(
-                model = ButtonModel(
+                model = ButtonModelNew(
                     iconRes = model.iconRes,
                     iconSize = 120,
-                    foregroundColorRes = R.color.black,
-                    backgroundColorRes = R.color.white,
+                    foregroundColor = primaryColor,
+                    backgroundColor = secondaryColor,
                     onClickListener = { itemView.callOnClick() }
                 )
             )
+            settingIconButton.rootView.findViewById<View>(R.id.button_view).stateListAnimator = null
 
             settingText.setup(
-                model = TextModel(
+                model = TextModelNew(
                     textValue = model.instructionText,
                     textSize = 20,
-                    textColorRes = R.color.black,
-                    backgroundColor = R.color.white
+                    textColor = primaryColor,
+                    backgroundColor = secondaryColor
                 )
             )
         }
