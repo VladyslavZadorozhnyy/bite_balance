@@ -28,8 +28,6 @@ class StatsViewModel(
             _state.value = StatsState(
                 monthNutrition = it.data?.first,
                 goalConsumption = it.data?.second,
-                month = 1,
-                year = 1,
                 message = it.message,
                 isLoading = it.isLoading,
                 isSuccessful = it.isSuccessful,

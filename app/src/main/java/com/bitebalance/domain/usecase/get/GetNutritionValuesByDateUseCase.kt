@@ -31,27 +31,25 @@ class GetNutritionValuesByDateUseCase(
 
         withContext(Dispatchers.IO) {
             try {
+                var summedNutritionValue = emptyNutritionValue
                 val dateModel = dateRepository.getDateFromString(dateFormat, dateValue)
                 val daysCount = dateRepository.getDaysCountInMonth(dateModel.month, dateModel.year)
 
-                for (i in 0 until daysCount) {
+                for (i in 0 until daysCount)
                     dayConsumptionMap[i] = emptyNutritionValue
-                }
 
                 mealRepository.getAllMeals()
                     .filter { dateRepository.getDateById(it.mealTimeId)?.month == dateModel.month &&
                             dateRepository.getDateById(it.mealTimeId)?.year == dateModel.year }
                     .groupBy {
+                        summedNutritionValue = emptyNutritionValue
                         dateRepository.getDateById(it.mealTimeId)?.day
                     }.asIterable().forEach { mapEntry ->
-                        var summedNutritionValue = emptyNutritionValue
-
                         mapEntry.value.map { mealModel ->
-                            dishRepository.getDishById(mealModel.dishId)
-                        }.map { dishModel ->
-                            nutritionValueRepository.getNutritionValueById(dishModel?.nutritionValId ?: -1)
-                        }.forEach { nutritionModel ->
-                            nutritionModel?.let { summedNutritionValue += nutritionModel }
+                            val dishModel = dishRepository.getDishById(mealModel.dishId)
+                            val nutritionModel = nutritionValueRepository.getNutritionValueById(dishModel?.nutritionValId ?: -1)
+
+                            nutritionModel?.let { summedNutritionValue = summedNutritionValue.plus(nutritionModel, mealModel.amount) }
                         }
                         mapEntry.key?.let { dayConsumptionMap[it] = summedNutritionValue }
                     }
