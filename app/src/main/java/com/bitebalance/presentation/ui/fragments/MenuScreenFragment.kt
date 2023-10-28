@@ -9,9 +9,10 @@ import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentMenuScreenBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.ui.basic.buttons.common.ButtonModel
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
+import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
-import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.NoItemsLayoutBinding
 import com.ui.model.DishModel
@@ -22,6 +23,8 @@ class MenuScreenFragment : Fragment() {
     private val noItemsLayoutBinding by lazy { NoItemsLayoutBinding.bind(binding.root) }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val themeViewModel by sharedViewModel<ThemeViewModel>()
+
     private val dishVm by sharedViewModel<DishViewModel>()
     private var creatingNewMeal = false
 
@@ -29,10 +32,7 @@ class MenuScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupHeader()
-        setupCreateNewButton()
         setupViewModelsObservation()
-
         return binding.root
     }
 
@@ -46,6 +46,12 @@ class MenuScreenFragment : Fragment() {
             if (state.data == null) { return@observe }
             if (state.data.isEmpty()) { setupNoItemsView() } else { setupDishRecycler(state.data) }
         }
+
+        themeViewModel.state.observe(this) {
+            setupHeader()
+            setupStyling()
+            setupCreateNewButton()
+        }
     }
 
     private fun setupHeader() {
@@ -53,13 +59,17 @@ class MenuScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.GONE
 
         binding.toolbar.headline.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Menu",
                 textSize = 30,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
+    }
+
+    private fun setupStyling() {
+        binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
     }
 
     private fun setupDishRecycler(dishItems: List<DishModel>) {
@@ -70,6 +80,8 @@ class MenuScreenFragment : Fragment() {
         binding.dishRecycler.setup(
             model = DishRecyclerModel(
                 items = dishItems,
+                primaryColor = themeViewModel.state.value!!.primaryColor,
+                secondaryColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = { processDishClick(it) }
             )
         )
@@ -77,14 +89,14 @@ class MenuScreenFragment : Fragment() {
 
     private fun setupCreateNewButton() {
         binding.createNewMealButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.add_icon,
                 iconSize = 80,
                 strokeWidth = 5,
                 labelTextSize = 14,
                 labelTextRes = R.string.add_new,
-                foregroundColorRes = R.color.black,
-                backgroundColorRes = R.color.white,
+                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(
                         CreateNewScreenFragment.newInstance(createDish = true),
@@ -102,11 +114,11 @@ class MenuScreenFragment : Fragment() {
 
         noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.empty_menu_icon)
         noItemsLayoutBinding.messageView.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Seems that you have no dishes yet. \n Start by adding one.",
                 textSize = 25,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
     }

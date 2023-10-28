@@ -73,6 +73,8 @@ class ChooseDishScreenFragment : Fragment() {
         binding.dishRecycler.setup(
             model = DishRecyclerModel(
                 items = dishItems,
+                primaryColor = themeViewModel.state.value!!.primaryColor,
+                secondaryColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = { processDishClick(it) }
             )
         )

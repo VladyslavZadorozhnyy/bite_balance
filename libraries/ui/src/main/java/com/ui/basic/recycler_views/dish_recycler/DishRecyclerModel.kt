@@ -6,6 +6,8 @@ import com.ui.model.DishModel
 
 data class DishRecyclerModel(
     val items: List<DishModel>,
+    val primaryColor: Int,
+    val secondaryColor: Int,
     val onClickListener: (DishModel) -> Unit
 ) : BaseUiComponentModel(
     componentType = ComponentUiType.Recycler
