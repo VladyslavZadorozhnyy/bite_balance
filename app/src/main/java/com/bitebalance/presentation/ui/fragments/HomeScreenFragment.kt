@@ -8,17 +8,15 @@ import android.view.ViewGroup
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentHomeScreenBinding
 import com.bitebalance.presentation.states.BasicState
-import com.bitebalance.presentation.viewmodels.DateViewModel
-import com.bitebalance.presentation.viewmodels.MealViewModel
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.bitebalance.presentation.viewmodels.NutritionViewModel
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModel
+import com.bitebalance.presentation.viewmodels.*
+import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.dialogs.common.BaseDialogModelNew
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
-import com.ui.components.progress.carousel.ProgressCarouselModel
+import com.ui.components.progress.carousel.ProgressCarouselModelNew
 import com.ui.model.NutritionValueModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -27,6 +25,8 @@ class HomeScreenFragment : Fragment() {
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
     private val nutritionVm by sharedViewModel<NutritionViewModel>()
+    private val themeViewModel by sharedViewModel<ThemeViewModel>()
+
     private val mealVm by sharedViewModel<MealViewModel>()
     private val dateVm by sharedViewModel<DateViewModel>()
 
@@ -34,7 +34,6 @@ class HomeScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupButtons()
         return binding.root
     }
 
@@ -52,6 +51,11 @@ class HomeScreenFragment : Fragment() {
 
         dateVm.state.observe(this) { state: String ->
             setupHeader(state)
+        }
+
+        themeViewModel.state.observe(this) {
+            setupStyling()
+            setupButtons()
         }
 
         mealVm.state.observe(this) { state ->
@@ -76,31 +80,37 @@ class HomeScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.GONE
 
         binding.toolbar.headline.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = greetingValue,
                 textSize = 35,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white
+                textColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor
             )
         )
     }
 
     private fun setupCarousel(consumedGoalValues: List<NutritionValueModel>) {
         binding.progressCarousel.setup(
-            model = ProgressCarouselModel(
+            model = ProgressCarouselModelNew(
                 consumed = consumedGoalValues[0],
                 goalConsumption = consumedGoalValues[1],
+                primaryColor = themeViewModel.state.value!!.primaryColor,
+                secondaryColor = themeViewModel.state.value!!.secondaryColor,
             )
         )
     }
 
+    private fun setupStyling() {
+        binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
+    }
+
     private fun setupButtons() {
         binding.infoButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.info_icon,
                 iconSize = 100,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
+                foregroundColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(InfoScreenFragment(), NavigationAction.ADD)
                 }
@@ -108,11 +118,11 @@ class HomeScreenFragment : Fragment() {
         )
 
         binding.todayMealsButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.meals_icon,
                 iconSize = 80,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
+                foregroundColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(TodayMealsScreenFragment(), NavigationAction.ADD)
                 }
@@ -120,21 +130,21 @@ class HomeScreenFragment : Fragment() {
         )
 
         binding.resetProgressButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.reset_icon,
                 iconSize = 100,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
+                foregroundColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
                 onClickListener =  { requestConfirmation() }
             )
         )
 
         binding.addMealButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.add_icon,
                 iconSize = 100,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
+                foregroundColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(AddMealScreenFragment(), NavigationAction.ADD)
                 }
@@ -145,9 +155,9 @@ class HomeScreenFragment : Fragment() {
     private fun requestConfirmation() {
         YesNoDialog(
             activity = requireActivity(),
-            model = BaseDialogModel(
-                backgroundColorRes = R.color.white,
-                textColorRes = R.color.black,
+            model = BaseDialogModelNew(
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                textColor = themeViewModel.state.value!!.primaryColor,
                 title = "Would you like to reset progress?\n\nToday’s data will be removed.",
                 onPositiveClicked = { mealVm.removeAllMeals() },
             )

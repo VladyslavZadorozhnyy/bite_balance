@@ -70,14 +70,14 @@ class ChooseDishScreenFragment : Fragment() {
         noItemsLayoutBinding.messageView.visibility = View.INVISIBLE
         binding.dishRecycler.visibility = View.VISIBLE
 
-        binding.dishRecycler.setup(
-            model = DishRecyclerModel(
-                items = dishItems,
-                primaryColor = themeViewModel.state.value!!.primaryColor,
-                secondaryColor = themeViewModel.state.value!!.secondaryColor,
-                onClickListener = { processDishClick(it) }
-            )
-        )
+        //binding.dishRecycler.setup(
+            //model = DishRecyclerModel(
+              //  items = dishItems,
+               // primaryColor = themeViewModel.state.value!!.primaryColor,
+                //secondaryColor = themeViewModel.state.value!!.secondaryColor,
+                //onClickListener = { processDishClick(it) }
+            //)
+        //)
     }
 
     private fun processDishClick(dish: DishModel) {

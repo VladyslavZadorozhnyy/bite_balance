@@ -1,15 +1,17 @@
 package com.ui.components.progress.indicator
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getColorStateList
 import androidx.core.content.ContextCompat.getColor
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew3
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.ProgressIndicatorBinding
+
 
 class ProgressIndicator(
     context: Context,
@@ -21,10 +23,10 @@ class ProgressIndicator(
     private val outOfLabel = context.getString(R.string.out_of)
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? ProgressIndicatorModel)?.let {
-            binding.layout.backgroundTintList = getColorStateList(context, R.color.black)
+        (model as? ProgressIndicatorModelNew)?.let { model ->
+            binding.layout.backgroundTintList = ColorStateList.valueOf(model.primaryColor)
 
-            setupAndGetProgress(it.consumed, it.goalConsumption).also { progress ->
+            setupAndGetProgress(model.consumed, model.goalConsumption).also { progress ->
                 setupDynamicLabels(model, progress)
                 setupStaticLabels(model)
             }
@@ -45,16 +47,18 @@ class ProgressIndicator(
         return curProgress
     }
 
-    private fun setupDynamicLabels(model: ProgressIndicatorModel, progress: Int) {
+    private fun setupDynamicLabels(model: ProgressIndicatorModelNew, progress: Int) {
         val consumedLabel = IndicatorUtils.valueToLabel(model.consumed)
         val goalLabel = IndicatorUtils.valueToLabel(model.goalConsumption)
         val fromLimitLabel = IndicatorUtils.progressToLabel(progress)
         val progressLabel = "$consumedLabel ${model.indicatorLabel} \n $outOfLabel $goalLabel"
 
         binding.progressLabel.setup(
-            model = TextModel(
+            model = TextModelNew3(
                 textValue = progressLabel,
                 textSize = 25,
+                backgroundColor = model.primaryColor,
+                textColor = model.secondaryColor
             )
         )
 
@@ -67,7 +71,7 @@ class ProgressIndicator(
         )
     }
 
-    private fun setupStaticLabels(model: ProgressIndicatorModel) {
+    private fun setupStaticLabels(model: ProgressIndicatorModelNew) {
         val progressTitleValue = context.getString(R.string.from_limit)
 
         binding.progressTitleLabel.setup(
