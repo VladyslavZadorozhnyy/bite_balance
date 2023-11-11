@@ -20,11 +20,9 @@ class InstructionRecycler(
 
     override fun setup(model: BaseUiComponentModel) {
         (model as? InstructionRecyclerModel)?.let { recyclerModel ->
-            val backgroundColor = getColor(context, recyclerModel.backgroundColorRes)
-
             binding.recyclerView.apply {
-                setBackgroundColor(backgroundColor)
-                adapter = InstructionAdapter(recyclerModel.items)
+                setBackgroundColor(recyclerModel.backgroundColor)
+                adapter = InstructionAdapter(recyclerModel.items, recyclerModel.backgroundColor, model.foregroundColor)
                 layoutManager = LinearLayoutManager(context)
             }
         }

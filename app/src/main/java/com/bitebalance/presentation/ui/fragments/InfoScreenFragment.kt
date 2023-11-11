@@ -1,5 +1,6 @@
 package com.bitebalance.presentation.ui.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,51 +9,66 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentInfoScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
+import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
 import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.mocks.MockInstructionModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class InfoScreenFragment : Fragment() {
     private val binding by lazy { FragmentInfoScreenBinding.inflate(layoutInflater) }
+
     private val navigationVm by sharedViewModel<NavigationViewModel>()
+    private val themeViewModel by sharedViewModel<ThemeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupStyling()
-        setupHeader()
-        setupRecycler()
+        setupViewModelsObservation()
 
         return binding.root
     }
 
+    private fun setupViewModelsObservation() {
+        themeViewModel.state.observe(this) {
+            setupStyling()
+            setupHeader()
+            setupRecycler()
+        }
+    }
+
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.white)
+        binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
+        binding.lineView.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
+
+        binding.sublayoutContainer.backgroundTintList =
+            ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
     }
 
     private fun setupHeader() {
-        binding.toolbar.forwardButton.visibility = View.GONE
+        binding.toolbar.forwardButton.visibility = View.INVISIBLE
 
         binding.toolbar.backButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
+                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = { navigationVm.popScreen() }
             )
         )
 
         binding.toolbar.headline.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Icons Legend",
                 textSize = 30,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white,
+                textColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
             )
         )
     }
@@ -60,7 +76,8 @@ class InfoScreenFragment : Fragment() {
     private fun setupRecycler() {
         binding.iconsLegends.setup(
             model = InstructionRecyclerModel(
-                backgroundColorRes = R.color.white,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                foregroundColor = themeViewModel.state.value!!.secondaryColor,
                 items = listOf(
                     MockInstructionModel(
                         iconRes = R.drawable.info_icon,
