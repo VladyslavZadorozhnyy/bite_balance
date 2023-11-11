@@ -118,7 +118,6 @@ class ProgressCarousel(
 
             val wrappedDrawable = DrawableCompat.wrap(context.getDrawable(nonActiveDotRes)!!)
             val wrappedDrawable2 = DrawableCompat.wrap(context.getDrawable(activeDotRes)!!)
-            Log.d("AAADIP", "wrappedDrawable2 as? GradientDrawable: ${(wrappedDrawable2 as? GradientDrawable)}")
             (wrappedDrawable2 as? GradientDrawable)?.let {
                 it.mutate()
                 it.setStroke(10, progressModel.secondaryColor)
