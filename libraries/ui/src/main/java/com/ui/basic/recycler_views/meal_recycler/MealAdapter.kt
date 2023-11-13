@@ -5,14 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
+import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 import com.ui.model.MealModelUnboxed
 
 class MealAdapter (
     private var items: List<MealModelUnboxed>,
+    private val foregroundColor: Int,
+    private val backgroundColor: Int,
     private val onClickListener: (MealModelUnboxed) -> Unit
 ): RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
 
@@ -24,7 +27,7 @@ class MealAdapter (
     }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], foregroundColor, backgroundColor)
         holder.itemView.setOnClickListener { onClickListener(items[position]) }
     }
 
@@ -47,25 +50,26 @@ class MealAdapter (
         private val clockIcon = view.findViewById<IconButton>(R.id.clock_icon)
         private val buttonView = view.findViewById<IconButton>(R.id.delete_button_icon)
 
-        fun bind(item: MealModelUnboxed) {
+        fun bind(item: MealModelUnboxed, foregroundColor: Int, backgroundColor: Int) {
+            (mealIcon.parent as? View)?.let { it.setBackgroundColor(foregroundColor) }
             mealIcon.setup(
-                model = ButtonModel(
+                model = ButtonModelNew(
                     iconRes = R.drawable.breakfast_icon,
                     iconSize = 120,
                     strokeWidth = 0,
-                    foregroundColorRes = R.color.black,
-                    backgroundColorRes = R.color.white,
+                    foregroundColor = backgroundColor,
+                    backgroundColor = foregroundColor,
                     onClickListener = { itemView.callOnClick() }
                 )
             )
 
             clockIcon.setup(
-                model = ButtonModel(
+                model = ButtonModelNew(
                     iconRes = R.drawable.clock_icon,
                     iconSize = 90,
                     strokeWidth = 0,
-                    foregroundColorRes = R.color.black,
-                    backgroundColorRes = R.color.white,
+                    foregroundColor = backgroundColor,
+                    backgroundColor = foregroundColor,
                     onClickListener = { itemView.callOnClick() }
                 )
             )
@@ -79,20 +83,20 @@ class MealAdapter (
             )
 
             textView.setup(
-                model = TextModel(
+                model = TextModelNew(
                     textValue = item.dishName,
                     textSize = 20,
-                    textColorRes = R.color.black,
-                    backgroundColor = R.color.white
+                    textColor = backgroundColor,
+                    backgroundColor = foregroundColor
                 )
             )
 
             timeView.setup(
-                model = TextModel(
+                model = TextModelNew(
                     textValue = item.mealTime,
                     textSize = 17,
-                    textColorRes = R.color.black,
-                    backgroundColor = R.color.white
+                    textColor = backgroundColor,
+                    backgroundColor = foregroundColor
                 )
             )
         }

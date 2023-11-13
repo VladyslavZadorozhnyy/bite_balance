@@ -6,7 +6,8 @@ import com.ui.model.MealModelUnboxed
 
 data class MealRecyclerModel(
     val items: List<MealModelUnboxed>,
-    val backgroundColorRes: Int,
+    val backgroundColor: Int,
+    val foregroundColor: Int,
     val onClickListener: (MealModelUnboxed) -> Unit,
     val onSwipeListener: (MealModelUnboxed) -> Unit,
 ): BaseUiComponentModel(

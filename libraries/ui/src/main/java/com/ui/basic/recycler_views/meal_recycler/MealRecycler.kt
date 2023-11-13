@@ -21,11 +21,14 @@ class MealRecycler(
 
     override fun setup(model: BaseUiComponentModel) {
         (model as? MealRecyclerModel)?.let { recyclerModel ->
-            val backgroundColor = getColor(context, recyclerModel.backgroundColorRes)
-
             binding.recyclerView.apply {
-                setBackgroundColor(backgroundColor)
-                adapter = MealAdapter(recyclerModel.items, recyclerModel.onClickListener)
+                setBackgroundColor(recyclerModel.backgroundColor)
+                adapter = MealAdapter(
+                    recyclerModel.items,
+                    recyclerModel.foregroundColor,
+                    recyclerModel.backgroundColor,
+                    recyclerModel.onClickListener,
+                )
                 layoutManager = LinearLayoutManager(context)
             }
 
