@@ -2,10 +2,12 @@ package com.ui.components.progress.indicator
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat.getColor
 import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.common.TextModelNew3
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
@@ -75,18 +77,20 @@ class ProgressIndicator(
         val progressTitleValue = context.getString(R.string.from_limit)
 
         binding.progressTitleLabel.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = progressTitleValue,
                 textSize = 20,
-                backgroundColor = R.color.transparent
+                textColor = model.secondaryColor,
+                backgroundColor = Color.TRANSPARENT
             )
         )
 
         binding.indicatorTitle.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = model.indicatorName,
                 textSize = 30,
-                backgroundColor = R.color.transparent
+                textColor = model.secondaryColor,
+                backgroundColor = Color.TRANSPARENT
             )
         )
     }

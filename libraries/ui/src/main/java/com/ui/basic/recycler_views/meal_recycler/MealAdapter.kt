@@ -1,5 +1,6 @@
 package com.ui.basic.recycler_views.meal_recycler
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,10 +76,12 @@ class MealAdapter (
             )
 
             buttonView.setup(
-                model = ButtonModel(
+                model = ButtonModelNew(
                     iconRes = R.drawable.bin_icon,
                     iconSize = 80,
                     strokeWidth = 5,
+                    backgroundColor = backgroundColor,
+                    foregroundColor = foregroundColor,
                 )
             )
 
