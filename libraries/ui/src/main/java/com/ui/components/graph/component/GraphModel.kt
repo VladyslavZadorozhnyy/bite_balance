@@ -7,6 +7,8 @@ import com.ui.model.NutritionValueModel
 data class GraphModel(
     val consumption: List<NutritionValueModel>,
     val consumptionGoal: NutritionValueModel,
+    val foregroundColor: Int,
+    val backgroundColor: Int,
     val screenSpan: Int = 7
 ) : BaseUiComponentModel(
     componentType = ComponentUiType.Graph

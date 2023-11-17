@@ -1,7 +1,10 @@
 package com.ui.components.graph.subcomponents
 
 import android.content.Context
+import android.util.Log
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.view.children
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -14,16 +17,22 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.slideable_text.SlideableText
+import com.ui.basic.texts.text.Text
 import com.ui.components.R
 
 class ChartSubComponent(
     context: Context,
+    private val barColor: Int,
+    private val foregroundColor: Int,
     private val chartView: CombinedChart,
+    private val goalConsumption: SlideableText,
+    private val actualConsumption: SlideableText
 ) {
     private val barDataLabel = context.getString(R.string.act_consumption)
     private val lineDataLabel = context.getString(R.string.goal_consumption)
 
-    private val barColor = getColor(context, R.color.black)
     private val lineColor = getColor(context, R.color.indicator_green)
     private val transparentColor = getColor(context, R.color.transparent)
 
@@ -86,6 +95,24 @@ class ChartSubComponent(
             animateY(2000)
             setVisibleXRangeMaximum(7F)
         }
+
+        goalConsumption.setup(
+            model = TextModelNew(
+                textValue = lineDataLabel,
+                textSize = 15,
+                textColor = barColor,
+                backgroundColor = foregroundColor,
+            )
+        )
+
+        actualConsumption.setup(
+            model = TextModelNew(
+                textValue = barDataLabel,
+                textSize = 15,
+                textColor = barColor,
+                backgroundColor = foregroundColor,
+            )
+        )
 
         setOnClickListener()
     }

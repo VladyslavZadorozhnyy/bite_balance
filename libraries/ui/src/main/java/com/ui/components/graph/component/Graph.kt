@@ -1,6 +1,7 @@
 package com.ui.components.graph.component
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.ui.common.BaseUiComponent
@@ -22,12 +23,26 @@ class Graph(
 
     override fun setup(model: BaseUiComponentModel) {
         (model as? GraphModel)?.let { graphModel ->
-            SpinnerSubComponent(binding.spinner).setup(context, spinnerItems) { activeIndex ->
-                ChartSubComponent(context, binding.chartView).setup(
+            SpinnerSubComponent(binding.spinner).setup(
+                context,
+                spinnerItems,
+                model.foregroundColor,
+                model.backgroundColor,
+            ) { activeIndex ->
+                ChartSubComponent(
+                    context,
+                    graphModel.foregroundColor,
+                    graphModel.backgroundColor,
+                    binding.chartView,
+                    binding.goalConsumption,
+                    binding.actualConsumption,
+                ).setup(
                     indexToLabel(activeIndex),
                     indexToConsumptionValues(activeIndex, graphModel),
                     indexToGoalValues(activeIndex, graphModel)
                 )
+                binding.chartView.backgroundTintList =
+                    ColorStateList.valueOf(graphModel.backgroundColor)
             }
         }
     }

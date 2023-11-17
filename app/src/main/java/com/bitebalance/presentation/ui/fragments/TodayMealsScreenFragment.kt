@@ -23,7 +23,7 @@ class TodayMealsScreenFragment : Fragment() {
     private val binding by lazy { FragmentTodaysMealsScreenBinding.inflate(layoutInflater) }
 
     private val navigationVm by sharedViewModel<NavigationViewModel>()
-    // Remove everywhere "themeViewModel" to "themeVm"
+    // AAADIP, Remove everywhere "themeViewModel" to "themeVm"
     private val themeViewModel by sharedViewModel<ThemeViewModel>()
     private val mealVm by sharedViewModel<MealViewModel>()
 

@@ -22,4 +22,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinner"/>
 
+    <com.ui.basic.texts.slideable_text.SlideableText
+        android:id="@+id/goal_consumption"
+        android:layout_width="120dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintStart_toStartOf="@id/chart_view"
+        app:layout_constraintBottom_toBottomOf="@id/chart_view"/>
+
+    <com.ui.basic.texts.slideable_text.SlideableText
+        android:id="@+id/actual_consumption"
+        android:layout_width="133dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="201dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintStart_toStartOf="@id/chart_view"
+        app:layout_constraintBottom_toBottomOf="@id/chart_view"/>
 </merge>

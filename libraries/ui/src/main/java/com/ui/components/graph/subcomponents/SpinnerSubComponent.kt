@@ -1,15 +1,18 @@
 package com.ui.components.graph.subcomponents
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.common.ComponentUiUtils
-import com.ui.basic.texts.common.TextModel
+import androidx.core.view.ViewCompat
+import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.SpinnerItemActiveLayoutBinding
 import com.ui.components.databinding.SpinnerItemNotActiveLayoutBinding
@@ -21,9 +24,17 @@ class SpinnerSubComponent(
     fun setup(
         context: Context,
         spinnerItems: List<String>,
+        foregroundColor: Int,
+        backgroundColor: Int,
         onItemSelected: (Int) -> Unit = {}
     ) {
-        CustomArrayAdapter(context, R.layout.spinner_item_active_layout, spinnerItems).apply {
+        CustomArrayAdapter(
+            context,
+            R.layout.spinner_item_active_layout,
+            spinnerItems,
+            foregroundColor,
+            backgroundColor,
+        ).apply {
             spinnerView.adapter = this
 
             spinnerView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -45,15 +56,19 @@ class SpinnerSubComponent(
         context: Context,
         textViewResourceId: Int,
         private val items: List<String>,
+        private val foregroundColor: Int,
+        private val backgroundColor: Int,
     ): ArrayAdapter<String> (context, textViewResourceId, items) {
         private val layoutInflater = LayoutInflater.from(context)
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
             SpinnerItemNotActiveLayoutBinding.inflate(layoutInflater).apply {
                 textView.setup(
-                    TextModel(
+                    TextModelNew(
                         textValue = items[position],
                         textSize = 20,
+                        textColor = backgroundColor,
+                        backgroundColor = foregroundColor,
                     )
                 )
 
@@ -65,21 +80,24 @@ class SpinnerSubComponent(
             SpinnerItemActiveLayoutBinding.inflate(layoutInflater).apply {
                 textView.setOnClickListener(null)
 
+                layoutStroke.backgroundTintList = ColorStateList.valueOf(foregroundColor)
+                layoutBody.backgroundTintList = ColorStateList.valueOf(backgroundColor)
+
                 textView.setup(
-                    TextModel(
+                    TextModelNew(
                         textValue = items[position],
                         textSize = 25,
-                        textColorRes = R.color.black,
-                        backgroundColor = R.color.transparent
+                        textColor = foregroundColor,
+                        backgroundColor = Color.TRANSPARENT,
                     )
                 )
 
                 dropdownButton.setup(
-                    ButtonModel(
+                    ButtonModelNew(
                         iconRes = R.drawable.arrow_down_icon,
-                        iconSize = 60,
-                        foregroundColorRes = R.color.white,
-                        backgroundColorRes = R.color.black,
+                        iconSize = 90,
+                        foregroundColor = backgroundColor,
+                        backgroundColor = foregroundColor,
                         onClickListener = { spinnerView.performClick() }
                     )
                 )
