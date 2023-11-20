@@ -95,7 +95,7 @@ class SpinnerSubComponent(
                 dropdownButton.setup(
                     ButtonModelNew(
                         iconRes = R.drawable.arrow_down_icon,
-                        iconSize = 90,
+                        iconSize = 70,
                         foregroundColor = backgroundColor,
                         backgroundColor = foregroundColor,
                         onClickListener = { spinnerView.performClick() }

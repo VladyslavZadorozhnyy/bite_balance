@@ -86,8 +86,8 @@ class StatsScreenFragment : Fragment() {
             model = ButtonModelNew(
                 iconRes = R.drawable.question_mark_icon,
                 iconSize = 70,
-                foregroundColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = { showConfirmDialog() }
             )
         )
@@ -96,8 +96,8 @@ class StatsScreenFragment : Fragment() {
             model = ButtonModelNew(
                 iconRes = R.drawable.goal_icon,
                 iconSize = 70,
-                foregroundColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = {
                     navigationVm.navigateTo(MyGoalsScreenFragment(), NavigationAction.ADD)
                 }

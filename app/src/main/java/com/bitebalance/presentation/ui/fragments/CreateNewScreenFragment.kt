@@ -72,8 +72,8 @@ class CreateNewScreenFragment : Fragment() {
             model = ButtonModelNew(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
-                foregroundColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = { activity?.onBackPressed() }
             )
         )

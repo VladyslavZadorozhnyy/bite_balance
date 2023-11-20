@@ -34,15 +34,15 @@ class Checkbox(
 
         (model as? CheckBoxModel)?.let { it ->
             tickIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                model.foregroundColor,
+                model.backgroundColor,
                 BlendModeCompat.SRC_ATOP,
             )
             crossIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                model.foregroundColor,
+                model.backgroundColor,
                 BlendModeCompat.SRC_ATOP,
             )
-            binding.checkboxStroke.backgroundTintList = ColorStateList.valueOf(it.foregroundColor)
-            binding.checkbox.backgroundTintList = ColorStateList.valueOf(it.backgroundColor)
+            binding.checkboxStroke.backgroundTintList = ColorStateList.valueOf(it.backgroundColor)
+            binding.checkbox.backgroundTintList = ColorStateList.valueOf(it.foregroundColor)
 
             if (it.active) {
                 if (it.checked) {
@@ -55,6 +55,11 @@ class Checkbox(
                 } else {
                     binding.imageView.setImageDrawable(crossIcon)
                 }
+            }
+
+            if (model.checked || !model.active) {
+                binding.checkbox.backgroundTintList = ColorStateList.valueOf(Color.DKGRAY)
+                return
             }
 
             binding.imageView.setOnClickListener { (it as ImageView)

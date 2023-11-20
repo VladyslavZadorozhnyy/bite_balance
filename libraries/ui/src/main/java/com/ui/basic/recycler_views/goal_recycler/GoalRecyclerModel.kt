@@ -6,7 +6,8 @@ import com.ui.mocks.MockGoalModel
 
 data class GoalRecyclerModel(
     val items: List<MockGoalModel>,
-    val backgroundColorRes: Int,
+    val backgroundColor: Int,
+    val foregroundColor: Int,
 ) : BaseUiComponentModel(
     componentType = ComponentUiType.Recycler
 )

@@ -21,11 +21,13 @@ class GoalRecycler(
 
     override fun setup(model: BaseUiComponentModel) {
         (model as? GoalRecyclerModel)?.let { recyclerModel ->
-            val backgroundColor = getColor(context, recyclerModel.backgroundColorRes)
-
             binding.recyclerView.apply {
-                setBackgroundColor(backgroundColor)
-                adapter = GoalAdapter(recyclerModel.items)
+                setBackgroundColor(recyclerModel.foregroundColor)
+                adapter = GoalAdapter(
+                    recyclerModel.items,
+                    recyclerModel.foregroundColor,
+                    recyclerModel.backgroundColor,
+                )
                 layoutManager = LinearLayoutManager(context)
             }
 
