@@ -49,7 +49,9 @@ class InputDialog(
             binding.inputForm.setup(
                 model = InputFormModel(
                     active = true,
-                    onInputChange = { inputValue = it }
+                    onInputChange = { inputValue = it },
+                    backgroundColor = 0,
+                    foregroundColor = 0,
                 )
             )
 

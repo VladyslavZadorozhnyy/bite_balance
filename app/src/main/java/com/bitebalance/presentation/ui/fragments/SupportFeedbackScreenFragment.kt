@@ -75,7 +75,9 @@ class SupportFeedbackScreenFragment : Fragment() {
             model = InputFormModel(
                 active = true,
                 hint = "*Message to developers*",
-                onInputChange = {  }
+                onInputChange = {  },
+                backgroundColor = 0,
+                foregroundColor = 0,
             )
         )
 

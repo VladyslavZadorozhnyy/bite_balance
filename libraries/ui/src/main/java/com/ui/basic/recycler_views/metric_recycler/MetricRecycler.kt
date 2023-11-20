@@ -20,7 +20,11 @@ class MetricRecycler(
     override fun setup(model: BaseUiComponentModel) {
         (model as? MetricRecyclerModel)?.let { recyclerModel ->
             binding.recyclerView.apply {
-                adapter = MetricAdapter(recyclerModel.items)
+                adapter = MetricAdapter(
+                    recyclerModel.items,
+                    foregroundColor = recyclerModel.foregroundColor,
+                    backgroundColor = recyclerModel.backgroundColor,
+                )
                 layoutManager = LinearLayoutManager(context)
             }
         }

@@ -1,6 +1,12 @@
 package com.ui.basic.checkbox
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageView
@@ -8,6 +14,8 @@ import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import androidx.core.content.ContextCompat.getColorStateList
 import androidx.core.content.ContextCompat.getDrawable
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import com.ui.components.R
 import com.ui.components.databinding.CheckboxBinding
 
@@ -25,18 +33,23 @@ class Checkbox(
     override fun setup(model: BaseUiComponentModel) {
 
         (model as? CheckBoxModel)?.let { it ->
-            binding.checkbox.backgroundTintList = getColorStateList(context, R.color.black)
+            tickIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                model.foregroundColor,
+                BlendModeCompat.SRC_ATOP,
+            )
+            crossIcon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                model.foregroundColor,
+                BlendModeCompat.SRC_ATOP,
+            )
+            binding.checkboxStroke.backgroundTintList = ColorStateList.valueOf(it.foregroundColor)
+            binding.checkbox.backgroundTintList = ColorStateList.valueOf(it.backgroundColor)
 
             if (it.active) {
-                binding.imageView.backgroundTintList = getColorStateList(context, R.color.white)
-
                 if (it.checked) {
                     binding.imageView.setImageDrawable(tickIcon)
                     it.onChecked()
                 }
             } else {
-                binding.imageView.backgroundTintList = getColorStateList(context, R.color.gray)
-
                 if (it.checked) {
                     binding.imageView.setImageDrawable(tickIcon)
                 } else {

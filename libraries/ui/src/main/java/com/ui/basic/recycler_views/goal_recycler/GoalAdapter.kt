@@ -1,5 +1,6 @@
 package com.ui.basic.recycler_views.goal_recycler
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,6 +66,8 @@ class GoalAdapter(
                     active = item.active,
                     onChecked = { textView.strikeThrough() },
                     onUnchecked = { textView.unstrikeThrough() },
+                    backgroundColor = Color.MAGENTA,
+                    foregroundColor = Color.CYAN,
                 )
             )
 

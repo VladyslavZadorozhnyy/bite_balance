@@ -6,15 +6,21 @@ import com.ui.mocks.MockMetricModel
 
 open class MetricRecyclerModel(
     val items: List<MockMetricModel>,
+    open val foregroundColor: Int,
+    open val backgroundColor: Int,
 ): BaseUiComponentModel(
     componentType = ComponentUiType.Recycler
 )
 
 data class DishNameMetricsModel(
-    var dishItems: List<MockMetricModel> = listOf()
-) : MetricRecyclerModel(dishItems) {
+    var dishItems: List<MockMetricModel> = listOf(),
+    override val foregroundColor: Int = 0,
+    override val backgroundColor: Int = 0,
+) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            foregroundColor: Int,
+            backgroundColor: Int,
             name: String = "",
             prots: String = "",
             fats: String = "",
@@ -56,15 +62,19 @@ data class DishNameMetricsModel(
                         onlyNumbers = true,
                         hint = kcal,
                     )
-                )
+                ),
+                foregroundColor = foregroundColor,
+                backgroundColor = backgroundColor,
             )
         }
     }
 }
 
 data class DishMetricsModel(
-    var dishItems: List<MockMetricModel> = listOf()
-) : MetricRecyclerModel(dishItems) {
+    var dishItems: List<MockMetricModel> = listOf(),
+    override val foregroundColor: Int = 0,
+    override val backgroundColor: Int = 0,
+) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
             editable: Boolean,
@@ -110,8 +120,10 @@ data class DishMetricsModel(
 }
 
 data class MealMetricsModel(
-    val mealItems: List<MockMetricModel> = listOf()
-) : MetricRecyclerModel(mealItems) {
+    val mealItems: List<MockMetricModel> = listOf(),
+    override val foregroundColor: Int = 0,
+    override val backgroundColor: Int = 0,
+) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
             editable: Boolean = true,
@@ -165,10 +177,14 @@ data class MealMetricsModel(
 }
 
 data class CreateMealMetricsModel(
-    val mealItems: List<MockMetricModel> = listOf()
-) : MetricRecyclerModel(mealItems) {
+    val mealItems: List<MockMetricModel> = listOf(),
+    override val foregroundColor: Int = 0,
+    override val backgroundColor: Int = 0,
+) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            foregroundColor: Int,
+            backgroundColor: Int,
             editable: Boolean = true,
             prots: Float = 0F,
             fats: Float = 0F,
@@ -213,15 +229,19 @@ data class CreateMealMetricsModel(
                         editable = editable,
                         onlyNumbers = true,
                     )
-                )
+                ),
+                backgroundColor = backgroundColor,
+                foregroundColor = foregroundColor,
             )
         }
     }
 }
 
 data class CreateMealWithExistingDishModel(
-    val mealItems: List<MockMetricModel> = listOf()
-) : MetricRecyclerModel(mealItems) {
+    val mealItems: List<MockMetricModel> = listOf(),
+    override val foregroundColor: Int = 0,
+    override val backgroundColor: Int = 0,
+) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
             prots: String = "",

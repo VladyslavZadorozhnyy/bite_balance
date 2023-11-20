@@ -8,6 +8,8 @@ data class CheckBoxModel(
     val active: Boolean,
     val onChecked: () -> Unit,
     val onUnchecked: () -> Unit,
+    val backgroundColor: Int,
+    val foregroundColor: Int
 ) : BaseUiComponentModel(
     componentType = ComponentUiType.Checkbox
 )

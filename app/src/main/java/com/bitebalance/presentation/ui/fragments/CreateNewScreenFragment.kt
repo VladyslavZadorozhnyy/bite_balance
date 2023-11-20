@@ -1,5 +1,6 @@
 package com.bitebalance.presentation.ui.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,13 +10,17 @@ import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentCreateNewScreenBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.MealViewModel
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
+import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.recycler_views.metric_recycler.CreateMealMetricsModel
 import com.ui.basic.recycler_views.metric_recycler.DishNameMetricsModel
 import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.dialogs.common.BaseDialogModelNew
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -23,6 +28,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class CreateNewScreenFragment : Fragment() {
     private val binding by lazy { FragmentCreateNewScreenBinding.inflate(layoutInflater) }
 
+    private val themeViewModel by sharedViewModel<ThemeViewModel>()
     private val dishVm by sharedViewModel<DishViewModel>()
     private val mealVm by sharedViewModel<MealViewModel>()
     private var createDish = false
@@ -31,10 +37,6 @@ class CreateNewScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        setupStyling()
-        setupHeader()
-        setupSubtitles()
-        setupRecycler()
         setupViewModelsObservation()
 
         return binding.root
@@ -49,46 +51,53 @@ class CreateNewScreenFragment : Fragment() {
     }
 
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = getColorStateList(requireContext(), R.color.white)
+        binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList =
+            ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
     }
 
     private fun setupHeader() {
         binding.toolbar.forwardButton.visibility = View.INVISIBLE
 
         binding.toolbar.headline.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = if (createDish) "New dish" else "New meal",
                 textSize = 30,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white
+                textColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
             )
         )
 
         binding.toolbar.backButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
+                foregroundColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
                 onClickListener = { activity?.onBackPressed() }
             )
         )
+
+        binding.dishIcon.imageTintList = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
+        binding.lineView.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
     }
 
     private fun setupSubtitles() {
         binding.specifyDish.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Specify nutritional value, please:",
                 textSize = 15,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white
+                textColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
             )
         )
 
         binding.toggleCheckbox.setup(
-            model = TextModel(
+            model = TextModelNew(
                 textValue = "Toggle check box for not including",
                 textSize = 15,
-                textColorRes = R.color.black,
-                backgroundColor = R.color.white
+                textColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeViewModel.state.value!!.primaryColor,
             )
         )
     }
@@ -96,18 +105,24 @@ class CreateNewScreenFragment : Fragment() {
     private fun setupRecycler() {
         binding.metricRecycler.setup(
             if (createDish) {
-                DishNameMetricsModel.newInstance()
+                DishNameMetricsModel.newInstance(
+                    themeViewModel.state.value!!.primaryColor,
+                    themeViewModel.state.value!!.secondaryColor,
+                )
             } else {
-                CreateMealMetricsModel.newInstance()
+                CreateMealMetricsModel.newInstance(
+                    themeViewModel.state.value!!.primaryColor,
+                    themeViewModel.state.value!!.secondaryColor,
+                )
             }
         )
 
         binding.doneButton.setup(
-            model = ButtonModel(
+            model = ButtonModelNew(
                 labelTextRes = R.string.done,
                 labelTextSize = 20,
-                foregroundColorRes = R.color.white,
-                backgroundColorRes = R.color.black,
+                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 onClickListener = {
                     ComponentUiUtils.hideKeyBoard(requireActivity())
                     val inputValues = if (createDish) {
@@ -117,10 +132,15 @@ class CreateNewScreenFragment : Fragment() {
                     }
 
                     if (inputValues.any { it.isEmpty() }) {
-                        YesNoDialog(requireActivity(), BaseDialogModel(
+                        YesNoDialog(
+                            requireActivity(),
+                            BaseDialogModelNew(
                                 title = "Some fields are empty. They will be filled with '0'",
                                 onPositiveClicked = { processDishCreation(inputValues) },
-                            )).show()
+                                textColor = themeViewModel.state.value!!.primaryColor,
+                                backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                            ),
+                        ).show()
                     } else {
                         processDishCreation(inputValues)
                     }
@@ -156,8 +176,12 @@ class CreateNewScreenFragment : Fragment() {
 
             ConfirmDialog(
                 requireActivity(),
-                BaseDialogModel(state.message, buttonTextRes = R.string.done,
-                    onConfirmClicked = { if (state.isSuccessful) activity?.onBackPressed() })
+                BaseDialogModelNew(
+                    state.message,
+                    textColor = themeViewModel.state.value!!.primaryColor,
+                    backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                    buttonText = R.string.done,
+                    onConfirmClicked = { if (state.isSuccessful) activity?.onBackPressed() }),
             ).show()
         }
 
@@ -166,7 +190,11 @@ class CreateNewScreenFragment : Fragment() {
 
             ConfirmDialog(
                 requireActivity(),
-                BaseDialogModel(state.message, buttonTextRes = R.string.done,
+                BaseDialogModelNew(
+                    state.message,
+                    textColor = themeViewModel.state.value!!.primaryColor,
+                    backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                    buttonText = R.string.done,
                     onConfirmClicked = {
                         if (state.isSuccessful) {
                             activity?.onBackPressed()
@@ -175,6 +203,13 @@ class CreateNewScreenFragment : Fragment() {
                     }
                 )
             ).show()
+        }
+
+        themeViewModel.state.observe(this) { state ->
+            setupStyling()
+            setupHeader()
+            setupSubtitles()
+            setupRecycler()
         }
     }
 
