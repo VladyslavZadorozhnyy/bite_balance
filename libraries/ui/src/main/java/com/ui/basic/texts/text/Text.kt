@@ -61,11 +61,8 @@ class Text(
 
             binding.background = getDrawable(context, R.drawable.text_shape)
             binding.background.setTint(model.backgroundColor)
-            binding.marqueeRepeatLimit = -1
 
-            binding.ellipsize = TextUtils.TruncateAt.MARQUEE
             binding.isSelected = true
-            binding.isSingleLine = true
         }
 
         (model as? TextModelNew2)?.let {

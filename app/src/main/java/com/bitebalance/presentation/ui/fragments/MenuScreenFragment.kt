@@ -1,5 +1,6 @@
 package com.bitebalance.presentation.ui.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -113,6 +114,7 @@ class MenuScreenFragment : Fragment() {
         binding.dishRecycler.visibility = View.INVISIBLE
 
         noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.empty_menu_icon)
+        noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
         noItemsLayoutBinding.messageView.setup(
             model = TextModelNew(
                 textValue = "Seems that you have no dishes yet. \n Start by adding one.",

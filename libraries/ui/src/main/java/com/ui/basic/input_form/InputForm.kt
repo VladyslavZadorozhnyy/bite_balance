@@ -7,9 +7,8 @@ import android.graphics.Paint
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getColorStateList
-import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.content.res.ResourcesCompat.getFont
 import androidx.core.widget.addTextChangedListener
 import com.ui.common.BaseUiComponent
@@ -35,7 +34,21 @@ class InputForm (
             binding.form.setTextColor(model.foregroundColor)
             binding.form.hint = it.hint
 
-            if (it.active) {
+            if (it.active && it.hint.equals("*Message to developers*")) {
+                binding.formStroke.setBackgroundResource(R.drawable.input_form_active_shape)
+                binding.formStroke.backgroundTintList = ColorStateList.valueOf(model.foregroundColor)
+
+                binding.form.setBackgroundResource(R.drawable.input_form_active_shape)
+                binding.form.backgroundTintList = ColorStateList.valueOf(model.backgroundColor)
+
+                binding.form.setHintTextColor(model.foregroundColor)
+                binding.form.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20F)
+                binding.form.gravity = Gravity.CENTER;
+
+                binding.form.addTextChangedListener {
+                    model.onInputChange.invoke(it?.toString() ?: "")
+                }
+            } else if (it.active) {
                 binding.formStroke.setBackgroundResource(R.drawable.input_form_active_shape)
                 binding.formStroke.backgroundTintList = ColorStateList.valueOf(model.foregroundColor)
 

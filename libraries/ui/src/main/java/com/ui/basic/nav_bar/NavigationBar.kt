@@ -1,10 +1,16 @@
 package com.ui.basic.nav_bar
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import androidx.core.content.ContextCompat.getColorStateList
+import androidx.core.content.ContextCompat.getDrawable
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.forEach
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
@@ -24,7 +30,7 @@ class NavigationBar(
     override fun setup(model: BaseUiComponentModel) {
         (model as? NavigationBarModel)?.let { navBarModel ->
             binding.itemIconTintList = null
-            binding.backgroundTintList = getColorStateList(context, R.color.black)
+            binding.backgroundTintList = ColorStateList.valueOf(navBarModel.foregroundColor)
 
             binding.setOnItemSelectedListener { chosen ->
                 disableAllItems(navBarModel)
@@ -51,12 +57,15 @@ class NavigationBar(
     }
 
     private fun enableItem(model: NavigationBarModel, chosen: MenuItem) {
-        when (chosen.itemId) {
-            R.id.nav_home -> chosen.setIcon(model.activeIconsRes[0])
-            R.id.nav_stats -> chosen.setIcon(model.activeIconsRes[1])
-            R.id.nav_menu -> chosen.setIcon(model.activeIconsRes[2])
-            else -> chosen.setIcon(model.activeIconsRes[3])
+        val chosenIconRes = when (chosen.itemId) {
+            R.id.nav_home -> model.activeIconsRes[0]
+            R.id.nav_stats -> model.activeIconsRes[1]
+            R.id.nav_menu -> model.activeIconsRes[2]
+            else -> model.activeIconsRes[3]
         }
+        val chosenIcon = getDrawable(context, chosenIconRes)
+        DrawableCompat.setTint(chosenIcon!!, model.backgroundColor)
+        chosen.icon = chosenIcon
     }
 
 }

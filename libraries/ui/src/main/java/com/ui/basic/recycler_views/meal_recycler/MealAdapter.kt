@@ -52,7 +52,7 @@ class MealAdapter (
         private val buttonView = view.findViewById<IconButton>(R.id.delete_button_icon)
 
         fun bind(item: MealModelUnboxed, foregroundColor: Int, backgroundColor: Int) {
-            (mealIcon.parent as? View)?.let { it.setBackgroundColor(foregroundColor) }
+            (mealIcon.parent as? View)?.setBackgroundColor(foregroundColor)
             mealIcon.setup(
                 model = ButtonModelNew(
                     iconRes = R.drawable.breakfast_icon,

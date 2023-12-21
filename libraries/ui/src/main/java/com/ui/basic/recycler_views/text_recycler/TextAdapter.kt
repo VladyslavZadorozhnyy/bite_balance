@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.texts.common.TextModel
+import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 
 
 class TextAdapter(
-    private val items: List<TextModel>,
-    private val onClickListener: (TextModel) -> Unit
+    private val items: List<TextModelNew>,
+    private val onClickListener: (TextModelNew) -> Unit
 ): RecyclerView.Adapter<TextAdapter.TextViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextViewHolder {
@@ -31,6 +32,6 @@ class TextAdapter(
     class TextViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val textView = view.findViewById<Text>(R.id.text_view)
 
-        fun bind(model: TextModel) { textView.setup(model) }
+        fun bind(model: TextModelNew) { textView.setup(model) }
     }
 }

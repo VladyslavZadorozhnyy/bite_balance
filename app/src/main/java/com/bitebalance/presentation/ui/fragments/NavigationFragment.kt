@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bitebalance.databinding.FragmentNavigationBinding
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.nav_bar.NavigationBarModel
 import com.ui.components.R
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NavigationFragment : Fragment() {
-    private val binding by lazy {
-        FragmentNavigationBinding.inflate(layoutInflater)
-    }
+    private val binding by lazy { FragmentNavigationBinding.inflate(layoutInflater) }
+    private val themeViewModel by sharedViewModel<ThemeViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,10 +27,10 @@ class NavigationFragment : Fragment() {
         binding.navigationComponent.setup(
             NavigationBarModel(
                 nonActiveIconsRes = listOf(
-                    R.drawable.nav_home_not_active,
-                    R.drawable.nav_stats_not_active,
-                    R.drawable.nav_menu_not_active,
-                    R.drawable.nav_settings_not_active
+                    R.drawable.nav_home_active,
+                    R.drawable.nav_stats_active,
+                    R.drawable.nav_menu_active,
+                    R.drawable.nav_settings_active
                 ),
                 activeIconsRes = listOf(
                     R.drawable.nav_home_active,
@@ -37,6 +38,8 @@ class NavigationFragment : Fragment() {
                     R.drawable.nav_menu_active,
                     R.drawable.nav_settings_active
                 ),
+                backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                foregroundColor = themeViewModel.state.value!!.primaryColor,
             ) { chosenItemId ->
                 val nextFragment = when (chosenItemId) {
                     R.id.nav_home -> HomeScreenFragment()
