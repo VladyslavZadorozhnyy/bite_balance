@@ -1,4 +1,4 @@
-package com.bitebalance.data.repository
+package com.bitebalance.data.db_repository
 
 import com.bitebalance.domain.model.DateModel
 import com.bitebalance.domain.model.fromEntity
@@ -34,11 +34,11 @@ class DateRepositoryImpl(
 
         val currentDateId = appDaoDatabase.getDateDao().insert(
             DateModel(
-                getCurrentMinute(),
-                getCurrentHour(),
-                getCurrentDay(),
-                getCurrentMonth(),
-                getCurrentYear(),
+                minute = getCurrentMinute(),
+                hour = getCurrentHour(),
+                day = getCurrentDay(),
+                month = getCurrentMonth(),
+                year = getCurrentYear(),
             ).toEntity())
 
         return DateModel(

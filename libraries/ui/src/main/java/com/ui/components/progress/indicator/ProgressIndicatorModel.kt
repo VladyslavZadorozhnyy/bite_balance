@@ -1,7 +1,7 @@
 package com.ui.components.progress.indicator
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 
 data class ProgressIndicatorModel(
     val consumed: Float?,
@@ -9,5 +9,5 @@ data class ProgressIndicatorModel(
     val indicatorLabel: String,
     val indicatorName: String
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Indicator,
+    componentType = Constants.ComponentUiType.Indicator,
 )

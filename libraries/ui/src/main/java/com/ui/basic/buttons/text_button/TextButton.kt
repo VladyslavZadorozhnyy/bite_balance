@@ -12,7 +12,7 @@ import com.ui.basic.buttons.common.ButtonConstants
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiConstants
+import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.databinding.TextButtonBinding
 
@@ -33,7 +33,7 @@ class TextButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponen
                 binding.text = context.getString(it)
                 binding.typeface = getFont(context, R.font.ultra_regular_font)
                 binding.paint.style = Paint.Style.STROKE
-                binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+                binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
                 binding.setTextColor(getColorStateList(context, model.foregroundColorRes))
 
                 binding.textSize = model.labelTextSize.toFloat()
@@ -53,7 +53,7 @@ class TextButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponen
                 binding.text = context.getString(it)
                 binding.typeface = getFont(context, R.font.ultra_regular_font)
                 binding.paint.style = Paint.Style.STROKE
-                binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+                binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
                 binding.setTextColor(ColorStateList.valueOf(model.foregroundColor))
 
                 binding.textSize = model.labelTextSize.toFloat()

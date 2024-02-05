@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
-import com.ui.common.ComponentUiConstants
+import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.progress.indicator.ProgressIndicator
 import com.ui.components.progress.indicator.ProgressIndicatorModel
@@ -21,7 +21,7 @@ class CarouselAdapter(
     private val kcalLabel = context.getString(R.string.kcal_label)
     private val gramLabel = context.getString(R.string.grams_label)
 
-    override fun getCount(): Int { return ComponentUiConstants.CAROUSEL_SIZE }
+    override fun getCount(): Int { return Constants.CAROUSEL_SIZE }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean { return view == `object` }
 

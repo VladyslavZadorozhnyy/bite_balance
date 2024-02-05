@@ -1,5 +1,5 @@
 package com.ui.common
 
 open class BaseUiComponentModel(
-    val componentType: ComponentUiType,
+    val componentType: Constants.ComponentUiType,
 )

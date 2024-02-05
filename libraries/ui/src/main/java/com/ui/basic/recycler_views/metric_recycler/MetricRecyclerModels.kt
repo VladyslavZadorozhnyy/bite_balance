@@ -1,7 +1,7 @@
 package com.ui.basic.recycler_views.metric_recycler
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.mocks.MockMetricModel
 
 open class MetricRecyclerModel(
@@ -9,7 +9,7 @@ open class MetricRecyclerModel(
     open val foregroundColor: Int,
     open val backgroundColor: Int,
 ): BaseUiComponentModel(
-    componentType = ComponentUiType.Recycler
+    componentType = Constants.ComponentUiType.Recycler
 )
 
 data class DishNameMetricsModel(

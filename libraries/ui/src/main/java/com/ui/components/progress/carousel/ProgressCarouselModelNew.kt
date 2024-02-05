@@ -1,7 +1,7 @@
 package com.ui.components.progress.carousel
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.model.NutritionValueModel
 
 data class ProgressCarouselModelNew(
@@ -10,5 +10,5 @@ data class ProgressCarouselModelNew(
     val primaryColor: Int,
     val secondaryColor: Int,
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Carousel,
+    componentType = Constants.ComponentUiType.Carousel,
 )

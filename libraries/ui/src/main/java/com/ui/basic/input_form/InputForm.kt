@@ -13,7 +13,7 @@ import androidx.core.content.res.ResourcesCompat.getFont
 import androidx.core.widget.addTextChangedListener
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiConstants
+import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.databinding.InputFormBinding
 
@@ -29,7 +29,7 @@ class InputForm (
         (model as? InputFormModel)?.let {
             binding.form.typeface = getFont(context, R.font.ultra_regular_font)
             binding.form.paint.style = Paint.Style.STROKE
-            binding.form.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+            binding.form.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
             binding.form.setTextColor(model.foregroundColor)
             binding.form.hint = it.hint

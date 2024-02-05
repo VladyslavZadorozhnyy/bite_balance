@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     fun updateNavBarColors() {
         supportFragmentManager.fragments.forEach { backStackedFragment ->
             (backStackedFragment as? NavigationFragment)?.updateNavBarColors()
-//            Log.d("AAADIP", "fragment: $it and it is NavigationFragment: ${it is NavigationFragment}")
         }
     }
 

@@ -1,7 +1,7 @@
 package com.ui.basic.recycler_views.meal_recycler
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.model.MealModelUnboxed
 
 data class MealRecyclerModel(
@@ -11,5 +11,5 @@ data class MealRecyclerModel(
     val onClickListener: (MealModelUnboxed) -> Unit,
     val onSwipeListener: (MealModelUnboxed) -> Unit,
 ): BaseUiComponentModel(
-    componentType = ComponentUiType.Recycler
+    componentType = Constants.ComponentUiType.Recycler
 )

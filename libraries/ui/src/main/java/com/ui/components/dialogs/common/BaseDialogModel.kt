@@ -1,7 +1,7 @@
 package com.ui.components.dialogs.common
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.components.R
 
 data class BaseDialogModel(
@@ -14,5 +14,5 @@ data class BaseDialogModel(
     val onNegativeClicked: () -> Unit = {},
     val onInputConfirmed: (value: String) -> Unit = {}
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Dialog
+    componentType = Constants.ComponentUiType.Dialog
 )

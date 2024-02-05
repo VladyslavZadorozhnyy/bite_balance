@@ -3,15 +3,13 @@ package com.ui.basic.nav_bar
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
-import androidx.core.content.ContextCompat.getColorStateList
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.forEach
+import androidx.core.view.forEachIndexed
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import com.ui.components.R
@@ -23,45 +21,41 @@ class NavigationBar(
 ) : BaseUiComponent(context, attrs) {
     private var navigationBarModel: NavigationBarModel? = null
     private var lastSelectedId = -1
-    private var second: Boolean = true
 
     private val binding by lazy {
         NavigationBarBinding.inflate(LayoutInflater.from(context), this).navView
     }
 
-    fun onResume() {
-        Log.d("AAADIP", "onResume(), inside navigationBar")
-        if (lastSelectedId != -1) {
-            binding.selectedItemId = lastSelectedId
-            binding.invalidate()
-        }
+    override fun onResume() {
+        super.onResume()
+        if (lastSelectedId == -1) return
+
+        binding.selectedItemId = lastSelectedId
+        binding.invalidate()
     }
 
     fun updateForegroundColor(foregroundColor: Int) {
         navigationBarModel = NavigationBarModel(
-            nonActiveIconsRes = navigationBarModel?.nonActiveIconsRes ?: listOf(),
-            activeIconsRes = navigationBarModel?.activeIconsRes ?: listOf(),
+            navIcons = navigationBarModel?.navIcons ?: listOf(),
             foregroundColor = foregroundColor,
             backgroundColor = navigationBarModel?.backgroundColor ?: Color.TRANSPARENT,
             onItemSelected = navigationBarModel?.onItemSelected ?: {},
         )
-        second = false
         setup(model = navigationBarModel!!)
     }
 
     fun updateBackgroundColor(backgroundColor: Int) {
         navigationBarModel = NavigationBarModel(
-            nonActiveIconsRes = navigationBarModel?.nonActiveIconsRes ?: listOf(),
-            activeIconsRes = navigationBarModel?.activeIconsRes ?: listOf(),
+            navIcons = navigationBarModel?.navIcons ?: listOf(),
             foregroundColor = navigationBarModel?.foregroundColor ?: Color.TRANSPARENT,
             backgroundColor = backgroundColor,
             onItemSelected = navigationBarModel?.onItemSelected ?: {},
         )
-        second = false
         setup(model = navigationBarModel!!)
     }
 
     override fun setup(model: BaseUiComponentModel) {
+        val isInitialSetup = navigationBarModel == null && (model as? NavigationBarModel) != null
         navigationBarModel = model as? NavigationBarModel
         navigationBarModel?.let {
             binding.itemIconTintList = null
@@ -77,30 +71,21 @@ class NavigationBar(
                 }
                 return@setOnItemSelectedListener true
             }
-            if (second) binding.selectedItemId = R.id.nav_home
+            if (isInitialSetup) binding.selectedItemId = R.id.nav_home
         }
     }
 
     private fun disableAllItems(model: NavigationBarModel) {
-        var index = 0
-
-        binding.menu.forEach {
-            val chosenIcon = getDrawable(context, model.nonActiveIconsRes[index])
-            DrawableCompat.setTint(chosenIcon!!, Color.DKGRAY) // AAADIP HERE
-            it.icon = chosenIcon
-            index++
+        binding.menu.forEachIndexed { index, item ->
+            val chosenIcon = getDrawable(context, model.navIcons[index])
+            DrawableCompat.setTint(chosenIcon!!, Color.DKGRAY)
+            item.icon = chosenIcon
         }
     }
 
     private fun enableItem(chosen: MenuItem) {
         navigationBarModel?.let {  model ->
-            val chosenIconRes = when (chosen.itemId) {
-                R.id.nav_home -> model.activeIconsRes[0]
-                R.id.nav_stats -> model.activeIconsRes[1]
-                R.id.nav_menu -> model.activeIconsRes[2]
-                else -> model.activeIconsRes[3]
-            }
-            val chosenIcon = getDrawable(context, chosenIconRes)
+            val chosenIcon = getDrawable(context, model.chosenIdToIndex(chosen.itemId))
             DrawableCompat.setTint(chosenIcon!!, model.backgroundColor)
             chosen.icon = chosenIcon
         }

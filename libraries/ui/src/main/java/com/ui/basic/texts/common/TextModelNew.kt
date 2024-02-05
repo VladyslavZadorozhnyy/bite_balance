@@ -1,16 +1,15 @@
 package com.ui.basic.texts.common
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiConstants
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.components.R
 
 data class TextModelNew (
     val textValue: String,
-    val textSize: Int = ComponentUiConstants.TEXT_SIZE,
+    val textSize: Int = Constants.TEXT_SIZE,
     val textColor: Int = R.color.white,
     val backgroundColor: Int = R.color.black,
     val backgroundRes: Int? = null
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Text
+    componentType = Constants.ComponentUiType.Text
 )

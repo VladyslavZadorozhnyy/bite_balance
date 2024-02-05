@@ -16,8 +16,8 @@ import androidx.viewpager.widget.ViewPager
 import com.ui.basic.texts.common.TextModelNew2
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiConstants
 import com.ui.common.ComponentUiUtils
+import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.databinding.ProgressCarouselBinding
 
@@ -100,7 +100,7 @@ class ProgressCarousel(
             val wrappedDrawable = DrawableCompat.wrap(context.getDrawable(nonActiveDotRes)!!)
             DrawableCompat.setTint(wrappedDrawable, progressModel.secondaryColor)
 
-            for (i in 0 until ComponentUiConstants.CAROUSEL_SIZE) {
+            for (i in 0 until Constants.CAROUSEL_SIZE) {
                 ImageView(context).apply {
                     setImageDrawable(getDrawable(context, nonActiveDotRes))
                     binding.sliderDots.addView(this, dotLayoutParams)

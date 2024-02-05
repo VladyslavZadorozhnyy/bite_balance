@@ -1,8 +1,7 @@
 package com.ui.components.dialogs.common
 
-import androidx.compose.ui.graphics.Color
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.components.R
 
 data class BaseDialogModelNew(
@@ -15,5 +14,5 @@ data class BaseDialogModelNew(
     val onNegativeClicked: () -> Unit = {},
     val onInputConfirmed: (value: String) -> Unit = {}
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Dialog
+    componentType = Constants.ComponentUiType.Dialog
 )

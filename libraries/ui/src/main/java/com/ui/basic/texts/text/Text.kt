@@ -13,11 +13,11 @@ import androidx.core.content.res.ResourcesCompat.getFont
 import androidx.core.graphics.drawable.DrawableCompat
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiConstants
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.common.TextModelNew2
 import com.ui.basic.texts.common.TextModelNew3
+import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.databinding.TextBinding
 
@@ -39,7 +39,7 @@ class Text(
 
             binding.gravity = Gravity.CENTER
             binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+            binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
             binding.background = if (it.backgroundRes != null) {
                 getDrawable(context, it.backgroundRes)
@@ -57,7 +57,7 @@ class Text(
 
             binding.gravity = Gravity.CENTER
             binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+            binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
             binding.background = getDrawable(context, R.drawable.text_shape)
             binding.background.setTint(model.backgroundColor)
@@ -73,7 +73,7 @@ class Text(
 
             binding.gravity = Gravity.CENTER
             binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+            binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
             binding.background = getDrawable(context, R.drawable.text_shape)
             binding.background = model.backgroundRes ?: getDrawable(context, R.drawable.text_shape)
@@ -87,7 +87,7 @@ class Text(
         (model as? TextModelNew3)?.let {
             binding.gravity = Gravity.CENTER
             binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+            binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
             val viewBackground = model.backgroundRes ?: getDrawable(context, R.drawable.text_shape)
             val wrappedDrawable = DrawableCompat.wrap(viewBackground!!)

@@ -1,7 +1,7 @@
 package com.ui.components.graph.component
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.model.NutritionValueModel
 
 data class GraphModel(
@@ -11,5 +11,5 @@ data class GraphModel(
     val backgroundColor: Int,
     val screenSpan: Int = 7
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Graph
+    componentType = Constants.ComponentUiType.Graph
 )

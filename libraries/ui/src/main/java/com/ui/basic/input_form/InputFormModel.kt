@@ -1,7 +1,7 @@
 package com.ui.basic.input_form
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 
 data class InputFormModel(
     val active: Boolean,
@@ -10,5 +10,5 @@ data class InputFormModel(
     val backgroundColor: Int,
     val onInputChange: (input: String) -> Unit = {}
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Input
+    componentType = Constants.ComponentUiType.Input
 )

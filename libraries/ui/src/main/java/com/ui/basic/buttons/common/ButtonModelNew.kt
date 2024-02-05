@@ -3,7 +3,7 @@ package com.ui.basic.buttons.common
 import android.graphics.Color
 import android.view.View
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 
 data class ButtonModelNew(
     val iconRes: Int? = null,
@@ -15,5 +15,5 @@ data class ButtonModelNew(
     val backgroundColor: Int = Color.BLACK,
     val onClickListener: View.OnClickListener? = null,
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Button
+    componentType = Constants.ComponentUiType.Button
 )

@@ -1,6 +1,6 @@
 package com.bitebalance.di
 
-import com.bitebalance.data.repository.*
+import com.bitebalance.data.db_repository.*
 import com.bitebalance.domain.repository.*
 import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
 import com.bitebalance.domain.usecase.add.AddNewDishUseCase

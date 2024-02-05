@@ -12,9 +12,9 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.res.ResourcesCompat.getFont
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiConstants
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
+import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.databinding.TextBinding
 
@@ -36,7 +36,7 @@ class SlideableText(
 
             binding.gravity = Gravity.CENTER
             binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+            binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
             binding.background = getDrawable(context, R.drawable.text_shape)
             binding.background.setTint(getColor(context, model.backgroundColor))
@@ -55,7 +55,7 @@ class SlideableText(
 
             binding.gravity = Gravity.CENTER
             binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+            binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
             binding.background = getDrawable(context, R.drawable.text_shape)
             binding.background.setTint(model.backgroundColor)

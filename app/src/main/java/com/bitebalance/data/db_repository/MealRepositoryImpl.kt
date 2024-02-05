@@ -1,4 +1,4 @@
-package com.bitebalance.data.repository
+package com.bitebalance.data.db_repository
 
 import com.bitebalance.domain.model.MealModel
 import com.bitebalance.domain.model.fromEntity

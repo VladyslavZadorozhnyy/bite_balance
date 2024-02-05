@@ -1,7 +1,7 @@
 package com.ui.basic.recycler_views.dish_recycler
 
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
+import com.ui.common.Constants
 import com.ui.model.DishModel
 
 data class DishRecyclerModel(
@@ -10,5 +10,5 @@ data class DishRecyclerModel(
     val secondaryColor: Int,
     val onClickListener: (DishModel) -> Unit
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Recycler
+    componentType = Constants.ComponentUiType.Recycler
 )
