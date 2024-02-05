@@ -21,29 +21,63 @@ class NavigationBar(
     context: Context,
     attrs: AttributeSet? = null,
 ) : BaseUiComponent(context, attrs) {
+    private var navigationBarModel: NavigationBarModel? = null
     private var lastSelectedId = -1
+    private var second: Boolean = true
 
     private val binding by lazy {
         NavigationBarBinding.inflate(LayoutInflater.from(context), this).navView
     }
 
+    fun onResume() {
+        Log.d("AAADIP", "onResume(), inside navigationBar")
+        if (lastSelectedId != -1) {
+            binding.selectedItemId = lastSelectedId
+            binding.invalidate()
+        }
+    }
+
+    fun updateForegroundColor(foregroundColor: Int) {
+        navigationBarModel = NavigationBarModel(
+            nonActiveIconsRes = navigationBarModel?.nonActiveIconsRes ?: listOf(),
+            activeIconsRes = navigationBarModel?.activeIconsRes ?: listOf(),
+            foregroundColor = foregroundColor,
+            backgroundColor = navigationBarModel?.backgroundColor ?: Color.TRANSPARENT,
+            onItemSelected = navigationBarModel?.onItemSelected ?: {},
+        )
+        second = false
+        setup(model = navigationBarModel!!)
+    }
+
+    fun updateBackgroundColor(backgroundColor: Int) {
+        navigationBarModel = NavigationBarModel(
+            nonActiveIconsRes = navigationBarModel?.nonActiveIconsRes ?: listOf(),
+            activeIconsRes = navigationBarModel?.activeIconsRes ?: listOf(),
+            foregroundColor = navigationBarModel?.foregroundColor ?: Color.TRANSPARENT,
+            backgroundColor = backgroundColor,
+            onItemSelected = navigationBarModel?.onItemSelected ?: {},
+        )
+        second = false
+        setup(model = navigationBarModel!!)
+    }
+
     override fun setup(model: BaseUiComponentModel) {
-        (model as? NavigationBarModel)?.let { navBarModel ->
+        navigationBarModel = model as? NavigationBarModel
+        navigationBarModel?.let {
             binding.itemIconTintList = null
-            binding.backgroundTintList = ColorStateList.valueOf(navBarModel.foregroundColor)
+            binding.backgroundTintList = ColorStateList.valueOf(it.foregroundColor)
 
             binding.setOnItemSelectedListener { chosen ->
-                disableAllItems(navBarModel)
-                enableItem(navBarModel, chosen)
+                disableAllItems(it)
+                enableItem(chosen)
 
                 if (lastSelectedId == -1 || lastSelectedId != chosen.itemId) {
                     lastSelectedId = chosen.itemId
-                    navBarModel.onItemSelected.invoke(chosen.itemId)
+                    it.onItemSelected.invoke(chosen.itemId)
                 }
                 return@setOnItemSelectedListener true
             }
-
-            binding.selectedItemId = R.id.nav_home
+            if (second) binding.selectedItemId = R.id.nav_home
         }
     }
 
@@ -58,16 +92,17 @@ class NavigationBar(
         }
     }
 
-    private fun enableItem(model: NavigationBarModel, chosen: MenuItem) {
-        val chosenIconRes = when (chosen.itemId) {
-            R.id.nav_home -> model.activeIconsRes[0]
-            R.id.nav_stats -> model.activeIconsRes[1]
-            R.id.nav_menu -> model.activeIconsRes[2]
-            else -> model.activeIconsRes[3]
+    private fun enableItem(chosen: MenuItem) {
+        navigationBarModel?.let {  model ->
+            val chosenIconRes = when (chosen.itemId) {
+                R.id.nav_home -> model.activeIconsRes[0]
+                R.id.nav_stats -> model.activeIconsRes[1]
+                R.id.nav_menu -> model.activeIconsRes[2]
+                else -> model.activeIconsRes[3]
+            }
+            val chosenIcon = getDrawable(context, chosenIconRes)
+            DrawableCompat.setTint(chosenIcon!!, model.backgroundColor)
+            chosen.icon = chosenIcon
         }
-        val chosenIcon = getDrawable(context, chosenIconRes)
-        DrawableCompat.setTint(chosenIcon!!, model.backgroundColor)
-        chosen.icon = chosenIcon
     }
-
 }

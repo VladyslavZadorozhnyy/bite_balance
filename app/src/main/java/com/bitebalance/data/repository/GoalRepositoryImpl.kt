@@ -1,6 +1,5 @@
 package com.bitebalance.data.repository
 
-import android.util.Log
 import com.bitebalance.domain.model.fromEntity
 import com.bitebalance.domain.model.toEntity
 import com.bitebalance.domain.repository.GoalRepository

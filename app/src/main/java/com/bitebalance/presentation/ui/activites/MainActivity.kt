@@ -6,6 +6,7 @@ import android.util.Log
 import com.ui.components.R
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.ActivityMainBinding
+import com.bitebalance.presentation.ui.fragments.NavigationFragment
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,6 +45,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun updateNavBarColors() {
+        supportFragmentManager.fragments.forEach { backStackedFragment ->
+            (backStackedFragment as? NavigationFragment)?.updateNavBarColors()
+//            Log.d("AAADIP", "fragment: $it and it is NavigationFragment: ${it is NavigationFragment}")
+        }
+    }
+
     fun backPressUntilComponent(componentName: String) {
         while (supportFragmentManager.fragments.lastOrNull()?.javaClass?.name != componentName) {
             onBackPressed()
@@ -53,5 +61,6 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         onBackPressedDispatcher.onBackPressed()
         supportFragmentManager.fragments.lastOrNull()?.onResume()
+        supportFragmentManager.fragments.forEach { (it as? NavigationFragment)?.onResume() }
     }
 }

@@ -1,12 +1,14 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bitebalance.databinding.FragmentNavigationBinding
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ui.basic.nav_bar.NavigationBarModel
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -21,6 +23,17 @@ class NavigationFragment : Fragment() {
     ): View {
         setupNavigationComponent()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.navigationComponent.onResume()
+    }
+
+    fun updateNavBarColors() {
+        Log.d("AAADIP", "updateNavBarColors() inside NavigationFragment")
+        binding.navigationComponent.updateBackgroundColor(themeViewModel.secondaryColor)
+        binding.navigationComponent.updateForegroundColor(themeViewModel.primaryColor)
     }
 
     private fun setupNavigationComponent() {

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bitebalance.databinding.FragmentAppearanceScreenBinding
+import com.bitebalance.presentation.ui.activites.MainActivity
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModelNew
@@ -63,7 +64,7 @@ class AppearanceScreenFragment : Fragment() {
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
                 backgroundColor = themeViewModel.state.value!!.primaryColor,
-                onClickListener = { navigationVm.popScreen() }
+                onClickListener = { activity?.onBackPressed() }
             )
         )
     }
@@ -154,6 +155,8 @@ class AppearanceScreenFragment : Fragment() {
                     themeViewModel.primaryColor = color
                 else if (changeSecondaryColor)
                     themeViewModel.secondaryColor = color
+
+                (activity as? MainActivity)?.updateNavBarColors()
             }
         }).apply {
             this.dialog.setTitle(dialogTitle)
