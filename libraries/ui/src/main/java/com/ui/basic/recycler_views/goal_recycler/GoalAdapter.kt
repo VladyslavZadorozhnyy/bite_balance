@@ -1,26 +1,24 @@
 package com.ui.basic.recycler_views.goal_recycler
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.checkbox.Checkbox
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
-import com.ui.mocks.MockGoalModel
+import com.ui.model.GoalModel
 
 
 class GoalAdapter(
-    private var items: List<MockGoalModel>,
+    private var items: List<GoalModel>,
     private val foregroundColor: Int,
     private val backgroundColor: Int,
+    private val goalAdapterListener: GoalAdapterListener,
 ): RecyclerView.Adapter<GoalAdapter.GoalViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalViewHolder {
@@ -31,7 +29,7 @@ class GoalAdapter(
     }
 
     override fun onBindViewHolder(holder: GoalViewHolder, position: Int) {
-        holder.bind(items[position], foregroundColor, backgroundColor)
+        holder.bind(items[position], foregroundColor, backgroundColor, goalAdapterListener)
     }
 
     override fun getItemCount(): Int {
@@ -43,13 +41,22 @@ class GoalAdapter(
         notifyDataSetChanged()
     }
 
+    fun getItemAt(position: Int): GoalModel {
+        return items[position]
+    }
+
+    interface GoalAdapterListener {
+        fun checkUncheckItem(goalModel: GoalModel, checked: Boolean)
+        fun onItemRemoved(item: GoalModel, itemsLeft: Int);
+    }
+
     class GoalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val itemViewContainer = view.findViewById<View>(R.id.item_view_container)
         private val textView = view.findViewById<Text>(R.id.goal_text_view)
         private val buttonView = view.findViewById<IconButton>(R.id.delete_button_icon)
         private val checkboxView = view.findViewById<Checkbox>(R.id.checkbox_view)
 
-        fun bind(item: MockGoalModel, foregroundColor: Int, backgroundColor: Int) {
+        fun bind(item: GoalModel, foregroundColor: Int, backgroundColor: Int, listener: GoalAdapterListener) {
             itemViewContainer.setBackgroundColor(backgroundColor)
 
             buttonView.setup(
@@ -73,10 +80,16 @@ class GoalAdapter(
                 model = CheckBoxModel(
                     checked = item.achieved,
                     active = item.active,
-                    onChecked = { textView.strikeThrough() },
-                    onUnchecked = { textView.unstrikeThrough() },
                     backgroundColor = foregroundColor,
                     foregroundColor = backgroundColor,
+                    onChecked = {
+                        listener.checkUncheckItem(item, true)
+                        textView.strikeThrough()
+                    },
+                    onUnchecked = {
+                        listener.checkUncheckItem(item, false)
+                        textView.unstrikeThrough()
+                    },
                 )
             )
 

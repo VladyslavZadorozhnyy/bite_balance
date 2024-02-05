@@ -27,6 +27,7 @@ class GoalRecycler(
                     recyclerModel.items,
                     recyclerModel.foregroundColor,
                     recyclerModel.backgroundColor,
+                    recyclerModel.goalAdapterListener,
                 )
                 layoutManager = LinearLayoutManager(context)
             }
@@ -41,7 +42,12 @@ class GoalRecycler(
                 }
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-                    (binding.recyclerView.adapter as? GoalAdapter)?.removeAt(viewHolder.adapterPosition)
+                    (binding.recyclerView.adapter as? GoalAdapter)?.let {
+                        recyclerModel.goalAdapterListener.onItemRemoved(
+                            item = it.getItemAt(viewHolder.adapterPosition),
+                            itemsLeft = it.itemCount - 1)
+                        it.removeAt(viewHolder.adapterPosition)
+                    }
                 }
             }
 

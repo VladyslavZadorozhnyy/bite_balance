@@ -1,9 +1,6 @@
 package com.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.database.common.Constants
 import com.database.entities.GoalEntity
 
@@ -12,7 +9,7 @@ interface GoalDao {
     @Insert
     fun insert(goalEntity: GoalEntity): Long
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateItem(goalEntity: GoalEntity)
 
     @Query("SELECT * FROM ${Constants.GOAL_TABLE_NAME}")

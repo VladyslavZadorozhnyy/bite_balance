@@ -57,7 +57,9 @@ class Checkbox(
                 }
             }
 
-            if (model.checked || !model.active) {
+//            TODO: Change later this condition
+//            if (model.checked || !model.active) {
+            if (!model.active) {
                 binding.checkbox.backgroundTintList = ColorStateList.valueOf(Color.DKGRAY)
                 return
             }

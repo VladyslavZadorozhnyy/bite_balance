@@ -51,7 +51,9 @@ class NavigationBar(
         var index = 0
 
         binding.menu.forEach {
-            it.setIcon(model.nonActiveIconsRes[index])
+            val chosenIcon = getDrawable(context, model.nonActiveIconsRes[index])
+            DrawableCompat.setTint(chosenIcon!!, Color.DKGRAY) // AAADIP HERE
+            it.icon = chosenIcon
             index++
         }
     }

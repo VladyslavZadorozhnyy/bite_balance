@@ -11,6 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
+        <include layout="@layout/no_items_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"/>
+
         <include layout="@layout/toolbar"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
