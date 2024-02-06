@@ -1,6 +1,5 @@
 package com.ui.basic.recycler_views.metric_recycler
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,13 @@ import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.checkbox.Checkbox
 import com.ui.basic.input_form.InputForm
 import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
-import com.ui.mocks.MockMetricModel
+import com.ui.model.MetricModel
 
 class MetricAdapter(
-    private val items: List<MockMetricModel>,
+    private val items: List<MetricModel>,
     private val foregroundColor: Int,
     private val backgroundColor: Int,
 ) : RecyclerView.Adapter<MetricAdapter.MetricViewHolder>() {
@@ -59,7 +57,7 @@ class MetricAdapter(
         fun setPosition(value: Int) { position = value }
 
         fun bind(
-            model: MockMetricModel,
+            model: MetricModel,
             inputValues: MutableList<String>,
         ) {
             itemView.setBackgroundColor(backgroundColor)

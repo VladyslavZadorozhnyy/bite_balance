@@ -1,7 +1,6 @@
 package com.bitebalance.presentation.ui.fragments
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,19 +13,15 @@ import com.bitebalance.presentation.viewmodels.DateViewModel
 import com.bitebalance.presentation.viewmodels.GoalViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.recycler_views.goal_recycler.GoalAdapter
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.NoItemsLayoutBinding
-import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.common.BaseDialogModelNew
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.input_dialog.InputDialog
-import com.ui.mocks.MockGoalModel
 import com.ui.model.GoalModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.text.SimpleDateFormat

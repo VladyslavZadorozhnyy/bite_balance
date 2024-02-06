@@ -9,13 +9,13 @@ import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
-import com.ui.mocks.MockInstructionModel
+import com.ui.model.InstructionModel
 
 class SettingsAdapter(
-    private val items: List<MockInstructionModel>,
+    private val items: List<InstructionModel>,
     private val primaryColor: Int,
     private val secondaryColor: Int,
-    private val onClickListener: (MockInstructionModel) -> Unit
+    private val onClickListener: (InstructionModel) -> Unit
 ): RecyclerView.Adapter<SettingsAdapter.SettingViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingViewHolder {
@@ -39,7 +39,7 @@ class SettingsAdapter(
         private val settingText = view.findViewById<Text>(R.id.setting_text)
         private val settingBar = view.findViewById<View>(R.id.setting_bar)
 
-        fun bind(model: MockInstructionModel, primaryColor: Int, secondaryColor: Int) {
+        fun bind(model: InstructionModel, primaryColor: Int, secondaryColor: Int) {
             itemView.setBackgroundColor(secondaryColor)
             settingBar.setBackgroundColor(primaryColor)
 

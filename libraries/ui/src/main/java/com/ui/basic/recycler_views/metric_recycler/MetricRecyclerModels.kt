@@ -1,12 +1,11 @@
 package com.ui.basic.recycler_views.metric_recycler
 
-import android.graphics.Color
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
-import com.ui.mocks.MockMetricModel
+import com.ui.model.MetricModel
 
 open class MetricRecyclerModel(
-    val items: List<MockMetricModel>,
+    val items: List<MetricModel>,
     open val foregroundColor: Int,
     open val backgroundColor: Int,
 ): BaseUiComponentModel(
@@ -14,7 +13,7 @@ open class MetricRecyclerModel(
 )
 
 data class DishNameMetricsModel(
-    var dishItems: List<MockMetricModel> = listOf(),
+    var dishItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
@@ -30,33 +29,33 @@ data class DishNameMetricsModel(
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
+                    MetricModel(
                         name = "Name:",
                         editable = true,
                         hint = name,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Prots:",
                         suffix = "g in 100g",
                         editable = true,
                         onlyNumbers = true,
                         hint = prots,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Fats:",
                         suffix = "g in 100g",
                         editable = true,
                         onlyNumbers = true,
                         hint = fats,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Carbs:",
                         suffix = "g in 100g",
                         editable = true,
                         onlyNumbers = true,
                         hint = carbs,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Kcal:",
                         suffix = "kcal in 100g",
                         editable = true,
@@ -72,7 +71,7 @@ data class DishNameMetricsModel(
 }
 
 data class DishMetricsModel(
-    var dishItems: List<MockMetricModel> = listOf(),
+    var dishItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
@@ -88,28 +87,28 @@ data class DishMetricsModel(
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
+                    MetricModel(
                         name = "Prots:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                         hint = prots,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Fats:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                         hint = fats,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Carbs:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                         hint = carbs,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Kcal:",
                         suffix = "kcal in 100g",
                         editable = editable,
@@ -125,7 +124,7 @@ data class DishMetricsModel(
 }
 
 data class MealMetricsModel(
-    val mealItems: List<MockMetricModel> = listOf(),
+    val mealItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
@@ -140,35 +139,35 @@ data class MealMetricsModel(
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
+                    MetricModel(
                         name = "Prots:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${prots * eaten}"
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Fats:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${fats * eaten}"
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Carbs:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${carbs * eaten}"
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Kcal:",
                         suffix = "kcal in 100g",
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${kcal * eaten}"
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Eaten:",
                         suffix = "in g",
                         editable = editable,
@@ -182,7 +181,7 @@ data class MealMetricsModel(
 }
 
 data class CreateMealMetricsModel(
-    val mealItems: List<MockMetricModel> = listOf(),
+    val mealItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
@@ -199,36 +198,36 @@ data class CreateMealMetricsModel(
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
+                    MetricModel(
                         name = "Name:",
                         editable = editable,
                         onlyNumbers = false,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Prots:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Fats:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Carbs:",
                         suffix = "g in 100g",
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Kcal:",
                         suffix = "kcal in 100g",
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Eaten:",
                         suffix = "in g",
                         editable = editable,
@@ -243,7 +242,7 @@ data class CreateMealMetricsModel(
 }
 
 data class CreateMealWithExistingDishModel(
-    val mealItems: List<MockMetricModel> = listOf(),
+    val mealItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
@@ -258,35 +257,35 @@ data class CreateMealWithExistingDishModel(
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
+                    MetricModel(
                         name = "Prots:",
                         suffix = "g in 100g",
                         hint = prots,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Fats:",
                         suffix = "g in 100g",
                         hint = fats,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Carbs:",
                         suffix = "g in 100g",
                         hint = carbs,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Kcal:",
                         suffix = "kcal in 100g",
                         hint = kcal,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
+                    MetricModel(
                         name = "Eaten:",
                         suffix = "in g",
                         editable = true,

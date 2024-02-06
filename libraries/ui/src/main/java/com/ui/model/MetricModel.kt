@@ -1,6 +1,6 @@
-package com.ui.mocks
+package com.ui.model
 
-class MockMetricModel(
+class MetricModel(
     val name: String,
     val hint: String = "",
     val suffix: String = "",

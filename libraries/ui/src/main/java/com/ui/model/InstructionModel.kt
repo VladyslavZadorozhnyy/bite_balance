@@ -1,6 +1,6 @@
-package com.ui.mocks
+package com.ui.model
 
-data class MockInstructionModel(
+data class InstructionModel(
     val iconRes: Int,
     val instructionText: String,
 )

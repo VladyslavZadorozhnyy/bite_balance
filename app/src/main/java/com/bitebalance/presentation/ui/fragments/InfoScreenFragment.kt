@@ -6,17 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentInfoScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.mocks.MockInstructionModel
+import com.ui.model.InstructionModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class InfoScreenFragment : Fragment() {
@@ -79,19 +76,19 @@ class InfoScreenFragment : Fragment() {
                 backgroundColor = themeViewModel.state.value!!.primaryColor,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
                 items = listOf(
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.info_icon,
                         instructionText = "Get information"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.meals_icon,
                         instructionText = "List today's meal"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.reset_icon,
                         instructionText = "Reset today's meals"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.add_icon,
                         instructionText = "Add new meal today"
                     ),

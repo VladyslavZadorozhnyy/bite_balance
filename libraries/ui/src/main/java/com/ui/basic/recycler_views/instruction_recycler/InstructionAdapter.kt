@@ -4,17 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
-import com.ui.mocks.MockInstructionModel
+import com.ui.model.InstructionModel
 
 class InstructionAdapter(
-    private var items: List<MockInstructionModel>,
+    private var items: List<InstructionModel>,
     private var backgroundColor: Int,
     private var foregroundColor: Int,
 ): RecyclerView.Adapter<InstructionAdapter.InstructionViewHolder>() {
@@ -38,7 +36,7 @@ class InstructionAdapter(
         private val buttonIcon = view.findViewById<IconButton>(R.id.button_icon)
         private val buttonInstruction = view.findViewById<Text>(R.id.button_instruction)
 
-        fun bind(item: MockInstructionModel, foregroundColor: Int, backgroundColor: Int) {
+        fun bind(item: InstructionModel, foregroundColor: Int, backgroundColor: Int) {
             buttonIcon.setup(
                 model = ButtonModelNew(
                     iconRes = item.iconRes,

@@ -13,7 +13,7 @@ import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.recycler_views.settings_recycler.SettingsRecyclerModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.mocks.MockInstructionModel
+import com.ui.model.InstructionModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class SettingsScreenFragment : Fragment() {
@@ -62,31 +62,31 @@ class SettingsScreenFragment : Fragment() {
         binding.settingRecycler.setup(
             model = SettingsRecyclerModel(
                 items = listOf(
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.appearance_icon,
                         instructionText = "Appearance"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.translate_icon,
                         instructionText = "Language"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.measurement_icon,
                         instructionText = "Measurement"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.people_icon,
                         instructionText = "About Us"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.instruction_icon,
                         instructionText = "Instruction"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.support_icon,
                         instructionText = "Support Us"
                     ),
-                    MockInstructionModel(
+                    InstructionModel(
                         iconRes = R.drawable.feedback_icon,
                         instructionText = "Feedback"
                     ),
@@ -98,7 +98,7 @@ class SettingsScreenFragment : Fragment() {
         )
     }
 
-    private fun processInstructionClicked(instruction: MockInstructionModel) {
+    private fun processInstructionClicked(instruction: InstructionModel) {
         when (instruction.instructionText) {
             "Appearance" -> navigationVm.navigateTo(AppearanceScreenFragment(), NavigationAction.ADD)
             "Language" -> navigationVm.navigateTo(ChooseSettingScreenFragment(), NavigationAction.ADD)
