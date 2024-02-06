@@ -62,10 +62,12 @@ class HomeScreenFragment : Fragment() {
             if (state.message.isNotEmpty()) {
                 ConfirmDialog(
                     requireActivity(),
-                    BaseDialogModel(
-                        state.message,
-                        buttonTextRes = R.string.done
-                    )
+                    BaseDialogModelNew(
+                        backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                        textColor = themeViewModel.state.value!!.primaryColor,
+                        title = state.message,
+                        buttonText = R.string.done,
+                    ),
                 ).show()
             }
 

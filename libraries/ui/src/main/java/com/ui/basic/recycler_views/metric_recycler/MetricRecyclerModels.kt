@@ -1,5 +1,6 @@
 package com.ui.basic.recycler_views.metric_recycler
 
+import android.graphics.Color
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
 import com.ui.mocks.MockMetricModel
@@ -82,6 +83,8 @@ data class DishMetricsModel(
             fats: String = "",
             carbs: String = "",
             kcal: String = "",
+            foregroundColor: Int = 0,
+            backgroundColor: Int = 0,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
@@ -113,7 +116,9 @@ data class DishMetricsModel(
                         onlyNumbers = true,
                         hint = kcal,
                     )
-                )
+                ),
+                foregroundColor = foregroundColor,
+                backgroundColor = backgroundColor,
             )
         }
     }
@@ -248,6 +253,8 @@ data class CreateMealWithExistingDishModel(
             fats: String = "",
             carbs: String = "",
             kcal: String = "",
+            foregroundColor: Int = 0,
+            backgroundColor: Int = 0,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
@@ -285,7 +292,9 @@ data class CreateMealWithExistingDishModel(
                         editable = true,
                         onlyNumbers = true,
                     )
-                )
+                ),
+                foregroundColor = foregroundColor,
+                backgroundColor = backgroundColor,
             )
         }
     }
