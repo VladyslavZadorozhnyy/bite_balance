@@ -17,29 +17,8 @@ class ThemeViewModel(context: Context) : ViewModel() {
     private val mPrefsKey: String = "THEME_SHARED_PREFERENCE"
     private var mPrefs = context.getSharedPreferences(mPrefsKey, MODE_PRIVATE)
 
-    var primaryColor: Int = 0
-        set (value) {
-            val initialSetting = field == 0
-            field = value
-            mPrefs.edit().putInt(mPrefsPrimaryColorKey, field).apply()
-            if (!initialSetting) updateState()
-        }
-        get() {
-            field = if (field == 0) mPrefs.getInt(mPrefsPrimaryColorKey, Color.BLACK) else field
-            return field
-        }
-
-    var secondaryColor: Int = 0
-        set (value) {
-            val initialSetting = field == 0
-            field = value
-            mPrefs.edit().putInt(mPrefsSecondaryColorKey, field).apply()
-            if (!initialSetting) updateState()
-        }
-        get() {
-            field = if (field == 0) mPrefs.getInt(mPrefsSecondaryColorKey, Color.WHITE) else field
-            return field
-        }
+    private var primaryColor: Int = 0
+    private var secondaryColor: Int = 0
 
     var fontResource: Int = 0
         set (value) {
@@ -53,8 +32,34 @@ class ThemeViewModel(context: Context) : ViewModel() {
             return field
         }
 
-    private val _state by lazy { MutableLiveData(ThemeState(primaryColor, secondaryColor, fontResource)) }
+    private val _state by lazy { MutableLiveData(ThemeState(getPrimaryColor(), getSecondaryColor(), fontResource)) }
     val state: LiveData<ThemeState> = _state
+
+    fun getPrimaryColor(): Int {
+        primaryColor = if (primaryColor == 0)
+            mPrefs.getInt(mPrefsPrimaryColorKey, Color.BLACK) else primaryColor
+        return primaryColor
+    }
+
+    fun setPrimaryColor(primaryColorValue: Int) {
+        val initialSetting = primaryColor == 0
+        primaryColor = primaryColorValue
+        mPrefs.edit().putInt(mPrefsPrimaryColorKey, primaryColor).apply()
+        if (!initialSetting) updateState()
+    }
+
+    fun getSecondaryColor(): Int {
+        secondaryColor = if (secondaryColor == 0)
+            mPrefs.getInt(mPrefsSecondaryColorKey, Color.WHITE) else secondaryColor
+        return secondaryColor
+    }
+
+    fun setSecondaryColor(secondaryColorValue: Int) {
+        val initialSetting = secondaryColor == 0
+        secondaryColor = secondaryColorValue
+        mPrefs.edit().putInt(mPrefsSecondaryColorKey, secondaryColor).apply()
+        if (!initialSetting) updateState()
+    }
 
     private fun updateState() {
         _state.value = ThemeState(primaryColor, secondaryColor, fontResource)

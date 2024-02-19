@@ -37,4 +37,8 @@
     <string name="prots_consumption">Prots consumption</string>
     <string name="fats_consumption">Fats consumption</string>
     <string name="carbs_consumption">Carbs consumption</string>
+
+<!--    ChooseDishScreenFragment-->
+    <string name="choose_dish">Choose dish</string>
+    <string name="no_dishes_yet">Seems that you have no dishes yet. \n\n Start by adding one.</string>
 </resources>

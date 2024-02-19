@@ -152,9 +152,9 @@ class AppearanceScreenFragment : Fragment() {
 
             override fun onOk(dialog: AmbilWarnaDialog?, color: Int) {
                 if (changePrimaryColor)
-                    themeViewModel.primaryColor = color
+                    themeViewModel.setPrimaryColor(color)
                 else if (changeSecondaryColor)
-                    themeViewModel.secondaryColor = color
+                    themeViewModel.setSecondaryColor(color)
 
                 (activity as? MainActivity)?.updateNavBarColors()
             }

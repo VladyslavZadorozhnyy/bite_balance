@@ -1,59 +1,79 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.content.res.ColorStateList
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
-import com.bitebalance.common.NavigationAction
-import com.bitebalance.databinding.FragmentChooseDishScreenBinding
-import com.bitebalance.presentation.viewmodels.DishViewModel
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.buttons.common.ButtonModelNew
-import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
-import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.components.databinding.NoItemsLayoutBinding
 import com.ui.model.DishModel
+import com.ui.common.Constants
+import android.content.res.ColorStateList
+import com.ui.basic.texts.common.TextModelNew
+import com.bitebalance.common.NavigationAction
+import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.components.databinding.ToolbarBinding
+import com.ui.components.databinding.NoItemsLayoutBinding
+import com.bitebalance.presentation.viewmodels.DishViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
+import com.bitebalance.databinding.FragmentChooseDishScreenBinding
 
 
-class ChooseDishScreenFragment : Fragment() {
-    private val binding by lazy { FragmentChooseDishScreenBinding.inflate(layoutInflater) }
-    private val noItemsLayoutBinding by lazy { NoItemsLayoutBinding.bind(binding.root) }
-
-    private val navigationVm by sharedViewModel<NavigationViewModel>()
-    private val themeViewModel by sharedViewModel<ThemeViewModel>()
+class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>() {
     private val dishVm by sharedViewModel<DishViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupViewModelsObservation()
+    override fun onStartFragment(): View {
+        binding = FragmentChooseDishScreenBinding.inflate(layoutInflater)
+        noItemsLayoutBinding = NoItemsLayoutBinding.bind(binding.root)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainer)
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onResumeFragment() {
+        super.onResumeFragment()
         dishVm.getAllDishes()
     }
 
-    private fun setupViewModelsObservation() {
+    override fun setupViewModelsObservation() {
         dishVm.state.observe(this) { state ->
             if (state.data == null) { return@observe }
             if (state.data.isEmpty()) { setupNoItemsView() } else { setupDishRecycler(state.data) }
         }
-        themeViewModel.state.observe(this) { state ->
+
+        themeVm.state.observe(this) {
             setupStyling()
             setupHeader()
         }
+    }
+
+    override fun onStopFragment() {
+        dishVm.state.removeObservers(this);
+        themeVm.state.removeObservers(this);
+    }
+
+    private fun setupStyling() {
+        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+    }
+
+    private fun setupHeader() {
+        toolbarBinding.headline.setup(
+            model = TextModelNew(
+                textValue = requireContext().getString(R.string.choose_dish),
+                textSize = Constants.TEXT_SIZE_BIG,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
+            )
+        )
+
+        toolbarBinding.backButton.setup(
+            model = ButtonModelNew(
+                iconRes = R.drawable.back_button_icon,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
+                foregroundColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor,
+                onClickListener = { navigationVm.popScreen() },
+            )
+        )
     }
 
     private fun setupNoItemsView() {
@@ -62,14 +82,14 @@ class ChooseDishScreenFragment : Fragment() {
         binding.dishRecycler.visibility = View.INVISIBLE
 
         noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.empty_menu_icon)
-        noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
+        noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
 
         noItemsLayoutBinding.messageView.setup(
             model = TextModelNew(
-                textValue = "Seems that you have no dishes yet. \n Start by adding one.",
-                textSize = 25,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                textValue = requireContext().getString(R.string.no_dishes_yet),
+                textSize = Constants.TEXT_SIZE,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
             )
         )
     }
@@ -82,46 +102,23 @@ class ChooseDishScreenFragment : Fragment() {
         binding.dishRecycler.setup(
             model = DishRecyclerModel(
                 items = dishItems,
-                primaryColor = themeViewModel.state.value!!.secondaryColor,
-                secondaryColor = themeViewModel.state.value!!.primaryColor,
+                primaryColor = themeVm.state.value!!.secondaryColor,
+                secondaryColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { processDishClick(it) }
             )
         )
     }
 
     private fun processDishClick(dish: DishModel) {
-        navigationVm.navigateTo(DishScreenFragment.newInstance(dish.name, createDish = true), NavigationAction.ADD)
-    }
-
-    private fun setupStyling() {
-        binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
-        binding.lineView.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
-
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
-    }
-
-    private fun setupHeader() {
-        binding.toolbar.headline.setup(
-            model = TextModelNew(
-                textValue = "Choose dish",
-                textSize = 30,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
-            )
-        )
-
-        binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
-                iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
-                onClickListener = { navigationVm.popScreen() }
-            )
+        navigationVm.navigateTo(
+            nextFragment = DishScreenFragment.newInstance(dish.name, createDish = true),
+            navAction = NavigationAction.ADD,
         )
     }
 
     companion object {
-        fun newInstance(): ChooseDishScreenFragment = ChooseDishScreenFragment()
+        fun newInstance(): ChooseDishScreenFragment {
+            return ChooseDishScreenFragment()
+        }
     }
 }

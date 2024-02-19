@@ -30,8 +30,8 @@ class NavigationFragment : Fragment() {
     }
 
     fun updateNavBarColors() {
-        binding.navigationComponent.updateBackgroundColor(themeViewModel.secondaryColor)
-        binding.navigationComponent.updateForegroundColor(themeViewModel.primaryColor)
+        binding.navigationComponent.updateBackgroundColor(themeViewModel.state.value!!.secondaryColor)
+        binding.navigationComponent.updateForegroundColor(themeViewModel.state.value!!.primaryColor)
     }
 
     private fun setupNavigationComponent() {
