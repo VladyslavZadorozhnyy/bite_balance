@@ -104,14 +104,14 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
                 items = dishItems,
                 primaryColor = themeVm.state.value!!.secondaryColor,
                 secondaryColor = themeVm.state.value!!.primaryColor,
-                onClickListener = { processDishClick(it) }
+                onClickListener = { processDishClick(it) },
             )
         )
     }
 
     private fun processDishClick(dish: DishModel) {
         navigationVm.navigateTo(
-            nextFragment = DishScreenFragment.newInstance(dish.name, createDish = true),
+            nextFragment = DishScreenFragment.newInstance(dishName = dish.name, createDish = true),
             navAction = NavigationAction.ADD,
         )
     }
