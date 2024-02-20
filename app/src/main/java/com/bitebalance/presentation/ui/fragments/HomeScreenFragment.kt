@@ -12,7 +12,6 @@ import com.bitebalance.presentation.viewmodels.*
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.common.BaseDialogModelNew
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog

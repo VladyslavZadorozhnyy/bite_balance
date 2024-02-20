@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat.getColorStateList
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.common.BaseUiComponentModel
-import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
@@ -36,35 +35,6 @@ class ConfirmDialog(
     }
 
     fun setup() {
-        (model as? BaseDialogModel)?.let {
-            window?.setBackgroundDrawable(transparentBackground)
-
-            binding.title.setup(
-                TextModel(
-                    textSize = 20,
-                    textValue = model.title,
-                    textColorRes = model.textColorRes,
-                    backgroundColor = model.backgroundColorRes
-                )
-            )
-
-            binding.confirmButton.setup(
-                ButtonModel(
-                    labelTextRes = model.buttonTextRes,
-                    labelTextSize = 10,
-                    foregroundColorRes = model.backgroundColorRes,
-                    backgroundColorRes = R.color.black,
-                    onClickListener = {
-                        model.onConfirmClicked()
-                        dismiss()
-                    }
-                )
-            )
-
-            binding.layout.background = getDrawable(context, R.drawable.dialog_shape)
-            binding.layout.backgroundTintList = getColorStateList(context, model.backgroundColorRes)
-        }
-
         (model as? BaseDialogModelNew)?.let {
             window?.setBackgroundDrawable(transparentBackground)
 

@@ -6,14 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentProgressScreenBinding
-import com.bitebalance.presentation.states.BasicState
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModel
-import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
-import com.ui.model.NutritionValueModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ProgressScreenFragment : Fragment() {

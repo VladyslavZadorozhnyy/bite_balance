@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat.getDrawable
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.common.BaseUiComponentModel
-import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
@@ -40,47 +39,6 @@ class YesNoDialog(
 
     @SuppressLint("ResourceAsColor")
     fun setup() {
-        (model as? BaseDialogModel)?.let {
-            window?.setBackgroundDrawable(transparentBackground)
-
-            binding.title.setup(
-                TextModel(
-                    textSize = 20,
-                    textValue = model.title,
-                    textColorRes = model.textColorRes,
-                    backgroundColor = model.backgroundColorRes
-                )
-            )
-
-            binding.yesButton.setup(
-                ButtonModel(
-                    labelTextRes = R.string.yes,
-                    labelTextSize = 15,
-                    foregroundColorRes = model.backgroundColorRes,
-                    backgroundColorRes = R.color.black,
-                    onClickListener = {
-                        model.onPositiveClicked()
-                        dismiss()
-                    }
-                )
-            )
-
-            binding.noButton.setup(
-                ButtonModel(
-                    labelTextRes = R.string.no,
-                    labelTextSize = 15,
-                    foregroundColorRes = model.backgroundColorRes,
-                    backgroundColorRes = R.color.black,
-                    onClickListener = {
-                        model.onNegativeClicked()
-                        dismiss()
-                    }
-                )
-            )
-
-            binding.layout.background = getDrawable(context, R.drawable.dialog_shape)
-            binding.layout.backgroundTintList = getColorStateList(context, model.backgroundColorRes)
-        }
 
         (model as? BaseDialogModelNew)?.let {
             window?.setBackgroundDrawable(transparentBackground)

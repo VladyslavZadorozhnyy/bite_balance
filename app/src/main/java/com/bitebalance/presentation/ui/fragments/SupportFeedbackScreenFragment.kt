@@ -7,17 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.databinding.FragmentSupportFeedbackScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.common.BaseDialogModelNew
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
