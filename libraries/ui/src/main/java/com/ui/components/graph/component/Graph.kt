@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
+import com.ui.common.Constants
 import com.ui.components.graph.subcomponents.ChartSubComponent
 import com.ui.components.graph.subcomponents.SpinnerSubComponent
 import com.ui.components.databinding.GraphLayoutBinding
@@ -15,8 +16,6 @@ class Graph(
     context: Context,
     attrs: AttributeSet? = null,
 ): BaseUiComponent(context, attrs) {
-    private val spinnerItems = GraphConstants.getSpinnerItems(context)
-
     private val binding by lazy {
         GraphLayoutBinding.inflate(LayoutInflater.from(context), this)
     }
@@ -25,7 +24,7 @@ class Graph(
         (model as? GraphModel)?.let { graphModel ->
             SpinnerSubComponent(binding.spinner).setup(
                 context,
-                spinnerItems,
+                Constants.SPINNER_ITEMS,
                 model.foregroundColor,
                 model.backgroundColor,
             ) { activeIndex ->

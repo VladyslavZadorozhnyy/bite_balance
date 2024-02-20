@@ -1,10 +1,7 @@
 package com.ui.components.graph.subcomponents
 
 import android.content.Context
-import android.util.Log
-import androidx.compose.ui.graphics.Color
 import androidx.core.content.ContextCompat.getColor
-import androidx.core.view.children
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData

@@ -19,11 +19,11 @@ import com.ui.components.databinding.SpinnerItemNotActiveLayoutBinding
 
 
 class SpinnerSubComponent(
-    private val spinnerView: Spinner
+    private val spinnerView: Spinner,
 ) {
     fun setup(
         context: Context,
-        spinnerItems: List<String>,
+        spinnerItems: List<Int>,
         foregroundColor: Int,
         backgroundColor: Int,
         onItemSelected: (Int) -> Unit = {}
@@ -55,17 +55,17 @@ class SpinnerSubComponent(
     inner class CustomArrayAdapter(
         context: Context,
         textViewResourceId: Int,
-        private val items: List<String>,
+        private val items: List<Int>,
         private val foregroundColor: Int,
         private val backgroundColor: Int,
-    ): ArrayAdapter<String> (context, textViewResourceId, items) {
+    ): ArrayAdapter<Int> (context, textViewResourceId, items) {
         private val layoutInflater = LayoutInflater.from(context)
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
             SpinnerItemNotActiveLayoutBinding.inflate(layoutInflater).apply {
                 textView.setup(
                     TextModelNew(
-                        textValue = items[position],
+                        textValue = context.getString(items[position]),
                         textSize = 20,
                         textColor = backgroundColor,
                         backgroundColor = foregroundColor,
@@ -85,7 +85,7 @@ class SpinnerSubComponent(
 
                 textView.setup(
                     TextModelNew(
-                        textValue = items[position],
+                        textValue = context.getString(items[position]),
                         textSize = 25,
                         textColor = foregroundColor,
                         backgroundColor = Color.TRANSPARENT,

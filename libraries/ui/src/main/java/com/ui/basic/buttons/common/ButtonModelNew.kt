@@ -7,9 +7,9 @@ import com.ui.common.Constants
 
 data class ButtonModelNew(
     val iconRes: Int? = null,
-    val iconSize: Int = ButtonConstants.ICON_SIZE,
+    val iconSize: Int = Constants.ICON_SIZE,
     val labelTextRes: Int? = null,
-    val labelTextSize: Int = ButtonConstants.LABEL_TEXT_SIZE,
+    val labelTextSize: Int = Constants.TEXT_SIZE,
     val strokeWidth: Int = 0,
     val foregroundColor: Int = Color.WHITE,
     val backgroundColor: Int = Color.BLACK,
