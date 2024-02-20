@@ -62,7 +62,7 @@ class MealDetailsScreenFragment : Fragment() {
         }
 
         nutritionVm.state.observe(this) { nutritionState ->
-            setupRecycler(nutritionState.data?.first())
+            nutritionState.data?.first()?.let { setupRecycler(it) }
         }
 
         themeVm.state.observe(this) { state ->
@@ -104,15 +104,19 @@ class MealDetailsScreenFragment : Fragment() {
         )
     }
 
-    private fun setupRecycler(nutritionValueModel: NutritionValueModel?) {
-        binding.metricRecycler.setup(MealMetricsModel.newInstance(
-            prots = nutritionValueModel?.prots ?: 0F,
-            fats = nutritionValueModel?.fats ?: 0F,
-            carbs = nutritionValueModel?.carbs ?: 0F,
-            kcal = nutritionValueModel?.kcals ?: 0F,
-            eaten = eatenAmount,
-            editable = false
-        ))
+    private fun setupRecycler(nutritionValueModel: NutritionValueModel) {
+        binding.metricRecycler.setup(
+            MealMetricsModel.newInstance(
+                prots = nutritionValueModel.prots,
+                fats = nutritionValueModel.fats,
+                carbs = nutritionValueModel.carbs,
+                kcal = nutritionValueModel.kcals,
+                eaten = eatenAmount,
+                editable = false,
+                foregroundColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
+            ),
+        )
 
         binding.doneButton.setup(
             model = ButtonModelNew(

@@ -136,9 +136,11 @@ data class MealMetricsModel(
             carbs: Float = 0F,
             kcal: Float = 0F,
             eaten: Float = 0F,
+            backgroundColor: Int = 0,
+            foregroundColor: Int = 0,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
-                listOf(
+                dishItems = listOf(
                     MetricModel(
                         name = "Prots:",
                         suffix = "g in 100g",
@@ -174,7 +176,9 @@ data class MealMetricsModel(
                         onlyNumbers = true,
                         hint = "$eaten"
                     )
-                )
+                ),
+                foregroundColor = foregroundColor,
+                backgroundColor = backgroundColor,
             )
         }
     }

@@ -21,7 +21,7 @@ class MetricRecycler(
         (model as? MetricRecyclerModel)?.let { recyclerModel ->
             binding.recyclerView.apply {
                 adapter = MetricAdapter(
-                    recyclerModel.items,
+                    items = recyclerModel.items,
                     foregroundColor = recyclerModel.foregroundColor,
                     backgroundColor = recyclerModel.backgroundColor,
                 )
