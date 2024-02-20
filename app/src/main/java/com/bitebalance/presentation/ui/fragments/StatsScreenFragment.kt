@@ -13,10 +13,10 @@ import com.bitebalance.presentation.viewmodels.DateViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.StatsViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModelNew
+import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.graph.component.GraphModel
 import com.ui.model.NutritionValueModel
@@ -87,7 +87,7 @@ class StatsScreenFragment : Fragment() {
 
     private fun setupHeader() {
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.question_mark_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -97,7 +97,7 @@ class StatsScreenFragment : Fragment() {
         )
 
         binding.toolbar.forwardButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.goal_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -121,7 +121,7 @@ class StatsScreenFragment : Fragment() {
 
     private fun setupButtons() {
         binding.prvMonthButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -134,7 +134,7 @@ class StatsScreenFragment : Fragment() {
         )
 
         binding.nxtMonthButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -172,7 +172,7 @@ class StatsScreenFragment : Fragment() {
     private fun showConfirmDialog() {
         ConfirmDialog(
             activity = requireActivity(),
-            model = BaseDialogModelNew(
+            model = BaseDialogModel(
                 backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 textColor = themeViewModel.state.value!!.primaryColor,
                 title = "Here you can see..."

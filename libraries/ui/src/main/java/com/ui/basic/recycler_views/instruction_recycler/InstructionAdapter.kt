@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
@@ -38,7 +38,7 @@ class InstructionAdapter(
 
         fun bind(item: InstructionModel, foregroundColor: Int, backgroundColor: Int) {
             buttonIcon.setup(
-                model = ButtonModelNew(
+                model = ButtonModel(
                     iconRes = item.iconRes,
                     iconSize = 100,
                     strokeWidth = 0,

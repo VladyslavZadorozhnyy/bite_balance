@@ -10,11 +10,11 @@ import android.view.ViewGroup
 import com.bitebalance.databinding.FragmentSupportFeedbackScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.input_form.InputFormModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModelNew
+import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -56,7 +56,7 @@ class SupportFeedbackScreenFragment : Fragment() {
         )
 
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -105,7 +105,7 @@ class SupportFeedbackScreenFragment : Fragment() {
     private fun setupButton() {
         Log.d("AAADIP", "setupButton() started")
         binding.commitButton.setup(
-            ButtonModelNew(
+            ButtonModel(
                 labelTextRes = R.string.commit,
                 labelTextSize = 15,
                 iconRes = R.drawable.donation_icon,
@@ -115,7 +115,7 @@ class SupportFeedbackScreenFragment : Fragment() {
                 onClickListener = {
                     ConfirmDialog(
                         activity = requireActivity(),
-                        model = BaseDialogModelNew(
+                        model = BaseDialogModel(
                             backgroundColor = themeViewModel.state.value!!.primaryColor,
                             textColor = themeViewModel.state.value!!.secondaryColor,
                             title = "Donated successfully!"

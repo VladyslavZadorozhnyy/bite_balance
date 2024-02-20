@@ -13,13 +13,13 @@ import com.bitebalance.presentation.viewmodels.DateViewModel
 import com.bitebalance.presentation.viewmodels.GoalViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.goal_recycler.GoalAdapter
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.NoItemsLayoutBinding
-import com.ui.components.dialogs.common.BaseDialogModelNew
+import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.input_dialog.InputDialog
 import com.ui.model.GoalModel
@@ -92,7 +92,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
             themeViewModel.state.value!!.primaryColor)
 
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -114,7 +114,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
 
     private fun setupButtons() {
         binding.prvMonthButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -124,7 +124,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
         )
 
         binding.nxtMonthButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 105,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -134,7 +134,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
         )
 
         binding.addGoalButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.add_icon,
                 iconSize = 120,
                 strokeWidth = 5,
@@ -148,7 +148,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
     private fun showInputDialog() {
         InputDialog(
             activity = requireActivity(),
-            model = BaseDialogModelNew(
+            model = BaseDialogModel(
                 backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 textColor = themeViewModel.state.value!!.primaryColor,
                 title = "My next goal is to :",
@@ -160,7 +160,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
     private fun showConfirmDialog(message: String) {
         ConfirmDialog(
             activity = requireActivity(),
-            model = BaseDialogModelNew(
+            model = BaseDialogModel(
                 backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 textColor = themeViewModel.state.value!!.primaryColor,
                 title = message,

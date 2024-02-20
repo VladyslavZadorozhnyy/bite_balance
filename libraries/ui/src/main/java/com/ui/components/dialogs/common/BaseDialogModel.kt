@@ -4,7 +4,7 @@ import com.ui.components.R
 import com.ui.common.Constants
 import com.ui.common.BaseUiComponentModel
 
-data class BaseDialogModelNew(
+data class BaseDialogModel(
     val title: String,
     val backgroundColor: Int = 0,
     val textColor: Int = 0,

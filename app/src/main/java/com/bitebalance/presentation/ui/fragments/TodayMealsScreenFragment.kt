@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentTodaysMealsScreenBinding
 import com.ui.model.MealModelUnboxed
 import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.meal_recycler.MealRecyclerModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
@@ -49,7 +48,7 @@ class TodayMealsScreenFragment : Fragment() {
 
     private fun setupHeader() {
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,

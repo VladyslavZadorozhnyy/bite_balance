@@ -9,12 +9,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.common.BaseUiComponentModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.YesNoDialogBinding
-import com.ui.components.dialogs.common.BaseDialogModelNew
+import com.ui.components.dialogs.common.BaseDialogModel
 
 class YesNoDialog(
     activity: Activity,
@@ -37,7 +37,7 @@ class YesNoDialog(
     @SuppressLint("ResourceAsColor")
     fun setup() {
 
-        (model as? BaseDialogModelNew)?.let {
+        (model as? BaseDialogModel)?.let {
             window?.setBackgroundDrawable(transparentBackground)
 
             binding.title.setup(
@@ -50,7 +50,7 @@ class YesNoDialog(
             )
 
             binding.yesButton.setup(
-                ButtonModelNew(
+                ButtonModel(
                     labelTextRes = R.string.yes,
                     labelTextSize = 15,
                     foregroundColor = model.backgroundColor,
@@ -63,7 +63,7 @@ class YesNoDialog(
             )
 
             binding.noButton.setup(
-                ButtonModelNew(
+                ButtonModel(
                     labelTextRes = R.string.no,
                     labelTextSize = 15,
                     foregroundColor = model.backgroundColor,

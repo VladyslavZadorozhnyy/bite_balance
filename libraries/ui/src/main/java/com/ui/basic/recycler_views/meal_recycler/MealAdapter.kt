@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.text.Text
@@ -52,7 +52,7 @@ class MealAdapter (
         fun bind(item: MealModelUnboxed, foregroundColor: Int, backgroundColor: Int) {
             (mealIcon.parent as? View)?.setBackgroundColor(foregroundColor)
             mealIcon.setup(
-                model = ButtonModelNew(
+                model = ButtonModel(
                     iconRes = R.drawable.breakfast_icon,
                     iconSize = 120,
                     strokeWidth = 0,
@@ -63,7 +63,7 @@ class MealAdapter (
             )
 
             clockIcon.setup(
-                model = ButtonModelNew(
+                model = ButtonModel(
                     iconRes = R.drawable.clock_icon,
                     iconSize = 90,
                     strokeWidth = 0,
@@ -74,7 +74,7 @@ class MealAdapter (
             )
 
             buttonView.setup(
-                model = ButtonModelNew(
+                model = ButtonModel(
                     iconRes = R.drawable.bin_icon,
                     iconSize = 80,
                     strokeWidth = 5,

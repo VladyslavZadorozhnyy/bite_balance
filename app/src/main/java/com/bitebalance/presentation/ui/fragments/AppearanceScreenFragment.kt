@@ -12,7 +12,7 @@ import com.bitebalance.databinding.FragmentAppearanceScreenBinding
 import com.bitebalance.presentation.ui.activites.MainActivity
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -59,7 +59,7 @@ class AppearanceScreenFragment : Fragment() {
         )
 
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,

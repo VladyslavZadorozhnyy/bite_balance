@@ -9,13 +9,13 @@ import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentHomeScreenBinding
 import com.bitebalance.presentation.states.BasicState
 import com.bitebalance.presentation.viewmodels.*
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModelNew
+import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
-import com.ui.components.progress.carousel.ProgressCarouselModelNew
+import com.ui.components.progress.carousel.ProgressCarouselModel
 import com.ui.model.NutritionValueModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -61,7 +61,7 @@ class HomeScreenFragment : Fragment() {
             if (state.message.isNotEmpty()) {
                 ConfirmDialog(
                     requireActivity(),
-                    BaseDialogModelNew(
+                    BaseDialogModel(
                         backgroundColor = themeViewModel.state.value!!.secondaryColor,
                         textColor = themeViewModel.state.value!!.primaryColor,
                         title = state.message,
@@ -92,7 +92,7 @@ class HomeScreenFragment : Fragment() {
 
     private fun setupCarousel(consumedGoalValues: List<NutritionValueModel>) {
         binding.progressCarousel.setup(
-            model = ProgressCarouselModelNew(
+            model = ProgressCarouselModel(
                 consumed = consumedGoalValues[0],
                 goalConsumption = consumedGoalValues[1],
                 primaryColor = themeViewModel.state.value!!.primaryColor,
@@ -107,7 +107,7 @@ class HomeScreenFragment : Fragment() {
 
     private fun setupButtons() {
         binding.infoButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.info_icon,
                 iconSize = 100,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -119,7 +119,7 @@ class HomeScreenFragment : Fragment() {
         )
 
         binding.todayMealsButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.meals_icon,
                 iconSize = 80,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -131,7 +131,7 @@ class HomeScreenFragment : Fragment() {
         )
 
         binding.resetProgressButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.reset_icon,
                 iconSize = 100,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -141,7 +141,7 @@ class HomeScreenFragment : Fragment() {
         )
 
         binding.addMealButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.add_icon,
                 iconSize = 100,
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -156,7 +156,7 @@ class HomeScreenFragment : Fragment() {
     private fun requestConfirmation() {
         YesNoDialog(
             activity = requireActivity(),
-            model = BaseDialogModelNew(
+            model = BaseDialogModel(
                 backgroundColor = themeViewModel.state.value!!.secondaryColor,
                 textColor = themeViewModel.state.value!!.primaryColor,
                 title = "Would you like to reset progress?\n\nToday’s data will be removed.",

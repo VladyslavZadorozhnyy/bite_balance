@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getColorStateList
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.FragmentAddMealScreenBinding
 import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -54,7 +53,7 @@ class AddMealScreenFragment : Fragment() {
 
     private fun setupHeader() {
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -86,7 +85,7 @@ class AddMealScreenFragment : Fragment() {
 
     private fun setupButtons() {
         binding.createNewButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.add_icon,
                 iconSize = 100,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -101,7 +100,7 @@ class AddMealScreenFragment : Fragment() {
         )
 
         binding.chooseFromMenu.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.nav_menu_active,
                 iconSize = 100,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,

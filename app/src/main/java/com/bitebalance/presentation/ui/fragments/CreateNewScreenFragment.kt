@@ -10,13 +10,13 @@ import com.bitebalance.databinding.FragmentCreateNewScreenBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.CreateMealMetricsModel
 import com.ui.basic.recycler_views.metric_recycler.DishNameMetricsModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModelNew
+import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -65,7 +65,7 @@ class CreateNewScreenFragment : Fragment() {
         )
 
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -114,7 +114,7 @@ class CreateNewScreenFragment : Fragment() {
         )
 
         binding.doneButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 labelTextRes = R.string.done,
                 labelTextSize = 20,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,
@@ -130,7 +130,7 @@ class CreateNewScreenFragment : Fragment() {
                     if (inputValues.any { it.isEmpty() }) {
                         YesNoDialog(
                             requireActivity(),
-                            BaseDialogModelNew(
+                            BaseDialogModel(
                                 title = "Some fields are empty. They will be filled with '0'",
                                 onPositiveClicked = { processDishCreation(inputValues) },
                                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -172,7 +172,7 @@ class CreateNewScreenFragment : Fragment() {
 
             ConfirmDialog(
                 requireActivity(),
-                BaseDialogModelNew(
+                BaseDialogModel(
                     state.message,
                     textColor = themeViewModel.state.value!!.primaryColor,
                     backgroundColor = themeViewModel.state.value!!.secondaryColor,
@@ -186,7 +186,7 @@ class CreateNewScreenFragment : Fragment() {
 
             ConfirmDialog(
                 requireActivity(),
-                BaseDialogModelNew(
+                BaseDialogModel(
                     state.message,
                     textColor = themeViewModel.state.value!!.primaryColor,
                     backgroundColor = themeViewModel.state.value!!.secondaryColor,

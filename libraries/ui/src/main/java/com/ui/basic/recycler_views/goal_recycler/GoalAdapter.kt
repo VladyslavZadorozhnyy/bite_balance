@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.checkbox.Checkbox
@@ -60,7 +60,7 @@ class GoalAdapter(
             itemViewContainer.setBackgroundColor(backgroundColor)
 
             buttonView.setup(
-                model = ButtonModelNew(
+                model = ButtonModel(
                     iconRes = R.drawable.bin_icon,
                     iconSize = 80,
                     strokeWidth = 5,

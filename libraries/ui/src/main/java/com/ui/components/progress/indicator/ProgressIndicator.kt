@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.common.TextModelNew3
@@ -25,7 +24,7 @@ class ProgressIndicator(
     private val outOfLabel = context.getString(R.string.out_of)
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? ProgressIndicatorModelNew)?.let { model ->
+        (model as? ProgressIndicatorModel)?.let { model ->
             binding.layout.backgroundTintList = ColorStateList.valueOf(model.primaryColor)
             setupAndGetProgress(model.consumed, model.goalConsumption).also { progress ->
                 setupDynamicLabels(model, progress)
@@ -52,7 +51,7 @@ class ProgressIndicator(
     }
 
     private fun setupDynamicLabels(
-        model: ProgressIndicatorModelNew,
+        model: ProgressIndicatorModel,
         progress: Int,
     ) {
         val consumedLabel = IndicatorUtils.valueToLabel(model.consumed)
@@ -79,7 +78,7 @@ class ProgressIndicator(
         )
     }
 
-    private fun setupStaticLabels(model: ProgressIndicatorModelNew) {
+    private fun setupStaticLabels(model: ProgressIndicatorModel) {
         binding.progressTitleLabel.setup(
             model = TextModelNew(
                 textValue = context.getString(R.string.from_limit),

@@ -48,7 +48,7 @@ class ProgressCarousel(
         val wrappedDrawable = DrawableCompat.wrap(textModelShape!!)
 
 
-        (model as? ProgressCarouselModelNew)?.let {
+        (model as? ProgressCarouselModel)?.let {
             DrawableCompat.setTint(wrappedDrawable, model.secondaryColor)
 
             binding.title.setup(
@@ -65,7 +65,7 @@ class ProgressCarousel(
     }
 
     private fun setupCarousel(model: BaseUiComponentModel) {
-        (model as? ProgressCarouselModelNew)?.let { progressModel ->
+        (model as? ProgressCarouselModel)?.let { progressModel ->
             binding.viewPager.apply {
                 adapter = CarouselAdapterNew(context, progressModel)
                 addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -81,7 +81,7 @@ class ProgressCarousel(
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun setupDots(model: BaseUiComponentModel) {
-        (model as? ProgressCarouselModelNew)?.let { progressModel ->
+        (model as? ProgressCarouselModel)?.let { progressModel ->
             val nonActiveDotRes = R.drawable.non_active_dot_icon
             val wrappedDrawable = DrawableCompat.wrap(context.getDrawable(nonActiveDotRes)!!)
             DrawableCompat.setTint(wrappedDrawable, progressModel.secondaryColor)
@@ -96,7 +96,7 @@ class ProgressCarousel(
     }
 
     private fun updateDots(activePosition: Int, model: BaseUiComponentModel) {
-        (model as? ProgressCarouselModelNew)?.let { progressModel ->
+        (model as? ProgressCarouselModel)?.let { progressModel ->
             if (binding.sliderDots.childCount == 0) { setupDots(model) }
 
             val activeDotRes = R.drawable.active_dot_icon

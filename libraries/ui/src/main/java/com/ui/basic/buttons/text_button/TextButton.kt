@@ -5,9 +5,8 @@ import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getColorStateList
 import androidx.core.content.res.ResourcesCompat.getFont
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
@@ -20,7 +19,7 @@ class TextButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponen
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? ButtonModelNew)?.let {
+        (model as? ButtonModel)?.let {
             binding.backgroundTintList = ColorStateList.valueOf(model.backgroundColor)
             binding.strokeColor = ColorStateList.valueOf(model.foregroundColor)
 

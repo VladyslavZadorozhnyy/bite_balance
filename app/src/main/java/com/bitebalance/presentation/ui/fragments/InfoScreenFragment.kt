@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.bitebalance.databinding.FragmentInfoScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
@@ -51,7 +51,7 @@ class InfoScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.INVISIBLE
 
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeViewModel.state.value!!.primaryColor,

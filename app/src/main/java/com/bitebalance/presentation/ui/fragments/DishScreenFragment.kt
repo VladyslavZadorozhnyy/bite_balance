@@ -2,12 +2,10 @@ package com.bitebalance.presentation.ui.fragments
 
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources
 import com.bitebalance.databinding.FragmentDishScreenBinding
 import com.bitebalance.presentation.ui.activites.MainActivity
 import com.ui.model.NutritionValueModel
@@ -15,13 +13,13 @@ import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.CreateMealWithExistingDishModel
 import com.ui.basic.recycler_views.metric_recycler.DishMetricsModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModelNew
+import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import com.ui.model.DishModel
@@ -66,7 +64,7 @@ class DishScreenFragment : Fragment() {
             if (state.message.isNotEmpty()) {
                 ConfirmDialog(
                     requireActivity(),
-                    BaseDialogModelNew(
+                    BaseDialogModel(
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                         textColor = themeVm.state.value!!.primaryColor,
                         title = state.message,
@@ -83,7 +81,7 @@ class DishScreenFragment : Fragment() {
                 setupHeader(state.data!!.first())
                 nutritionVm.getNutritionValue(state.data.first().nutritionValId)
             } else {
-                ConfirmDialog(requireActivity(), BaseDialogModelNew(
+                ConfirmDialog(requireActivity(), BaseDialogModel(
                     title = state.message,
                     buttonText = R.string.done,
                     textColor = themeVm.state.value!!.secondaryColor,
@@ -97,7 +95,7 @@ class DishScreenFragment : Fragment() {
             if (state.message.isNotEmpty()) {
                 ConfirmDialog(
                     requireActivity(),
-                    BaseDialogModelNew(
+                    BaseDialogModel(
                         state.message,
                         buttonText = R.string.done,
                         textColor = themeVm.state.value!!.secondaryColor,
@@ -137,7 +135,7 @@ class DishScreenFragment : Fragment() {
         )
 
         binding.toolbar.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = 70,
                 foregroundColor = themeVm.state.value!!.primaryColor,
@@ -167,7 +165,7 @@ class DishScreenFragment : Fragment() {
 
     private fun setupDeleteButton() {
         binding.deleteButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.bin_icon,
                 iconSize = 70,
                 strokeWidth = 5,
@@ -176,7 +174,7 @@ class DishScreenFragment : Fragment() {
                 onClickListener = {
                     YesNoDialog(
                         requireActivity(),
-                        BaseDialogModelNew(
+                        BaseDialogModel(
                             title = "Do you want to delete this dish?",
                             textColor = themeVm.state.value!!.secondaryColor,
                             backgroundColor = themeVm.state.value!!.primaryColor,
@@ -189,7 +187,7 @@ class DishScreenFragment : Fragment() {
 
     private fun setupEditButton() {
         binding.editButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.edit_icon,
                 iconSize = 70,
                 strokeWidth = 5,
@@ -235,7 +233,7 @@ class DishScreenFragment : Fragment() {
         )
 
         binding.doneButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 labelTextRes = if (editButtonChecked) { R.string.update } else { R.string.done },
                 labelTextSize = 20,
                 foregroundColor = themeVm.state.value!!.primaryColor,
@@ -258,7 +256,7 @@ class DishScreenFragment : Fragment() {
         if (inputValues.any { it.isEmpty() }) {
             YesNoDialog(
                 requireActivity(),
-                BaseDialogModelNew(
+                BaseDialogModel(
                     title = "Some fields are empty. They will be filled with '0'",
                     textColor = themeVm.state.value!!.secondaryColor,
                     backgroundColor = themeVm.state.value!!.primaryColor,
@@ -276,7 +274,7 @@ class DishScreenFragment : Fragment() {
         if (inputValues.any { inputValues.last().isEmpty() }) {
             YesNoDialog(
                 requireActivity(),
-                BaseDialogModelNew(
+                BaseDialogModel(
                     title = "Some fields are empty. They will be filled with '0'",
                     textColor = themeVm.state.value!!.secondaryColor,
                     backgroundColor = themeVm.state.value!!.primaryColor,

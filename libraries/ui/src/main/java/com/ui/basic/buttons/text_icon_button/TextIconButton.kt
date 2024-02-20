@@ -6,7 +6,7 @@ import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.content.res.ResourcesCompat.getFont
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
@@ -19,7 +19,7 @@ class TextIconButton(context: Context, attrs: AttributeSet? = null) : BaseUiComp
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? ButtonModelNew)?.let { model ->
+        (model as? ButtonModel)?.let { model ->
             binding.backgroundTintList = ColorStateList.valueOf(model.backgroundColor)
             binding.strokeColor = ColorStateList.valueOf(model.foregroundColor)
 

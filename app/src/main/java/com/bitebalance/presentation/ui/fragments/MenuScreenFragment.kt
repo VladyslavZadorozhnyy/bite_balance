@@ -11,7 +11,7 @@ import com.bitebalance.databinding.FragmentMenuScreenBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
@@ -90,7 +90,7 @@ class MenuScreenFragment : Fragment() {
 
     private fun setupCreateNewButton() {
         binding.createNewMealButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.add_icon,
                 iconSize = 80,
                 strokeWidth = 5,

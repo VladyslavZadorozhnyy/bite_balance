@@ -7,11 +7,11 @@ import androidx.viewpager.widget.PagerAdapter
 import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.progress.indicator.ProgressIndicator
-import com.ui.components.progress.indicator.ProgressIndicatorModelNew
+import com.ui.components.progress.indicator.ProgressIndicatorModel
 
 class CarouselAdapterNew(
     private val context: Context,
-    private val model: ProgressCarouselModelNew,
+    private val model: ProgressCarouselModel,
 ) : PagerAdapter() {
     private val kcalName = context.getString(R.string.kcal_name)
     private val protsName = context.getString(R.string.prots_name)
@@ -38,7 +38,7 @@ class CarouselAdapterNew(
 
     private fun bindView(view: ProgressIndicator, position: Int, container: ViewGroup) {
         val progressModel = when (position) {
-            0 -> ProgressIndicatorModelNew(
+            0 -> ProgressIndicatorModel(
                 consumed = model.goalConsumption.kcals / 100f,
                 goalConsumption = model.consumed.kcals,
                 indicatorLabel = kcalLabel,
@@ -46,7 +46,7 @@ class CarouselAdapterNew(
                 primaryColor = model.primaryColor,
                 secondaryColor = model.secondaryColor
             )
-            1 -> ProgressIndicatorModelNew(
+            1 -> ProgressIndicatorModel(
                 consumed = model.goalConsumption.prots / 100f,
                 goalConsumption = model.consumed.prots,
                 indicatorLabel = gramLabel,
@@ -54,7 +54,7 @@ class CarouselAdapterNew(
                 primaryColor = model.primaryColor,
                 secondaryColor = model.secondaryColor
             )
-            2 -> ProgressIndicatorModelNew(
+            2 -> ProgressIndicatorModel(
                 consumed = model.goalConsumption.fats / 100f,
                 goalConsumption = model.consumed.fats,
                 indicatorLabel = gramLabel,
@@ -62,7 +62,7 @@ class CarouselAdapterNew(
                 primaryColor = model.primaryColor,
                 secondaryColor = model.secondaryColor
             )
-            else -> ProgressIndicatorModelNew(
+            else -> ProgressIndicatorModel(
                 consumed = model.goalConsumption.carbs / 100f,
                 goalConsumption = model.consumed.carbs,
                 indicatorLabel = gramLabel,

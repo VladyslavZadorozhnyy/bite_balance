@@ -7,7 +7,7 @@ import com.ui.common.Constants
 import android.content.res.ColorStateList
 import com.ui.basic.texts.common.TextModelNew
 import com.bitebalance.common.NavigationAction
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.components.databinding.ToolbarBinding
 import com.ui.components.databinding.NoItemsLayoutBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
@@ -66,7 +66,7 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
         )
 
         toolbarBinding.backButton.setup(
-            model = ButtonModelNew(
+            model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = themeVm.state.value!!.primaryColor,

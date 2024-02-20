@@ -5,7 +5,7 @@ import android.graphics.Color
 import com.ui.common.Constants
 import com.ui.common.BaseUiComponentModel
 
-data class ButtonModelNew(
+data class ButtonModel(
     val iconRes: Int? = null,
     val iconSize: Int = Constants.ICON_SIZE,
     val labelTextRes: Int? = null,

@@ -3,15 +3,13 @@ package com.ui.components.graph.subcomponents
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.core.view.ViewCompat
-import com.ui.basic.buttons.common.ButtonModelNew
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.SpinnerItemActiveLayoutBinding
@@ -93,7 +91,7 @@ class SpinnerSubComponent(
                 )
 
                 dropdownButton.setup(
-                    ButtonModelNew(
+                    ButtonModel(
                         iconRes = R.drawable.arrow_down_icon,
                         iconSize = 70,
                         foregroundColor = backgroundColor,
