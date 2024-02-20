@@ -12,7 +12,6 @@ import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.recycler_views.text_recycler.TextRecyclerModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel

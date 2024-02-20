@@ -18,7 +18,6 @@ import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.recycler_views.metric_recycler.CreateMealWithExistingDishModel
 import com.ui.basic.recycler_views.metric_recycler.DishMetricsModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R

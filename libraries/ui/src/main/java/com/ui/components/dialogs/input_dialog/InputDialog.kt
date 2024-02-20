@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat.getDrawable
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.common.BaseUiComponentModel
 import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import com.ui.components.databinding.InputDialogBinding

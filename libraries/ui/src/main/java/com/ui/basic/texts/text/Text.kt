@@ -13,7 +13,6 @@ import androidx.core.content.res.ResourcesCompat.getFont
 import androidx.core.graphics.drawable.DrawableCompat
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.basic.texts.common.TextModelNew2
 import com.ui.basic.texts.common.TextModelNew3
@@ -31,24 +30,6 @@ class Text(
 
     @SuppressLint("ResourceAsColor")
     override fun setup(model: BaseUiComponentModel) {
-        (model as? TextModel)?.let {
-            binding.text = model.textValue
-            binding.textSize = model.textSize.toFloat()
-            binding.setTextColor(getColor(context, model.textColorRes))
-            binding.typeface = getFont(context, R.font.ultra_regular_font)
-
-            binding.gravity = Gravity.CENTER
-            binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
-
-            binding.background = if (it.backgroundRes != null) {
-                getDrawable(context, it.backgroundRes)
-            } else {
-                getDrawable(context, R.drawable.text_shape)
-            }
-            binding.background.setTint(getColor(context, model.backgroundColor))
-        }
-
         (model as? TextModelNew)?.let {
             binding.text = model.textValue
             binding.textSize = model.textSize.toFloat()
