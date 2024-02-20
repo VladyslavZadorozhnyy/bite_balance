@@ -1,8 +1,8 @@
 package com.ui.components.progress.carousel
 
-import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
 import com.ui.model.NutritionValueModel
+import com.ui.common.BaseUiComponentModel
 
 data class ProgressCarouselModelNew(
     val consumed: NutritionValueModel,

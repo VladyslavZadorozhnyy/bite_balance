@@ -1,24 +1,23 @@
 package com.ui.components.progress.carousel
 
-import android.annotation.SuppressLint
+import com.ui.components.R
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.drawable.GradientDrawable
-import android.util.AttributeSet
-import android.util.Log
-import android.view.LayoutInflater
+import com.ui.common.Constants
 import android.widget.ImageView
+import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat.getDrawable
-import androidx.core.graphics.drawable.DrawableCompat
+import com.ui.common.BaseUiComponent
+import com.ui.common.ComponentUiUtils
+import android.annotation.SuppressLint
 import androidx.core.view.updateMargins
+import android.content.res.ColorStateList
+import com.ui.common.BaseUiComponentModel
 import androidx.viewpager.widget.ViewPager
 import com.ui.basic.texts.common.TextModelNew2
-import com.ui.common.BaseUiComponent
-import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiUtils
-import com.ui.common.Constants
-import com.ui.components.R
+import android.graphics.drawable.GradientDrawable
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.content.ContextCompat.getDrawable
 import com.ui.components.databinding.ProgressCarouselBinding
 
 
@@ -66,19 +65,6 @@ class ProgressCarousel(
     }
 
     private fun setupCarousel(model: BaseUiComponentModel) {
-        (model as? ProgressCarouselModel)?.let { progressModel ->
-            binding.viewPager.apply {
-                adapter = CarouselAdapter(context, progressModel)
-                addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                    override fun onPageSelected(position: Int) { updateDots(position, model) }
-
-                    override fun onPageScrolled(pos: Int, posOffset: Float, posOffsetPixels: Int) {}
-
-                    override fun onPageScrollStateChanged(state: Int) {}
-                })
-            }
-        }
-
         (model as? ProgressCarouselModelNew)?.let { progressModel ->
             binding.viewPager.apply {
                 adapter = CarouselAdapterNew(context, progressModel)
