@@ -1,9 +1,9 @@
 package com.ui.basic.buttons.common
 
-import android.graphics.Color
 import android.view.View
-import com.ui.common.BaseUiComponentModel
+import android.graphics.Color
 import com.ui.common.Constants
+import com.ui.common.BaseUiComponentModel
 
 data class ButtonModelNew(
     val iconRes: Int? = null,

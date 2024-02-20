@@ -1,11 +1,9 @@
 package com.ui.basic.recycler_views.meal_recycler
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.texts.common.TextModelNew

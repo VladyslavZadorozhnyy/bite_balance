@@ -1,8 +1,8 @@
 package com.ui.components.dialogs.common
 
-import com.ui.common.BaseUiComponentModel
-import com.ui.common.Constants
 import com.ui.components.R
+import com.ui.common.Constants
+import com.ui.common.BaseUiComponentModel
 
 data class BaseDialogModelNew(
     val title: String,

@@ -12,9 +12,7 @@ import com.bitebalance.databinding.FragmentAddMealScreenBinding
 import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
-import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.common.TextModelNew
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -116,7 +114,7 @@ class AddMealScreenFragment : Fragment() {
 
         binding.createNewLabel.setup(
             model = TextModelNew(
-                textValue = "Create new meal",
+                textValue = "Create new dish",
                 textSize = 20,
                 textColor = themeViewModel.state.value!!.secondaryColor,
                 backgroundColor = themeViewModel.state.value!!.primaryColor,

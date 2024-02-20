@@ -5,7 +5,6 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat.getColorStateList
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.common.ButtonModelNew
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
@@ -18,17 +17,6 @@ class IconButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponen
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? ButtonModel)?.let {
-            binding.backgroundTintList = getColorStateList(context, model.backgroundColorRes)
-            binding.strokeColor = getColorStateList(context, model.foregroundColorRes)
-            binding.iconTint = getColorStateList(context, model.foregroundColorRes)
-            binding.cornerRadius = Constants.CORNER_RADIUS
-            binding.strokeWidth = model.strokeWidth
-            binding.iconSize = model.iconSize
-
-            model.iconRes?.let { binding.setIconResource(it) }
-            model.onClickListener?.let { binding.setOnClickListener(it) }
-        }
         (model as? ButtonModelNew)?.let {
             binding.backgroundTintList = ColorStateList.valueOf(it.backgroundColor)
             binding.strokeColor = ColorStateList.valueOf(model.foregroundColor)
