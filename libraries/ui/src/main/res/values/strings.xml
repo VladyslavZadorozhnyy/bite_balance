@@ -39,6 +39,7 @@
     <string name="carbs_consumption">Carbs consumption</string>
 
 <!--    Common-->
+    <string name="empty_line" />
 
 <!--    ChooseDishScreenFragment-->
     <string name="choose_dish">Choose dish</string>
@@ -50,4 +51,12 @@
     <string name="choose_from_menu">Choose from menu</string>
     <string name="specify_meal">Specify meal, please:</string>
     <string name="meals_eaten_today">Meals eaten today: </string>
+
+<!--    AppearanceScreenFragment-->
+    <string name="appearance">Appearance</string>
+    <string name="primary_color">Primary color</string>
+    <string name="secondary_color">Secondary color</string>
+    <string name="font">Font</string>
+    <string name="choose_primary_color">Choose primary color</string>
+    <string name="choose_secondary_color">Choose secondary color</string>
 </resources>

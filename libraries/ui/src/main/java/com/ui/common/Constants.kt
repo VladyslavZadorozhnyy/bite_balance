@@ -15,6 +15,7 @@ object Constants {
     const val ICON_SIZE = 40
     const val ICON_SIZE_BIG = 100
     const val CORNER_RADIUS = 20
+    const val COLOR_ICON_STROKE_WIDTH = 5
 
 //    Other constants
     const val CAROUSEL_SIZE = 4

@@ -45,8 +45,8 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
     }
 
     override fun onStopFragment() {
-        dishVm.state.removeObservers(this);
-        themeVm.state.removeObservers(this);
+        dishVm.state.removeObservers(this)
+        themeVm.state.removeObservers(this)
     }
 
     private fun setupStyling() {
