@@ -68,4 +68,11 @@
     <string name="instruction">Instruction</string>
     <string name="support_us">Support Us</string>
     <string name="feedback">Feedback</string>
+
+<!--    CreateNewScreenFragment-->
+    <string name="new_dish">New dish</string>
+    <string name="new_meal">New meal</string>
+    <string name="spec_nut_value">Specify nutritional value, please:</string>
+    <string name="toggle_check">Toggle check box for not including</string>
+    <string name="some_fields_empty">Some fields are empty. They will be filled with \'0\'</string>
 </resources>

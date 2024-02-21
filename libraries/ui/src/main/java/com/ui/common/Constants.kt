@@ -6,6 +6,7 @@ object Constants {
 //    Text constants
     const val TEXT_SIZE = 20
     const val TEXT_SIZE_BIG = 30
+    const val TEXT_SIZE_SMALL = 15
     const val TEXT_STROKE_WIDTH = 3F
 
 //    Button constants
