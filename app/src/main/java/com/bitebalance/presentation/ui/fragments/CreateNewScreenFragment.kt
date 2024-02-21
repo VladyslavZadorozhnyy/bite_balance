@@ -40,7 +40,7 @@ class CreateNewScreenFragment : Fragment() {
 
     override fun onDestroy() {
         dishVm.resetState()
-        mealVm.resetState()
+        mealVm.resetState() // THIS MAY NOT BE NEEDED AAADIP
         mealVm.state.removeObservers(this)
         dishVm.state.removeObservers(this)
         super.onDestroy()
