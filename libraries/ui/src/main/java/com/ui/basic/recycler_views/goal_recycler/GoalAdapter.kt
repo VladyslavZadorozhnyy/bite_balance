@@ -8,7 +8,7 @@ import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.checkbox.Checkbox
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 import com.ui.model.GoalModel
@@ -69,7 +69,7 @@ class GoalAdapter(
                 )
             )
             textView.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = item.textValue,
                     textSize = 30,
                     textColor = foregroundColor,

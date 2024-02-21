@@ -14,9 +14,8 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.slideable_text.SlideableText
-import com.ui.basic.texts.text.Text
 import com.ui.components.R
 
 class ChartSubComponent(
@@ -94,7 +93,7 @@ class ChartSubComponent(
         }
 
         goalConsumption.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = lineDataLabel,
                 textSize = 15,
                 textColor = barColor,
@@ -103,7 +102,7 @@ class ChartSubComponent(
         )
 
         actualConsumption.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = barDataLabel,
                 textSize = 15,
                 textColor = barColor,

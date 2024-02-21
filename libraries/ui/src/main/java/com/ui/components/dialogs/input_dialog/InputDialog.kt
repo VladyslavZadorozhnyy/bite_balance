@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat.getDrawable
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.common.BaseUiComponentModel
 import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.InputDialogBinding
 import com.ui.components.dialogs.common.BaseDialogModel
@@ -38,7 +38,7 @@ class InputDialog(
             window?.setBackgroundDrawable(transparentBackground)
 
             binding.title.setup(
-                TextModelNew(
+                TextModel(
                     textSize = 30,
                     textValue = model.title,
                     textColor = it.textColor,

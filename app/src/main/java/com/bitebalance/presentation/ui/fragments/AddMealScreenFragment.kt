@@ -12,7 +12,7 @@ import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -63,7 +63,7 @@ class AddMealScreenFragment : Fragment() {
         )
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Add meal",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.secondaryColor,
@@ -74,7 +74,7 @@ class AddMealScreenFragment : Fragment() {
         binding.lineView.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
 
         binding.specifyMeal.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Specify meal, please:",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.secondaryColor,
@@ -112,7 +112,7 @@ class AddMealScreenFragment : Fragment() {
         )
 
         binding.createNewLabel.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Create new dish",
                 textSize = 20,
                 textColor = themeViewModel.state.value!!.secondaryColor,
@@ -121,7 +121,7 @@ class AddMealScreenFragment : Fragment() {
         )
 
         binding.chooseFromMenuLabel.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Choose from menu",
                 textSize = 20,
                 textColor = themeViewModel.state.value!!.secondaryColor,
@@ -135,7 +135,7 @@ class AddMealScreenFragment : Fragment() {
 
     private fun setupMealCounter(mealsNumber: Int) {
         binding.mealsTodayLabel.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Meals eaten today: ",
                 textSize = 20,
                 textColor = themeViewModel.state.value!!.secondaryColor,
@@ -144,7 +144,7 @@ class AddMealScreenFragment : Fragment() {
         )
 
         binding.mealsTodayValue.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = mealsNumber.toString(),
                 textSize = 20,
                 textColor = themeViewModel.state.value!!.secondaryColor,

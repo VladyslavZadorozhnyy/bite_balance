@@ -17,7 +17,7 @@ import androidx.viewpager.widget.ViewPager
 import android.graphics.drawable.GradientDrawable
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.content.ContextCompat.getDrawable
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.databinding.ProgressCarouselBinding
 
 
@@ -52,7 +52,7 @@ class ProgressCarousel(
             DrawableCompat.setTint(wrappedDrawable, model.secondaryColor)
 
             binding.title.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = titleValue,
                     textSize = 30,
                     textColor = model.primaryColor,

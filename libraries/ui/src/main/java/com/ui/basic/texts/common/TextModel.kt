@@ -5,7 +5,7 @@ import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
 import com.ui.components.R
 
-data class TextModelNew(
+data class TextModel(
     val textValue: String,
     val textSize: Int = Constants.TEXT_SIZE,
     val textColor: Int = R.color.white,

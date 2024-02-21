@@ -10,7 +10,7 @@ import com.bitebalance.databinding.FragmentTextScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -41,7 +41,7 @@ class TextScreenFragment : Fragment() {
         binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "About Us",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -64,7 +64,7 @@ class TextScreenFragment : Fragment() {
         binding.subtext.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
 
         binding.subtext.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "*Information about the project and application*",
                 textSize = 20,
                 textColor = themeViewModel.state.value!!.secondaryColor,

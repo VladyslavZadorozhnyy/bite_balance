@@ -11,7 +11,7 @@ import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.model.InstructionModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -61,7 +61,7 @@ class InfoScreenFragment : Fragment() {
         )
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Icons Legend",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.secondaryColor,

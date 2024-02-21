@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.core.content.ContextCompat.getColor
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
 import com.ui.components.R
@@ -59,7 +59,7 @@ class ProgressIndicator(
         val progressLabel = "$consumedLabel ${model.indicatorLabel} \n $outOfLabel $goalLabel"
 
         binding.progressLabel.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = progressLabel,
                 textSize = 25,
                 backgroundColor = model.primaryColor,
@@ -69,7 +69,7 @@ class ProgressIndicator(
         )
 
         binding.progressValueLabel.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = fromLimitLabel,
                 textSize = 20,
                 textColor = Color.WHITE,
@@ -80,7 +80,7 @@ class ProgressIndicator(
 
     private fun setupStaticLabels(model: ProgressIndicatorModel) {
         binding.progressTitleLabel.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = context.getString(R.string.from_limit),
                 textSize = 20,
                 textColor = model.secondaryColor,
@@ -89,7 +89,7 @@ class ProgressIndicator(
         )
 
         binding.indicatorTitle.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = model.indicatorName,
                 textSize = 30,
                 textColor = model.secondaryColor,

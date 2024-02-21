@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.common.BaseUiComponentModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.ConfirmDialogBinding
 import com.ui.components.dialogs.common.BaseDialogModel
@@ -36,7 +36,7 @@ class ConfirmDialog(
             window?.setBackgroundDrawable(transparentBackground)
 
             binding.title.setup(
-                TextModelNew(
+                TextModel(
                     textSize = 20,
                     textValue = model.title,
                     textColor = model.textColor,

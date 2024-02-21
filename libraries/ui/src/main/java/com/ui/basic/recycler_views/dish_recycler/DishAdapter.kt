@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.slideable_text.SlideableText
 import com.ui.components.R
 import com.ui.model.DishModel
@@ -48,7 +48,7 @@ class DishAdapter(
 
         fun bind(item: DishModel, primaryColor: Int, secondaryColor: Int) {
             textView.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = item.name,
                     textSize = 20,
                     textColor = secondaryColor,

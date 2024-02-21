@@ -16,7 +16,7 @@ import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.goal_recycler.GoalAdapter
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.NoItemsLayoutBinding
 import com.ui.components.dialogs.common.BaseDialogModel
@@ -58,7 +58,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
             currentDateString = currentDateString.ifEmpty { state }
 
             binding.monthTextview.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = state,
                     textSize = 25,
                     textColor = themeViewModel.state.value!!.secondaryColor,
@@ -102,7 +102,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
         )
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "My Goals",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -199,7 +199,7 @@ class MyGoalsScreenFragment : Fragment(), GoalAdapter.GoalAdapterListener {
         noGoalsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
 
         noGoalsLayoutBinding.messageView.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Seems that you have no goals for this month. \n\n You can create one for current month.",
                 textSize = 25,
                 textColor = themeViewModel.state.value!!.secondaryColor,

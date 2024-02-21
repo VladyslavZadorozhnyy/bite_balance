@@ -11,7 +11,7 @@ import com.bitebalance.databinding.FragmentSettingsScreenBinding
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.recycler_views.settings_recycler.SettingsRecyclerModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.model.InstructionModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -49,7 +49,7 @@ class SettingsScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.GONE
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Settings",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.primaryColor,

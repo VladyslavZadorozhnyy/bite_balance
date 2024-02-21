@@ -12,7 +12,7 @@ import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.text_recycler.TextRecyclerModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -56,7 +56,7 @@ class ChooseSettingScreenFragment : Fragment() {
         )
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Choosings",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -71,43 +71,43 @@ class ChooseSettingScreenFragment : Fragment() {
         binding.textRecycler.setup(
             model = TextRecyclerModel(
                 items = listOf(
-                    TextModelNew(
+                    TextModel(
                         textValue = "Appearance",
                         textSize = 30,
                         textColor = themeViewModel.state.value!!.primaryColor,
                         backgroundColor = themeViewModel.state.value!!.secondaryColor,
                     ),
-                    TextModelNew(
+                    TextModel(
                         textValue = "Language",
                         textSize = 30,
                         textColor = themeViewModel.state.value!!.primaryColor,
                         backgroundColor = themeViewModel.state.value!!.secondaryColor,
                     ),
-                    TextModelNew(
+                    TextModel(
                         textValue = "Measurement",
                         textSize = 30,
                         textColor = themeViewModel.state.value!!.primaryColor,
                         backgroundColor = themeViewModel.state.value!!.secondaryColor,
                     ),
-                    TextModelNew(
+                    TextModel(
                         textValue = "About Us",
                         textSize = 30,
                         textColor = themeViewModel.state.value!!.primaryColor,
                         backgroundColor = themeViewModel.state.value!!.secondaryColor,
                     ),
-                    TextModelNew(
+                    TextModel(
                         textValue = "Instruction",
                         textSize = 30,
                         textColor = themeViewModel.state.value!!.primaryColor,
                         backgroundColor = themeViewModel.state.value!!.secondaryColor,
                     ),
-                    TextModelNew(
+                    TextModel(
                         textValue = "Support Us",
                         textSize = 30,
                         textColor = themeViewModel.state.value!!.primaryColor,
                         backgroundColor = themeViewModel.state.value!!.secondaryColor,
                     ),
-                    TextModelNew(
+                    TextModel(
                         textValue = "Feedback",
                         textSize = 30,
                         textColor = themeViewModel.state.value!!.primaryColor,
@@ -119,7 +119,7 @@ class ChooseSettingScreenFragment : Fragment() {
         )
     }
 
-    private fun processVariantClicked(variant: TextModelNew) {
+    private fun processVariantClicked(variant: TextModel) {
         Log.d("AAADIP", "variant: $variant")
     }
 }

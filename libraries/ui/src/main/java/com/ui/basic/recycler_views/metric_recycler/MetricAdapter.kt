@@ -8,7 +8,7 @@ import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.checkbox.Checkbox
 import com.ui.basic.input_form.InputForm
 import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 import com.ui.model.MetricModel
@@ -125,7 +125,7 @@ class MetricAdapter(
 
         private fun setupMetricValueText(value: String) {
             metricValueViewText.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = value,
                     textSize = 18,
                     textColor = foregroundColor,
@@ -136,7 +136,7 @@ class MetricAdapter(
 
         private fun setupMetricName(value: String) {
             metricNameView.setup(
-                TextModelNew(
+                TextModel(
                     textValue = value,
                     textSize = 18,
                     textColor = foregroundColor,
@@ -147,7 +147,7 @@ class MetricAdapter(
 
         private fun setupMetricSuffix(value: String) {
             metricSuffixView.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = value,
                     textSize = 18,
                     textColor = foregroundColor,

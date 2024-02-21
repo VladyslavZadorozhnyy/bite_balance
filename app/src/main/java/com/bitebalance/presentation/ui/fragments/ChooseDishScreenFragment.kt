@@ -5,7 +5,7 @@ import com.ui.components.R
 import com.ui.model.DishModel
 import com.ui.common.Constants
 import android.content.res.ColorStateList
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.bitebalance.common.NavigationAction
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.components.databinding.ToolbarBinding
@@ -57,7 +57,7 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
 
     private fun setupHeader() {
         toolbarBinding.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = requireContext().getString(R.string.choose_dish),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.secondaryColor,
@@ -85,7 +85,7 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
         noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
 
         noItemsLayoutBinding.messageView.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = requireContext().getString(R.string.no_dishes_yet),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.secondaryColor,

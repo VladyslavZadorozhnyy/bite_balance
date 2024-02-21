@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 import com.ui.model.InstructionModel
@@ -47,7 +47,7 @@ class InstructionAdapter(
                 )
             )
             buttonInstruction.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = item.instructionText,
                     textSize = 20,
                     textColor = foregroundColor,

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.basic.texts.text.Text
 import com.ui.components.R
 import com.ui.model.MealModelUnboxed
@@ -84,7 +84,7 @@ class MealAdapter (
             )
 
             textView.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = item.dishName,
                     textSize = 20,
                     textColor = backgroundColor,
@@ -93,7 +93,7 @@ class MealAdapter (
             )
 
             timeView.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = item.mealTime,
                     textSize = 17,
                     textColor = backgroundColor,

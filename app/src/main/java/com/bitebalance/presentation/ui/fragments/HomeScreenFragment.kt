@@ -10,7 +10,7 @@ import com.bitebalance.databinding.FragmentHomeScreenBinding
 import com.bitebalance.presentation.states.BasicState
 import com.bitebalance.presentation.viewmodels.*
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
@@ -81,7 +81,7 @@ class HomeScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.GONE
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = greetingValue,
                 textSize = 35,
                 textColor = themeViewModel.state.value!!.primaryColor,

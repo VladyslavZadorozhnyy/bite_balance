@@ -10,7 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.SpinnerItemActiveLayoutBinding
 import com.ui.components.databinding.SpinnerItemNotActiveLayoutBinding
@@ -62,7 +62,7 @@ class SpinnerSubComponent(
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
             SpinnerItemNotActiveLayoutBinding.inflate(layoutInflater).apply {
                 textView.setup(
-                    TextModelNew(
+                    TextModel(
                         textValue = context.getString(items[position]),
                         textSize = 20,
                         textColor = backgroundColor,
@@ -82,7 +82,7 @@ class SpinnerSubComponent(
                 layoutBody.backgroundTintList = ColorStateList.valueOf(backgroundColor)
 
                 textView.setup(
-                    TextModelNew(
+                    TextModel(
                         textValue = context.getString(items[position]),
                         textSize = 25,
                         textColor = foregroundColor,

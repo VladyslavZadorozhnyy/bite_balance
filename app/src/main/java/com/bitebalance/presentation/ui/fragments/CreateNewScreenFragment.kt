@@ -13,7 +13,7 @@ import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.CreateMealMetricsModel
 import com.ui.basic.recycler_views.metric_recycler.DishNameMetricsModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
@@ -56,7 +56,7 @@ class CreateNewScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.INVISIBLE
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = if (createDish) "New dish" else "New meal",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.secondaryColor,
@@ -80,7 +80,7 @@ class CreateNewScreenFragment : Fragment() {
 
     private fun setupSubtitles() {
         binding.specifyDish.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Specify nutritional value, please:",
                 textSize = 15,
                 textColor = themeViewModel.state.value!!.secondaryColor,
@@ -89,7 +89,7 @@ class CreateNewScreenFragment : Fragment() {
         )
 
         binding.toggleCheckbox.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Toggle check box for not including",
                 textSize = 15,
                 textColor = themeViewModel.state.value!!.secondaryColor,

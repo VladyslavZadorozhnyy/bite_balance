@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import com.ui.model.NutritionValueModel
 import android.content.res.ColorStateList
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
@@ -74,7 +74,7 @@ class MealDetailsScreenFragment : Fragment() {
 
     private fun setupHeader(dishName: String) {
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = dishName,
                 textSize = 30,
                 textColor = themeVm.state.value!!.primaryColor,
@@ -95,7 +95,7 @@ class MealDetailsScreenFragment : Fragment() {
 
     private fun setupSubtitles() {
         binding.details.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Details:",
                 textSize = 25,
                 textColor = themeVm.state.value!!.primaryColor,

@@ -14,7 +14,7 @@ import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.StatsViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
@@ -60,7 +60,7 @@ class StatsScreenFragment : Fragment() {
 
         dateVm.state.observe(this) { state ->
             binding.monthTextview.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = state,
                     textSize = 25,
                     textColor = themeViewModel.state.value!!.primaryColor,
@@ -109,7 +109,7 @@ class StatsScreenFragment : Fragment() {
         )
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Statistics",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.secondaryColor,

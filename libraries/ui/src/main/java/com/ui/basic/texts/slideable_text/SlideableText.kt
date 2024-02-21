@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat.getDrawable
 import androidx.core.content.res.ResourcesCompat.getFont
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.common.Constants
 import com.ui.components.R
 import com.ui.components.databinding.TextBinding
@@ -26,7 +26,7 @@ class SlideableText(
 
     @SuppressLint("ResourceAsColor")
     override fun setup(model: BaseUiComponentModel) {
-        (model as? TextModelNew)?.let {
+        (model as? TextModel)?.let {
             binding.text = model.textValue
             binding.textSize = model.textSize.toFloat()
             binding.typeface = getFont(context, R.font.ultra_regular_font)

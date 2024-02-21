@@ -13,7 +13,7 @@ import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import com.ui.components.databinding.NoItemsLayoutBinding
 import com.ui.model.DishModel
@@ -60,7 +60,7 @@ class MenuScreenFragment : Fragment() {
         binding.toolbar.forwardButton.visibility = View.GONE
 
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Menu",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -116,7 +116,7 @@ class MenuScreenFragment : Fragment() {
         noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.empty_menu_icon)
         noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
         noItemsLayoutBinding.messageView.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Seems that you have no dishes yet. \n Start by adding one.",
                 textSize = 25,
                 textColor = themeViewModel.state.value!!.primaryColor,

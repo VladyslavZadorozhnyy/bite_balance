@@ -13,7 +13,7 @@ import com.bitebalance.presentation.ui.activites.MainActivity
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import yuku.ambilwarna.AmbilWarnaDialog
@@ -50,7 +50,7 @@ class AppearanceScreenFragment : Fragment() {
 
     private fun setupHeader() {
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Appearance",
                 textSize = 30,
                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -80,7 +80,7 @@ class AppearanceScreenFragment : Fragment() {
         }
 
         binding.color1TextView.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Primary color",
                 textSize = 25,
                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -104,7 +104,7 @@ class AppearanceScreenFragment : Fragment() {
         }
 
         binding.color2TextView.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Secondary color",
                 textSize = 25,
                 textColor = themeViewModel.state.value!!.primaryColor,
@@ -119,7 +119,7 @@ class AppearanceScreenFragment : Fragment() {
 
     private fun setupFontLayout() {
         binding.fontTextView.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = "Font",
                 textSize = 25,
                 textColor = themeViewModel.state.value!!.primaryColor,

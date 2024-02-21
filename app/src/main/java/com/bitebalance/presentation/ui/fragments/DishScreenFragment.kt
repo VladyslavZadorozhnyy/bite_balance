@@ -16,7 +16,7 @@ import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.recycler_views.metric_recycler.CreateMealWithExistingDishModel
 import com.ui.basic.recycler_views.metric_recycler.DishMetricsModel
-import com.ui.basic.texts.common.TextModelNew
+import com.ui.basic.texts.common.TextModel
 import com.ui.common.ComponentUiUtils
 import com.ui.components.R
 import com.ui.components.dialogs.common.BaseDialogModel
@@ -126,7 +126,7 @@ class DishScreenFragment : Fragment() {
 
     private fun setupHeader(dishModel: DishModel) {
         binding.toolbar.headline.setup(
-            model = TextModelNew(
+            model = TextModel(
                 textValue = dishModel.name,
                 textSize = 30,
                 textColor = themeVm.state.value!!.secondaryColor,
@@ -151,7 +151,7 @@ class DishScreenFragment : Fragment() {
     private fun setupSubtitles() {
         if (editButtonChecked) {
             binding.toggleCheckbox.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = "Toggle check box for not including",
                     textSize = 15,
                     textColor = themeVm.state.value!!.secondaryColor,
