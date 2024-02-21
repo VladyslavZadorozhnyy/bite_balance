@@ -9,7 +9,7 @@ data class ProgressIndicatorModel(
     val indicatorLabel: String,
     val indicatorName: String,
     val primaryColor: Int,
-    val secondaryColor: Int
+    val secondaryColor: Int,
 ) : BaseUiComponentModel(
     componentType = Constants.ComponentUiType.Indicator,
 )

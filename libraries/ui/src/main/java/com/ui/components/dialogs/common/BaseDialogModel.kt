@@ -12,7 +12,7 @@ data class BaseDialogModel(
     val onConfirmClicked: () -> Unit = {},
     val onPositiveClicked: () -> Unit = {},
     val onNegativeClicked: () -> Unit = {},
-    val onInputConfirmed: (value: String) -> Unit = {}
+    val onInputConfirmed: (value: String) -> Unit = {},
 ) : BaseUiComponentModel(
     componentType = Constants.ComponentUiType.Dialog
 )
