@@ -40,6 +40,7 @@
 
 <!--    Common-->
     <string name="empty_line" />
+    <string name="appearance">Appearance</string>
 
 <!--    ChooseDishScreenFragment-->
     <string name="choose_dish">Choose dish</string>
@@ -53,10 +54,18 @@
     <string name="meals_eaten_today">Meals eaten today: </string>
 
 <!--    AppearanceScreenFragment-->
-    <string name="appearance">Appearance</string>
     <string name="primary_color">Primary color</string>
     <string name="secondary_color">Secondary color</string>
     <string name="font">Font</string>
     <string name="choose_primary_color">Choose primary color</string>
     <string name="choose_secondary_color">Choose secondary color</string>
+
+<!--    ChooseSettingScreenFragment-->
+    <string name="choosings">Choosings</string>
+    <string name="language">Language</string>
+    <string name="measurement">Measurement</string>
+    <string name="about_us">About Us</string>
+    <string name="instruction">Instruction</string>
+    <string name="support_us">Support Us</string>
+    <string name="feedback">Feedback</string>
 </resources>

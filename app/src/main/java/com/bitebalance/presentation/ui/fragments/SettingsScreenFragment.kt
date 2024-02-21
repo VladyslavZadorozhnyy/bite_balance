@@ -101,8 +101,8 @@ class SettingsScreenFragment : Fragment() {
     private fun processInstructionClicked(instruction: InstructionModel) {
         when (instruction.instructionText) {
             "Appearance" -> navigationVm.navigateTo(AppearanceScreenFragment(), NavigationAction.ADD)
-            "Language" -> navigationVm.navigateTo(ChooseSettingScreenFragment(), NavigationAction.ADD)
-            "Measurement" -> navigationVm.navigateTo(ChooseSettingScreenFragment(), NavigationAction.ADD)
+            "Language" -> navigationVm.navigateTo(ChooseSettingScreenFragment.newInstance(), NavigationAction.ADD)
+            "Measurement" -> navigationVm.navigateTo(ChooseSettingScreenFragment.newInstance(), NavigationAction.ADD)
             "About Us" -> navigationVm.navigateTo(TextScreenFragment(), NavigationAction.ADD)
             "Instruction" -> navigationVm.navigateTo(TextScreenFragment(), NavigationAction.ADD)
             "Support Us" -> navigationVm.navigateTo(SupportFeedbackScreenFragment(), NavigationAction.ADD)
