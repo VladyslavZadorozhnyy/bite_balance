@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.components.databinding.NoItemsLayoutBinding
 import com.ui.components.databinding.ToolbarBinding
+import com.ui.components.databinding.NoItemsLayoutBinding
+import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
 
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
     protected val themeVm by sharedViewModel<ThemeViewModel>()

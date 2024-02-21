@@ -38,7 +38,16 @@
     <string name="fats_consumption">Fats consumption</string>
     <string name="carbs_consumption">Carbs consumption</string>
 
+<!--    Common-->
+
 <!--    ChooseDishScreenFragment-->
     <string name="choose_dish">Choose dish</string>
     <string name="no_dishes_yet">Seems that you have no dishes yet. \n\n Start by adding one.</string>
+
+<!--    AddMealScreenFragment-->
+    <string name="add_meal">Add meal</string>
+    <string name="create_dish">Create new dish</string>
+    <string name="choose_from_menu">Choose from menu</string>
+    <string name="specify_meal">Specify meal, please:</string>
+    <string name="meals_eaten_today">Meals eaten today: </string>
 </resources>

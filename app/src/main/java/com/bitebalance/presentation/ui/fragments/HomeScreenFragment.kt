@@ -147,8 +147,8 @@ class HomeScreenFragment : Fragment() {
                 foregroundColor = themeViewModel.state.value!!.secondaryColor,
                 backgroundColor = themeViewModel.state.value!!.primaryColor,
                 onClickListener =  {
-                    navigationVm.navigateTo(AddMealScreenFragment(), NavigationAction.ADD)
-                }
+                    navigationVm.navigateTo(AddMealScreenFragment.newInstance(), NavigationAction.ADD)
+                },
             )
         )
     }

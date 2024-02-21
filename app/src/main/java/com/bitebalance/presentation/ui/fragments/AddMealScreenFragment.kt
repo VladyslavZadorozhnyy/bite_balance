@@ -1,84 +1,78 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.content.res.ColorStateList
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.bitebalance.common.NavigationAction
-import com.bitebalance.databinding.FragmentAddMealScreenBinding
-import com.bitebalance.presentation.viewmodels.MealViewModel
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
+import com.ui.common.Constants
+import android.content.res.ColorStateList
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
+import com.bitebalance.common.NavigationAction
+import com.ui.components.databinding.ToolbarBinding
+import com.bitebalance.presentation.viewmodels.MealViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.bitebalance.databinding.FragmentAddMealScreenBinding
 
-class AddMealScreenFragment : Fragment() {
-    private val binding by lazy { FragmentAddMealScreenBinding.inflate(layoutInflater) }
-
-    private val navigationVm by sharedViewModel<NavigationViewModel>()
-    // AAADIP, Remove everywhere "themeViewModel" to "themeVm"
-    private val themeViewModel by sharedViewModel<ThemeViewModel>()
+class AddMealScreenFragment : BaseFragment<FragmentAddMealScreenBinding>() {
     private val mealVm by sharedViewModel<MealViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupViewModelsObservation()
+    override fun onStartFragment(): View {
+        binding = FragmentAddMealScreenBinding.inflate(layoutInflater)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainer)
+
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onResumeFragment() {
+        super.onResumeFragment()
         mealVm.getMeals()
     }
 
-    private fun setupViewModelsObservation() {
+    override fun setupViewModelsObservation() {
         mealVm.state.observe(this) { state -> setupMealCounter(state.data?.size ?: 0) }
-        themeViewModel.state.observe(this) { state ->
+        themeVm.state.observe(this) {
             setupStyling()
             setupHeader()
             setupButtons()
         }
     }
 
+    override fun onStopFragment() {
+        mealVm.state.removeObservers(this)
+    }
+
     private fun setupStyling() {
-        binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
+        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.mealIcon.imageTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
     }
 
     private fun setupHeader() {
-        binding.toolbar.backButton.setup(
+        toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
-                onClickListener = { activity?.onBackPressed() }
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
+                foregroundColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor,
+                onClickListener = { activity?.onBackPressed() },
             )
         )
 
-        binding.toolbar.headline.setup(
+        toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = "Add meal",
-                textSize = 30,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                textValue = requireContext().getString(R.string.add_meal),
+                textSize = Constants.TEXT_SIZE_BIG,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
             )
         )
-
-        binding.lineView.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
 
         binding.specifyMeal.setup(
             model = TextModel(
-                textValue = "Specify meal, please:",
-                textSize = 30,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                textValue = requireContext().getString(R.string.specify_meal),
+                textSize = Constants.TEXT_SIZE_BIG,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
             )
         )
     }
@@ -87,75 +81,72 @@ class AddMealScreenFragment : Fragment() {
         binding.createNewButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.add_icon,
-                iconSize = 100,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                iconSize = Constants.ICON_SIZE_BIG,
+                foregroundColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = {
                     navigationVm.navigateTo(
                         CreateNewScreenFragment.newInstance(createDish = false),
-                        NavigationAction.ADD
+                        NavigationAction.ADD,
                     )
-                }
+                },
             )
         )
 
         binding.chooseFromMenu.setup(
             model = ButtonModel(
                 iconRes = R.drawable.nav_menu_active,
-                iconSize = 100,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                iconSize = Constants.ICON_SIZE_BIG,
+                foregroundColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = {
                     navigationVm.navigateTo(ChooseDishScreenFragment.newInstance(), NavigationAction.ADD)
-                }
+                },
             )
         )
 
         binding.createNewLabel.setup(
             model = TextModel(
-                textValue = "Create new dish",
-                textSize = 20,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
-            )
+                textValue = requireContext().getString(R.string.create_dish),
+                textSize = Constants.TEXT_SIZE,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
+            ),
         )
 
         binding.chooseFromMenuLabel.setup(
             model = TextModel(
-                textValue = "Choose from menu",
-                textSize = 20,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
-            )
+                textValue = requireContext().getString(R.string.choose_from_menu),
+                textSize = Constants.TEXT_SIZE,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
+            ),
         )
-
-        binding.mealIcon.imageTintList =
-            ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
     }
 
     private fun setupMealCounter(mealsNumber: Int) {
         binding.mealsTodayLabel.setup(
             model = TextModel(
-                textValue = "Meals eaten today: ",
-                textSize = 20,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                textValue = requireContext().getString(R.string.meals_eaten_today),
+                textSize = Constants.TEXT_SIZE,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
             )
         )
 
         binding.mealsTodayValue.setup(
             model = TextModel(
                 textValue = mealsNumber.toString(),
-                textSize = 20,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
-            )
+                textSize = Constants.TEXT_SIZE,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
+            ),
         )
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        navigationVm.state.removeObservers(this)
-        mealVm.state.removeObservers(this)
+    companion object {
+        fun newInstance(): AddMealScreenFragment {
+            return AddMealScreenFragment()
+        }
     }
 }
