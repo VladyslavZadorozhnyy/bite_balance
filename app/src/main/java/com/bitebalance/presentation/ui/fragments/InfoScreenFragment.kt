@@ -87,4 +87,10 @@ class InfoScreenFragment : BaseFragment<FragmentInfoScreenBinding>() {
             ),
         )
     }
+
+    companion object {
+        fun newInstance(): InfoScreenFragment {
+            return InfoScreenFragment()
+        }
+    }
 }
