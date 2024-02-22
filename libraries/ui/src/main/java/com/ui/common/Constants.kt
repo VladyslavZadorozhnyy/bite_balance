@@ -9,14 +9,12 @@ object Constants {
     const val TEXT_SIZE_SMALL = 15
     const val TEXT_STROKE_WIDTH = 3F
 
-//    Button constants
-    const val BACK_BUTTON_ICON_SIZE = 70
-
 //    Icon constants
     const val ICON_SIZE = 40
     const val ICON_SIZE_MEDIUM = 80
     const val ICON_SIZE_BIG = 100
     const val CORNER_RADIUS = 20
+    const val BACK_BUTTON_ICON_SIZE = 70
     const val COLOR_ICON_STROKE_WIDTH = 5
 
 //    Other constants

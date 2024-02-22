@@ -81,4 +81,11 @@
 
 <!--    HomeScreenFragment-->
     <string name="confirm_reset">Would you like to reset progress?\n\nToday’s data will be removed.</string>
+
+<!--    InfoScreenFragment-->
+    <string name="icons_legend">Icons Legend</string>
+    <string name="get_info_leg">Get information</string>
+    <string name="list_today_meal_leg">List today\'s meals</string>
+    <string name="reset_today_meal_leg">Reset today\'s meals</string>
+    <string name="add_meal_leg">Add new meal today</string>
 </resources>

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="10dp"
         android:background="@drawable/sublayout_shape">
 
         <include layout="@layout/toolbar"

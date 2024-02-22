@@ -1,71 +1,62 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.content.res.ColorStateList
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.bitebalance.databinding.FragmentInfoScreenBinding
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
+import com.ui.common.Constants
 import com.ui.model.InstructionModel
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import android.content.res.ColorStateList
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
+import com.ui.components.databinding.ToolbarBinding
+import com.bitebalance.databinding.FragmentInfoScreenBinding
+import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
 
-class InfoScreenFragment : Fragment() {
-    private val binding by lazy { FragmentInfoScreenBinding.inflate(layoutInflater) }
+class InfoScreenFragment : BaseFragment<FragmentInfoScreenBinding>() {
 
-    private val navigationVm by sharedViewModel<NavigationViewModel>()
-    private val themeViewModel by sharedViewModel<ThemeViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupViewModelsObservation()
+    override fun onStartFragment(): View {
+        binding = FragmentInfoScreenBinding.inflate(layoutInflater)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainer)
 
         return binding.root
     }
 
-    private fun setupViewModelsObservation() {
-        themeViewModel.state.observe(this) {
+    override fun setupViewModelsObservation() {
+        themeVm.state.observe(this) {
             setupStyling()
             setupHeader()
             setupRecycler()
         }
     }
 
-    private fun setupStyling() {
-        binding.root.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
-        binding.lineView.setBackgroundColor(themeViewModel.state.value!!.secondaryColor)
+    override fun onStopFragment() {
+        themeVm.state.removeObservers(this)
+    }
 
-        binding.sublayoutContainer.backgroundTintList =
-            ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
+    private fun setupStyling() {
+        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
     }
 
     private fun setupHeader() {
-        binding.toolbar.forwardButton.visibility = View.INVISIBLE
+        toolbarBinding.forwardButton.visibility = View.INVISIBLE
 
-        binding.toolbar.backButton.setup(
+        toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
+                foregroundColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = { navigationVm.popScreen() }
             )
         )
 
-        binding.toolbar.headline.setup(
+        toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = "Icons Legend",
-                textSize = 30,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                textValue = requireContext().getString(R.string.icons_legend),
+                textSize = Constants.TEXT_SIZE_BIG,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
             )
         )
     }
@@ -73,27 +64,27 @@ class InfoScreenFragment : Fragment() {
     private fun setupRecycler() {
         binding.iconsLegends.setup(
             model = InstructionRecyclerModel(
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
-                foregroundColor = themeViewModel.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = themeVm.state.value!!.secondaryColor,
                 items = listOf(
                     InstructionModel(
                         iconRes = R.drawable.info_icon,
-                        instructionText = "Get information"
+                        instructionText = requireContext().getString(R.string.get_info_leg),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.meals_icon,
-                        instructionText = "List today's meal"
+                        instructionText = requireContext().getString(R.string.list_today_meal_leg),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.reset_icon,
-                        instructionText = "Reset today's meals"
+                        instructionText = requireContext().getString(R.string.reset_today_meal_leg),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.add_icon,
-                        instructionText = "Add new meal today"
+                        instructionText = requireContext().getString(R.string.add_meal_leg),
                     ),
-                )
-            )
+                ),
+            ),
         )
     }
 }
