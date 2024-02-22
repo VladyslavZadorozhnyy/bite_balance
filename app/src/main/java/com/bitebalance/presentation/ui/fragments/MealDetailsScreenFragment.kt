@@ -1,52 +1,55 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.os.Bundle
 import android.view.View
 import com.ui.components.R
-import android.view.ViewGroup
-import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
+import com.ui.common.Constants
 import com.ui.model.NutritionValueModel
 import android.content.res.ColorStateList
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
+import com.ui.components.databinding.ToolbarBinding
 import com.bitebalance.presentation.viewmodels.DishViewModel
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.bitebalance.presentation.viewmodels.NutritionViewModel
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import com.ui.basic.recycler_views.metric_recycler.MealMetricsModel
 import com.bitebalance.databinding.FragmentMealDetailsScreenBinding
 
-class MealDetailsScreenFragment : Fragment() {
-    private val binding by lazy { FragmentMealDetailsScreenBinding.inflate(layoutInflater) }
-
+class MealDetailsScreenFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
     private val dishVm by sharedViewModel<DishViewModel>()
-    private val themeVm by sharedViewModel<ThemeViewModel>()
     private val nutritionVm by sharedViewModel<NutritionViewModel>()
-    private val navigationVm by sharedViewModel<NavigationViewModel>()
 
     private var dishName: String = ""
     private var eatenAmount: Float = 0F
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        setupViewModelsObservation()
+    override fun onStartFragment(): View {
+        binding = FragmentMealDetailsScreenBinding.inflate(layoutInflater)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainerConstraint)
+
         return binding.root
     }
-
-    override fun onResume() {
-        super.onResume()
+    override fun onResumeFragment() {
+        super.onResumeFragment()
         dishVm.getDishByName(dishName)
     }
 
-    override fun onDestroy() {
+    override fun setupViewModelsObservation() {
+        dishVm.state.observe(this) { dishState ->
+            nutritionVm.getNutritionValue(dishState.data?.first()?.nutritionValId ?: -1)
+        }
+        nutritionVm.state.observe(this) { nutritionState ->
+            nutritionState.data?.first()?.let { setupRecycler(it) }
+        }
+        themeVm.state.observe(this) {
+            setupStyling()
+            setupSubtitles()
+            setupHeader(dishName)
+        }
+    }
+
+    override fun onStopFragment() {
         dishVm.state.removeObservers(this)
         nutritionVm.state.removeObservers(this)
-        navigationVm.state.removeObservers(this)
-        super.onDestroy()
+        themeVm.state.removeObservers(this)
     }
 
     private fun setupStyling() {
@@ -56,76 +59,58 @@ class MealDetailsScreenFragment : Fragment() {
         binding.dishIcon.imageTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
     }
 
-    private fun setupViewModelsObservation() {
-        dishVm.state.observe(this) { dishState ->
-            nutritionVm.getNutritionValue(dishState.data?.first()?.nutritionValId ?: -1)
-        }
-
-        nutritionVm.state.observe(this) { nutritionState ->
-            nutritionState.data?.first()?.let { setupRecycler(it) }
-        }
-
-        themeVm.state.observe(this) { state ->
-            setupStyling()
-            setupSubtitles()
-            setupHeader(dishName)
-        }
-    }
-
     private fun setupHeader(dishName: String) {
-        binding.toolbar.headline.setup(
+        toolbarBinding.headline.setup(
             model = TextModel(
                 textValue = dishName,
-                textSize = 30,
+                textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
-
-        binding.toolbar.backButton.setup(
+        toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { navigationVm.popScreen() },
-            )
+            ),
         )
     }
 
     private fun setupSubtitles() {
         binding.details.setup(
             model = TextModel(
-                textValue = "Details:",
-                textSize = 25,
+                textValue = requireContext().getString(R.string.details),
+                textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
     }
 
     private fun setupRecycler(nutritionValueModel: NutritionValueModel) {
         binding.metricRecycler.setup(
             MealMetricsModel.newInstance(
-                prots = nutritionValueModel.prots,
-                fats = nutritionValueModel.fats,
-                carbs = nutritionValueModel.carbs,
-                kcal = nutritionValueModel.kcals,
+                prots = nutritionValueModel.prots / eatenAmount,
+                fats = nutritionValueModel.fats  / eatenAmount,
+                carbs = nutritionValueModel.carbs  / eatenAmount,
+                kcal = nutritionValueModel.kcals  / eatenAmount,
                 eaten = eatenAmount,
                 editable = false,
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
             ),
         )
-
         binding.doneButton.setup(
             model = ButtonModel(
                 labelTextRes = R.string.back,
-                labelTextSize = 20,
+                labelTextSize = Constants.TEXT_SIZE,
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { activity?.onBackPressed() },
-            )
+            ),
         )
     }
 

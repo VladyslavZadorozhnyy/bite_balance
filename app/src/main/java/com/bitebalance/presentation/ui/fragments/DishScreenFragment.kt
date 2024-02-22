@@ -109,6 +109,7 @@ class DishScreenFragment : BaseFragment<FragmentDishScreenBinding>() {
     override fun onStopFragment() {
         mealVm.state.removeObservers(this)
         dishVm.state.removeObservers(this)
+        nutritionVm.resetState()
         nutritionVm.state.removeObservers(this)
     }
 

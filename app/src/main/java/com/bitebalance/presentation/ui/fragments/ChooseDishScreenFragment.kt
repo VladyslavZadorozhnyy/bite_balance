@@ -37,7 +37,6 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
             if (state.data == null) { return@observe }
             if (state.data.isEmpty()) { setupNoItemsView() } else { setupDishRecycler(state.data) }
         }
-
         themeVm.state.observe(this) {
             setupStyling()
             setupHeader()

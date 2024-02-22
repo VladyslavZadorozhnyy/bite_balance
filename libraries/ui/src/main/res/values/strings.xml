@@ -12,7 +12,6 @@
 
 <!--TODO: later split string resources for different components, like it was done with drawables and layouts-->
     <string name="done">Done</string>
-    <string name="back">Back</string>
     <string name="update">Update</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -88,4 +87,8 @@
     <string name="list_today_meal_leg">List today\'s meals</string>
     <string name="reset_today_meal_leg">Reset today\'s meals</string>
     <string name="add_meal_leg">Add new meal today</string>
+
+<!--    MealDetailsScreenFragment-->
+    <string name="details">Details:</string>
+    <string name="back">Back</string>
 </resources>
