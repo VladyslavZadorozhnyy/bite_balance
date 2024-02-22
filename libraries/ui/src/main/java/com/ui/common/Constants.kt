@@ -14,6 +14,7 @@ object Constants {
 
 //    Icon constants
     const val ICON_SIZE = 40
+    const val ICON_SIZE_MEDIUM = 80
     const val ICON_SIZE_BIG = 100
     const val CORNER_RADIUS = 20
     const val COLOR_ICON_STROKE_WIDTH = 5
