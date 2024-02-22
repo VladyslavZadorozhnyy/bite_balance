@@ -1,61 +1,52 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.content.res.ColorStateList
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.bitebalance.databinding.FragmentDishScreenBinding
-import com.bitebalance.presentation.ui.activites.MainActivity
+import com.ui.components.R
+import com.ui.model.DishModel
+import com.ui.common.Constants
+import com.ui.common.ComponentUiUtils
 import com.ui.model.NutritionValueModel
+import android.content.res.ColorStateList
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
+import com.ui.components.databinding.ToolbarBinding
+import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.MealViewModel
-import com.bitebalance.presentation.viewmodels.NutritionViewModel
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.recycler_views.metric_recycler.CreateMealWithExistingDishModel
-import com.ui.basic.recycler_views.metric_recycler.DishMetricsModel
-import com.ui.basic.texts.common.TextModel
-import com.ui.common.ComponentUiUtils
-import com.ui.components.R
-import com.ui.components.dialogs.common.BaseDialogModel
+import com.bitebalance.databinding.FragmentDishScreenBinding
+import com.bitebalance.presentation.ui.activites.MainActivity
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
-import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
-import com.ui.model.DishModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.bitebalance.presentation.viewmodels.NutritionViewModel
+import com.ui.basic.recycler_views.metric_recycler.DishMetricsModel
+import com.ui.basic.recycler_views.metric_recycler.CreateMealWithExistingDishModel
 
-class DishScreenFragment : Fragment() {
-    private val binding by lazy { FragmentDishScreenBinding.inflate(layoutInflater) }
-
-    private val nutritionVm by sharedViewModel<NutritionViewModel>()
-    private val themeVm by sharedViewModel<ThemeViewModel>()
+class DishScreenFragment : BaseFragment<FragmentDishScreenBinding>() {
     private val mealVm by sharedViewModel<MealViewModel>()
     private val dishVm by sharedViewModel<DishViewModel>()
+    private val nutritionVm by sharedViewModel<NutritionViewModel>()
 
-    private lateinit var dishName: String
+    private var dishName = ""
     private var editButtonChecked = false
     private var createDish: Boolean = false
     private lateinit var dishNutritionValue: NutritionValueModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupViewModelsObservation()
+    override fun onStartFragment(): View {
+        binding = FragmentDishScreenBinding.inflate(layoutInflater)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainer)
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onResumeFragment() {
+        super.onResumeFragment()
         dishVm.getDishByName(dishName)
     }
 
-    private fun setupViewModelsObservation() {
+    override fun setupViewModelsObservation() {
         nutritionVm.state.observe(this) { state ->
             if (state.message.isEmpty() && state.data == null) { return@observe }
-
             if (state.data != null) {
                 if (editButtonChecked) { binding.editButton.click() }
                 dishNutritionValue = state.data.first()
@@ -63,17 +54,16 @@ class DishScreenFragment : Fragment() {
             }
             if (state.message.isNotEmpty()) {
                 ConfirmDialog(
-                    requireActivity(),
-                    BaseDialogModel(
+                    activity = requireActivity(),
+                    model = BaseDialogModel(
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                         textColor = themeVm.state.value!!.primaryColor,
                         title = state.message,
                         buttonText = R.string.done,
-                    )
+                    ),
                 ).show()
             }
         }
-
         dishVm.state.observe(this) { state ->
             if (state.message.isEmpty() && state.data == null) { return@observe; }
 
@@ -90,32 +80,36 @@ class DishScreenFragment : Fragment() {
                 )).show()
             }
         }
-
         mealVm.state.observe(this) { state ->
             if (state.message.isNotEmpty()) {
                 ConfirmDialog(
                     requireActivity(),
                     BaseDialogModel(
-                        state.message,
+                        title = state.message,
                         buttonText = R.string.done,
                         textColor = themeVm.state.value!!.secondaryColor,
                         backgroundColor = themeVm.state.value!!.primaryColor,
-                        onConfirmClicked = { if (state.isSuccessful) {
-                            (activity as? MainActivity)?.let {
-                                it.backPressUntilComponent(HomeScreenFragment::class.java.name)
-                            }
-                        } })
+                        onConfirmClicked = {
+                            if (state.isSuccessful)
+                                    (activity as? MainActivity)?.backPressUntilComponent(HomeScreenFragment::class.java.name)
+                        },
+                    )
                 ).show()
             }
         }
-
-        themeVm.state.observe(this) { state ->
+        themeVm.state.observe(this) {
             setupStyling()
             if (!createDish) {
                 setupEditButton()
                 setupDeleteButton()
             }
         }
+    }
+
+    override fun onStopFragment() {
+        mealVm.state.removeObservers(this)
+        dishVm.state.removeObservers(this)
+        nutritionVm.state.removeObservers(this)
     }
 
     private fun setupStyling() {
@@ -125,62 +119,59 @@ class DishScreenFragment : Fragment() {
     }
 
     private fun setupHeader(dishModel: DishModel) {
-        binding.toolbar.headline.setup(
+        toolbarBinding.headline.setup(
             model = TextModel(
                 textValue = dishModel.name,
-                textSize = 30,
+                textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
             )
         )
-
-        binding.toolbar.backButton.setup(
+        toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = { activity?.onBackPressed() }
             )
         )
-
         binding.dishIcon.setBackgroundResource(dishModel.iconRes)
         binding.dishIcon.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
     }
 
     private fun setupSubtitles() {
-        if (editButtonChecked) {
-            binding.toggleCheckbox.setup(
-                model = TextModel(
-                    textValue = "Toggle check box for not including",
-                    textSize = 15,
-                    textColor = themeVm.state.value!!.secondaryColor,
-                    backgroundColor = themeVm.state.value!!.primaryColor
-                )
-            )
-        }
-
         binding.toggleCheckbox.visibility = if (editButtonChecked) View.VISIBLE else View.GONE
+        if (!editButtonChecked) return
+        binding.toggleCheckbox.setup(
+            model = TextModel(
+                textValue = requireContext().getString(R.string.toggle_check),
+                textSize = Constants.TEXT_SIZE_SMALL,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor
+            )
+        )
     }
 
     private fun setupDeleteButton() {
         binding.deleteButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.bin_icon,
-                iconSize = 70,
-                strokeWidth = 5,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
+                strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
                 foregroundColor = if (editButtonChecked) themeVm.state.value!!.secondaryColor else themeVm.state.value!!.primaryColor,
                 backgroundColor = if (editButtonChecked) themeVm.state.value!!.primaryColor else themeVm.state.value!!.secondaryColor,
                 onClickListener = {
                     YesNoDialog(
-                        requireActivity(),
-                        BaseDialogModel(
-                            title = "Do you want to delete this dish?",
+                        activity = requireActivity(),
+                        model = BaseDialogModel(
+                            title = requireContext().getString(R.string.want_delete),
                             textColor = themeVm.state.value!!.secondaryColor,
                             backgroundColor = themeVm.state.value!!.primaryColor,
                             onPositiveClicked = { dishVm.removeDish(dishName) },
-                        )).show()
-                }
+                        ),
+                    ).show()
+                },
             )
         )
     }
@@ -189,8 +180,8 @@ class DishScreenFragment : Fragment() {
         binding.editButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.edit_icon,
-                iconSize = 70,
-                strokeWidth = 5,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
+                strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
                 foregroundColor = if (editButtonChecked) themeVm.state.value!!.secondaryColor else themeVm.state.value!!.primaryColor,
                 backgroundColor = if (editButtonChecked) themeVm.state.value!!.primaryColor else themeVm.state.value!!.secondaryColor,
                 onClickListener = {
@@ -199,7 +190,7 @@ class DishScreenFragment : Fragment() {
                     setupEditButton()
                     setupSubtitles()
                     setupRecycler()
-                }
+                },
             )
         )
     }
@@ -212,30 +203,29 @@ class DishScreenFragment : Fragment() {
         binding.metricRecycler.setup(
             if (createDish) {
                 CreateMealWithExistingDishModel.newInstance(
-                    dishNutritionValue.prots.toString(),
-                    dishNutritionValue.fats.toString(),
-                    dishNutritionValue.carbs.toString(),
-                    dishNutritionValue.kcals.toString(),
+                    prots = dishNutritionValue.prots.toString(),
+                    fats = dishNutritionValue.fats.toString(),
+                    carbs = dishNutritionValue.carbs.toString(),
+                    kcal = dishNutritionValue.kcals.toString(),
                     foregroundColor = themeVm.state.value!!.primaryColor,
                     backgroundColor = themeVm.state.value!!.secondaryColor,
                 )
             } else {
                 DishMetricsModel.newInstance(
                     editable = editButtonChecked,
-                    dishNutritionValue.prots.toString(),
-                    dishNutritionValue.fats.toString(),
-                    dishNutritionValue.carbs.toString(),
-                    dishNutritionValue.kcals.toString(),
+                    prots = dishNutritionValue.prots.toString(),
+                    fats = dishNutritionValue.fats.toString(),
+                    carbs = dishNutritionValue.carbs.toString(),
+                    kcal = dishNutritionValue.kcals.toString(),
                     foregroundColor = themeVm.state.value!!.primaryColor,
                     backgroundColor = themeVm.state.value!!.secondaryColor,
                 )
             }
         )
-
         binding.doneButton.setup(
             model = ButtonModel(
                 labelTextRes = if (editButtonChecked) { R.string.update } else { R.string.done },
-                labelTextSize = 20,
+                labelTextSize = Constants.TEXT_SIZE,
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = {
@@ -251,17 +241,17 @@ class DishScreenFragment : Fragment() {
             activity?.onBackPressed()
             return
         }
-
         val inputValues = binding.metricRecycler.getInputValues()
         if (inputValues.any { it.isEmpty() }) {
             YesNoDialog(
-                requireActivity(),
-                BaseDialogModel(
-                    title = "Some fields are empty. They will be filled with '0'",
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    title = requireContext().getString(R.string.some_fields_empty),
                     textColor = themeVm.state.value!!.secondaryColor,
                     backgroundColor = themeVm.state.value!!.primaryColor,
                     onPositiveClicked = { processUpdate() },
-            )).show()
+                ),
+            ).show()
         } else {
             processUpdate()
         }
@@ -273,9 +263,9 @@ class DishScreenFragment : Fragment() {
 
         if (inputValues.any { inputValues.last().isEmpty() }) {
             YesNoDialog(
-                requireActivity(),
-                BaseDialogModel(
-                    title = "Some fields are empty. They will be filled with '0'",
+                activity = requireActivity(),
+                model = BaseDialogModel(
+                    title = requireContext().getString(R.string.some_fields_empty),
                     textColor = themeVm.state.value!!.secondaryColor,
                     backgroundColor = themeVm.state.value!!.primaryColor,
                     onPositiveClicked = { mealVm.createNewMeal(dishName, eatenValue.toFloat()) },
@@ -285,19 +275,8 @@ class DishScreenFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        dishVm.resetState()
-        nutritionVm.resetState()
-        nutritionVm.state.removeObservers(this)
-        dishVm.state.removeObservers(this)
-        super.onDestroy()
-    }
-
     companion object {
-        fun newInstance(
-            dishName: String,
-            createDish: Boolean = false
-        ): DishScreenFragment {
+        fun newInstance(dishName: String, createDish: Boolean = false): DishScreenFragment {
             return DishScreenFragment().also {
                 it.dishName = dishName
                 it.createDish = createDish
