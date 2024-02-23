@@ -29,7 +29,7 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
     override fun onStartFragment(): View {
         binding = FragmentMyGoalsScreenBinding.inflate(layoutInflater)
         noItemsLayoutBinding = NoItemsLayoutBinding.bind(binding.root)
-        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainer)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainerConstraint)
 
         return binding.root
     }

@@ -10,7 +10,6 @@
     <string name="send">Send</string>
 
 <!--TODO: later split string resources for different components, like it was done with drawables and layouts-->
-    <string name="done">Done</string>
     <string name="update">Update</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -38,6 +37,7 @@
 
 <!--    Common-->
     <string name="empty_line" />
+    <string name="done">Done</string>
     <string name="appearance">Appearance</string>
     <string name="toggle_check">Toggle check box for not including</string>
     <string name="some_fields_empty">Some fields are empty. They will be filled with \'0\'</string>
@@ -103,4 +103,9 @@
 
 <!--    SettingsScreenFragment-->
     <string name="settings">Settings</string>
+
+<!--    StatsScreenFragment-->
+    <string name="statistics">Statistics</string>
+    <string name="days_empty">Some days do not have data</string>
+    <string name="your_stats_here">Your statistics data located here. Switch months and nutrition indicators to explore</string>
 </resources>
