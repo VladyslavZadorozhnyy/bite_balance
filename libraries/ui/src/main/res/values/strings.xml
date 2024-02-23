@@ -94,4 +94,10 @@
 <!--    MenuScreenFragment-->
     <string name="add_new">Add new</string>
     <string name="menu">Menu</string>
+
+<!--    MyGoalsScreenFragment-->
+    <string name="goal_removed">Goal was removed</string>
+    <string name="my_goals">My Goals</string>
+    <string name="next_goal">My next goal is to :</string>
+    <string name="no_goals_yet">Seems that you have no goals for this month. \n\n You can create one for current month.</string>
 </resources>

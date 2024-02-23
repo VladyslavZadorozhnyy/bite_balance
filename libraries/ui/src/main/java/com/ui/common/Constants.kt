@@ -1,6 +1,8 @@
 package com.ui.common
 
 import com.ui.components.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Constants {
 //    Text constants
@@ -13,6 +15,7 @@ object Constants {
     const val ICON_SIZE = 40
     const val ICON_SIZE_MEDIUM = 80
     const val ICON_SIZE_BIG = 100
+    const val ICON_SIZE_LARGE = 120
     const val CORNER_RADIUS = 20
     const val BACK_BUTTON_ICON_SIZE = 70
     const val COLOR_ICON_STROKE_WIDTH = 5
@@ -33,6 +36,8 @@ object Constants {
         R.string.fats_consumption,
         R.string.carbs_consumption,
     )
+
+    val DATE_FORMAT = SimpleDateFormat("MMMM yyyy", Locale.US)
 
     enum class ComponentUiType {
         Button,
