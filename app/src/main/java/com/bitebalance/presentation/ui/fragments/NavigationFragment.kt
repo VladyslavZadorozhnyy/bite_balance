@@ -54,4 +54,10 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
         binding.navigationComponent.updateBackgroundColor(themeVm.state.value!!.secondaryColor)
         binding.navigationComponent.updateForegroundColor(themeVm.state.value!!.primaryColor)
     }
+
+    companion object {
+        fun newInstance(): NavigationFragment {
+            return NavigationFragment()
+        }
+    }
 }
