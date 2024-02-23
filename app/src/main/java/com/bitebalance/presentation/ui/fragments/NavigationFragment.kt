@@ -35,7 +35,7 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
                     R.id.nav_home -> HomeScreenFragment()
                     R.id.nav_stats -> StatsScreenFragment()
                     R.id.nav_menu -> MenuScreenFragment.newInstance(creatingNewMeal = false)
-                    else -> SettingsScreenFragment()
+                    else -> SettingsScreenFragment.newInstance()
                 }
                 changeFragment(nextFragment)
             },
