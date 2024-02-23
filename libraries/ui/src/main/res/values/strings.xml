@@ -5,7 +5,6 @@
 <!--    TODO: remove later-->
     <string name="text_button_sample">Text Button</string>
     <string name="text_icon_button_sample">Text Icon Button</string>
-    <string name="add_new">Add new</string>
     <string name="get_input_button">Get input</string>
     <string name="commit">Commit</string>
     <string name="send">Send</string>
@@ -42,10 +41,10 @@
     <string name="appearance">Appearance</string>
     <string name="toggle_check">Toggle check box for not including</string>
     <string name="some_fields_empty">Some fields are empty. They will be filled with \'0\'</string>
+    <string name="no_dishes_yet">Seems that you have no dishes yet. \n\n Start by adding one.</string>
 
 <!--    ChooseDishScreenFragment-->
     <string name="choose_dish">Choose dish</string>
-    <string name="no_dishes_yet">Seems that you have no dishes yet. \n\n Start by adding one.</string>
 
 <!--    AddMealScreenFragment-->
     <string name="add_meal">Add meal</string>
@@ -91,4 +90,8 @@
 <!--    MealDetailsScreenFragment-->
     <string name="details">Details:</string>
     <string name="back">Back</string>
+
+<!--    MenuScreenFragment-->
+    <string name="add_new">Add new</string>
+    <string name="menu">Menu</string>
 </resources>
