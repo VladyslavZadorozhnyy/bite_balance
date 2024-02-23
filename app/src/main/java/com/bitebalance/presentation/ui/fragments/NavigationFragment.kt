@@ -1,45 +1,35 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.bitebalance.databinding.FragmentNavigationBinding
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.nav_bar.NavigationBarModel
-import com.ui.common.Constants
 import com.ui.components.R
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.ui.common.Constants
+import androidx.fragment.app.Fragment
+import com.ui.basic.nav_bar.NavigationBarModel
+import com.bitebalance.databinding.FragmentNavigationBinding
 
-class NavigationFragment : Fragment() {
-    private val binding by lazy { FragmentNavigationBinding.inflate(layoutInflater) }
-    private val themeViewModel by sharedViewModel<ThemeViewModel>()
+class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupNavigationComponent()
+    override fun onStartFragment(): View {
+        binding = FragmentNavigationBinding.inflate(layoutInflater)
+
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStopFragment() {
+//        TODO("Not yet implemented") AAADIP REMOVE
+    }
+
+    override fun onResumeFragment() {
+        super.onResumeFragment()
         binding.navigationComponent.onResume()
     }
 
-    fun updateNavBarColors() {
-        binding.navigationComponent.updateBackgroundColor(themeViewModel.state.value!!.secondaryColor)
-        binding.navigationComponent.updateForegroundColor(themeViewModel.state.value!!.primaryColor)
-    }
-
-    private fun setupNavigationComponent() {
+    override fun setupViewModelsObservation() {
         binding.navigationComponent.setup(
             NavigationBarModel(
                 navIcons = Constants.NAVIGATION_ICONS_LIST,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = themeVm.state.value!!.primaryColor,
             ) { chosenItemId ->
                 val nextFragment = when (chosenItemId) {
                     R.id.nav_home -> HomeScreenFragment()
@@ -48,7 +38,7 @@ class NavigationFragment : Fragment() {
                     else -> SettingsScreenFragment()
                 }
                 changeFragment(nextFragment)
-            }
+            },
         )
     }
 
@@ -58,5 +48,10 @@ class NavigationFragment : Fragment() {
             replace(binding.contentFragment.id, fragment)
             commit()
         }
+    }
+
+    fun updateNavBarColors() {
+        binding.navigationComponent.updateBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.navigationComponent.updateForegroundColor(themeVm.state.value!!.primaryColor)
     }
 }
