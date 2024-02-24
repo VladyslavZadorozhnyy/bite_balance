@@ -1,39 +1,28 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.content.res.ColorStateList
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.bitebalance.databinding.FragmentSupportFeedbackScreenBinding
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.texts.common.TextModel
 import com.ui.components.R
+import com.ui.common.Constants
+import android.content.res.ColorStateList
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.input_form.InputFormModel
+import com.ui.basic.buttons.common.ButtonModel
+import com.ui.components.databinding.ToolbarBinding
 import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.bitebalance.databinding.FragmentSupportFeedbackScreenBinding
 
-class SupportFeedbackScreenFragment : Fragment() {
-    private val binding by lazy { FragmentSupportFeedbackScreenBinding.inflate(layoutInflater) }
+class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreenBinding>() {
 
-    private val navigationVm by sharedViewModel<NavigationViewModel>()
-    private val themeViewModel by sharedViewModel<ThemeViewModel>()
+    override fun onStartFragment(): View {
+        binding = FragmentSupportFeedbackScreenBinding.inflate(layoutInflater)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainerConstraint)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupViewModelsObservation()
         return binding.root
     }
 
-    private fun setupViewModelsObservation() {
-        themeViewModel.state.observe(this) { state ->
+    override fun setupViewModelsObservation() {
+        themeVm.state.observe(this) {
             setupStyling()
             setupHeader()
             setupSubtexts()
@@ -41,89 +30,91 @@ class SupportFeedbackScreenFragment : Fragment() {
         }
     }
 
+    override fun onStopFragment() {
+        themeVm.state.removeObservers(this)
+    }
+
     private fun setupStyling() {
-        binding.root.backgroundTintList = ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
     }
 
     private fun setupHeader() {
-        binding.toolbar.headline.setup(
+        toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = "Support Us",
-                textSize = 30,
-                textColor = themeViewModel.state.value!!.primaryColor,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor
+                textValue = requireContext().getString(R.string.support_us),
+                textSize = Constants.TEXT_SIZE_BIG,
+                textColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor
             )
         )
-
-        binding.toolbar.backButton.setup(
+        toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
-                foregroundColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
-                onClickListener = { navigationVm.popScreen() }
-            )
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
+                foregroundColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
+                onClickListener = { navigationVm.popScreen() },
+            ),
         )
     }
 
     private fun setupSubtexts() {
-        binding.subtext.backgroundTintList =
-            ColorStateList.valueOf(themeViewModel.state.value!!.primaryColor)
-
-        binding.donationPlanText.backgroundTintList =
-            ColorStateList.valueOf(themeViewModel.state.value!!.secondaryColor)
+        binding.subtext.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+        binding.donationPlanText.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
 
         binding.subtext.setup(
             model = TextModel(
-                textValue = "*Donation text*",
-                textSize = 20,
-                textColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                textValue = requireContext().getString(R.string.donation_text),
+                textSize = Constants.TEXT_SIZE,
+                textColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
             )
         )
-
         binding.inputSubtext.setup(
             model = InputFormModel(
                 active = true,
-                hint = "*Message to developers*",
+                hint = requireContext().getString(R.string.message_to_developers),
                 onInputChange = {  },
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
-            )
+                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = themeVm.state.value!!.primaryColor,
+            ),
         )
-
         binding.donationPlanText.setup(
             model = TextModel(
-                textValue = "*Donation plan*",
-                textSize = 20,
-                textColor = themeViewModel.state.value!!.primaryColor,
-                backgroundColor = themeViewModel.state.value!!.secondaryColor
-            )
+                textValue = requireContext().getString(R.string.donation_plan),
+                textSize = Constants.TEXT_SIZE,
+                textColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = themeVm.state.value!!.secondaryColor,
+            ),
         )
     }
 
     private fun setupButton() {
-        Log.d("AAADIP", "setupButton() started")
         binding.commitButton.setup(
-            ButtonModel(
+            model = ButtonModel(
                 labelTextRes = R.string.commit,
-                labelTextSize = 15,
+                labelTextSize = Constants.TEXT_SIZE_SMALL,
                 iconRes = R.drawable.donation_icon,
-                iconSize = 80,
-                foregroundColor = themeViewModel.state.value!!.secondaryColor,
-                backgroundColor = themeViewModel.state.value!!.primaryColor,
+                iconSize = Constants.ICON_SIZE_MEDIUM,
+                foregroundColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = {
                     ConfirmDialog(
                         activity = requireActivity(),
                         model = BaseDialogModel(
-                            backgroundColor = themeViewModel.state.value!!.primaryColor,
-                            textColor = themeViewModel.state.value!!.secondaryColor,
-                            title = "Donated successfully!"
-                        )
+                            backgroundColor = themeVm.state.value!!.primaryColor,
+                            textColor = themeVm.state.value!!.secondaryColor,
+                            title = requireContext().getString(R.string.donated),
+                        ),
                     ).show()
-                }
-            )
+                },
+            ),
         )
-        Log.d("AAADIP", "setupButton() ended, 2")
+    }
+
+    companion object {
+        fun newInstance(): SupportFeedbackScreenFragment {
+            return SupportFeedbackScreenFragment()
+        }
     }
 }

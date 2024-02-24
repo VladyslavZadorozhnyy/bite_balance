@@ -105,9 +105,9 @@ class SettingsScreenFragment : BaseFragment<FragmentSettingsScreenBinding>() {
             requireContext().getString(R.string.instruction) ->
                 navigationVm.navigateTo(TextScreenFragment(), NavigationAction.ADD)
             requireContext().getString(R.string.support_us) ->
-                navigationVm.navigateTo(SupportFeedbackScreenFragment(), NavigationAction.ADD)
+                navigationVm.navigateTo(SupportFeedbackScreenFragment.newInstance(), NavigationAction.ADD)
             requireContext().getString(R.string.feedback) ->
-                navigationVm.navigateTo(SupportFeedbackScreenFragment(), NavigationAction.ADD)
+                navigationVm.navigateTo(SupportFeedbackScreenFragment.newInstance(), NavigationAction.ADD)
         }
     }
 

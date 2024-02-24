@@ -6,7 +6,6 @@
     <string name="text_button_sample">Text Button</string>
     <string name="text_icon_button_sample">Text Icon Button</string>
     <string name="get_input_button">Get input</string>
-    <string name="commit">Commit</string>
     <string name="send">Send</string>
 
 <!--TODO: later split string resources for different components, like it was done with drawables and layouts-->
@@ -38,6 +37,7 @@
 <!--    Common-->
     <string name="empty_line" />
     <string name="done">Done</string>
+    <string name="support_us">Support Us</string>
     <string name="appearance">Appearance</string>
     <string name="toggle_check">Toggle check box for not including</string>
     <string name="some_fields_empty">Some fields are empty. They will be filled with \'0\'</string>
@@ -66,7 +66,6 @@
     <string name="measurement">Measurement</string>
     <string name="about_us">About Us</string>
     <string name="instruction">Instruction</string>
-    <string name="support_us">Support Us</string>
     <string name="feedback">Feedback</string>
 
 <!--    CreateNewScreenFragment-->
@@ -108,4 +107,11 @@
     <string name="statistics">Statistics</string>
     <string name="days_empty">Some days do not have data</string>
     <string name="your_stats_here">Your statistics data located here. Switch months and nutrition indicators to explore</string>
+
+<!--     SupportFeedbackScreenFragment-->
+    <string name="commit">Commit</string>
+    <string name="donated">Donated successfully!</string>
+    <string name="donation_text">*Donation text*</string>
+    <string name="message_to_developers">*Message to developers*</string>
+    <string name="donation_plan">*Donation plan*</string>
 </resources>
