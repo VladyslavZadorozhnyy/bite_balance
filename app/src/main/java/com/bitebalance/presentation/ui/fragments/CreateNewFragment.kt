@@ -15,10 +15,11 @@ import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.bitebalance.databinding.FragmentCreateNewScreenBinding
+import com.bitebalance.presentation.ui.activites.MainActivity
 import com.ui.basic.recycler_views.metric_recycler.DishNameMetricsModel
 import com.ui.basic.recycler_views.metric_recycler.CreateMealMetricsModel
 
-class CreateNewScreenFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
+class CreateNewFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
     private val dishVm by sharedViewModel<DishViewModel>()
     private val mealVm by sharedViewModel<MealViewModel>()
     private var createDish = false
@@ -57,15 +58,12 @@ class CreateNewScreenFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                     backgroundColor = themeVm.state.value!!.secondaryColor,
                     buttonText = R.string.done,
                     onConfirmClicked = {
-                        if (state.isSuccessful) {
-                            activity?.onBackPressed()
-                            activity?.onBackPressed()
-                        }
+                        if (state.isSuccessful)
+                            (activity as? MainActivity)?.backPressUntilComponent(HomeFragment::class.java.name)
                     }
-                )
+                ),
             ).show()
         }
-
         themeVm.state.observe(this) {
             setupHeader()
             setupStyling()
@@ -91,13 +89,12 @@ class CreateNewScreenFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
     private fun setupHeader() {
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(if (createDish) R.string.new_dish else R.string.new_meal),
+                textValue = getString(if (createDish) R.string.new_dish else R.string.new_meal),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
-
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
@@ -105,27 +102,26 @@ class CreateNewScreenFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = { activity?.onBackPressed() },
-            )
+            ),
         )
     }
 
     private fun setupSubtitles() {
         binding.specifyDish.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.spec_nut_value),
+                textValue = getString(R.string.spec_nut_value),
                 textSize = Constants.TEXT_SIZE_SMALL,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
-
         binding.toggleCheckbox.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.toggle_check),
+                textValue = getString(R.string.toggle_check),
                 textSize = Constants.TEXT_SIZE_SMALL,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
     }
 
@@ -143,7 +139,6 @@ class CreateNewScreenFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                 )
             }
         )
-
         binding.doneButton.setup(
             model = ButtonModel(
                 labelTextRes = R.string.done,
@@ -162,17 +157,17 @@ class CreateNewScreenFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                         YesNoDialog(
                             activity = requireActivity(),
                             model = BaseDialogModel(
-                                title = requireContext().getString(R.string.some_fields_empty),
-                                onPositiveClicked = { processDishCreation(inputValues) },
+                                title = getString(R.string.some_fields_empty),
                                 textColor = themeVm.state.value!!.primaryColor,
                                 backgroundColor = themeVm.state.value!!.secondaryColor,
+                                onPositiveClicked = { processDishCreation(inputValues) },
                             ),
                         ).show()
                     } else {
                         processDishCreation(inputValues)
                     }
                 }
-            )
+            ),
         )
     }
 
@@ -198,8 +193,8 @@ class CreateNewScreenFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
     }
 
     companion object {
-        fun newInstance(createDish: Boolean): CreateNewScreenFragment {
-            return CreateNewScreenFragment().also { it.createDish = createDish }
+        fun newInstance(createDish: Boolean): CreateNewFragment {
+            return CreateNewFragment().also { it.createDish = createDish }
         }
     }
 }

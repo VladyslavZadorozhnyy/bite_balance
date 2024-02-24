@@ -30,11 +30,9 @@ class MainActivity : AppCompatActivity() {
 
             when (state.action) {
                 NavigationAction.POP ->
-                    supportFragmentManager.fragments.lastOrNull()?.let {
-                        transaction.remove(it) }
+                    supportFragmentManager.fragments.lastOrNull()?.let { transaction.remove(it) }
                 NavigationAction.REPLACE ->
-                    state.fragment?.let {
-                        transaction.replace(binding.fragmentContainer.id, it) }
+                    state.fragment?.let { transaction.replace(binding.fragmentContainer.id, it) }
                 else ->
                     state.fragment?.let {
                         transaction.add(binding.fragmentContainer.id, it).addToBackStack(null) }

@@ -17,7 +17,7 @@ import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.ui.components.progress.carousel.ProgressCarouselModel
 
-class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
+class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
     private val nutritionVm by sharedViewModel<NutritionViewModel>()
     private val mealVm by sharedViewModel<MealViewModel>()
     private val dateVm by sharedViewModel<DateViewModel>()
@@ -58,9 +58,7 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                     ),
                 ).show()
             }
-            if (state.message.isNotEmpty() && state.isSuccessful) {
-                nutritionVm.getConsumedGoalValues()
-            }
+            if (state.message.isNotEmpty() && state.isSuccessful) nutritionVm.getConsumedGoalValues()
         }
     }
 
@@ -81,8 +79,8 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 textValue = greetingValue,
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor
-            )
+                backgroundColor = themeVm.state.value!!.secondaryColor,
+            ),
         )
     }
 
@@ -93,7 +91,7 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 goalConsumption = consumedGoalValues[1],
                 primaryColor = themeVm.state.value!!.primaryColor,
                 secondaryColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
     }
 
@@ -110,8 +108,8 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(InfoScreenFragment.newInstance(), NavigationAction.ADD)
-                }
-            )
+                },
+            ),
         )
         binding.todayMealsButton.setup(
             model = ButtonModel(
@@ -121,8 +119,8 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(TodayMealsScreenFragment.newInstance(), NavigationAction.ADD)
-                }
-            )
+                },
+            ),
         )
         binding.resetProgressButton.setup(
             model = ButtonModel(
@@ -130,8 +128,8 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 iconSize = Constants.ICON_SIZE_BIG,
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-                onClickListener =  { requestConfirmation() }
-            )
+                onClickListener =  { requestConfirmation() },
+            ),
         )
         binding.addMealButton.setup(
             model = ButtonModel(
@@ -140,9 +138,9 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener =  {
-                    navigationVm.navigateTo(AddMealScreenFragment.newInstance(), NavigationAction.ADD)
+                    navigationVm.navigateTo(AddMealFragment.newInstance(), NavigationAction.ADD)
                 },
-            )
+            ),
         )
     }
 
@@ -152,9 +150,15 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
             model = BaseDialogModel(
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 textColor = themeVm.state.value!!.primaryColor,
-                title = requireContext().getString(R.string.confirm_reset),
+                title = getString(R.string.confirm_reset),
                 onPositiveClicked = { mealVm.removeAllMeals() },
-            )
+            ),
         ).show()
+    }
+
+    companion object {
+        fun newInstance(): HomeFragment {
+            return HomeFragment()
+        }
     }
 }

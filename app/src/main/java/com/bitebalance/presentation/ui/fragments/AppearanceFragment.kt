@@ -14,7 +14,7 @@ import com.bitebalance.presentation.ui.activites.MainActivity
 import com.bitebalance.databinding.FragmentAppearanceScreenBinding
 
 
-class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
+class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
     override fun onStartFragment(): View {
         binding = FragmentAppearanceScreenBinding.inflate(layoutInflater)
         toolbarBinding = ToolbarBinding.bind(binding.root)
@@ -48,9 +48,8 @@ class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>()
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
-
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
@@ -58,7 +57,7 @@ class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>()
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { activity?.onBackPressed() },
-            )
+            ),
         )
     }
 
@@ -71,18 +70,19 @@ class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>()
             binding.color1Bar.setBackgroundColor(themeVm.state.value!!.primaryColor)
             binding.color1.setBackgroundColor(themeVm.state.value!!.secondaryColor)
         }
-
         binding.color1TextView.setup(
             model = TextModel(
                 textValue = requireContext().getString(R.string.primary_color),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
-
         binding.color1.setOnClickListener {
-            setupColorPickingDialog(changePrimaryColor = true, changeSecondaryColor = false)
+            setupColorPickingDialog(
+                changePrimaryColor = true,
+                changeSecondaryColor = false,
+            )
         }
     }
 
@@ -95,16 +95,14 @@ class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>()
             binding.color2Bar.setBackgroundColor(themeVm.state.value!!.primaryColor)
             binding.color2.setBackgroundColor(themeVm.state.value!!.secondaryColor)
         }
-
         binding.color2TextView.setup(
             model = TextModel(
                 textValue = requireContext().getString(R.string.secondary_color),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
-
         binding.color2.setOnClickListener {
             setupColorPickingDialog(
                 changePrimaryColor = false,
@@ -116,11 +114,11 @@ class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>()
     private fun setupFontLayout() {
         binding.fontTextView.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.font),
+                textValue = getString(R.string.font),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
         binding.fontLayout.setBackgroundColor(themeVm.state.value!!.secondaryColor)
         binding.fontBar.setBackgroundColor(themeVm.state.value!!.primaryColor)
@@ -131,12 +129,9 @@ class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>()
         changePrimaryColor: Boolean = false,
         changeSecondaryColor: Boolean = false,
     ) {
-        val dialogTitleRes = if (changePrimaryColor)
-            requireContext().getString(R.string.choose_primary_color)
-        else if (changeSecondaryColor)
-            requireContext().getString(R.string.choose_secondary_color)
-        else
-            requireContext().getString(R.string.empty_line)
+        val dialogTitleRes = if (changePrimaryColor) getString(R.string.choose_primary_color)
+        else if (changeSecondaryColor) getString(R.string.choose_secondary_color)
+        else requireContext().getString(R.string.empty_line)
 
         val defaultColor: Int = if (changePrimaryColor) themeVm.state.value?.primaryColor ?: -1
         else themeVm.state.value?.secondaryColor ?: -1
@@ -157,8 +152,8 @@ class AppearanceScreenFragment : BaseFragment<FragmentAppearanceScreenBinding>()
     }
 
     companion object {
-        fun newInstance(): AppearanceScreenFragment {
-            return AppearanceScreenFragment()
+        fun newInstance(): AppearanceFragment {
+            return AppearanceFragment()
         }
     }
 }

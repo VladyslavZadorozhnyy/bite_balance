@@ -11,7 +11,7 @@ import com.ui.components.databinding.ToolbarBinding
 import com.ui.basic.recycler_views.text_recycler.TextRecyclerModel
 import com.bitebalance.databinding.FragmentChooseSettingScreenBinding
 
-class ChooseSettingScreenFragment : BaseFragment<FragmentChooseSettingScreenBinding>() {
+class ChooseSettingFragment : BaseFragment<FragmentChooseSettingScreenBinding>() {
     override fun onStartFragment(): View {
         binding = FragmentChooseSettingScreenBinding.inflate(layoutInflater)
         toolbarBinding = ToolbarBinding.bind(binding.root)
@@ -45,16 +45,15 @@ class ChooseSettingScreenFragment : BaseFragment<FragmentChooseSettingScreenBind
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { navigationVm.popScreen() },
-            )
+            ),
         )
-
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.choosings),
+                textValue = getString(R.string.choosings),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
     }
 
@@ -63,50 +62,50 @@ class ChooseSettingScreenFragment : BaseFragment<FragmentChooseSettingScreenBind
             model = TextRecyclerModel(
                 items = listOf(
                     TextModel(
-                        textValue = requireContext().getString(R.string.appearance),
+                        textValue = getString(R.string.appearance),
                         textSize = Constants.TEXT_SIZE_BIG,
                         textColor = themeVm.state.value!!.primaryColor,
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                     ),
                     TextModel(
-                        textValue = requireContext().getString(R.string.language),
+                        textValue = getString(R.string.language),
                         textSize = Constants.TEXT_SIZE_BIG,
                         textColor = themeVm.state.value!!.primaryColor,
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                     ),
                     TextModel(
-                        textValue = requireContext().getString(R.string.measurement),
+                        textValue = getString(R.string.measurement),
                         textSize = Constants.TEXT_SIZE_BIG,
                         textColor = themeVm.state.value!!.primaryColor,
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                     ),
                     TextModel(
-                        textValue = requireContext().getString(R.string.about_us),
+                        textValue = getString(R.string.about_us),
                         textSize = Constants.TEXT_SIZE_BIG,
                         textColor = themeVm.state.value!!.primaryColor,
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                     ),
                     TextModel(
-                        textValue = requireContext().getString(R.string.instruction),
+                        textValue = getString(R.string.instruction),
                         textSize = Constants.TEXT_SIZE_BIG,
                         textColor = themeVm.state.value!!.primaryColor,
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                     ),
                     TextModel(
-                        textValue = requireContext().getString(R.string.support_us),
+                        textValue = getString(R.string.support_us),
                         textSize = Constants.TEXT_SIZE_BIG,
                         textColor = themeVm.state.value!!.primaryColor,
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                     ),
                     TextModel(
-                        textValue = requireContext().getString(R.string.feedback),
+                        textValue = getString(R.string.feedback),
                         textSize = Constants.TEXT_SIZE_BIG,
                         textColor = themeVm.state.value!!.primaryColor,
                         backgroundColor = themeVm.state.value!!.secondaryColor,
                     ),
                 ),
                 onClickListener = { processVariantClicked(it) }
-            )
+            ),
         )
     }
 
@@ -115,8 +114,8 @@ class ChooseSettingScreenFragment : BaseFragment<FragmentChooseSettingScreenBind
     }
 
     companion object {
-        fun newInstance(): ChooseSettingScreenFragment {
-            return ChooseSettingScreenFragment()
+        fun newInstance(): ChooseSettingFragment {
+            return ChooseSettingFragment()
         }
     }
 }

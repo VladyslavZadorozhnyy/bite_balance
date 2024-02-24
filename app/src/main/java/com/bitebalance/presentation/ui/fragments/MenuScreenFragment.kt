@@ -95,7 +95,7 @@ class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(
-                        CreateNewScreenFragment.newInstance(createDish = true),
+                        CreateNewFragment.newInstance(createDish = true),
                         NavigationAction.ADD
                     )
                 },
@@ -122,9 +122,9 @@ class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
 
     private fun processDishClick(dish: DishModel) {
         if (createNewMeal)
-            navigationVm.navigateTo(CreateNewScreenFragment.newInstance(createDish = false), NavigationAction.ADD)
+            navigationVm.navigateTo(CreateNewFragment.newInstance(createDish = false), NavigationAction.ADD)
         else
-            navigationVm.navigateTo(DishScreenFragment.newInstance(dish.name), NavigationAction.ADD)
+            navigationVm.navigateTo(DishFragment.newInstance(dish.name), NavigationAction.ADD)
     }
 
     companion object {

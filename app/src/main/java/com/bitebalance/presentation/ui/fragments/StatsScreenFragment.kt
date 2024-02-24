@@ -82,7 +82,7 @@ class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = {
-                    navigationVm.navigateTo(MyGoalsScreenFragment(), NavigationAction.ADD)
+                    navigationVm.navigateTo(MyGoalsScreenFragment.newInstance(), NavigationAction.ADD)
                 },
             ),
         )
@@ -156,5 +156,11 @@ class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
                 buttonText = R.string.done,
             ),
         ).show()
+    }
+
+    companion object {
+        fun newInstance(): StatsScreenFragment {
+            return StatsScreenFragment()
+        }
     }
 }

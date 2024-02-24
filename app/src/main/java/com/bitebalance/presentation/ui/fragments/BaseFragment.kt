@@ -22,11 +22,11 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     protected abstract fun onStartFragment(): View?
 
-    protected abstract fun onStopFragment()
-
     protected abstract fun setupViewModelsObservation()
 
     protected open fun onResumeFragment() { setupViewModelsObservation() }
+
+    protected abstract fun onStopFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater,

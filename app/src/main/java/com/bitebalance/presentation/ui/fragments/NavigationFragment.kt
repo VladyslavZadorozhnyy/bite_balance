@@ -32,8 +32,8 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
                 foregroundColor = themeVm.state.value!!.primaryColor,
             ) { chosenItemId ->
                 val nextFragment = when (chosenItemId) {
-                    R.id.nav_home -> HomeScreenFragment()
-                    R.id.nav_stats -> StatsScreenFragment()
+                    R.id.nav_home -> HomeFragment.newInstance()
+                    R.id.nav_stats -> StatsScreenFragment.newInstance()
                     R.id.nav_menu -> MenuScreenFragment.newInstance(creatingNewMeal = false)
                     else -> SettingsScreenFragment.newInstance()
                 }

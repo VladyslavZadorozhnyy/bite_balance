@@ -95,15 +95,15 @@ class SettingsScreenFragment : BaseFragment<FragmentSettingsScreenBinding>() {
     private fun processInstructionClicked(instruction: InstructionModel) {
         when (instruction.instructionText) {
             requireContext().getString(R.string.appearance) ->
-                navigationVm.navigateTo(AppearanceScreenFragment(), NavigationAction.ADD)
+                navigationVm.navigateTo(AppearanceFragment.newInstance(), NavigationAction.ADD)
             requireContext().getString(R.string.language) ->
-                navigationVm.navigateTo(ChooseSettingScreenFragment.newInstance(), NavigationAction.ADD)
+                navigationVm.navigateTo(ChooseSettingFragment.newInstance(), NavigationAction.ADD)
             requireContext().getString(R.string.measurement) ->
-                navigationVm.navigateTo(ChooseSettingScreenFragment.newInstance(), NavigationAction.ADD)
+                navigationVm.navigateTo(ChooseSettingFragment.newInstance(), NavigationAction.ADD)
             requireContext().getString(R.string.about_us) ->
-                navigationVm.navigateTo(TextScreenFragment(), NavigationAction.ADD)
+                navigationVm.navigateTo(TextScreenFragment.newInstance(), NavigationAction.ADD)
             requireContext().getString(R.string.instruction) ->
-                navigationVm.navigateTo(TextScreenFragment(), NavigationAction.ADD)
+                navigationVm.navigateTo(TextScreenFragment.newInstance(), NavigationAction.ADD)
             requireContext().getString(R.string.support_us) ->
                 navigationVm.navigateTo(SupportFeedbackScreenFragment.newInstance(), NavigationAction.ADD)
             requireContext().getString(R.string.feedback) ->

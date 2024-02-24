@@ -206,4 +206,10 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
         noItemsLayoutBinding.imageView.bringToFront()
         noItemsLayoutBinding.messageView.bringToFront()
     }
+
+    companion object {
+        fun newInstance(): MyGoalsScreenFragment {
+            return MyGoalsScreenFragment()
+        }
+    }
 }

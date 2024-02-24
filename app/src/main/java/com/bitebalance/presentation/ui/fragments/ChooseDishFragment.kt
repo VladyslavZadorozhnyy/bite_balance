@@ -16,7 +16,7 @@ import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 import com.bitebalance.databinding.FragmentChooseDishScreenBinding
 
 
-class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>() {
+class ChooseDishFragment : BaseFragment<FragmentChooseDishScreenBinding>() {
     private val dishVm by sharedViewModel<DishViewModel>()
 
     override fun onStartFragment(): View {
@@ -35,7 +35,7 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
     override fun setupViewModelsObservation() {
         dishVm.state.observe(this) { state ->
             if (state.data == null) { return@observe }
-            if (state.data.isEmpty()) { setupNoItemsView() } else { setupDishRecycler(state.data) }
+            if (state.data.isEmpty()) setupNoItemsView() else setupDishRecycler(state.data)
         }
         themeVm.state.observe(this) {
             setupStyling()
@@ -57,13 +57,12 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
     private fun setupHeader() {
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.choose_dish),
+                textValue = getString(R.string.choose_dish),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
-
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
@@ -71,7 +70,7 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = { navigationVm.popScreen() },
-            )
+            ),
         )
     }
 
@@ -85,11 +84,11 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
 
         noItemsLayoutBinding.messageView.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.no_dishes_yet),
+                textValue = getString(R.string.no_dishes_yet),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
     }
 
@@ -104,20 +103,23 @@ class ChooseDishScreenFragment : BaseFragment<FragmentChooseDishScreenBinding>()
                 primaryColor = themeVm.state.value!!.secondaryColor,
                 secondaryColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { processDishClick(it) },
-            )
+            ),
         )
     }
 
     private fun processDishClick(dish: DishModel) {
         navigationVm.navigateTo(
-            nextFragment = DishScreenFragment.newInstance(dishName = dish.name, createDish = true),
+            nextFragment = DishFragment.newInstance(
+                dishName = dish.name,
+                createDish = true,
+            ),
             navAction = NavigationAction.ADD,
         )
     }
 
     companion object {
-        fun newInstance(): ChooseDishScreenFragment {
-            return ChooseDishScreenFragment()
+        fun newInstance(): ChooseDishFragment {
+            return ChooseDishFragment()
         }
     }
 }
