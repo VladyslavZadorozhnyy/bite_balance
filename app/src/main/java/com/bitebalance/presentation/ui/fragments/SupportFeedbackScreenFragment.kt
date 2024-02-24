@@ -105,6 +105,7 @@ class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreen
                             backgroundColor = themeVm.state.value!!.primaryColor,
                             textColor = themeVm.state.value!!.secondaryColor,
                             title = requireContext().getString(R.string.donated),
+                            buttonText = R.string.done,
                         ),
                     ).show()
                 },

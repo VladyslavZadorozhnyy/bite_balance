@@ -114,4 +114,7 @@
     <string name="donation_text">*Donation text*</string>
     <string name="message_to_developers">*Message to developers*</string>
     <string name="donation_plan">*Donation plan*</string>
+
+<!--    TextScreenFragment-->
+    <string name="project_info">*Information about the project and application*</string>
 </resources>
