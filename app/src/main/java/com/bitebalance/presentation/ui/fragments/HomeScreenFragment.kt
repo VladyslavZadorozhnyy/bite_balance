@@ -120,7 +120,7 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener =  {
-                    navigationVm.navigateTo(TodayMealsScreenFragment(), NavigationAction.ADD)
+                    navigationVm.navigateTo(TodayMealsScreenFragment.newInstance(), NavigationAction.ADD)
                 }
             )
         )

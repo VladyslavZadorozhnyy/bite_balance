@@ -117,4 +117,7 @@
 
 <!--    TextScreenFragment-->
     <string name="project_info">*Information about the project and application*</string>
+
+<!--    TodayMealsScreenFragment-->
+    <string name="no_meals_yet">Seems that you have no meals yet. \n\n Start by adding one.</string>
 </resources>
