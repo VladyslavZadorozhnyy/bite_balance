@@ -33,9 +33,9 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
             ) { chosenItemId ->
                 val nextFragment = when (chosenItemId) {
                     R.id.nav_home -> HomeFragment.newInstance()
-                    R.id.nav_stats -> StatsScreenFragment.newInstance()
-                    R.id.nav_menu -> MenuScreenFragment.newInstance(creatingNewMeal = false)
-                    else -> SettingsScreenFragment.newInstance()
+                    R.id.nav_stats -> StatsFragment.newInstance()
+                    R.id.nav_menu -> MenuFragment.newInstance(creatingNewMeal = false)
+                    else -> SettingsFragment.newInstance()
                 }
                 changeFragment(nextFragment)
             },

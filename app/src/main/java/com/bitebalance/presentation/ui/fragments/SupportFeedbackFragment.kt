@@ -12,7 +12,7 @@ import com.ui.components.dialogs.common.BaseDialogModel
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import com.bitebalance.databinding.FragmentSupportFeedbackScreenBinding
 
-class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreenBinding>() {
+class SupportFeedbackFragment : BaseFragment<FragmentSupportFeedbackScreenBinding>() {
 
     override fun onStartFragment(): View {
         binding = FragmentSupportFeedbackScreenBinding.inflate(layoutInflater)
@@ -41,11 +41,11 @@ class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreen
     private fun setupHeader() {
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.support_us),
+                textValue = getString(R.string.support_us),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor
-            )
+                backgroundColor = themeVm.state.value!!.secondaryColor,
+            ),
         )
         toolbarBinding.backButton.setup(
             model = ButtonModel(
@@ -64,16 +64,16 @@ class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreen
 
         binding.subtext.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.donation_text),
+                textValue = getString(R.string.donation_text),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
         binding.inputSubtext.setup(
             model = InputFormModel(
                 active = true,
-                hint = requireContext().getString(R.string.message_to_developers),
+                hint = getString(R.string.message_to_developers),
                 onInputChange = {  },
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 foregroundColor = themeVm.state.value!!.primaryColor,
@@ -81,7 +81,7 @@ class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreen
         )
         binding.donationPlanText.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.donation_plan),
+                textValue = getString(R.string.donation_plan),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
@@ -104,7 +104,7 @@ class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreen
                         model = BaseDialogModel(
                             backgroundColor = themeVm.state.value!!.primaryColor,
                             textColor = themeVm.state.value!!.secondaryColor,
-                            title = requireContext().getString(R.string.donated),
+                            title = getString(R.string.donated),
                             buttonText = R.string.done,
                         ),
                     ).show()
@@ -114,8 +114,8 @@ class SupportFeedbackScreenFragment : BaseFragment<FragmentSupportFeedbackScreen
     }
 
     companion object {
-        fun newInstance(): SupportFeedbackScreenFragment {
-            return SupportFeedbackScreenFragment()
+        fun newInstance(): SupportFeedbackFragment {
+            return SupportFeedbackFragment()
         }
     }
 }

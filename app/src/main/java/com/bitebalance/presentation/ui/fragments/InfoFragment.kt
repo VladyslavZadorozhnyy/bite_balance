@@ -11,11 +11,11 @@ import com.ui.components.databinding.ToolbarBinding
 import com.bitebalance.databinding.FragmentInfoScreenBinding
 import com.ui.basic.recycler_views.instruction_recycler.InstructionRecyclerModel
 
-class InfoScreenFragment : BaseFragment<FragmentInfoScreenBinding>() {
+class InfoFragment : BaseFragment<FragmentInfoScreenBinding>() {
 
     override fun onStartFragment(): View {
         binding = FragmentInfoScreenBinding.inflate(layoutInflater)
-        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainer)
+        toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainerConstraint)
 
         return binding.root
     }
@@ -35,7 +35,7 @@ class InfoScreenFragment : BaseFragment<FragmentInfoScreenBinding>() {
     private fun setupStyling() {
         binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
         binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+        binding.sublayoutContainerConstraint.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
     }
 
     private fun setupHeader() {
@@ -47,17 +47,16 @@ class InfoScreenFragment : BaseFragment<FragmentInfoScreenBinding>() {
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-                onClickListener = { navigationVm.popScreen() }
-            )
+                onClickListener = { navigationVm.popScreen() },
+            ),
         )
-
         toolbarBinding.headline.setup(
             model = TextModel(
                 textValue = requireContext().getString(R.string.icons_legend),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
     }
 
@@ -69,19 +68,19 @@ class InfoScreenFragment : BaseFragment<FragmentInfoScreenBinding>() {
                 items = listOf(
                     InstructionModel(
                         iconRes = R.drawable.info_icon,
-                        instructionText = requireContext().getString(R.string.get_info_leg),
+                        instructionText = getString(R.string.get_info_leg),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.meals_icon,
-                        instructionText = requireContext().getString(R.string.list_today_meal_leg),
+                        instructionText = getString(R.string.list_today_meal_leg),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.reset_icon,
-                        instructionText = requireContext().getString(R.string.reset_today_meal_leg),
+                        instructionText = getString(R.string.reset_today_meal_leg),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.add_icon,
-                        instructionText = requireContext().getString(R.string.add_meal_leg),
+                        instructionText = getString(R.string.add_meal_leg),
                     ),
                 ),
             ),
@@ -89,8 +88,8 @@ class InfoScreenFragment : BaseFragment<FragmentInfoScreenBinding>() {
     }
 
     companion object {
-        fun newInstance(): InfoScreenFragment {
-            return InfoScreenFragment()
+        fun newInstance(): InfoFragment {
+            return InfoFragment()
         }
     }
 }

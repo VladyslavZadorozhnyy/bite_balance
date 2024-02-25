@@ -107,7 +107,7 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener =  {
-                    navigationVm.navigateTo(InfoScreenFragment.newInstance(), NavigationAction.ADD)
+                    navigationVm.navigateTo(InfoFragment.newInstance(), NavigationAction.ADD)
                 },
             ),
         )
@@ -118,7 +118,7 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener =  {
-                    navigationVm.navigateTo(TodayMealsScreenFragment.newInstance(), NavigationAction.ADD)
+                    navigationVm.navigateTo(TodayMealsFragment.newInstance(), NavigationAction.ADD)
                 },
             ),
         )

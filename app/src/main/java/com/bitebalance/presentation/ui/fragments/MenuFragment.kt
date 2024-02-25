@@ -15,7 +15,7 @@ import com.bitebalance.presentation.viewmodels.DishViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.ui.basic.recycler_views.dish_recycler.DishRecyclerModel
 
-class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
+class MenuFragment : BaseFragment<FragmentMenuScreenBinding>() {
     private val dishVm by sharedViewModel<DishViewModel>()
     private var createNewMeal = false
 
@@ -35,7 +35,7 @@ class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
     override fun setupViewModelsObservation() {
         dishVm.state.observe(this) { state ->
             if (state.data == null) { return@observe }
-            if (state.data.isEmpty()) { setupNoItemsView() } else { setupDishRecycler(state.data) }
+            if (state.data.isEmpty()) setupNoItemsView() else setupDishRecycler(state.data)
         }
         themeVm.state.observe(this) {
             setupHeader()
@@ -56,7 +56,7 @@ class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
         toolbarBinding.forwardButton.visibility = View.GONE
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.menu),
+                textValue = getString(R.string.menu),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
@@ -96,7 +96,7 @@ class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
                 onClickListener =  {
                     navigationVm.navigateTo(
                         CreateNewFragment.newInstance(createDish = true),
-                        NavigationAction.ADD
+                        NavigationAction.ADD,
                     )
                 },
             ),
@@ -112,7 +112,7 @@ class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
         noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
         noItemsLayoutBinding.messageView.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.no_dishes_yet),
+                textValue = getString(R.string.no_dishes_yet),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
@@ -128,8 +128,8 @@ class MenuScreenFragment : BaseFragment<FragmentMenuScreenBinding>() {
     }
 
     companion object {
-        fun newInstance(creatingNewMeal: Boolean): MenuScreenFragment {
-            return MenuScreenFragment().also { it.createNewMeal = creatingNewMeal }
+        fun newInstance(creatingNewMeal: Boolean): MenuFragment {
+            return MenuFragment().also { it.createNewMeal = creatingNewMeal }
         }
     }
 }

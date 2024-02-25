@@ -21,7 +21,7 @@ import com.bitebalance.databinding.FragmentMyGoalsScreenBinding
 import com.ui.basic.recycler_views.goal_recycler.GoalRecyclerModel
 
 
-class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapter.GoalAdapterListener {
+class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapter.GoalAdapterListener {
     private val dateVm by sharedViewModel<DateViewModel>()
     private val goalVm by sharedViewModel<GoalViewModel>()
     private var curDate = ""
@@ -55,13 +55,12 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
             binding.addGoalButton.visibility = if (state != curDate) View.GONE else View.VISIBLE
         }
         goalVm.state.observe(this) { state ->
-            if (state.data != null) {
+            if (state.data != null)
                 setupRecycler()
-            } else if (state.isSuccessful && state.message == "Goal created successfully") {
+            else if (state.isSuccessful && state.message == "Goal created successfully")
                 goalVm.getAllGoals(dateVm.state.value, Constants.DATE_FORMAT)
-            } else if (!state.isSuccessful && state.message == "Something went wrong") {
+            else if (!state.isSuccessful && state.message == "Something went wrong")
                 showConfirmDialog(state.message)
-            }
         }
     }
 
@@ -76,7 +75,7 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
     }
 
     override fun onItemRemoved(item: GoalModel, itemsLeft: Int) {
-        Toast.makeText(activity, requireContext().getString(R.string.goal_removed), Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity, getString(R.string.goal_removed), Toast.LENGTH_SHORT).show()
         goalVm.removeGoal(item)
 
         if (itemsLeft == 0) setupNoItemsView()
@@ -98,15 +97,15 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { navigationVm.popScreen() }
-            )
+            ),
         )
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.my_goals),
+                textValue = getString(R.string.my_goals),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
-            )
+            ),
         )
         dateVm.getCurrentMonth(Constants.DATE_FORMAT)
     }
@@ -119,7 +118,7 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { dateVm.getPrevMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "") },
-            )
+            ),
         )
         binding.nxtMonthButton.setup(
             model = ButtonModel(
@@ -128,7 +127,7 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { dateVm.getNextMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "") },
-            )
+            ),
         )
         binding.addGoalButton.setup(
             model = ButtonModel(
@@ -138,7 +137,7 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = { showInputDialog() }
-            )
+            ),
         )
     }
 
@@ -148,9 +147,9 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
             model = BaseDialogModel(
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 textColor = themeVm.state.value!!.primaryColor,
-                title = requireContext().getString(R.string.next_goal),
+                title = getString(R.string.next_goal),
                 onInputConfirmed = { goalVm.addNewGoal(it) },
-            )
+            ),
         ).show()
     }
 
@@ -196,7 +195,7 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
         noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
         noItemsLayoutBinding.messageView.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.no_goals_yet),
+                textValue = getString(R.string.no_goals_yet),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
@@ -208,8 +207,8 @@ class MyGoalsScreenFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), Goal
     }
 
     companion object {
-        fun newInstance(): MyGoalsScreenFragment {
-            return MyGoalsScreenFragment()
+        fun newInstance(): MyGoalsFragment {
+            return MyGoalsFragment()
         }
     }
 }

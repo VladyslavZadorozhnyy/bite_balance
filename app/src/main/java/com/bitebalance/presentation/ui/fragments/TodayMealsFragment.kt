@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.ui.basic.recycler_views.meal_recycler.MealRecyclerModel
 import com.bitebalance.databinding.FragmentTodaysMealsScreenBinding
 
-class TodayMealsScreenFragment : BaseFragment<FragmentTodaysMealsScreenBinding>() {
+class TodayMealsFragment : BaseFragment<FragmentTodaysMealsScreenBinding>() {
     private val mealVm by sharedViewModel<MealViewModel>()
 
     override fun onStartFragment(): View {
@@ -57,16 +57,16 @@ class TodayMealsScreenFragment : BaseFragment<FragmentTodaysMealsScreenBinding>(
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = 70,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
                 onClickListener = { navigationVm.popScreen() },
-            )
+            ),
         )
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = "Today's meals",
-                textSize = 30,
+                textValue = getString(R.string.today_meals),
+                textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
             ),
@@ -83,11 +83,11 @@ class TodayMealsScreenFragment : BaseFragment<FragmentTodaysMealsScreenBinding>(
 
         noItemsLayoutBinding.messageView.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.no_meals_yet),
+                textValue = getString(R.string.no_meals_yet),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
-            )
+            ),
         )
     }
 
@@ -109,7 +109,7 @@ class TodayMealsScreenFragment : BaseFragment<FragmentTodaysMealsScreenBinding>(
 
     private fun processMealClick(meal: MealModelUnboxed) {
         navigationVm.navigateTo(
-            MealDetailsScreenFragment.newInstance(meal.dishName, meal.amount),
+            MealDetailsFragment.newInstance(meal.dishName, meal.amount),
             NavigationAction.ADD,
         )
     }
@@ -119,8 +119,8 @@ class TodayMealsScreenFragment : BaseFragment<FragmentTodaysMealsScreenBinding>(
     }
 
     companion object {
-        fun newInstance(): TodayMealsScreenFragment {
-            return TodayMealsScreenFragment()
+        fun newInstance(): TodayMealsFragment {
+            return TodayMealsFragment()
         }
     }
 }

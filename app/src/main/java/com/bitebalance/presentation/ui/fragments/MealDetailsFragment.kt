@@ -14,9 +14,9 @@ import com.bitebalance.presentation.viewmodels.NutritionViewModel
 import com.ui.basic.recycler_views.metric_recycler.MealMetricsModel
 import com.bitebalance.databinding.FragmentMealDetailsScreenBinding
 
-class MealDetailsScreenFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
-    private val dishVm by sharedViewModel<DishViewModel>()
+class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
     private val nutritionVm by sharedViewModel<NutritionViewModel>()
+    private val dishVm by sharedViewModel<DishViewModel>()
 
     private var dishName: String = ""
     private var eatenAmount: Float = 0F
@@ -27,6 +27,7 @@ class MealDetailsScreenFragment : BaseFragment<FragmentMealDetailsScreenBinding>
 
         return binding.root
     }
+
     override fun onResumeFragment() {
         super.onResumeFragment()
         dishVm.getDishByName(dishName)
@@ -82,7 +83,7 @@ class MealDetailsScreenFragment : BaseFragment<FragmentMealDetailsScreenBinding>
     private fun setupSubtitles() {
         binding.details.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.details),
+                textValue = getString(R.string.details),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
@@ -115,8 +116,8 @@ class MealDetailsScreenFragment : BaseFragment<FragmentMealDetailsScreenBinding>
     }
 
     companion object {
-        fun newInstance(dishName: String, eatenAmount: Float): MealDetailsScreenFragment {
-            return MealDetailsScreenFragment().also {
+        fun newInstance(dishName: String, eatenAmount: Float): MealDetailsFragment {
+            return MealDetailsFragment().also {
                 it.dishName = dishName
                 it.eatenAmount = eatenAmount
             }

@@ -120,4 +120,5 @@
 
 <!--    TodayMealsScreenFragment-->
     <string name="no_meals_yet">Seems that you have no meals yet. \n\n Start by adding one.</string>
+    <string name="today_meals">Today\'s meals</string>
 </resources>

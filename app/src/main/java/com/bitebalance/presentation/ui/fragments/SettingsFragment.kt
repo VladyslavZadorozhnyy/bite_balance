@@ -11,7 +11,7 @@ import com.ui.components.databinding.ToolbarBinding
 import com.bitebalance.databinding.FragmentSettingsScreenBinding
 import com.ui.basic.recycler_views.settings_recycler.SettingsRecyclerModel
 
-class SettingsScreenFragment : BaseFragment<FragmentSettingsScreenBinding>() {
+class SettingsFragment : BaseFragment<FragmentSettingsScreenBinding>() {
 
     override fun onStartFragment(): View {
         binding = FragmentSettingsScreenBinding.inflate(layoutInflater)
@@ -44,7 +44,7 @@ class SettingsScreenFragment : BaseFragment<FragmentSettingsScreenBinding>() {
 
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.settings),
+                textValue = getString(R.string.settings),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
@@ -58,62 +58,62 @@ class SettingsScreenFragment : BaseFragment<FragmentSettingsScreenBinding>() {
                 items = listOf(
                     InstructionModel(
                         iconRes = R.drawable.appearance_icon,
-                        instructionText = requireContext().getString(R.string.appearance),
+                        instructionText = getString(R.string.appearance),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.translate_icon,
-                        instructionText = requireContext().getString(R.string.language),
+                        instructionText = getString(R.string.language),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.measurement_icon,
-                        instructionText = requireContext().getString(R.string.measurement),
+                        instructionText = getString(R.string.measurement),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.people_icon,
-                        instructionText = requireContext().getString(R.string.about_us),
+                        instructionText = getString(R.string.about_us),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.instruction_icon,
-                        instructionText = requireContext().getString(R.string.instruction),
+                        instructionText = getString(R.string.instruction),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.support_icon,
-                        instructionText = requireContext().getString(R.string.support_us),
+                        instructionText = getString(R.string.support_us),
                     ),
                     InstructionModel(
                         iconRes = R.drawable.feedback_icon,
-                        instructionText = requireContext().getString(R.string.feedback),
+                        instructionText = getString(R.string.feedback),
                     ),
                 ),
                 primaryColor = themeVm.state.value!!.primaryColor,
                 secondaryColor = themeVm.state.value!!.secondaryColor,
-                onClickListener = { processInstructionClicked(it) }
-            )
+                onClickListener = { processInstructionClicked(it) },
+            ),
         )
     }
 
     private fun processInstructionClicked(instruction: InstructionModel) {
         when (instruction.instructionText) {
-            requireContext().getString(R.string.appearance) ->
+            getString(R.string.appearance) ->
                 navigationVm.navigateTo(AppearanceFragment.newInstance(), NavigationAction.ADD)
-            requireContext().getString(R.string.language) ->
+            getString(R.string.language) ->
                 navigationVm.navigateTo(ChooseSettingFragment.newInstance(), NavigationAction.ADD)
-            requireContext().getString(R.string.measurement) ->
+            getString(R.string.measurement) ->
                 navigationVm.navigateTo(ChooseSettingFragment.newInstance(), NavigationAction.ADD)
-            requireContext().getString(R.string.about_us) ->
-                navigationVm.navigateTo(TextScreenFragment.newInstance(), NavigationAction.ADD)
-            requireContext().getString(R.string.instruction) ->
-                navigationVm.navigateTo(TextScreenFragment.newInstance(), NavigationAction.ADD)
-            requireContext().getString(R.string.support_us) ->
-                navigationVm.navigateTo(SupportFeedbackScreenFragment.newInstance(), NavigationAction.ADD)
-            requireContext().getString(R.string.feedback) ->
-                navigationVm.navigateTo(SupportFeedbackScreenFragment.newInstance(), NavigationAction.ADD)
+            getString(R.string.about_us) ->
+                navigationVm.navigateTo(AboutUsFragment.newInstance(), NavigationAction.ADD)
+            getString(R.string.instruction) ->
+                navigationVm.navigateTo(AboutUsFragment.newInstance(), NavigationAction.ADD)
+            getString(R.string.support_us) ->
+                navigationVm.navigateTo(SupportFeedbackFragment.newInstance(), NavigationAction.ADD)
+            getString(R.string.feedback) ->
+                navigationVm.navigateTo(SupportFeedbackFragment.newInstance(), NavigationAction.ADD)
         }
     }
 
     companion object {
-        fun newInstance(): SettingsScreenFragment {
-            return SettingsScreenFragment()
+        fun newInstance(): SettingsFragment {
+            return SettingsFragment()
         }
     }
 }

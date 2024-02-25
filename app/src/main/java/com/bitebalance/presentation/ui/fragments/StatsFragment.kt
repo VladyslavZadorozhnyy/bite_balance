@@ -18,7 +18,7 @@ import com.bitebalance.databinding.FragmentStatsScreenBinding
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
+class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
     private val statsVm by sharedViewModel<StatsViewModel>()
     private val dateVm by sharedViewModel<DateViewModel>()
     private var mToast: Toast? = null
@@ -82,13 +82,13 @@ class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
                 foregroundColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 onClickListener = {
-                    navigationVm.navigateTo(MyGoalsScreenFragment.newInstance(), NavigationAction.ADD)
+                    navigationVm.navigateTo(MyGoalsFragment.newInstance(), NavigationAction.ADD)
                 },
             ),
         )
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.statistics),
+                textValue = getString(R.string.statistics),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
@@ -108,7 +108,7 @@ class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
                     mToast?.cancel()
                     dateVm.getPrevMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "")
                 },
-            )
+            ),
         )
         binding.nxtMonthButton.setup(
             model = ButtonModel(
@@ -120,7 +120,7 @@ class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
                     mToast?.cancel()
                     dateVm.getNextMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "")
                 },
-            )
+            ),
         )
         binding.chooseMonthContainer.setBackgroundColor(themeVm.state.value!!.secondaryColor)
         binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
@@ -140,7 +140,7 @@ class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
         )
         monthNutritionValues.any { it == statsVm.emptyNutritionValue }.let { emptyValPresent ->
             if (emptyValPresent) {
-                mToast = Toast.makeText(activity, requireContext().getString(R.string.days_empty), Toast.LENGTH_LONG)
+                mToast = Toast.makeText(activity, getString(R.string.days_empty), Toast.LENGTH_LONG)
                 mToast?.show()
             }
         }
@@ -152,15 +152,15 @@ class StatsScreenFragment : BaseFragment<FragmentStatsScreenBinding>() {
             model = BaseDialogModel(
                 backgroundColor = themeVm.state.value!!.secondaryColor,
                 textColor = themeVm.state.value!!.primaryColor,
-                title = requireContext().getString(R.string.your_stats_here),
+                title = getString(R.string.your_stats_here),
                 buttonText = R.string.done,
             ),
         ).show()
     }
 
     companion object {
-        fun newInstance(): StatsScreenFragment {
-            return StatsScreenFragment()
+        fun newInstance(): StatsFragment {
+            return StatsFragment()
         }
     }
 }

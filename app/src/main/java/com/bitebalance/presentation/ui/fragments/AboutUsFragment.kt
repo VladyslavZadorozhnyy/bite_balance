@@ -9,7 +9,7 @@ import com.ui.basic.buttons.common.ButtonModel
 import com.ui.components.databinding.ToolbarBinding
 import com.bitebalance.databinding.FragmentTextScreenBinding
 
-class TextScreenFragment : BaseFragment<FragmentTextScreenBinding>() {
+class AboutUsFragment : BaseFragment<FragmentTextScreenBinding>() {
 
     override fun onStartFragment(): View {
         binding = FragmentTextScreenBinding.inflate(layoutInflater)
@@ -35,7 +35,7 @@ class TextScreenFragment : BaseFragment<FragmentTextScreenBinding>() {
 
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.about_us),
+                textValue = getString(R.string.about_us),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = themeVm.state.value!!.primaryColor,
                 backgroundColor = themeVm.state.value!!.secondaryColor,
@@ -57,7 +57,7 @@ class TextScreenFragment : BaseFragment<FragmentTextScreenBinding>() {
 
         binding.subtext.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.project_info),
+                textValue = getString(R.string.project_info),
                 textSize = Constants.TEXT_SIZE,
                 textColor = themeVm.state.value!!.secondaryColor,
                 backgroundColor = themeVm.state.value!!.primaryColor,
@@ -66,8 +66,8 @@ class TextScreenFragment : BaseFragment<FragmentTextScreenBinding>() {
     }
 
     companion object {
-        fun newInstance(): TextScreenFragment {
-            return TextScreenFragment()
+        fun newInstance(): AboutUsFragment {
+            return AboutUsFragment()
         }
     }
 }
