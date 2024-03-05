@@ -2,7 +2,6 @@ package com.bitebalance.presentation.ui.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.ui.components.R
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.databinding.ActivityMainBinding
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun backPressUntilComponent(componentName: String) {
+    fun backPressUntil(componentName: String) {
         while (supportFragmentManager.fragments.lastOrNull()?.javaClass?.name != componentName)
             onBackPressed()
     }

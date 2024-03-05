@@ -90,7 +90,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                         backgroundColor = primaryColor,
                         onConfirmClicked = {
                             if (state.isSuccessful)
-                                mActivity.backPressUntilComponent(HomeFragment::class.java.name)
+                                mActivity.backPressUntil(HomeFragment::class.java.name)
                         },
                     )
                 ).show()

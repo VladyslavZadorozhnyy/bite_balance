@@ -58,7 +58,7 @@ class CreateNewFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                     buttonText = R.string.done,
                     onConfirmClicked = {
                         if (state.isSuccessful)
-                            mActivity.backPressUntilComponent(HomeFragment::class.java.name)
+                            mActivity.backPressUntil(HomeFragment::class.java.name)
                     }
                 ),
             ).show()
