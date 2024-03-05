@@ -110,7 +110,7 @@ class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
                 labelTextSize = Constants.TEXT_SIZE,
                 foregroundColor = secondaryColor,
                 backgroundColor = primaryColor,
-                onClickListener = { activity?.onBackPressed() },
+                onClickListener = { navigationVm.popScreen() },
             ),
         )
     }

@@ -75,7 +75,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                     buttonText = R.string.done,
                     textColor = secondaryColor,
                     backgroundColor = primaryColor,
-                    onConfirmClicked = { activity?.onBackPressed() }
+                    onConfirmClicked = { navigationVm.popScreen() },
                 )).show()
             }
         }
@@ -134,7 +134,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,
-                onClickListener = { activity?.onBackPressed() }
+                onClickListener = { navigationVm.popScreen() }
             ),
         )
         binding.dishIcon.setBackgroundResource(dishModel.iconRes)
@@ -239,7 +239,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
 
     private fun processNonCreateDish() {
         if (!editButtonChecked) {
-            activity?.onBackPressed()
+            navigationVm.popScreen()
             return
         }
         val inputValues = binding.metricRecycler.getInputValues()

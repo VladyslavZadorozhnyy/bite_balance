@@ -41,7 +41,7 @@ class CreateNewFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                     textColor = primaryColor,
                     backgroundColor = secondaryColor,
                     buttonText = R.string.done,
-                    onConfirmClicked = { if (state.isSuccessful) activity?.onBackPressed() },
+                    onConfirmClicked = { if (state.isSuccessful) navigationVm.popScreen() },
                 ),
             ).show()
         }
@@ -100,7 +100,7 @@ class CreateNewFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,
-                onClickListener = { activity?.onBackPressed() },
+                onClickListener = { navigationVm.popScreen() },
             ),
         )
     }

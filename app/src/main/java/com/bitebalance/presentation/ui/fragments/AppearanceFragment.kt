@@ -51,7 +51,7 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = secondaryColor,
                 backgroundColor = primaryColor,
-                onClickListener = { activity?.onBackPressed() },
+                onClickListener = { navigationVm.popScreen() },
             ),
         )
     }

@@ -55,7 +55,7 @@ class AddMealFragment : BaseFragment<FragmentAddMealScreenBinding>() {
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,
-                onClickListener = { activity?.onBackPressed() },
+                onClickListener = { navigationVm.popScreen() },
             ),
         )
         toolbarBinding.headline.setup(

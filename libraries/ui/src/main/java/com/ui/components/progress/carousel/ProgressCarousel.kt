@@ -13,10 +13,10 @@ import androidx.core.view.updateMargins
 import android.content.res.ColorStateList
 import com.ui.common.BaseUiComponentModel
 import androidx.viewpager.widget.ViewPager
+import com.ui.basic.texts.common.TextModel
 import android.graphics.drawable.GradientDrawable
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.content.ContextCompat.getDrawable
-import com.ui.basic.texts.common.TextModel
 import com.ui.components.databinding.ProgressCarouselBinding
 
 
