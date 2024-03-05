@@ -1,6 +1,5 @@
 package com.ui.basic.texts.text
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.text.TextUtils
@@ -25,7 +24,6 @@ class Text(
         TextBinding.inflate(LayoutInflater.from(context), this).textView
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun setup(model: BaseUiComponentModel) {
         (model as? TextModel)?.let {
             binding.text = model.textValue

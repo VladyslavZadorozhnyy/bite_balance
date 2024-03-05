@@ -1,6 +1,5 @@
 package com.ui.basic.texts.slideable_text
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Paint
 import android.text.TextUtils
@@ -24,7 +23,6 @@ class SlideableText(
         TextBinding.inflate(LayoutInflater.from(context), this).textView
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun setup(model: BaseUiComponentModel) {
         (model as? TextModel)?.let {
             binding.text = model.textValue

@@ -1,6 +1,5 @@
 package com.ui.components.dialogs.yes_no_dialog
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.res.ColorStateList
@@ -34,7 +33,6 @@ class YesNoDialog(
         setCanceledOnTouchOutside(false)
     }
 
-    @SuppressLint("ResourceAsColor")
     fun setup() {
 
         (model as? BaseDialogModel)?.let {
@@ -74,7 +72,6 @@ class YesNoDialog(
                     }
                 )
             )
-
             binding.layout.background = getDrawable(context, R.drawable.dialog_shape)
             binding.layout.backgroundTintList = ColorStateList.valueOf(model.backgroundColor)
         }

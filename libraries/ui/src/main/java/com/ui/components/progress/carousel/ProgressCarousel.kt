@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.ui.common.BaseUiComponent
 import com.ui.common.ComponentUiUtils
-import android.annotation.SuppressLint
 import androidx.core.view.updateMargins
 import android.content.res.ColorStateList
 import com.ui.common.BaseUiComponentModel
@@ -80,16 +79,15 @@ class ProgressCarousel(
         }
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private fun setupDots(model: BaseUiComponentModel) {
         (model as? ProgressCarouselModel)?.let { progressModel ->
-            val nonActiveDotRes = R.drawable.non_active_dot_icon
-            val wrappedDrawable = DrawableCompat.wrap(context.getDrawable(nonActiveDotRes)!!)
+            val nonActiveDotDr = getDrawable(context, R.drawable.non_active_dot_icon) ?: return
+            val wrappedDrawable = DrawableCompat.wrap(nonActiveDotDr)
             DrawableCompat.setTint(wrappedDrawable, progressModel.secondaryColor)
 
             for (i in 0 until Constants.CAROUSEL_SIZE) {
                 ImageView(context).apply {
-                    setImageDrawable(getDrawable(context, nonActiveDotRes))
+                    setImageDrawable(nonActiveDotDr)
                     binding.sliderDots.addView(this, dotLayoutParams)
                 }
             }
