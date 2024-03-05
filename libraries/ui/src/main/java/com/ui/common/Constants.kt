@@ -1,8 +1,8 @@
 package com.ui.common
 
+import java.util.*
 import com.ui.components.R
 import java.text.SimpleDateFormat
-import java.util.*
 
 object Constants {
 //    Text constants

@@ -3,10 +3,10 @@ package com.ui.components.dialogs.input_dialog
 import android.app.Activity
 import android.app.Dialog
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.ContextCompat.getDrawable
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.common.BaseUiComponentModel
@@ -20,12 +20,9 @@ class InputDialog(
     activity: Activity,
     private val model: BaseUiComponentModel
 ) : Dialog(activity) {
+    private val binding by lazy { InputDialogBinding.inflate(LayoutInflater.from(context)) }
+    private val transparentBackground by lazy { ColorDrawable(Color.TRANSPARENT) }
     private var inputValue = ""
-    private val transparentBackground = ColorDrawable(getColor(context, R.color.transparent))
-
-    private val binding by lazy {
-        InputDialogBinding.inflate(LayoutInflater.from(context))
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
