@@ -1,15 +1,16 @@
 package com.ui.components.graph.component
 
+import com.ui.components.R
 import android.content.Context
-import android.content.res.ColorStateList
+import com.ui.common.Constants
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.ui.common.BaseUiComponent
+import android.content.res.ColorStateList
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.Constants
+import com.ui.components.databinding.GraphLayoutBinding
 import com.ui.components.graph.subcomponents.ChartSubComponent
 import com.ui.components.graph.subcomponents.SpinnerSubComponent
-import com.ui.components.databinding.GraphLayoutBinding
 
 
 class Graph(
@@ -23,22 +24,22 @@ class Graph(
     override fun setup(model: BaseUiComponentModel) {
         (model as? GraphModel)?.let { graphModel ->
             SpinnerSubComponent(binding.spinner).setup(
-                context,
-                Constants.SPINNER_ITEMS,
-                model.foregroundColor,
-                model.backgroundColor,
+                context = context,
+                spinnerItems = Constants.SPINNER_ITEMS,
+                foregroundColor = model.foregroundColor,
+                backgroundColor = model.backgroundColor,
             ) { activeIndex ->
                 ChartSubComponent(
-                    context,
-                    graphModel.foregroundColor,
-                    graphModel.backgroundColor,
-                    binding.chartView,
-                    binding.goalConsumption,
-                    binding.actualConsumption,
+                    context = context,
+                    barColor = graphModel.foregroundColor,
+                    foregroundColor = graphModel.backgroundColor,
+                    chartView = binding.chartView,
+                    goalConsumption = binding.goalConsumption,
+                    actualConsumption = binding.actualConsumption,
                 ).setup(
-                    indexToLabel(activeIndex),
-                    indexToConsumptionValues(activeIndex, graphModel),
-                    indexToGoalValues(activeIndex, graphModel)
+                    metricsLabel = indexToLabel(activeIndex),
+                    barEntries = indexToConsumptionValues(activeIndex, graphModel),
+                    lineEntries = indexToGoalValues(activeIndex, graphModel),
                 )
                 binding.chartView.backgroundTintList =
                     ColorStateList.valueOf(graphModel.backgroundColor)
@@ -47,14 +48,11 @@ class Graph(
     }
 
     private fun indexToLabel(metricsIndex: Int): String {
-        return when(metricsIndex) {
-            0 -> "kcal"
-            else -> "g"
-        }
+        return context.getString(if (metricsIndex == 0) R.string.kcal else R.string.g)
     }
 
     private fun indexToConsumptionValues(metricsIndex: Int, model: GraphModel): List<Float> {
-        return when(metricsIndex) {
+        return when (metricsIndex) {
             0 -> model.consumption.map { it.kcals }.toList()
             1 -> model.consumption.map { it.prots }.toList()
             2 -> model.consumption.map { it.fats }.toList()
@@ -63,7 +61,7 @@ class Graph(
     }
 
     private fun indexToGoalValues(metricsIndex: Int, model: GraphModel): List<Float> {
-        return when(metricsIndex) {
+        return when (metricsIndex) {
             0 -> model.consumption.map { model.consumptionGoal.kcals }.toList()
             1 -> model.consumption.map { model.consumptionGoal.prots }.toList()
             2 -> model.consumption.map { model.consumptionGoal.fats }.toList()

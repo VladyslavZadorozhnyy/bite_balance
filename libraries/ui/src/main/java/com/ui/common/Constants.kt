@@ -22,6 +22,7 @@ object Constants {
 
 //    Other constants
     const val CAROUSEL_SIZE = 4
+    const val GRAPH_SPAN_SIZE = 7
 
     val NAVIGATION_ICONS_LIST = listOf(
         R.drawable.nav_home_active,

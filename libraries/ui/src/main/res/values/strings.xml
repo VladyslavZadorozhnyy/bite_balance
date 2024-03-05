@@ -37,6 +37,8 @@
 <!--    Common-->
     <string name="empty_line" />
     <string name="done">Done</string>
+    <string name="kcal">kcal</string>
+    <string name="g">g</string>
     <string name="support_us">Support Us</string>
     <string name="appearance">Appearance</string>
     <string name="toggle_check">Toggle check box for not including</string>

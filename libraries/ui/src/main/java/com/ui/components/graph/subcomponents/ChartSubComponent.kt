@@ -24,7 +24,7 @@ class ChartSubComponent(
     private val foregroundColor: Int,
     private val chartView: CombinedChart,
     private val goalConsumption: SlideableText,
-    private val actualConsumption: SlideableText
+    private val actualConsumption: SlideableText,
 ) {
     private val barDataLabel = context.getString(R.string.act_consumption)
     private val lineDataLabel = context.getString(R.string.goal_consumption)
@@ -35,12 +35,12 @@ class ChartSubComponent(
     fun setup(
         metricsLabel: String,
         barEntries: List<Float>,
-        lineEntries: List<Float>
+        lineEntries: List<Float>,
     ) {
         val barDataSet = BarDataSet(getBarEntries(barEntries), barDataLabel).also {
             it.valueTextColor = transparentColor
-            it.setColors(barColor)
             it.valueTextSize = 16f
+            it.setColors(barColor)
         }
 
         barDataSet.valueFormatter = object : ValueFormatter() {
@@ -148,9 +148,8 @@ class ChartSubComponent(
     private fun updateDataSetColors(chosenIndex: Int, entryCount: Int): List<Int> {
         val result = arrayListOf<Int>()
 
-        for (i in 0 .. entryCount) {
+        for (i in 0 .. entryCount)
             result.add(if (i == chosenIndex) { barColor } else { transparentColor })
-        }
         return result
     }
 }
