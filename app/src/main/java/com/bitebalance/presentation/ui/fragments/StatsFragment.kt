@@ -40,8 +40,8 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
                 model = TextModel(
                     textValue = state,
                     textSize = Constants.TEXT_SIZE,
-                    textColor = themeVm.state.value!!.primaryColor,
-                    backgroundColor = themeVm.state.value!!.secondaryColor,
+                    textColor = primaryColor,
+                    backgroundColor = secondaryColor,
                 ),
             )
             statsVm.getStatsByMonthAndYear(Constants.DATE_FORMAT, state)
@@ -54,15 +54,15 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
     }
 
     override fun onStopFragment() {
+        super.onStopFragment()
         mToast?.cancel()
         dateVm.state.removeObservers(this)
         statsVm.state.removeObservers(this)
-        navigationVm.state.removeObservers(this)
     }
 
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.root.setBackgroundColor(secondaryColor)
     }
 
     private fun setupHeader() {
@@ -70,8 +70,8 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.question_mark_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = { showConfirmDialog() },
             ),
         )
@@ -79,8 +79,8 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.goal_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = {
                     navigationVm.navigateTo(MyGoalsFragment.newInstance(), NavigationAction.ADD)
                 },
@@ -90,8 +90,8 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
             model = TextModel(
                 textValue = getString(R.string.statistics),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                textColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
         dateVm.getCurrentMonth(Constants.DATE_FORMAT)
@@ -102,8 +102,8 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.ICON_SIZE_BIG,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = {
                     mToast?.cancel()
                     dateVm.getPrevMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "")
@@ -114,16 +114,16 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.ICON_SIZE_BIG,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = {
                     mToast?.cancel()
                     dateVm.getNextMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "")
                 },
             ),
         )
-        binding.chooseMonthContainer.setBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.chooseMonthContainer.setBackgroundColor(secondaryColor)
+        binding.lineView.setBackgroundColor(secondaryColor)
     }
 
     private fun setupChart(
@@ -134,8 +134,8 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
             GraphModel(
                 consumption = monthNutritionValues,
                 consumptionGoal = goalNutritionValue,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
             )
         )
         monthNutritionValues.any { it == statsVm.emptyNutritionValue }.let { emptyValPresent ->
@@ -150,8 +150,8 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
         ConfirmDialog(
             activity = requireActivity(),
             model = BaseDialogModel(
-                backgroundColor = themeVm.state.value!!.secondaryColor,
-                textColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = secondaryColor,
+                textColor = primaryColor,
                 title = getString(R.string.your_stats_here),
                 buttonText = R.string.done,
             ),

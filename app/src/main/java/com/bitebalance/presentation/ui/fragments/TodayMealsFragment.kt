@@ -20,7 +20,7 @@ class TodayMealsFragment : BaseFragment<FragmentTodaysMealsScreenBinding>() {
 
     override fun onStartFragment(): View {
         binding = FragmentTodaysMealsScreenBinding.inflate(layoutInflater)
-        noItemsLayoutBinding = NoItemsLayoutBinding.bind(binding.root)
+        noItemsBinding = NoItemsLayoutBinding.bind(binding.root)
         toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainerConstraint)
 
         return binding.root
@@ -44,13 +44,13 @@ class TodayMealsFragment : BaseFragment<FragmentTodaysMealsScreenBinding>() {
     }
 
     override fun onStopFragment() {
-        navigationVm.state.removeObservers(this)
+        super.onStopFragment()
         mealVm.state.removeObservers(this)
     }
 
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.root.setBackgroundColor(secondaryColor)
     }
 
     private fun setupHeader() {
@@ -58,8 +58,8 @@ class TodayMealsFragment : BaseFragment<FragmentTodaysMealsScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { navigationVm.popScreen() },
             ),
         )
@@ -67,39 +67,39 @@ class TodayMealsFragment : BaseFragment<FragmentTodaysMealsScreenBinding>() {
             model = TextModel(
                 textValue = getString(R.string.today_meals),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }
 
     private fun setupNoItemsView() {
-        noItemsLayoutBinding.imageView.visibility = View.VISIBLE
-        noItemsLayoutBinding.messageView.visibility = View.VISIBLE
+        noItemsBinding.imageView.visibility = View.VISIBLE
+        noItemsBinding.messageView.visibility = View.VISIBLE
         binding.mealRecycler.visibility = View.INVISIBLE
 
-        noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.nav_menu_active)
-        noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        noItemsBinding.imageView.setBackgroundResource(R.drawable.nav_menu_active)
+        noItemsBinding.imageView.backgroundTintList = ColorStateList.valueOf(secondaryColor)
 
-        noItemsLayoutBinding.messageView.setup(
+        noItemsBinding.messageView.setup(
             model = TextModel(
                 textValue = getString(R.string.no_meals_yet),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                textColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
     }
 
     private fun setupRecycler(content: List<MealModelUnboxed>) {
-        noItemsLayoutBinding.imageView.visibility = View.INVISIBLE
-        noItemsLayoutBinding.messageView.visibility = View.INVISIBLE
+        noItemsBinding.imageView.visibility = View.INVISIBLE
+        noItemsBinding.messageView.visibility = View.INVISIBLE
         binding.mealRecycler.visibility = View.VISIBLE
         binding.mealRecycler.setup(
             model = MealRecyclerModel(
                 items = content,
-                backgroundColor = themeVm.state.value!!.primaryColor,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = primaryColor,
+                foregroundColor = secondaryColor,
                 onClickListener = { processMealClick(it) },
                 onSwipeListener = { processSwipe(it) },
             ),

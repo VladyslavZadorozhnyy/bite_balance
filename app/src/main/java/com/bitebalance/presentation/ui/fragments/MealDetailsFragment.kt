@@ -48,16 +48,16 @@ class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
     }
 
     override fun onStopFragment() {
+        super.onStopFragment()
         dishVm.state.removeObservers(this)
         nutritionVm.state.removeObservers(this)
-        themeVm.state.removeObservers(this)
     }
 
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
-        binding.root.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.lineView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.dishIcon.imageTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(secondaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.lineView.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.dishIcon.imageTintList = ColorStateList.valueOf(primaryColor)
     }
 
     private fun setupHeader(dishName: String) {
@@ -65,16 +65,16 @@ class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
             model = TextModel(
                 textValue = dishName,
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { navigationVm.popScreen() },
             ),
         )
@@ -85,8 +85,8 @@ class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
             model = TextModel(
                 textValue = getString(R.string.details),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }
@@ -100,16 +100,16 @@ class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
                 kcal = nutritionValueModel.kcals  / eatenAmount,
                 eaten = eatenAmount,
                 editable = false,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
         binding.doneButton.setup(
             model = ButtonModel(
                 labelTextRes = R.string.back,
                 labelTextSize = Constants.TEXT_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { activity?.onBackPressed() },
             ),
         )

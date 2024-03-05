@@ -10,7 +10,6 @@ import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
 import android.graphics.drawable.GradientDrawable
 import com.ui.components.databinding.ToolbarBinding
-import com.bitebalance.presentation.ui.activites.MainActivity
 import com.bitebalance.databinding.FragmentAppearanceScreenBinding
 
 
@@ -32,13 +31,9 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
         }
     }
 
-    override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
-    }
-
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.root.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(secondaryColor)
     }
 
     private fun setupHeader() {
@@ -46,16 +41,16 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
             model = TextModel(
                 textValue = requireContext().getString(R.string.appearance),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { activity?.onBackPressed() },
             ),
         )
@@ -65,17 +60,17 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
         (binding.color1ColorView.background as? GradientDrawable)?.let {
             it.mutate()
             it.setStroke(Constants.COLOR_ICON_STROKE_WIDTH, ColorStateList.valueOf(Color.BLACK))
-            it.color = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+            it.color = ColorStateList.valueOf(primaryColor)
             binding.color1ColorView.background = it
-            binding.color1Bar.setBackgroundColor(themeVm.state.value!!.primaryColor)
-            binding.color1.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+            binding.color1Bar.setBackgroundColor(primaryColor)
+            binding.color1.setBackgroundColor(secondaryColor)
         }
         binding.color1TextView.setup(
             model = TextModel(
                 textValue = requireContext().getString(R.string.primary_color),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
         binding.color1.setOnClickListener {
@@ -90,17 +85,17 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
         (binding.color2ColorView.background as? GradientDrawable)?.let {
             it.mutate()
             it.setStroke(Constants.COLOR_ICON_STROKE_WIDTH, ColorStateList.valueOf(Color.BLACK))
-            it.color = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+            it.color = ColorStateList.valueOf(secondaryColor)
             binding.color2ColorView.background = it
-            binding.color2Bar.setBackgroundColor(themeVm.state.value!!.primaryColor)
-            binding.color2.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+            binding.color2Bar.setBackgroundColor(primaryColor)
+            binding.color2.setBackgroundColor(secondaryColor)
         }
         binding.color2TextView.setup(
             model = TextModel(
                 textValue = requireContext().getString(R.string.secondary_color),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
         binding.color2.setOnClickListener {
@@ -116,13 +111,13 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
             model = TextModel(
                 textValue = getString(R.string.font),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
-        binding.fontLayout.setBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.fontBar.setBackgroundColor(themeVm.state.value!!.primaryColor)
-        binding.fontIcon.setColorFilter(themeVm.state.value!!.primaryColor)
+        binding.fontLayout.setBackgroundColor(secondaryColor)
+        binding.fontBar.setBackgroundColor(primaryColor)
+        binding.fontIcon.setColorFilter(primaryColor)
     }
 
     private fun setupColorPickingDialog(
@@ -143,7 +138,7 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
                 if (changePrimaryColor) themeVm.setPrimaryColor(color)
                 else if (changeSecondaryColor) themeVm.setSecondaryColor(color)
 
-                (activity as? MainActivity)?.updateNavBarColors()
+                mActivity.updateNavBarColors()
             }
         }).apply {
             this.dialog.setTitle(dialogTitleRes)

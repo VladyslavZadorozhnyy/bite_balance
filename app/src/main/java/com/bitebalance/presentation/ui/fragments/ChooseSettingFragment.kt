@@ -27,14 +27,10 @@ class ChooseSettingFragment : BaseFragment<FragmentChooseSettingScreenBinding>()
         }
     }
 
-    override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
-    }
-
     private fun setupStyling() {
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.textRecycler.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.root.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.textRecycler.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(secondaryColor)
     }
 
     private fun setupHeader() {
@@ -42,8 +38,8 @@ class ChooseSettingFragment : BaseFragment<FragmentChooseSettingScreenBinding>()
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { navigationVm.popScreen() },
             ),
         )
@@ -51,8 +47,8 @@ class ChooseSettingFragment : BaseFragment<FragmentChooseSettingScreenBinding>()
             model = TextModel(
                 textValue = getString(R.string.choosings),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }
@@ -64,44 +60,44 @@ class ChooseSettingFragment : BaseFragment<FragmentChooseSettingScreenBinding>()
                     TextModel(
                         textValue = getString(R.string.appearance),
                         textSize = Constants.TEXT_SIZE_BIG,
-                        textColor = themeVm.state.value!!.primaryColor,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                     ),
                     TextModel(
                         textValue = getString(R.string.language),
                         textSize = Constants.TEXT_SIZE_BIG,
-                        textColor = themeVm.state.value!!.primaryColor,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                     ),
                     TextModel(
                         textValue = getString(R.string.measurement),
                         textSize = Constants.TEXT_SIZE_BIG,
-                        textColor = themeVm.state.value!!.primaryColor,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                     ),
                     TextModel(
                         textValue = getString(R.string.about_us),
                         textSize = Constants.TEXT_SIZE_BIG,
-                        textColor = themeVm.state.value!!.primaryColor,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                     ),
                     TextModel(
                         textValue = getString(R.string.instruction),
                         textSize = Constants.TEXT_SIZE_BIG,
-                        textColor = themeVm.state.value!!.primaryColor,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                     ),
                     TextModel(
                         textValue = getString(R.string.support_us),
                         textSize = Constants.TEXT_SIZE_BIG,
-                        textColor = themeVm.state.value!!.primaryColor,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                     ),
                     TextModel(
                         textValue = getString(R.string.feedback),
                         textSize = Constants.TEXT_SIZE_BIG,
-                        textColor = themeVm.state.value!!.primaryColor,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                     ),
                 ),
                 onClickListener = { processVariantClicked(it) }

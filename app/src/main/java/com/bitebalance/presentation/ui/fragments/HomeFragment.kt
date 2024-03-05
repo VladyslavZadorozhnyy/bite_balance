@@ -51,8 +51,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
                 ConfirmDialog(
                     requireActivity(),
                     BaseDialogModel(
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
-                        textColor = themeVm.state.value!!.primaryColor,
+                        backgroundColor = secondaryColor,
+                        textColor = primaryColor,
                         title = state.message,
                         buttonText = R.string.done,
                     ),
@@ -63,9 +63,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
     }
 
     override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
+        super.onStopFragment()
         nutritionVm.state.removeObservers(this)
-        navigationVm.state.removeObservers(this)
         mealVm.state.removeObservers(this)
         dateVm.state.removeObservers(this)
     }
@@ -78,8 +77,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
             model = TextModel(
                 textValue = greetingValue,
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }
@@ -89,14 +88,14 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
             model = ProgressCarouselModel(
                 consumed = consumedGoalValues[0],
                 goalConsumption = consumedGoalValues[1],
-                primaryColor = themeVm.state.value!!.primaryColor,
-                secondaryColor = themeVm.state.value!!.secondaryColor,
+                primaryColor = primaryColor,
+                secondaryColor = secondaryColor,
             ),
         )
     }
 
     private fun setupStyling() {
-        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.root.setBackgroundColor(secondaryColor)
     }
 
     private fun setupButtons() {
@@ -104,8 +103,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.info_icon,
                 iconSize = Constants.ICON_SIZE_BIG,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(InfoFragment.newInstance(), NavigationAction.ADD)
                 },
@@ -115,8 +114,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.meals_icon,
                 iconSize = Constants.ICON_SIZE_MEDIUM,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(TodayMealsFragment.newInstance(), NavigationAction.ADD)
                 },
@@ -126,8 +125,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.reset_icon,
                 iconSize = Constants.ICON_SIZE_BIG,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener =  { requestConfirmation() },
             ),
         )
@@ -135,8 +134,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.add_icon,
                 iconSize = Constants.ICON_SIZE_BIG,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(AddMealFragment.newInstance(), NavigationAction.ADD)
                 },
@@ -148,8 +147,8 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
         YesNoDialog(
             activity = requireActivity(),
             model = BaseDialogModel(
-                backgroundColor = themeVm.state.value!!.secondaryColor,
-                textColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = secondaryColor,
+                textColor = primaryColor,
                 title = getString(R.string.confirm_reset),
                 onPositiveClicked = { mealVm.removeAllMeals() },
             ),

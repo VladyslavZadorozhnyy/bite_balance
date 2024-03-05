@@ -21,7 +21,7 @@ class MenuFragment : BaseFragment<FragmentMenuScreenBinding>() {
 
     override fun onStartFragment(): View {
         binding = FragmentMenuScreenBinding.inflate(layoutInflater)
-        noItemsLayoutBinding = NoItemsLayoutBinding.bind(binding.root)
+        noItemsBinding = NoItemsLayoutBinding.bind(binding.root)
         toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainer)
 
         return binding.root
@@ -45,10 +45,9 @@ class MenuFragment : BaseFragment<FragmentMenuScreenBinding>() {
     }
 
     override fun onStopFragment() {
+        super.onStopFragment()
         dishVm.resetState()
         dishVm.state.removeObservers(this)
-        themeVm.state.removeObservers(this)
-        navigationVm.state.removeObservers(this)
     }
 
     private fun setupHeader() {
@@ -58,26 +57,26 @@ class MenuFragment : BaseFragment<FragmentMenuScreenBinding>() {
             model = TextModel(
                 textValue = getString(R.string.menu),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }
 
     private fun setupStyling() {
-        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.root.setBackgroundColor(secondaryColor)
     }
 
     private fun setupDishRecycler(dishItems: List<DishModel>) {
-        noItemsLayoutBinding.imageView.visibility = View.INVISIBLE
-        noItemsLayoutBinding.messageView.visibility = View.INVISIBLE
+        noItemsBinding.imageView.visibility = View.INVISIBLE
+        noItemsBinding.messageView.visibility = View.INVISIBLE
         binding.dishRecycler.visibility = View.VISIBLE
 
         binding.dishRecycler.setup(
             model = DishRecyclerModel(
                 items = dishItems,
-                primaryColor = themeVm.state.value!!.primaryColor,
-                secondaryColor = themeVm.state.value!!.secondaryColor,
+                primaryColor = primaryColor,
+                secondaryColor = secondaryColor,
                 onClickListener = { processDishClick(it) },
             ),
         )
@@ -91,8 +90,8 @@ class MenuFragment : BaseFragment<FragmentMenuScreenBinding>() {
                 strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
                 labelTextSize = Constants.TEXT_SIZE_SMALL,
                 labelTextRes = R.string.add_new,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(
                         CreateNewFragment.newInstance(createDish = true),
@@ -104,18 +103,18 @@ class MenuFragment : BaseFragment<FragmentMenuScreenBinding>() {
     }
 
     private fun setupNoItemsView() {
-        noItemsLayoutBinding.imageView.visibility = View.VISIBLE
-        noItemsLayoutBinding.messageView.visibility = View.VISIBLE
+        noItemsBinding.imageView.visibility = View.VISIBLE
+        noItemsBinding.messageView.visibility = View.VISIBLE
         binding.dishRecycler.visibility = View.INVISIBLE
 
-        noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.empty_menu_icon)
-        noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        noItemsLayoutBinding.messageView.setup(
+        noItemsBinding.imageView.setBackgroundResource(R.drawable.empty_menu_icon)
+        noItemsBinding.imageView.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        noItemsBinding.messageView.setup(
             model = TextModel(
                 textValue = getString(R.string.no_dishes_yet),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }

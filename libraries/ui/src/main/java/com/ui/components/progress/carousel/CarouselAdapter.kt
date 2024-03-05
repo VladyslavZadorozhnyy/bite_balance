@@ -9,7 +9,7 @@ import com.ui.components.R
 import com.ui.components.progress.indicator.ProgressIndicator
 import com.ui.components.progress.indicator.ProgressIndicatorModel
 
-class CarouselAdapterNew(
+class CarouselAdapter(
     private val context: Context,
     private val model: ProgressCarouselModel,
 ) : PagerAdapter() {

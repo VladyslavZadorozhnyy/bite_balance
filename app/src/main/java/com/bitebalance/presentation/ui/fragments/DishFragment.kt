@@ -15,7 +15,6 @@ import com.ui.components.dialogs.yes_no_dialog.YesNoDialog
 import com.bitebalance.presentation.viewmodels.DishViewModel
 import com.bitebalance.presentation.viewmodels.MealViewModel
 import com.bitebalance.databinding.FragmentDishScreenBinding
-import com.bitebalance.presentation.ui.activites.MainActivity
 import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.bitebalance.presentation.viewmodels.NutritionViewModel
@@ -56,8 +55,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 ConfirmDialog(
                     activity = requireActivity(),
                     model = BaseDialogModel(
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
-                        textColor = themeVm.state.value!!.primaryColor,
+                        backgroundColor = secondaryColor,
+                        textColor = primaryColor,
                         title = state.message,
                         buttonText = R.string.done,
                     ),
@@ -74,8 +73,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 ConfirmDialog(requireActivity(), BaseDialogModel(
                     title = state.message,
                     buttonText = R.string.done,
-                    textColor = themeVm.state.value!!.secondaryColor,
-                    backgroundColor = themeVm.state.value!!.primaryColor,
+                    textColor = secondaryColor,
+                    backgroundColor = primaryColor,
                     onConfirmClicked = { activity?.onBackPressed() }
                 )).show()
             }
@@ -87,11 +86,11 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                     BaseDialogModel(
                         title = state.message,
                         buttonText = R.string.done,
-                        textColor = themeVm.state.value!!.secondaryColor,
-                        backgroundColor = themeVm.state.value!!.primaryColor,
+                        textColor = secondaryColor,
+                        backgroundColor = primaryColor,
                         onConfirmClicked = {
                             if (state.isSuccessful)
-                                    (activity as? MainActivity)?.backPressUntilComponent(HomeFragment::class.java.name)
+                                mActivity.backPressUntilComponent(HomeFragment::class.java.name)
                         },
                     )
                 ).show()
@@ -107,6 +106,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
     }
 
     override fun onStopFragment() {
+        super.onStopFragment()
         mealVm.state.removeObservers(this)
         dishVm.state.removeObservers(this)
         nutritionVm.resetState()
@@ -114,9 +114,9 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
     }
 
     private fun setupStyling() {
-        binding.root.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
-        binding.lineView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(secondaryColor)
+        binding.lineView.backgroundTintList = ColorStateList.valueOf(secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(primaryColor)
     }
 
     private fun setupHeader(dishModel: DishModel) {
@@ -124,21 +124,21 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
             model = TextModel(
                 textValue = dishModel.name,
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                textColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = { activity?.onBackPressed() }
             ),
         )
         binding.dishIcon.setBackgroundResource(dishModel.iconRes)
-        binding.dishIcon.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        binding.dishIcon.backgroundTintList = ColorStateList.valueOf(secondaryColor)
     }
 
     private fun setupSubtitles() {
@@ -148,8 +148,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
             model = TextModel(
                 textValue = getString(R.string.toggle_check),
                 textSize = Constants.TEXT_SIZE_SMALL,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor
+                textColor = secondaryColor,
+                backgroundColor = primaryColor
             ),
         )
     }
@@ -160,15 +160,15 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 iconRes = R.drawable.bin_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
-                foregroundColor = if (editButtonChecked) themeVm.state.value!!.secondaryColor else themeVm.state.value!!.primaryColor,
-                backgroundColor = if (editButtonChecked) themeVm.state.value!!.primaryColor else themeVm.state.value!!.secondaryColor,
+                foregroundColor = if (editButtonChecked) secondaryColor else primaryColor,
+                backgroundColor = if (editButtonChecked) primaryColor else secondaryColor,
                 onClickListener = {
                     YesNoDialog(
                         activity = requireActivity(),
                         model = BaseDialogModel(
                             title = getString(R.string.want_delete),
-                            textColor = themeVm.state.value!!.secondaryColor,
-                            backgroundColor = themeVm.state.value!!.primaryColor,
+                            textColor = secondaryColor,
+                            backgroundColor = primaryColor,
                             onPositiveClicked = { dishVm.removeDish(dishName) },
                         ),
                     ).show()
@@ -183,8 +183,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 iconRes = R.drawable.edit_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
-                foregroundColor = if (editButtonChecked) themeVm.state.value!!.secondaryColor else themeVm.state.value!!.primaryColor,
-                backgroundColor = if (editButtonChecked) themeVm.state.value!!.primaryColor else themeVm.state.value!!.secondaryColor,
+                foregroundColor = if (editButtonChecked) secondaryColor else primaryColor,
+                backgroundColor = if (editButtonChecked) primaryColor else secondaryColor,
                 onClickListener = {
                     ComponentUiUtils.hideKeyBoard(requireActivity())
                     editButtonChecked = !editButtonChecked
@@ -208,8 +208,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                     fats = dishNutritionValue.fats.toString(),
                     carbs = dishNutritionValue.carbs.toString(),
                     kcal = dishNutritionValue.kcals.toString(),
-                    foregroundColor = themeVm.state.value!!.primaryColor,
-                    backgroundColor = themeVm.state.value!!.secondaryColor,
+                    foregroundColor = primaryColor,
+                    backgroundColor = secondaryColor,
                 )
             } else {
                 DishMetricsModel.newInstance(
@@ -218,8 +218,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                     fats = dishNutritionValue.fats.toString(),
                     carbs = dishNutritionValue.carbs.toString(),
                     kcal = dishNutritionValue.kcals.toString(),
-                    foregroundColor = themeVm.state.value!!.primaryColor,
-                    backgroundColor = themeVm.state.value!!.secondaryColor,
+                    foregroundColor = primaryColor,
+                    backgroundColor = secondaryColor,
                 )
             }
         )
@@ -227,8 +227,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
             model = ButtonModel(
                 labelTextRes = if (editButtonChecked) { R.string.update } else { R.string.done },
                 labelTextSize = Constants.TEXT_SIZE,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = {
                     ComponentUiUtils.hideKeyBoard(requireActivity())
                     if (createDish) processCreateDish() else processNonCreateDish()
@@ -248,8 +248,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 activity = requireActivity(),
                 model = BaseDialogModel(
                     title = getString(R.string.some_fields_empty),
-                    textColor = themeVm.state.value!!.secondaryColor,
-                    backgroundColor = themeVm.state.value!!.primaryColor,
+                    textColor = secondaryColor,
+                    backgroundColor = primaryColor,
                     onPositiveClicked = { processUpdate() },
                 ),
             ).show()
@@ -267,8 +267,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 activity = requireActivity(),
                 model = BaseDialogModel(
                     title = getString(R.string.some_fields_empty),
-                    textColor = themeVm.state.value!!.secondaryColor,
-                    backgroundColor = themeVm.state.value!!.primaryColor,
+                    textColor = secondaryColor,
+                    backgroundColor = primaryColor,
                     onPositiveClicked = { mealVm.createNewMeal(dishName, eatenValue.toFloat()) },
                 ),
             ).show()

@@ -28,14 +28,10 @@ class SettingsFragment : BaseFragment<FragmentSettingsScreenBinding>() {
         }
     }
 
-    override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
-    }
-
     private fun setupStyling() {
-        binding.settingsSublayout.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.root.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
-        binding.settingRecycler.setBackgroundColor(themeVm.state.value!!.primaryColor)
+        binding.settingsSublayout.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(secondaryColor)
+        binding.settingRecycler.setBackgroundColor(primaryColor)
     }
 
     private fun setupHeader() {
@@ -46,8 +42,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsScreenBinding>() {
             model = TextModel(
                 textValue = getString(R.string.settings),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }
@@ -85,8 +81,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsScreenBinding>() {
                         instructionText = getString(R.string.feedback),
                     ),
                 ),
-                primaryColor = themeVm.state.value!!.primaryColor,
-                secondaryColor = themeVm.state.value!!.secondaryColor,
+                primaryColor = primaryColor,
+                secondaryColor = secondaryColor,
                 onClickListener = { processInstructionClicked(it) },
             ),
         )

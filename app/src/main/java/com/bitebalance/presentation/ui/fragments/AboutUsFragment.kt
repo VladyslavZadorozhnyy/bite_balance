@@ -25,42 +25,37 @@ class AboutUsFragment : BaseFragment<FragmentTextScreenBinding>() {
         }
     }
 
-    override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
-        navigationVm.state.removeObservers(this)
-    }
-
     private fun setupHeader() {
-        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
+        binding.root.setBackgroundColor(secondaryColor)
 
         toolbarBinding.headline.setup(
             model = TextModel(
                 textValue = getString(R.string.about_us),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { navigationVm.popScreen() },
             ),
         )
     }
 
     private fun setupSubtext() {
-        binding.subtext.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        binding.subtext.backgroundTintList = ColorStateList.valueOf(secondaryColor)
 
         binding.subtext.setup(
             model = TextModel(
                 textValue = getString(R.string.project_info),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                textColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
     }

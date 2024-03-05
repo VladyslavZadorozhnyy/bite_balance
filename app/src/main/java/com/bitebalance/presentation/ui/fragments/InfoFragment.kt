@@ -28,14 +28,10 @@ class InfoFragment : BaseFragment<FragmentInfoScreenBinding>() {
         }
     }
 
-    override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
-    }
-
     private fun setupStyling() {
-        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.sublayoutContainerConstraint.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+        binding.root.setBackgroundColor(secondaryColor)
+        binding.lineView.setBackgroundColor(secondaryColor)
+        binding.sublayoutContainerConstraint.backgroundTintList = ColorStateList.valueOf(primaryColor)
     }
 
     private fun setupHeader() {
@@ -45,8 +41,8 @@ class InfoFragment : BaseFragment<FragmentInfoScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = { navigationVm.popScreen() },
             ),
         )
@@ -54,8 +50,8 @@ class InfoFragment : BaseFragment<FragmentInfoScreenBinding>() {
             model = TextModel(
                 textValue = requireContext().getString(R.string.icons_legend),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                textColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
     }
@@ -63,8 +59,8 @@ class InfoFragment : BaseFragment<FragmentInfoScreenBinding>() {
     private fun setupRecycler() {
         binding.iconsLegends.setup(
             model = InstructionRecyclerModel(
-                backgroundColor = themeVm.state.value!!.primaryColor,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
+                backgroundColor = primaryColor,
+                foregroundColor = secondaryColor,
                 items = listOf(
                     InstructionModel(
                         iconRes = R.drawable.info_icon,

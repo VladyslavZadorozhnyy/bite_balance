@@ -68,7 +68,7 @@ class ProgressCarousel(
     private fun setupCarousel(model: BaseUiComponentModel) {
         (model as? ProgressCarouselModel)?.let { progressModel ->
             binding.viewPager.apply {
-                adapter = CarouselAdapterNew(context, progressModel)
+                adapter = CarouselAdapter(context, progressModel)
                 addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                     override fun onPageSelected(position: Int) { updateDots(position, progressModel) }
 

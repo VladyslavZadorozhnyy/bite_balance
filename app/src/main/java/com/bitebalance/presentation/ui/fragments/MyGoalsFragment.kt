@@ -28,7 +28,7 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
 
     override fun onStartFragment(): View {
         binding = FragmentMyGoalsScreenBinding.inflate(layoutInflater)
-        noItemsLayoutBinding = NoItemsLayoutBinding.bind(binding.root)
+        noItemsBinding = NoItemsLayoutBinding.bind(binding.root)
         toolbarBinding = ToolbarBinding.bind(binding.sublayoutContainerConstraint)
 
         return binding.root
@@ -47,8 +47,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
                 model = TextModel(
                     textValue = state,
                     textSize = Constants.TEXT_SIZE,
-                    textColor = themeVm.state.value!!.secondaryColor,
-                    backgroundColor = themeVm.state.value!!.primaryColor,
+                    textColor = secondaryColor,
+                    backgroundColor = primaryColor,
                 ),
             )
             goalVm.getAllGoals(state, Constants.DATE_FORMAT)
@@ -65,7 +65,7 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
     }
 
     override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
+        super.onStopFragment()
         dateVm.state.removeObservers(this)
         goalVm.state.removeObservers(this)
     }
@@ -82,20 +82,20 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
     }
 
     private fun setupStyling() {
-        binding.root.setBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+        binding.root.setBackgroundColor(secondaryColor)
+        binding.sublayoutContainer.backgroundTintList = ColorStateList.valueOf(primaryColor)
     }
 
     private fun setupHeader() {
-        binding.lineView.setBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.chooseMonthContainer.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
+        binding.lineView.setBackgroundColor(secondaryColor)
+        binding.chooseMonthContainer.backgroundTintList = ColorStateList.valueOf(primaryColor)
 
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { navigationVm.popScreen() }
             ),
         )
@@ -103,8 +103,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
             model = TextModel(
                 textValue = getString(R.string.my_goals),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
         dateVm.getCurrentMonth(Constants.DATE_FORMAT)
@@ -115,8 +115,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { dateVm.getPrevMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "") },
             ),
         )
@@ -124,8 +124,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { dateVm.getNextMonth(Constants.DATE_FORMAT, dateVm.state.value ?: "") },
             ),
         )
@@ -134,8 +134,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
                 iconRes = R.drawable.add_icon,
                 iconSize = Constants.ICON_SIZE_LARGE,
                 strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
-                foregroundColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                foregroundColor = primaryColor,
+                backgroundColor = secondaryColor,
                 onClickListener = { showInputDialog() }
             ),
         )
@@ -145,8 +145,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
         InputDialog(
             activity = requireActivity(),
             model = BaseDialogModel(
-                backgroundColor = themeVm.state.value!!.secondaryColor,
-                textColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = secondaryColor,
+                textColor = primaryColor,
                 title = getString(R.string.next_goal),
                 onInputConfirmed = { goalVm.addNewGoal(it) },
             ),
@@ -157,8 +157,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
         ConfirmDialog(
             activity = requireActivity(),
             model = BaseDialogModel(
-                backgroundColor = themeVm.state.value!!.secondaryColor,
-                textColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = secondaryColor,
+                textColor = primaryColor,
                 title = message,
                 onInputConfirmed = { goalVm.addNewGoal(it) },
             ),
@@ -167,8 +167,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
 
     private fun setupRecycler() {
         goalVm.state.value?.data?.let {
-            noItemsLayoutBinding.imageView.visibility = if (it.isEmpty()) View.VISIBLE else View.INVISIBLE
-            noItemsLayoutBinding.messageView.visibility = if (it.isEmpty()) View.VISIBLE else View.INVISIBLE
+            noItemsBinding.imageView.visibility = if (it.isEmpty()) View.VISIBLE else View.INVISIBLE
+            noItemsBinding.messageView.visibility = if (it.isEmpty()) View.VISIBLE else View.INVISIBLE
             binding.goalRecycler.visibility = if (it.isEmpty()) View.INVISIBLE else View.VISIBLE
 
             if (it.isEmpty()) {
@@ -177,8 +177,8 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
                 binding.goalRecycler.setup(
                     model = GoalRecyclerModel(
                         items = it,
-                        backgroundColor = themeVm.state.value!!.secondaryColor,
-                        foregroundColor = themeVm.state.value!!.primaryColor,
+                        backgroundColor = secondaryColor,
+                        foregroundColor = primaryColor,
                         goalAdapterListener = this,
                     ),
                 )
@@ -187,23 +187,23 @@ class MyGoalsFragment : BaseFragment<FragmentMyGoalsScreenBinding>(), GoalAdapte
     }
 
     private fun setupNoItemsView() {
-        noItemsLayoutBinding.imageView.visibility = View.VISIBLE
-        noItemsLayoutBinding.messageView.visibility = View.VISIBLE
+        noItemsBinding.imageView.visibility = View.VISIBLE
+        noItemsBinding.messageView.visibility = View.VISIBLE
         binding.goalRecycler.visibility = View.INVISIBLE
 
-        noItemsLayoutBinding.imageView.setBackgroundResource(R.drawable.goal_icon)
-        noItemsLayoutBinding.imageView.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
-        noItemsLayoutBinding.messageView.setup(
+        noItemsBinding.imageView.setBackgroundResource(R.drawable.goal_icon)
+        noItemsBinding.imageView.backgroundTintList = ColorStateList.valueOf(secondaryColor)
+        noItemsBinding.messageView.setup(
             model = TextModel(
                 textValue = getString(R.string.no_goals_yet),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                textColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
-        noItemsLayoutBinding.root.bringToFront()
-        noItemsLayoutBinding.imageView.bringToFront()
-        noItemsLayoutBinding.messageView.bringToFront()
+        noItemsBinding.root.bringToFront()
+        noItemsBinding.imageView.bringToFront()
+        noItemsBinding.messageView.bringToFront()
     }
 
     companion object {

@@ -15,10 +15,6 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
         return binding.root
     }
 
-    override fun onStopFragment() {
-//        TODO("Not yet implemented") AAADIP REMOVE
-    }
-
     override fun onResumeFragment() {
         super.onResumeFragment()
         binding.navigationComponent.onResume()
@@ -28,8 +24,8 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
         binding.navigationComponent.setup(
             NavigationBarModel(
                 navIcons = Constants.NAVIGATION_ICONS_LIST,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
-                foregroundColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = secondaryColor,
+                foregroundColor = primaryColor,
             ) { chosenItemId ->
                 val nextFragment = when (chosenItemId) {
                     R.id.nav_home -> HomeFragment.newInstance()
@@ -51,8 +47,8 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
     }
 
     fun updateNavBarColors() {
-        binding.navigationComponent.updateBackgroundColor(themeVm.state.value!!.secondaryColor)
-        binding.navigationComponent.updateForegroundColor(themeVm.state.value!!.primaryColor)
+        binding.navigationComponent.updateBackgroundColor(secondaryColor)
+        binding.navigationComponent.updateForegroundColor(primaryColor)
     }
 
     companion object {

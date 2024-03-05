@@ -30,12 +30,8 @@ class SupportFeedbackFragment : BaseFragment<FragmentSupportFeedbackScreenBindin
         }
     }
 
-    override fun onStopFragment() {
-        themeVm.state.removeObservers(this)
-    }
-
     private fun setupStyling() {
-        binding.root.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        binding.root.backgroundTintList = ColorStateList.valueOf(secondaryColor)
     }
 
     private fun setupHeader() {
@@ -43,31 +39,31 @@ class SupportFeedbackFragment : BaseFragment<FragmentSupportFeedbackScreenBindin
             model = TextModel(
                 textValue = getString(R.string.support_us),
                 textSize = Constants.TEXT_SIZE_BIG,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
                 iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = { navigationVm.popScreen() },
             ),
         )
     }
 
     private fun setupSubtexts() {
-        binding.subtext.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.primaryColor)
-        binding.donationPlanText.backgroundTintList = ColorStateList.valueOf(themeVm.state.value!!.secondaryColor)
+        binding.subtext.backgroundTintList = ColorStateList.valueOf(primaryColor)
+        binding.donationPlanText.backgroundTintList = ColorStateList.valueOf(secondaryColor)
 
         binding.subtext.setup(
             model = TextModel(
                 textValue = getString(R.string.donation_text),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                textColor = secondaryColor,
+                backgroundColor = primaryColor,
             ),
         )
         binding.inputSubtext.setup(
@@ -75,16 +71,16 @@ class SupportFeedbackFragment : BaseFragment<FragmentSupportFeedbackScreenBindin
                 active = true,
                 hint = getString(R.string.message_to_developers),
                 onInputChange = {  },
-                backgroundColor = themeVm.state.value!!.secondaryColor,
-                foregroundColor = themeVm.state.value!!.primaryColor,
+                backgroundColor = secondaryColor,
+                foregroundColor = primaryColor,
             ),
         )
         binding.donationPlanText.setup(
             model = TextModel(
                 textValue = getString(R.string.donation_plan),
                 textSize = Constants.TEXT_SIZE,
-                textColor = themeVm.state.value!!.primaryColor,
-                backgroundColor = themeVm.state.value!!.secondaryColor,
+                textColor = primaryColor,
+                backgroundColor = secondaryColor,
             ),
         )
     }
@@ -96,14 +92,14 @@ class SupportFeedbackFragment : BaseFragment<FragmentSupportFeedbackScreenBindin
                 labelTextSize = Constants.TEXT_SIZE_SMALL,
                 iconRes = R.drawable.donation_icon,
                 iconSize = Constants.ICON_SIZE_MEDIUM,
-                foregroundColor = themeVm.state.value!!.secondaryColor,
-                backgroundColor = themeVm.state.value!!.primaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener = {
                     ConfirmDialog(
                         activity = requireActivity(),
                         model = BaseDialogModel(
-                            backgroundColor = themeVm.state.value!!.primaryColor,
-                            textColor = themeVm.state.value!!.secondaryColor,
+                            backgroundColor = primaryColor,
+                            textColor = secondaryColor,
                             title = getString(R.string.donated),
                             buttonText = R.string.done,
                         ),
