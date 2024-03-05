@@ -1,20 +1,21 @@
 package com.ui.components.dialogs.input_dialog
 
-import android.app.Activity
-import android.app.Dialog
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getDrawable
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.common.BaseUiComponentModel
-import com.ui.basic.input_form.InputFormModel
-import com.ui.basic.texts.common.TextModel
+import android.app.Dialog
 import com.ui.components.R
-import com.ui.components.databinding.InputDialogBinding
+import android.app.Activity
+import android.graphics.Color
+import com.ui.common.Constants
+import android.view.LayoutInflater
+import android.content.res.ColorStateList
+import com.ui.common.BaseUiComponentModel
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.input_form.InputFormModel
+import com.ui.basic.buttons.common.ButtonModel
+import android.graphics.drawable.ColorDrawable
+import androidx.core.content.ContextCompat.getDrawable
 import com.ui.components.dialogs.common.BaseDialogModel
+import com.ui.components.databinding.InputDialogBinding
 
 class InputDialog(
     activity: Activity,
@@ -31,42 +32,38 @@ class InputDialog(
     }
 
     fun setup() {
-        (model as? BaseDialogModel)?.let {
-            window?.setBackgroundDrawable(transparentBackground)
+        if (model !is BaseDialogModel) return
 
-            binding.title.setup(
-                TextModel(
-                    textSize = 30,
-                    textValue = model.title,
-                    textColor = it.textColor,
-                    backgroundColor = it.backgroundColor,
-                )
-            )
-
-            binding.inputForm.setup(
-                model = InputFormModel(
-                    active = true,
-                    onInputChange = { inputValue = it },
-                    backgroundColor = it.backgroundColor,
-                    foregroundColor = it.textColor,
-                )
-            )
-
-            binding.confirmButton.setup(
-                ButtonModel(
-                    labelTextRes = R.string.add,
-                    labelTextSize = 15,
-                    foregroundColor = it.backgroundColor,
-                    backgroundColor = it.textColor,
-                    onClickListener = {
-                        model.onInputConfirmed(inputValue)
-                        dismiss()
-                    }
-                )
-            )
-
-            binding.layout.background = getDrawable(context, R.drawable.dialog_shape)
-            binding.layout.backgroundTintList = ColorStateList.valueOf(it.backgroundColor)
-        }
+        window?.setBackgroundDrawable(transparentBackground)
+        binding.title.setup(
+            model = TextModel(
+                textSize = Constants.TEXT_SIZE_BIG,
+                textValue = model.title,
+                textColor = model.textColor,
+                backgroundColor = model.backgroundColor,
+            ),
+        )
+        binding.inputForm.setup(
+            model = InputFormModel(
+                active = true,
+                onInputChange = { inputValue = it },
+                backgroundColor = model.backgroundColor,
+                foregroundColor = model.textColor,
+            ),
+        )
+        binding.confirmButton.setup(
+            model = ButtonModel(
+                labelTextRes = R.string.add,
+                labelTextSize = Constants.TEXT_SIZE_SMALL,
+                foregroundColor = model.backgroundColor,
+                backgroundColor = model.textColor,
+                onClickListener = {
+                    model.onInputConfirmed(inputValue)
+                    dismiss()
+                },
+            ),
+        )
+        binding.layout.background = getDrawable(context, R.drawable.dialog_shape)
+        binding.layout.backgroundTintList = ColorStateList.valueOf(model.backgroundColor)
     }
 }
