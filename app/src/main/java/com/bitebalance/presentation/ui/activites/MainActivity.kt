@@ -50,9 +50,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun backPressUntilComponent(componentName: String) {
-        while (supportFragmentManager.fragments.lastOrNull()?.javaClass?.name != componentName) {
+        while (supportFragmentManager.fragments.lastOrNull()?.javaClass?.name != componentName)
             onBackPressed()
-        }
     }
 
     override fun onBackPressed() {
