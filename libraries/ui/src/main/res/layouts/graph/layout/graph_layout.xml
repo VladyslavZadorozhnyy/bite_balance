@@ -24,19 +24,23 @@
 
     <com.ui.basic.texts.slideable_text.SlideableText
         android:id="@+id/goal_consumption"
-        android:layout_width="120dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="51dp"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="60dp"
+        android:paddingEnd="33dp"
         android:layout_marginBottom="15dp"
         app:layout_constraintStart_toStartOf="@id/chart_view"
+        app:layout_constraintEnd_toStartOf="@id/actual_consumption"
         app:layout_constraintBottom_toBottomOf="@id/chart_view"/>
 
     <com.ui.basic.texts.slideable_text.SlideableText
         android:id="@+id/actual_consumption"
-        android:layout_width="135dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="201dp"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="15dp"
-        app:layout_constraintStart_toStartOf="@id/chart_view"
+        android:paddingStart="5dp"
+        android:paddingEnd="15dp"
+        app:layout_constraintStart_toEndOf="@id/goal_consumption"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/chart_view"/>
 </merge>

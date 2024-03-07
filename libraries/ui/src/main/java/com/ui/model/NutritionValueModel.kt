@@ -4,7 +4,7 @@ data class NutritionValueModel(
     val prots: Float,
     val fats: Float,
     val carbs: Float,
-    val kcals: Float
+    val kcals: Float,
 ) {
     fun plus(other: NutritionValueModel, eatenAmount: Float): NutritionValueModel {
         return NutritionValueModel(

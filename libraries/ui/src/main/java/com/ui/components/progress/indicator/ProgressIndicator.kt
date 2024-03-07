@@ -1,15 +1,16 @@
 package com.ui.components.progress.indicator
 
-import android.content.Context
-import android.content.res.ColorStateList
+import com.ui.components.R
 import android.graphics.Color
+import android.content.Context
+import com.ui.common.Constants
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getColor
-import com.ui.basic.texts.common.TextModel
 import com.ui.common.BaseUiComponent
+import android.content.res.ColorStateList
 import com.ui.common.BaseUiComponentModel
-import com.ui.components.R
+import com.ui.basic.texts.common.TextModel
+import androidx.core.content.ContextCompat.getColor
 import com.ui.components.databinding.ProgressIndicatorBinding
 
 
@@ -23,12 +24,12 @@ class ProgressIndicator(
     private val outOfLabel = context.getString(R.string.out_of)
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? ProgressIndicatorModel)?.let { model ->
-            binding.layout.backgroundTintList = ColorStateList.valueOf(model.primaryColor)
-            setupAndGetProgress(model.consumed, model.goalConsumption).also { progress ->
-                setupDynamicLabels(model, progress)
-                setupStaticLabels(model)
-            }
+        if (model !is ProgressIndicatorModel) return
+
+        binding.layout.backgroundTintList = ColorStateList.valueOf(model.primaryColor)
+        setupAndGetProgress(model.consumed, model.goalConsumption).also { progress ->
+            setupDynamicLabels(model, progress)
+            setupStaticLabels(model)
         }
     }
 
@@ -61,17 +62,16 @@ class ProgressIndicator(
         binding.progressLabel.setup(
             model = TextModel(
                 textValue = progressLabel,
-                textSize = 25,
+                textSize = Constants.TEXT_SIZE_MD,
                 backgroundColor = model.primaryColor,
                 textColor = model.secondaryColor,
                 isSingleLine = false,
             )
         )
-
         binding.progressValueLabel.setup(
             model = TextModel(
                 textValue = fromLimitLabel,
-                textSize = 20,
+                textSize = Constants.TEXT_SIZE,
                 textColor = Color.WHITE,
                 backgroundColor = getColor(context, IndicatorUtils.progressToColor(progress))
             )
@@ -82,16 +82,15 @@ class ProgressIndicator(
         binding.progressTitleLabel.setup(
             model = TextModel(
                 textValue = context.getString(R.string.from_limit),
-                textSize = 20,
+                textSize = Constants.TEXT_SIZE,
                 textColor = model.secondaryColor,
                 backgroundColor = Color.TRANSPARENT
             )
         )
-
         binding.indicatorTitle.setup(
             model = TextModel(
                 textValue = model.indicatorName,
-                textSize = 30,
+                textSize = Constants.TEXT_SIZE_BIG,
                 textColor = model.secondaryColor,
                 backgroundColor = Color.TRANSPARENT
             )

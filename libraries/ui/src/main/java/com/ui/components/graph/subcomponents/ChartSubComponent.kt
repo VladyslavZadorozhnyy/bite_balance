@@ -1,22 +1,23 @@
 package com.ui.components.graph.subcomponents
 
-import android.content.Context
-import androidx.core.content.ContextCompat.getColor
-import com.github.mikephil.charting.charts.CombinedChart
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
-import com.github.mikephil.charting.data.CombinedData
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.highlight.Highlight
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener
-import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.slideable_text.SlideableText
 import com.ui.components.R
+import android.graphics.Color
+import com.ui.common.Constants
+import android.content.Context
+import com.ui.basic.texts.common.TextModel
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.CombinedData
+import com.ui.basic.texts.slideable_text.SlideableText
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.charts.CombinedChart
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
 class ChartSubComponent(
     context: Context,
@@ -26,106 +27,94 @@ class ChartSubComponent(
     private val goalConsumption: SlideableText,
     private val actualConsumption: SlideableText,
 ) {
+    private val lineColor = context.getColor(R.color.indicator_green)
     private val barDataLabel = context.getString(R.string.act_consumption)
     private val lineDataLabel = context.getString(R.string.goal_consumption)
-
-    private val lineColor = getColor(context, R.color.indicator_green)
-    private val transparentColor = getColor(context, R.color.transparent)
 
     fun setup(
         metricsLabel: String,
         barEntries: List<Float>,
         lineEntries: List<Float>,
     ) {
-        val barDataSet = BarDataSet(getBarEntries(barEntries), barDataLabel).also {
-            it.valueTextColor = transparentColor
-            it.valueTextSize = 16f
-            it.setColors(barColor)
+        val barDataSet = BarDataSet(getBarEntries(barEntries), barDataLabel).apply {
+            valueTextColor = Color.TRANSPARENT
+            valueTextSize = Constants.TEXT_SIZE.toFloat()
+            setColors(barColor)
         }
-
         barDataSet.valueFormatter = object : ValueFormatter() {
             override fun getFormattedValue(value: Float): String {
                 return "${value.toInt()} $metricsLabel"
             }
         }
+        val lineDataSet = LineDataSet(getLineEntries(lineEntries), lineDataLabel).apply {
+            lineWidth = Constants.GRANULARITY * 2
+            circleRadius = Constants.COLOR_ICON_STROKE_WIDTH.toFloat()
+            valueTextColor = Color.TRANSPARENT
 
-        val lineDataSet = LineDataSet(getLineEntries(lineEntries), lineDataLabel).also {
-            it.lineWidth = 2f
-            it.circleRadius = 5f
-            it.valueTextColor = transparentColor
-
-            it.setColors(lineColor)
-            it.setCircleColor(lineColor)
-            it.circleHoleColor = lineColor
+            setColors(lineColor)
+            setCircleColor(lineColor)
+            circleHoleColor = lineColor
         }
 
-        val barData = BarData(barDataSet).also { it.barWidth = 0.5f }
+        val barData = BarData(barDataSet).apply { barWidth = Constants.GRANULARITY / 2 }
         val lineData = LineData(lineDataSet)
 
-        val combinedData = CombinedData().also {
-            it.setData(barData)
-            it.setData(lineData)
+        val combinedData = CombinedData().apply {
+            setData(barData)
+            setData(lineData)
         }
-
         chartView.apply {
             description.isEnabled = false
             axisRight.isEnabled = false
             xAxis.position = XAxis.XAxisPosition.BOTTOM
 
-            extraBottomOffset = 20f
-            legend.yOffset = 10f
-            legend.xOffset = -10f
-            legend.formSize = 20f
-            legend.textSize = 15f
+            extraBottomOffset = Constants.OFFSET_LARGE
+            legend.yOffset = Constants.OFFSET_SMALL
+            legend.xOffset = -Constants.OFFSET_SMALL
+            legend.formSize = Constants.OFFSET_LARGE
+            legend.textSize = Constants.TEXT_SIZE_SMALL.toFloat()
 
             xAxis.spaceMin = barData.barWidth
             xAxis.spaceMax = barData.barWidth
-            xAxis.axisMinimum = 0.5F
-            axisLeft.axisMinimum = 0F
+            xAxis.axisMinimum = Constants.GRANULARITY / 2
+            axisLeft.axisMinimum = Constants.AXIS_MINIMUM
 
-            xAxis.granularity = 1.0f
+            xAxis.granularity = Constants.GRANULARITY
             xAxis.isGranularityEnabled = true
 
             data = combinedData
             setScaleEnabled(false)
-            animateY(2000)
-            setVisibleXRangeMaximum(7F)
+            animateY(Constants.DURATION)
+            setVisibleXRangeMaximum(Constants.GRAPH_SPAN_SIZE.toFloat())
         }
-
         goalConsumption.setup(
             model = TextModel(
                 textValue = lineDataLabel,
-                textSize = 15,
+                textSize = Constants.TEXT_SIZE_SMALL,
                 textColor = barColor,
                 backgroundColor = foregroundColor,
-            )
+            ),
         )
-
         actualConsumption.setup(
             model = TextModel(
                 textValue = barDataLabel,
-                textSize = 15,
+                textSize = Constants.TEXT_SIZE_SMALL,
                 textColor = barColor,
                 backgroundColor = foregroundColor,
-            )
+            ),
         )
-
         setOnClickListener()
     }
 
     private fun getBarEntries(barFloats: List<Float>): List<BarEntry> {
         return mutableListOf<BarEntry>().apply {
-            for (index in barFloats.indices) {
-                add(BarEntry(index.toFloat(), barFloats[index]))
-            }
+            for (index in barFloats.indices) { add(BarEntry(index.toFloat(), barFloats[index])) }
         }
     }
 
     private fun getLineEntries(lineFloats: List<Float>): List<Entry> {
         return mutableListOf<BarEntry>().apply {
-            for (index in lineFloats.indices) {
-                add(BarEntry(index.toFloat(), lineFloats[index]))
-            }
+            for (index in lineFloats.indices) { add(BarEntry(index.toFloat(), lineFloats[index])) }
         }
     }
 
@@ -139,9 +128,7 @@ class ChartSubComponent(
                 }
             }
 
-            override fun onNothingSelected() {
-                barDs.valueTextColor = transparentColor
-            }
+            override fun onNothingSelected() { barDs.valueTextColor = Color.TRANSPARENT }
         })
     }
 
@@ -149,7 +136,7 @@ class ChartSubComponent(
         val result = arrayListOf<Int>()
 
         for (i in 0 .. entryCount)
-            result.add(if (i == chosenIndex) { barColor } else { transparentColor })
+            result.add(if (i == chosenIndex) barColor else Color.TRANSPARENT)
         return result
     }
 }
