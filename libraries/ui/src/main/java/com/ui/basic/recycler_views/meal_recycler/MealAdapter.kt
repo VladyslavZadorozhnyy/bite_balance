@@ -1,21 +1,22 @@
 package com.ui.basic.recycler_views.meal_recycler
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.text.Text
 import com.ui.components.R
+import android.view.ViewGroup
+import com.ui.common.Constants
+import android.view.LayoutInflater
+import com.ui.basic.texts.text.Text
 import com.ui.model.MealModelUnboxed
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
+import androidx.recyclerview.widget.RecyclerView
+import com.ui.basic.buttons.icon_button.IconButton
 
 class MealAdapter (
     private var items: List<MealModelUnboxed>,
     private val foregroundColor: Int,
     private val backgroundColor: Int,
-    private val onClickListener: (MealModelUnboxed) -> Unit
+    private val onClickListener: (MealModelUnboxed) -> Unit,
 ): RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
@@ -34,12 +35,6 @@ class MealAdapter (
         return items.size
     }
 
-    fun removeAt(position: Int) {
-        items = items.subList(0, position) + items.subList(position + 1, items.size)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position,  items.size - position)
-    }
-
     fun getAt(position: Int) = items[position]
 
     class MealViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -54,44 +49,38 @@ class MealAdapter (
             mealIcon.setup(
                 model = ButtonModel(
                     iconRes = R.drawable.breakfast_icon,
-                    iconSize = 120,
-                    strokeWidth = 0,
+                    iconSize = Constants.ICON_SIZE_LARGE,
                     foregroundColor = backgroundColor,
                     backgroundColor = foregroundColor,
                     onClickListener = { itemView.callOnClick() }
                 )
             )
-
             clockIcon.setup(
                 model = ButtonModel(
                     iconRes = R.drawable.clock_icon,
-                    iconSize = 90,
-                    strokeWidth = 0,
+                    iconSize = Constants.MEAL_ICON_SIZE,
                     foregroundColor = backgroundColor,
                     backgroundColor = foregroundColor,
                     onClickListener = { itemView.callOnClick() }
                 )
             )
-
             buttonView.setup(
                 model = ButtonModel(
                     iconRes = R.drawable.bin_icon,
-                    iconSize = 80,
-                    strokeWidth = 5,
+                    iconSize = Constants.ICON_SIZE_MEDIUM,
+                    strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
                     backgroundColor = backgroundColor,
                     foregroundColor = foregroundColor,
-                )
+                ),
             )
-
             textView.setup(
                 model = TextModel(
                     textValue = item.dishName,
-                    textSize = 20,
+                    textSize = Constants.TEXT_SIZE,
                     textColor = backgroundColor,
                     backgroundColor = foregroundColor
                 )
             )
-
             timeView.setup(
                 model = TextModel(
                     textValue = item.mealTime,

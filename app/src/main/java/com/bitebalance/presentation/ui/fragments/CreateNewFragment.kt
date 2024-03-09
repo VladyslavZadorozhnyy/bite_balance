@@ -128,11 +128,13 @@ class CreateNewFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
         binding.metricRecycler.setup(
             if (createDish) {
                 DishNameMetricsModel.newInstance(
+                    context = requireContext(),
                     foregroundColor = primaryColor,
                     backgroundColor = secondaryColor,
                 )
             } else {
                 CreateMealMetricsModel.newInstance(
+                    context = requireContext(),
                     foregroundColor = primaryColor,
                     backgroundColor = secondaryColor,
                 )

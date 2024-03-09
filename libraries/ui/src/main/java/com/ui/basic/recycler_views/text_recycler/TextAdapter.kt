@@ -1,17 +1,17 @@
 package com.ui.basic.recycler_views.text_recycler
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.text.Text
 import com.ui.components.R
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import com.ui.basic.texts.text.Text
+import com.ui.basic.texts.common.TextModel
+import androidx.recyclerview.widget.RecyclerView
 
 
 class TextAdapter(
     private val items: List<TextModel>,
-    private val onClickListener: (TextModel) -> Unit
+    private val onClickListener: (TextModel) -> Unit,
 ): RecyclerView.Adapter<TextAdapter.TextViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextViewHolder {

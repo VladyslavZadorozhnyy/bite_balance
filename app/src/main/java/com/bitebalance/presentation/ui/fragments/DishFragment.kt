@@ -204,6 +204,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
         binding.metricRecycler.setup(
             if (createDish) {
                 CreateMealWithExistingDishModel.newInstance(
+                    context = requireContext(),
                     prots = dishNutritionValue.prots.toString(),
                     fats = dishNutritionValue.fats.toString(),
                     carbs = dishNutritionValue.carbs.toString(),
@@ -213,6 +214,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                 )
             } else {
                 DishMetricsModel.newInstance(
+                    context = requireContext(),
                     editable = editButtonChecked,
                     prots = dishNutritionValue.prots.toString(),
                     fats = dishNutritionValue.fats.toString(),

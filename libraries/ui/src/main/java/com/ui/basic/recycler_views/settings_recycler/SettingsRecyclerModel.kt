@@ -1,8 +1,8 @@
 package com.ui.basic.recycler_views.settings_recycler
 
-import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
 import com.ui.model.InstructionModel
+import com.ui.common.BaseUiComponentModel
 
 data class SettingsRecyclerModel(
     val items: List<InstructionModel>,

@@ -1,17 +1,18 @@
 package com.ui.basic.recycler_views.metric_recycler
 
-import android.view.LayoutInflater
 import android.view.View
+import com.ui.components.R
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.checkbox.CheckBoxModel
+import com.ui.common.Constants
+import com.ui.model.MetricModel
+import android.view.LayoutInflater
+import com.ui.basic.texts.text.Text
 import com.ui.basic.checkbox.Checkbox
 import com.ui.basic.input_form.InputForm
-import com.ui.basic.input_form.InputFormModel
 import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.text.Text
-import com.ui.components.R
-import com.ui.model.MetricModel
+import com.ui.basic.checkbox.CheckBoxModel
+import com.ui.basic.input_form.InputFormModel
+import androidx.recyclerview.widget.RecyclerView
 
 class MetricAdapter(
     private val items: List<MetricModel>,
@@ -61,19 +62,13 @@ class MetricAdapter(
             inputValues: MutableList<String>,
         ) {
             itemView.setBackgroundColor(backgroundColor)
-
             setupMetricName(model.name)
-            if (model.editable) {
-                setupCheckBox(inputValues)
-            } else {
-                checkBoxView.visibility = View.INVISIBLE
-            }
 
-            if (model.suffix.isNotEmpty()) {
-                setupMetricSuffix(model.suffix)
-            } else {
-                metricSuffixView.visibility = View.GONE
-            }
+            if (model.editable) setupCheckBox(inputValues)
+            else checkBoxView.visibility = View.INVISIBLE
+
+            if (model.suffix.isNotEmpty()) setupMetricSuffix(model.suffix)
+            else metricSuffixView.visibility = View.GONE
 
             if (model.editable) {
                 setupMetricValueInput(true, inputValues)
@@ -103,7 +98,7 @@ class MetricAdapter(
                     },
                     backgroundColor = backgroundColor,
                     foregroundColor = foregroundColor,
-                )
+                ),
             )
         }
 
@@ -115,11 +110,11 @@ class MetricAdapter(
                     onInputChange = { inputValues[position] = it },
                     foregroundColor = foregroundColor,
                     backgroundColor = backgroundColor,
-                )
+                ),
             )
         }
 
-        fun setupOnlyNumbers() {
+        private fun setupOnlyNumbers() {
             metricValueViewInput.setupOnlyNumbers()
         }
 
@@ -127,21 +122,21 @@ class MetricAdapter(
             metricValueViewText.setup(
                 model = TextModel(
                     textValue = value,
-                    textSize = 18,
+                    textSize = Constants.TEXT_SIZE,
                     textColor = foregroundColor,
                     backgroundColor = backgroundColor
-                )
+                ),
             )
         }
 
         private fun setupMetricName(value: String) {
             metricNameView.setup(
-                TextModel(
+                model = TextModel(
                     textValue = value,
-                    textSize = 18,
+                    textSize = Constants.TEXT_SIZE,
                     textColor = foregroundColor,
                     backgroundColor = backgroundColor,
-                )
+                ),
             )
         }
 
@@ -149,10 +144,10 @@ class MetricAdapter(
             metricSuffixView.setup(
                 model = TextModel(
                     textValue = value,
-                    textSize = 18,
+                    textSize = Constants.TEXT_SIZE,
                     textColor = foregroundColor,
                     backgroundColor = backgroundColor,
-                )
+                ),
             )
             metricSuffixView.visibility = View.VISIBLE
         }

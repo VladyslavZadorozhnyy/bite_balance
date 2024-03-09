@@ -1,21 +1,22 @@
 package com.ui.basic.recycler_views.settings_recycler
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.text.Text
 import com.ui.components.R
+import android.view.ViewGroup
+import com.ui.common.Constants
+import android.view.LayoutInflater
+import com.ui.basic.texts.text.Text
 import com.ui.model.InstructionModel
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
+import androidx.recyclerview.widget.RecyclerView
+import com.ui.basic.buttons.icon_button.IconButton
 
 class SettingsAdapter(
     private val items: List<InstructionModel>,
     private val primaryColor: Int,
     private val secondaryColor: Int,
-    private val onClickListener: (InstructionModel) -> Unit
+    private val onClickListener: (InstructionModel) -> Unit,
 ): RecyclerView.Adapter<SettingsAdapter.SettingViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingViewHolder {
@@ -46,21 +47,21 @@ class SettingsAdapter(
             settingIconButton.setup(
                 model = ButtonModel(
                     iconRes = model.iconRes,
-                    iconSize = 120,
+                    iconSize = Constants.ICON_SIZE_LARGE,
                     foregroundColor = primaryColor,
                     backgroundColor = secondaryColor,
-                    onClickListener = { itemView.callOnClick() }
-                )
+                    onClickListener = { itemView.callOnClick() },
+                ),
             )
             settingIconButton.rootView.findViewById<View>(R.id.button_view).stateListAnimator = null
 
             settingText.setup(
                 model = TextModel(
                     textValue = model.instructionText,
-                    textSize = 20,
+                    textSize = Constants.TEXT_SIZE,
                     textColor = primaryColor,
-                    backgroundColor = secondaryColor
-                )
+                    backgroundColor = secondaryColor,
+                ),
             )
         }
     }

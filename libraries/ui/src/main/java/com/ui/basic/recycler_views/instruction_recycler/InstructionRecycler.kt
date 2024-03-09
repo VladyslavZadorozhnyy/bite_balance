@@ -3,11 +3,9 @@ package com.ui.basic.recycler_views.instruction_recycler
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getColor
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ui.components.databinding.RecyclerViewBinding
 
 class InstructionRecycler(
@@ -19,12 +17,16 @@ class InstructionRecycler(
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? InstructionRecyclerModel)?.let { recyclerModel ->
-            binding.recyclerView.apply {
-                setBackgroundColor(recyclerModel.backgroundColor)
-                adapter = InstructionAdapter(recyclerModel.items, recyclerModel.backgroundColor, model.foregroundColor)
-                layoutManager = LinearLayoutManager(context)
-            }
+        if (model !is InstructionRecyclerModel) return
+
+        binding.recyclerView.apply {
+            setBackgroundColor(model.backgroundColor)
+            adapter = InstructionAdapter(
+                items = model.items,
+                backgroundColor = model.backgroundColor,
+                foregroundColor = model.foregroundColor,
+            )
+            layoutManager = LinearLayoutManager(context)
         }
     }
 }

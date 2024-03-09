@@ -9,7 +9,6 @@
         android:id="@+id/checkbox_view"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="10dp"
         android:layout_gravity="center_vertical" />
 
     <com.ui.basic.texts.text.Text

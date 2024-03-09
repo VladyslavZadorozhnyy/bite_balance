@@ -44,6 +44,16 @@
     <string name="toggle_check">Toggle check box for not including</string>
     <string name="some_fields_empty">Some fields are empty. They will be filled with \'0\'</string>
     <string name="no_dishes_yet">Seems that you have no dishes yet. \n\n Start by adding one.</string>
+    <string name="name">Name:</string>
+    <string name="prots_">Prots:</string>
+    <string name="fats_">Fats:</string>
+    <string name="carbs_">Carbs:</string>
+    <string name="kcal_">Kcal:</string>
+    <string name="name_">Name:</string>
+    <string name="eaten_">Eaten:</string>
+    <string name="g_in">g in 100g</string>
+    <string name="in_g">in g</string>
+    <string name="kcal_in">kcal in 100g</string>
 
 <!--    ChooseDishScreenFragment-->
     <string name="choose_dish">Choose dish</string>

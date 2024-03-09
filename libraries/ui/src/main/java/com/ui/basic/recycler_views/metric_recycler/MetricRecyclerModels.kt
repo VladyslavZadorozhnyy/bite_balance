@@ -1,8 +1,10 @@
 package com.ui.basic.recycler_views.metric_recycler
 
-import com.ui.common.BaseUiComponentModel
+import com.ui.components.R
+import android.content.Context
 import com.ui.common.Constants
 import com.ui.model.MetricModel
+import com.ui.common.BaseUiComponentModel
 
 open class MetricRecyclerModel(
     val items: List<MetricModel>,
@@ -19,6 +21,7 @@ data class DishNameMetricsModel(
 ) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             foregroundColor: Int,
             backgroundColor: Int,
             name: String = "",
@@ -30,34 +33,34 @@ data class DishNameMetricsModel(
             return DishNameMetricsModel(
                 listOf(
                     MetricModel(
-                        name = "Name:",
+                        name = context.getString(R.string.name_),
                         editable = true,
                         hint = name,
                     ),
                     MetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = prots,
                     ),
                     MetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = fats,
                     ),
                     MetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = carbs,
                     ),
                     MetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = kcal,
@@ -77,6 +80,7 @@ data class DishMetricsModel(
 ) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             editable: Boolean,
             prots: String = "",
             fats: String = "",
@@ -88,33 +92,33 @@ data class DishMetricsModel(
             return DishNameMetricsModel(
                 listOf(
                     MetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = prots,
                     ),
                     MetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = fats,
                     ),
                     MetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = carbs,
                     ),
                     MetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = kcal,
-                    )
+                    ),
                 ),
                 foregroundColor = foregroundColor,
                 backgroundColor = backgroundColor,
@@ -130,6 +134,7 @@ data class MealMetricsModel(
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             editable: Boolean = true,
             prots: Float = 0F,
             fats: Float = 0F,
@@ -142,40 +147,40 @@ data class MealMetricsModel(
             return DishNameMetricsModel(
                 dishItems = listOf(
                     MetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${prots * eaten}"
                     ),
                     MetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${fats * eaten}"
                     ),
                     MetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${carbs * eaten}"
                     ),
                     MetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${kcal * eaten}"
                     ),
                     MetricModel(
-                        name = "Eaten:",
-                        suffix = "in g",
+                        name = context.getString(R.string.eaten_),
+                        suffix = context.getString(R.string.in_g),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "$eaten"
-                    )
+                    ),
                 ),
                 foregroundColor = foregroundColor,
                 backgroundColor = backgroundColor,
@@ -191,49 +196,45 @@ data class CreateMealMetricsModel(
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             foregroundColor: Int,
             backgroundColor: Int,
             editable: Boolean = true,
-            prots: Float = 0F,
-            fats: Float = 0F,
-            carbs: Float = 0F,
-            kcal: Float = 0F,
-            eaten: Float = 0F,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
                     MetricModel(
-                        name = "Name:",
+                        name = context.getString(R.string.name_),
                         editable = editable,
                         onlyNumbers = false,
                     ),
                     MetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Eaten:",
-                        suffix = "in g",
+                        name = context.getString(R.string.eaten_),
+                        suffix = context.getString(R.string.in_g),
                         editable = editable,
                         onlyNumbers = true,
                     )
@@ -252,6 +253,7 @@ data class CreateMealWithExistingDishModel(
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             prots: String = "",
             fats: String = "",
             carbs: String = "",
@@ -262,36 +264,36 @@ data class CreateMealWithExistingDishModel(
             return DishNameMetricsModel(
                 listOf(
                     MetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         hint = prots,
                         editable = false,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         hint = fats,
                         editable = false,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         hint = carbs,
                         editable = false,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         hint = kcal,
                         editable = false,
                         onlyNumbers = true,
                     ),
                     MetricModel(
-                        name = "Eaten:",
-                        suffix = "in g",
+                        name = context.getString(R.string.eaten_),
+                        suffix = context.getString(R.string.in_g),
                         editable = true,
                         onlyNumbers = true,
                     )

@@ -94,6 +94,7 @@ class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
     private fun setupRecycler(nutritionValueModel: NutritionValueModel) {
         binding.metricRecycler.setup(
             MealMetricsModel.newInstance(
+                context = requireContext(),
                 prots = nutritionValueModel.prots / eatenAmount,
                 fats = nutritionValueModel.fats  / eatenAmount,
                 carbs = nutritionValueModel.carbs  / eatenAmount,
