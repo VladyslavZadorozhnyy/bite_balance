@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.ui.basic.texts.slideable_text.SlideableText
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/headline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

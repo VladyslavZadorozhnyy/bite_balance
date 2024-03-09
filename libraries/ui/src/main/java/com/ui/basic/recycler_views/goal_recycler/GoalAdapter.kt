@@ -89,7 +89,7 @@ class GoalAdapter(
                     },
                     onUnchecked = {
                         listener.checkUncheckItem(item, false)
-                        textView.unstrikeThrough()
+                        textView.clearThrough()
                     },
                 ),
             )

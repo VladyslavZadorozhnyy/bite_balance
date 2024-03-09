@@ -11,7 +11,7 @@ import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.slideable_text.SlideableText
+import com.ui.basic.texts.slideable_text.SlideText
 
 
 class DishAdapter(
@@ -39,7 +39,7 @@ class DishAdapter(
     }
 
     class DishViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        private val textView = view.findViewById<SlideableText>(R.id.dish_name_view)
+        private val textView = view.findViewById<SlideText>(R.id.dish_name_view)
         private val dishIconView = view.findViewById<IconButton>(R.id.dish_icon_view)
 
         fun bind(item: DishModel, primaryColor: Int, secondaryColor: Int) {

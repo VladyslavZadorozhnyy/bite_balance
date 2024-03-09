@@ -13,7 +13,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.data.CombinedData
-import com.ui.basic.texts.slideable_text.SlideableText
+import com.ui.basic.texts.slideable_text.SlideText
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.charts.CombinedChart
 import com.github.mikephil.charting.formatter.ValueFormatter
@@ -24,8 +24,8 @@ class ChartSubComponent(
     private val barColor: Int,
     private val foregroundColor: Int,
     private val chartView: CombinedChart,
-    private val goalConsumption: SlideableText,
-    private val actualConsumption: SlideableText,
+    private val goalConsumption: SlideText,
+    private val actualConsumption: SlideText,
 ) {
     private val lineColor = context.getColor(R.color.indicator_green)
     private val barDataLabel = context.getString(R.string.act_consumption)

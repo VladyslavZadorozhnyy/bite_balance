@@ -93,8 +93,8 @@ class MetricAdapter(
                     },
                     onUnchecked = {
                         setupMetricValueInput(active = true, inputValues)
-                        metricNameView.unstrikeThrough()
-                        metricSuffixView.unstrikeThrough()
+                        metricNameView.clearThrough()
+                        metricSuffixView.clearThrough()
                     },
                     backgroundColor = backgroundColor,
                     foregroundColor = foregroundColor,

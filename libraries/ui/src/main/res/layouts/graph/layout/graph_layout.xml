@@ -22,7 +22,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinner"/>
 
-    <com.ui.basic.texts.slideable_text.SlideableText
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/goal_consumption"
         android:layout_width="0dp"
         android:layout_height="25dp"
@@ -33,7 +33,7 @@
         app:layout_constraintEnd_toStartOf="@id/actual_consumption"
         app:layout_constraintBottom_toBottomOf="@id/chart_view"/>
 
-    <com.ui.basic.texts.slideable_text.SlideableText
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/actual_consumption"
         android:layout_width="0dp"
         android:layout_height="25dp"

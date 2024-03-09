@@ -2,8 +2,8 @@ package com.ui.basic.texts.common
 
 import android.graphics.Color
 import com.ui.common.Constants
-import android.graphics.drawable.Drawable
 import com.ui.common.BaseUiComponentModel
+import android.graphics.drawable.Drawable
 
 data class TextModel(
     val textValue: String,
@@ -14,5 +14,5 @@ data class TextModel(
     val backgroundResDrawable: Drawable? = null,
     val isSingleLine: Boolean = false,
 ) : BaseUiComponentModel(
-    componentType = Constants.ComponentUiType.Text
+    componentType = Constants.ComponentUiType.Text,
 )
