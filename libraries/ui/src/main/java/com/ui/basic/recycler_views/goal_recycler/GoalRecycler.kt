@@ -3,12 +3,11 @@ package com.ui.basic.recycler_views.goal_recycler
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getColor
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ui.components.databinding.RecyclerViewBinding
 
 class GoalRecycler(
@@ -20,39 +19,38 @@ class GoalRecycler(
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? GoalRecyclerModel)?.let { recyclerModel ->
-            binding.recyclerView.apply {
-                setBackgroundColor(recyclerModel.foregroundColor)
-                adapter = GoalAdapter(
-                    recyclerModel.items,
-                    recyclerModel.foregroundColor,
-                    recyclerModel.backgroundColor,
-                    recyclerModel.goalAdapterListener,
-                )
-                layoutManager = LinearLayoutManager(context)
-            }
+        if (model !is GoalRecyclerModel) return
 
-            val touchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-                override fun onMove(
-                    recyclerView: RecyclerView,
-                    viewHolder: RecyclerView.ViewHolder,
-                    target: RecyclerView.ViewHolder
-                ): Boolean {
-                    return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-                    (binding.recyclerView.adapter as? GoalAdapter)?.let {
-                        recyclerModel.goalAdapterListener.onItemRemoved(
-                            item = it.getItemAt(viewHolder.adapterPosition),
-                            itemsLeft = it.itemCount - 1)
-                        it.removeAt(viewHolder.adapterPosition)
-                    }
-                }
-            }
-
-            val touchHelper = ItemTouchHelper(touchCallback)
-            touchHelper.attachToRecyclerView(binding.recyclerView)
+        binding.recyclerView.apply {
+            setBackgroundColor(model.foregroundColor)
+            adapter = GoalAdapter(
+                items = model.items,
+                foregroundColor = model.foregroundColor,
+                backgroundColor = model.backgroundColor,
+                goalAdapterListener = model.goalAdapterListener,
+            )
+            layoutManager = LinearLayoutManager(context)
         }
+        val touchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
+                (binding.recyclerView.adapter as? GoalAdapter)?.let {
+                    model.goalAdapterListener.onItemRemoved(
+                        item = it.getItemAt(viewHolder.adapterPosition),
+                        itemsLeft = it.itemCount - 1,
+                    )
+                    it.removeAt(viewHolder.adapterPosition)
+                }
+            }
+        }
+        val touchHelper = ItemTouchHelper(touchCallback)
+        touchHelper.attachToRecyclerView(binding.recyclerView)
     }
 }

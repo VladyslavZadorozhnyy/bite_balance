@@ -2,6 +2,7 @@ package com.bitebalance.presentation.ui.fragments
 
 import android.view.View
 import com.ui.components.R
+import android.view.Gravity
 import com.ui.common.Constants
 import android.content.res.ColorStateList
 import com.ui.basic.texts.common.TextModel
@@ -70,9 +71,9 @@ class SupportFeedbackFragment : BaseFragment<FragmentSupportFeedbackScreenBindin
             model = InputFormModel(
                 active = true,
                 hint = getString(R.string.message_to_developers),
-                onInputChange = {  },
                 backgroundColor = secondaryColor,
                 foregroundColor = primaryColor,
+                hintGravity = Gravity.CENTER,
             ),
         )
         binding.donationPlanText.setup(

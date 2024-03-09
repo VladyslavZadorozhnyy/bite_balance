@@ -1,13 +1,13 @@
 package com.ui.basic.buttons.icon_button
 
 import android.content.Context
-import android.content.res.ColorStateList
+import com.ui.common.Constants
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import com.ui.basic.buttons.common.ButtonModel
 import com.ui.common.BaseUiComponent
+import android.content.res.ColorStateList
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.Constants
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.components.databinding.IconButtonBinding
 
 class IconButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponent(context, attrs) {
@@ -16,17 +16,17 @@ class IconButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponen
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? ButtonModel)?.let {
-            binding.backgroundTintList = ColorStateList.valueOf(it.backgroundColor)
-            binding.strokeColor = ColorStateList.valueOf(model.foregroundColor)
-            binding.iconTint = ColorStateList.valueOf(model.foregroundColor)
-            binding.cornerRadius = Constants.CORNER_RADIUS
-            binding.strokeWidth = model.strokeWidth
-            binding.iconSize = model.iconSize
+        if (model !is ButtonModel) return
 
-            model.iconRes?.let { binding.setIconResource(it) }
-            model.onClickListener?.let { binding.setOnClickListener(it) }
-        }
+        binding.backgroundTintList = ColorStateList.valueOf(model.backgroundColor)
+        binding.strokeColor = ColorStateList.valueOf(model.foregroundColor)
+        binding.iconTint = ColorStateList.valueOf(model.foregroundColor)
+        binding.cornerRadius = Constants.CORNER_RADIUS
+        binding.strokeWidth = model.strokeWidth
+        binding.iconSize = model.iconSize
+
+        model.iconRes?.let { binding.setIconResource(it) }
+        model.onClickListener?.let { binding.setOnClickListener(it) }
     }
 
     fun click() { binding.performClick() }

@@ -41,6 +41,7 @@ object Constants {
     const val DOT_SIZE_DP = 12
     const val DOT_STROKE_PX = 10
     const val GS_STANDARD = 100f
+    const val DISH_ICON_SIZE = 270
 
     val NAVIGATION_ICONS_LIST = listOf(
         R.drawable.nav_home_active,

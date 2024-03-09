@@ -1,24 +1,24 @@
 package com.ui.basic.recycler_views.dish_recycler
 
-import android.content.res.ColorStateList
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModel
-import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.slideable_text.SlideableText
 import com.ui.components.R
 import com.ui.model.DishModel
+import android.view.ViewGroup
+import com.ui.common.Constants
+import android.view.LayoutInflater
+import android.content.res.ColorStateList
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
+import androidx.recyclerview.widget.RecyclerView
+import com.ui.basic.buttons.icon_button.IconButton
+import com.ui.basic.texts.slideable_text.SlideableText
 
 
 class DishAdapter(
     private val items: List<DishModel>,
     private val primaryColor: Int,
     private val secondaryColor: Int,
-    private val onClickListener: (DishModel) -> Unit
+    private val onClickListener: (DishModel) -> Unit,
 ): RecyclerView.Adapter<DishAdapter.DishViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
@@ -42,28 +42,23 @@ class DishAdapter(
         private val textView = view.findViewById<SlideableText>(R.id.dish_name_view)
         private val dishIconView = view.findViewById<IconButton>(R.id.dish_icon_view)
 
-        init {
-            view.setOnClickListener { Log.d("AAADIP", "setOnClickListener called") }
-        }
-
         fun bind(item: DishModel, primaryColor: Int, secondaryColor: Int) {
             textView.setup(
                 model = TextModel(
                     textValue = item.name,
-                    textSize = 20,
+                    textSize = Constants.TEXT_SIZE,
                     textColor = secondaryColor,
-                    backgroundColor = primaryColor
-                )
+                    backgroundColor = primaryColor,
+                ),
             )
-
             dishIconView.setup(
                 model = ButtonModel(
                     iconRes = item.iconRes,
-                    iconSize = 270,
+                    iconSize = Constants.DISH_ICON_SIZE,
                     foregroundColor = secondaryColor,
                     backgroundColor = primaryColor,
-                    onClickListener = { itemView.callOnClick() }
-                )
+                    onClickListener = { itemView.callOnClick() },
+                ),
             )
             dishIconView.rootView.findViewById<View>(R.id.button_view).stateListAnimator = null
         }

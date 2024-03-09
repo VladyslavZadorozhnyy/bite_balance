@@ -1,8 +1,8 @@
 package com.ui.basic.nav_bar
 
-import com.ui.common.BaseUiComponentModel
-import com.ui.common.Constants
 import com.ui.components.R
+import com.ui.common.Constants
+import com.ui.common.BaseUiComponentModel
 
 data class NavigationBarModel(
     val navIcons: List<Int>,
