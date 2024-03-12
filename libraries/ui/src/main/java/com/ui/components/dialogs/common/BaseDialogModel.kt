@@ -8,7 +8,7 @@ data class BaseDialogModel(
     val title: String,
     val backgroundColor: Int = 0,
     val textColor: Int = 0,
-    val buttonText: Int = R.string.text_button_sample,
+    val buttonText: Int = R.string.done,
     val onConfirmClicked: () -> Unit = {},
     val onPositiveClicked: () -> Unit = {},
     val onNegativeClicked: () -> Unit = {},

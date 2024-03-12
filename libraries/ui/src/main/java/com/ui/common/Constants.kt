@@ -45,10 +45,10 @@ object Constants {
     const val MEAL_ICON_SIZE = 90
 
     val NAVIGATION_ICONS_LIST = listOf(
-        R.drawable.nav_home_active,
-        R.drawable.nav_stats_active,
-        R.drawable.nav_menu_active,
-        R.drawable.nav_settings_active,
+        R.drawable.nav_home,
+        R.drawable.nav_stats,
+        R.drawable.nav_menu,
+        R.drawable.nav_settings,
     )
 
     val SPINNER_ITEMS = listOf(

@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">BiteBalance</string>
-
-<!--    TODO: remove later-->
-    <string name="text_button_sample">Text Button</string>
-    <string name="text_icon_button_sample">Text Icon Button</string>
-    <string name="get_input_button">Get input</string>
-    <string name="send">Send</string>
-
-<!--TODO: later split string resources for different components, like it was done with drawables and layouts-->
-    <string name="update">Update</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="add">Add</string>
-    <string name="out_of">out of</string>
-    <string name="from_limit">From limit:</string>
-    <string name="eaten_today">Eaten today:</string>
-
-    <string name="goal_consumption">Goal consumption</string>
-    <string name="act_consumption">Actual consumption</string>
-
-    <string name="kcal_name">Calories</string>
-    <string name="prots_name">Proteins</string>
-    <string name="fats_name">Fats</string>
-    <string name="carbs_name">Carbohydrates</string>
-
-    <string name="kcal_label">kcal</string>
-    <string name="grams_label">g</string>
-
-
-    <string name="kcal_consumption">Kcal consumption</string>
-    <string name="prots_consumption">Prots consumption</string>
-    <string name="fats_consumption">Fats consumption</string>
-    <string name="carbs_consumption">Carbs consumption</string>
-
 <!--    Common-->
+    <string name="app_name">BiteBalance</string>
     <string name="empty_line" />
     <string name="done">Done</string>
     <string name="kcal">kcal</string>
@@ -54,25 +21,29 @@
     <string name="g_in">g in 100g</string>
     <string name="in_g">in g</string>
     <string name="kcal_in">kcal in 100g</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="add">Add</string>
 
-<!--    ChooseDishScreenFragment-->
+<!--    ChooseDishFragment-->
     <string name="choose_dish">Choose dish</string>
+    <string name="update">Update</string>
 
-<!--    AddMealScreenFragment-->
+<!--    AddMealFragment-->
     <string name="add_meal">Add meal</string>
     <string name="create_dish">Create new dish</string>
     <string name="choose_from_menu">Choose from menu</string>
     <string name="specify_meal">Specify meal, please:</string>
     <string name="meals_eaten_today">Meals eaten today: </string>
 
-<!--    AppearanceScreenFragment-->
+<!--    AppearanceFragment-->
     <string name="primary_color">Primary color</string>
     <string name="secondary_color">Secondary color</string>
     <string name="font">Font</string>
     <string name="choose_primary_color">Choose primary color</string>
     <string name="choose_secondary_color">Choose secondary color</string>
 
-<!--    ChooseSettingScreenFragment-->
+<!--    ChooseSettingFragment-->
     <string name="choosings">Choosings</string>
     <string name="language">Language</string>
     <string name="measurement">Measurement</string>
@@ -80,57 +51,72 @@
     <string name="instruction">Instruction</string>
     <string name="feedback">Feedback</string>
 
-<!--    CreateNewScreenFragment-->
+<!--    CreateNewFragment-->
     <string name="new_dish">New dish</string>
     <string name="new_meal">New meal</string>
     <string name="spec_nut_value">Specify nutritional value, please:</string>
 
-<!--    DishScreenFragment-->
+<!--    DishFragment-->
     <string name="want_delete">Do you want to delete this dish?</string>
 
-<!--    HomeScreenFragment-->
+<!--    HomeFragment-->
     <string name="confirm_reset">Would you like to reset progress?\n\nToday’s data will be removed.</string>
+    <string name="out_of">out of</string>
+    <string name="from_limit">From limit:</string>
+    <string name="eaten_today">Eaten today:</string>
+    <string name="kcal_label">kcal</string>
+    <string name="grams_label">g</string>
+    <string name="kcal_name">Calories</string>
+    <string name="prots_name">Proteins</string>
+    <string name="fats_name">Fats</string>
+    <string name="carbs_name">Carbohydrates</string>
 
-<!--    InfoScreenFragment-->
+<!--    InfoFragment-->
     <string name="icons_legend">Icons Legend</string>
     <string name="get_info_leg">Get information</string>
     <string name="list_today_meal_leg">List today\'s meals</string>
     <string name="reset_today_meal_leg">Reset today\'s meals</string>
     <string name="add_meal_leg">Add new meal today</string>
 
-<!--    MealDetailsScreenFragment-->
+<!--    MealDetailsFragment-->
     <string name="details">Details:</string>
     <string name="back">Back</string>
 
-<!--    MenuScreenFragment-->
+<!--    MenuFragment-->
     <string name="add_new">Add new</string>
     <string name="menu">Menu</string>
 
-<!--    MyGoalsScreenFragment-->
+<!--    MyGoalsFragment-->
     <string name="goal_removed">Goal was removed</string>
     <string name="my_goals">My Goals</string>
     <string name="next_goal">My next goal is to :</string>
     <string name="no_goals_yet">Seems that you have no goals for this month. \n\n You can create one for current month.</string>
 
-<!--    SettingsScreenFragment-->
+<!--    SettingsFragment-->
     <string name="settings">Settings</string>
 
-<!--    StatsScreenFragment-->
+<!--    StatsFragment-->
     <string name="statistics">Statistics</string>
+    <string name="goal_consumption">Goal consumption</string>
+    <string name="act_consumption">Actual consumption</string>
     <string name="days_empty">Some days do not have data</string>
     <string name="your_stats_here">Your statistics data located here. Switch months and nutrition indicators to explore</string>
+    <string name="kcal_consumption">Kcal consumption</string>
+    <string name="prots_consumption">Prots consumption</string>
+    <string name="fats_consumption">Fats consumption</string>
+    <string name="carbs_consumption">Carbs consumption</string>
 
-<!--     SupportFeedbackScreenFragment-->
+<!--     SupportFeedbackFragment-->
     <string name="commit">Commit</string>
     <string name="donated">Donated successfully!</string>
     <string name="donation_text">*Donation text*</string>
     <string name="message_to_developers">*Message to developers*</string>
     <string name="donation_plan">*Donation plan*</string>
 
-<!--    TextScreenFragment-->
+<!--    TextFragment-->
     <string name="project_info">*Information about the project and application*</string>
 
-<!--    TodayMealsScreenFragment-->
+<!--    TodayMealsFragment-->
     <string name="no_meals_yet">Seems that you have no meals yet. \n\n Start by adding one.</string>
     <string name="today_meals">Today\'s meals</string>
 </resources>

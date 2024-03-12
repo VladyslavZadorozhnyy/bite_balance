@@ -93,7 +93,7 @@ class AddMealFragment : BaseFragment<FragmentAddMealScreenBinding>() {
         )
         binding.chooseFromMenu.setup(
             model = ButtonModel(
-                iconRes = R.drawable.nav_menu_active,
+                iconRes = R.drawable.nav_menu,
                 iconSize = Constants.ICON_SIZE_BIG,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,

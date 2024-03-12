@@ -78,7 +78,7 @@ class TodayMealsFragment : BaseFragment<FragmentTodaysMealsScreenBinding>() {
         noItemsBinding.messageView.visibility = View.VISIBLE
         binding.mealRecycler.visibility = View.INVISIBLE
 
-        noItemsBinding.imageView.setBackgroundResource(R.drawable.nav_menu_active)
+        noItemsBinding.imageView.setBackgroundResource(R.drawable.nav_menu)
         noItemsBinding.imageView.backgroundTintList = ColorStateList.valueOf(secondaryColor)
 
         noItemsBinding.messageView.setup(
