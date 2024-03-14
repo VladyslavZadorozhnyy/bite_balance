@@ -1,13 +1,13 @@
 package com.bitebalance.presentation.ui.activites
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ui.components.R
 import com.bitebalance.common.NavigationAction
+import androidx.appcompat.app.AppCompatActivity
 import com.bitebalance.databinding.ActivityMainBinding
-import com.bitebalance.presentation.ui.fragments.NavigationFragment
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.bitebalance.presentation.ui.fragments.NavigationFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigationObserving() {
         navigationVm.state.observe(this) { state ->
             supportFragmentManager.fragments.lastOrNull()?.onPause()
-            val transaction = supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.slide_in, R.anim.slide_out)
+            val transaction = supportFragmentManager.beginTransaction().setCustomAnimations(
+                R.anim.slide_to_up, R.anim.slide_to_down, R.anim.slide_to_up, R.anim.slide_to_down)
 
             when (state.action) {
                 NavigationAction.POP ->
