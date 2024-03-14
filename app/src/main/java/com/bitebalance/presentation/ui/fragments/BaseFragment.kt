@@ -23,6 +23,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     protected lateinit var noItemsBinding: NoItemsLayoutBinding
 
     protected val mActivity by lazy { requireActivity() as MainActivity }
+
     protected val primaryColor
         get() = themeVm.state.value?.primaryColor ?: Color.BLACK
     protected val secondaryColor

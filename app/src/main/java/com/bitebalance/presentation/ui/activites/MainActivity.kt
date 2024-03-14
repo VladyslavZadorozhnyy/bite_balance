@@ -2,6 +2,7 @@ package com.bitebalance.presentation.ui.activites
 
 import android.os.Bundle
 import com.ui.components.R
+import androidx.fragment.app.Fragment
 import com.bitebalance.common.NavigationAction
 import androidx.appcompat.app.AppCompatActivity
 import com.bitebalance.databinding.ActivityMainBinding
@@ -56,5 +57,9 @@ class MainActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         supportFragmentManager.fragments.lastOrNull()?.onResume()
         supportFragmentManager.fragments.forEach { (it as? NavigationFragment)?.onResume() }
+    }
+
+    fun getCurrentFragment(): Fragment? {
+        return supportFragmentManager.fragments.lastOrNull()
     }
 }
