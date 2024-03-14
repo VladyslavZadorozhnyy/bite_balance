@@ -29,14 +29,13 @@ class MainActivity : AppCompatActivity() {
 
             when (state.action) {
                 NavigationAction.POP ->
-                    supportFragmentManager.fragments.lastOrNull()?.let { transaction.remove(it) }
+                    onBackPressed()
                 NavigationAction.REPLACE ->
                     state.fragment?.let { transaction.replace(binding.fragmentContainer.id, it) }
                 else ->
                     state.fragment?.let {
                         transaction.add(binding.fragmentContainer.id, it).addToBackStack(null) }
             }
-
             supportFragmentManager.fragments.lastOrNull()?.onStop()
             transaction.commit()
         }
