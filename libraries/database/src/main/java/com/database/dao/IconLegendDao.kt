@@ -11,19 +11,14 @@ import com.database.entities.IconLegendEntity
 interface IconLegendDao {
     @Insert
     fun insert(iconLegendEntity: IconLegendEntity): Long
-
     @Update
     fun updateItem(iconLegendEntity: IconLegendEntity)
-
     @Query("SELECT * FROM ${Constants.ICON_LEGEND_TABLE_NAME}")
     fun getAll(): List<IconLegendEntity>
-
     @Query("SELECT * FROM ${Constants.ICON_LEGEND_TABLE_NAME} WHERE id=:id")
     fun getById(id: Long): IconLegendEntity?
-
     @Query("DELETE FROM ${Constants.ICON_LEGEND_TABLE_NAME} WHERE id=:id")
     fun deleteById(id: Long)
-
     @Query("DELETE FROM ${Constants.ICON_LEGEND_TABLE_NAME}")
     fun deleteAll()
 }

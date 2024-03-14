@@ -1,9 +1,9 @@
 package com.database.db
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
 import com.database.dao.*
+import androidx.room.Database
 import com.database.entities.*
+import androidx.room.RoomDatabase
 
 @Database(entities = [
     DateEntity::class,

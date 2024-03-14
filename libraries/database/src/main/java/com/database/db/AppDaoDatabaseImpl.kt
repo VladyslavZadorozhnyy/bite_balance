@@ -1,9 +1,9 @@
 package com.database.db
 
-import android.content.Context
-import androidx.room.Room
-import com.database.common.Constants
 import com.database.dao.*
+import androidx.room.Room
+import android.content.Context
+import com.database.common.Constants
 
 class AppDaoDatabaseImpl(
     private val context: Context
@@ -14,9 +14,9 @@ class AppDaoDatabaseImpl(
         synchronized(AppDatabase::class.java) {
             if (instance == null) {
                 instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    Constants.DATABASE_NAME
+                    context = context.applicationContext,
+                    klass = AppDatabase::class.java,
+                    name = Constants.DATABASE_NAME,
                 ).fallbackToDestructiveMigration().build()
             }
         }

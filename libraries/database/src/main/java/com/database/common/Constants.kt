@@ -10,6 +10,6 @@ object Constants {
     const val GOAL_METRICS_TABLE_NAME = "goal_metrics_table"
     const val MEAL_TABLE_NAME = "meal_table"
     const val METRIC_TABLE_NAME = "metric_table"
-    const val NUTRITION_VALUE_TABLE_NAME = "nutrition_value_table"
     const val SETTING_TABLE_NAME = "setting_table"
+    const val NUTRITION_VALUE_TABLE_NAME = "nutrition_value_table"
 }
