@@ -91,7 +91,7 @@ class SupportFeedbackFragment : BaseFragment<FragmentSupportFeedbackScreenBindin
             model = ButtonModel(
                 labelTextRes = R.string.commit,
                 labelTextSize = Constants.TEXT_SIZE_SMALL,
-                iconRes = R.drawable.donation_icon,
+                iconRes = R.drawable.support_icon,
                 iconSize = Constants.ICON_SIZE_MEDIUM,
                 foregroundColor = secondaryColor,
                 backgroundColor = primaryColor,
