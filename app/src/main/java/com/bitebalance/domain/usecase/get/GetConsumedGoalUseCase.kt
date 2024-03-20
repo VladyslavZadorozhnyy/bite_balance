@@ -1,27 +1,27 @@
 package com.bitebalance.domain.usecase.get
 
+import com.ui.components.R
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import com.bitebalance.common.Resource
 import com.ui.model.NutritionValueModel
-import com.bitebalance.domain.repository.DateRepository
-import com.bitebalance.domain.repository.DishRepository
-import com.bitebalance.domain.repository.MealRepository
-import com.bitebalance.domain.repository.NutritionValueRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
+import com.bitebalance.common.Constants
+import com.bitebalance.domain.repository.*
 
 class GetConsumedGoalUseCase(
     private val dateRepository: DateRepository,
     private val mealRepository: MealRepository,
     private val dishRepository: DishRepository,
+    private val stringRepository: StringRepository,
     private val nutritionValueRepository: NutritionValueRepository,
 ) {
     private val defaultGoalConsumption = NutritionValueModel(
-        prots = 51F,
-        fats = 62F,
-        carbs = 275F,
-        kcals = 2250F,
+        prots = Constants.ST_PROTS_CONSUMPTION,
+        fats = Constants.ST_FATS_CONSUMPTION,
+        carbs = Constants.ST_CARBS_CONSUMPTION,
+        kcals = Constants.ST_KCALS_CONSUMPTION,
     )
 
     operator fun invoke(): Flow<Resource<List<NutritionValueModel>>> = flow {
@@ -51,27 +51,22 @@ class GetConsumedGoalUseCase(
                         prots = todayTotalConsumption.prots + it.prots * todayMeals[i].amount,
                         fats = todayTotalConsumption.fats + it.fats * todayMeals[i].amount,
                         carbs = todayTotalConsumption.carbs + it.carbs * todayMeals[i].amount,
-                        kcals = todayTotalConsumption.kcals + it.kcals * todayMeals[i].amount
+                        kcals = todayTotalConsumption.kcals + it.kcals * todayMeals[i].amount,
                         )
                     }
                 }
-
                 goalConsumption = if (nutritionValueRepository.getGoalConsumption() == null) {
                     nutritionValueRepository.setGoalConsumption(defaultGoalConsumption)
                     nutritionValueRepository.getGoalConsumption()!!
                 } else {
                     nutritionValueRepository.getGoalConsumption()!!
                 }
-
             } catch (exception: Exception) {
-                resultMessage = exception.message ?: "Unknown error"
+                resultMessage = exception.message ?: stringRepository.getStr(R.string.unknown_error)
             }
         }
 
-        if (resultMessage.isNotEmpty()) {
-            emit(Resource.Error(message = resultMessage))
-        } else {
-            emit(Resource.Success(data = listOf(goalConsumption, todayTotalConsumption)))
-        }
+        if (resultMessage.isNotEmpty()) emit(Resource.Error(message = resultMessage))
+        else emit(Resource.Success(data = listOf(goalConsumption, todayTotalConsumption)))
     }
 }

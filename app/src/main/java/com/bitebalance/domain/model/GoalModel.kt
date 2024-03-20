@@ -1,24 +1,24 @@
 package com.bitebalance.domain.model
 
-import com.database.entities.GoalEntity
 import com.ui.model.GoalModel
+import com.database.entities.GoalEntity
 
 fun GoalModel.Companion.fromEntity(goalEntity: GoalEntity): GoalModel {
     return GoalModel(
-        goalEntity.textValue,
-        goalEntity.active,
-        goalEntity.achieved,
-        goalEntity.dateCreatedId,
-        goalEntity.id,
+        textValue = goalEntity.textValue,
+        active = goalEntity.active,
+        achieved = goalEntity.achieved,
+        dateCreatedId = goalEntity.dateCreatedId,
+        id = goalEntity.id,
     )
 }
 
 fun GoalModel.toEntity(): GoalEntity {
     return GoalEntity(
-        this.textValue,
-        this.active,
-        this.achieved,
-        this.dateCreatedId,
-        this.id,
+        textValue = this.textValue,
+        active = this.active,
+        achieved = this.achieved,
+        dateCreatedId = this.dateCreatedId,
+        id = this.id,
     )
 }

@@ -1,15 +1,16 @@
 package com.bitebalance.data.db_repository
 
-import com.bitebalance.domain.model.fromEntity
-import com.bitebalance.domain.model.toEntity
-import com.bitebalance.domain.repository.NutritionValueRepository
 import com.database.common.Constants
 import com.database.db.AppDaoDatabase
-import com.database.entities.GoalMetricsEntity
 import com.ui.model.NutritionValueModel
+import com.bitebalance.domain.model.toEntity
+import com.bitebalance.domain.model.fromEntity
+import com.database.entities.GoalMetricsEntity
+import com.bitebalance.domain.repository.NutritionValueRepository
+
 
 class NutritionValueRepositoryImpl(
-    private val appDaoDatabase: AppDaoDatabase
+    private val appDaoDatabase: AppDaoDatabase,
 ) : NutritionValueRepository {
     override fun getNutritionValueById(id: Long): NutritionValueModel? {
         return appDaoDatabase.getNutritionValueDao().getById(id)
@@ -39,7 +40,6 @@ class NutritionValueRepositoryImpl(
 
         appDaoDatabase.getNutritionValueDao().getById(goalConsumptionEntity.entityId)
             ?.let { return NutritionValueModel.fromEntity(it) }
-
         return null
     }
 
@@ -52,21 +52,23 @@ class NutritionValueRepositoryImpl(
             .getByTableName(Constants.NUTRITION_VALUE_TABLE_NAME)
 
         if (previousGoalConsumption == null) {
-            appDaoDatabase.getGoalMetricsDao().insert(GoalMetricsEntity(
-                tableName = Constants.NUTRITION_VALUE_TABLE_NAME,
-                entityId = updatedModelId
-            ))
+            appDaoDatabase.getGoalMetricsDao().insert(
+                goalMetricsEntity = GoalMetricsEntity(
+                    tableName = Constants.NUTRITION_VALUE_TABLE_NAME,
+                    entityId = updatedModelId,
+                ),
+            )
         } else {
             appDaoDatabase.getGoalMetricsDao().updateItem(
                 newEntityId = updatedModelId,
-                tableName = Constants.NUTRITION_VALUE_TABLE_NAME
+                tableName = Constants.NUTRITION_VALUE_TABLE_NAME,
             )
         }
     }
 
     override fun removeGoalConsumption() {
         appDaoDatabase.getGoalMetricsDao().deleteByTableName(
-            tableName = Constants.NUTRITION_VALUE_TABLE_NAME
+            tableName = Constants.NUTRITION_VALUE_TABLE_NAME,
         )
     }
 }

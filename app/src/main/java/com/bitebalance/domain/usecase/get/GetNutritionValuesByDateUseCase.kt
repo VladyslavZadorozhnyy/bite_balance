@@ -1,22 +1,21 @@
 package com.bitebalance.domain.usecase.get
 
-import com.bitebalance.common.Resource
-import com.bitebalance.domain.repository.DateRepository
-import com.bitebalance.domain.repository.DishRepository
-import com.bitebalance.domain.repository.MealRepository
-import com.bitebalance.domain.repository.NutritionValueRepository
-import com.ui.model.NutritionValueModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
+import com.ui.components.R
 import java.text.SimpleDateFormat
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import com.bitebalance.common.Resource
+import com.ui.model.NutritionValueModel
+import com.bitebalance.domain.repository.*
 
 class GetNutritionValuesByDateUseCase(
     private val dateRepository: DateRepository,
     private val mealRepository: MealRepository,
     private val dishRepository: DishRepository,
-    private val nutritionValueRepository: NutritionValueRepository,
+    private val stringRepository: StringRepository,
+    private val nutrRepository: NutritionValueRepository,
 ) {
     private val emptyNutritionValue = NutritionValueModel(0F, 0F, 0F, 0F)
     operator fun invoke(
@@ -31,7 +30,7 @@ class GetNutritionValuesByDateUseCase(
 
         withContext(Dispatchers.IO) {
             try {
-                var summedNutritionValue = emptyNutritionValue
+                var summedNutr = emptyNutritionValue
                 val dateModel = dateRepository.getDateFromString(dateFormat, dateValue)
                 val daysCount = dateRepository.getDaysCountInMonth(dateModel.month, dateModel.year)
 
@@ -42,20 +41,20 @@ class GetNutritionValuesByDateUseCase(
                     .filter { dateRepository.getDateById(it.mealTimeId)?.month == dateModel.month &&
                             dateRepository.getDateById(it.mealTimeId)?.year == dateModel.year }
                     .groupBy {
-                        summedNutritionValue = emptyNutritionValue
+                        summedNutr = emptyNutritionValue
                         dateRepository.getDateById(it.mealTimeId)?.day
                     }.asIterable().forEach { mapEntry ->
                         mapEntry.value.map { mealModel ->
                             val dishModel = dishRepository.getDishById(mealModel.dishId)
-                            val nutritionModel = nutritionValueRepository.getNutritionValueById(dishModel?.nutritionValId ?: -1)
+                            val nutModel = nutrRepository.getNutritionValueById(dishModel?.nutritionValId ?: -1)
 
-                            nutritionModel?.let { summedNutritionValue = summedNutritionValue.plus(nutritionModel, mealModel.amount) }
+                            nutModel?.let { summedNutr = summedNutr.plus(nutModel, mealModel.amount) }
                         }
-                        mapEntry.key?.let { dayConsumptionMap[it] = summedNutritionValue }
+                        mapEntry.key?.let { dayConsumptionMap[it] = summedNutr }
                     }
-                nutritionValueRepository.getGoalConsumption()?.let { goalConsumption = it }
+                nutrRepository.getGoalConsumption()?.let { goalConsumption = it }
             } catch (exception: Throwable) {
-                errorMessage = exception.message ?: "Unknown error"
+                errorMessage = exception.message ?: stringRepository.getStr(R.string.unknown_error)
             }
         }
 
@@ -66,7 +65,7 @@ class GetNutritionValuesByDateUseCase(
                 data = Pair(dayConsumptionMap.values.toList(), goalConsumption!!)
             ))
         } else {
-            emit(Resource.Error(message = "Goal consumption not downloaded"))
+            emit(Resource.Error(message = stringRepository.getStr(R.string.consumption_error)))
         }
     }
 }

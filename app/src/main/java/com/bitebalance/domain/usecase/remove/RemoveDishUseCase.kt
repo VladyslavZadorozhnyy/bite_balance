@@ -1,16 +1,19 @@
 package com.bitebalance.domain.usecase.remove
 
-import com.bitebalance.common.Resource
-import com.bitebalance.domain.repository.DishRepository
-import com.bitebalance.domain.repository.NutritionValueRepository
+import com.ui.components.R
 import com.ui.model.DishModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
+import com.bitebalance.common.Resource
+import com.bitebalance.domain.repository.DishRepository
+import com.bitebalance.domain.repository.StringRepository
+import com.bitebalance.domain.repository.NutritionValueRepository
 
 class RemoveDishUseCase(
     private val dishRepository: DishRepository,
+    private val stringRepository: StringRepository,
     private val nutritionValueRepository: NutritionValueRepository,
 ) {
     operator fun invoke(dishName: String): Flow<Resource<List<DishModel>>> = flow {
@@ -24,14 +27,11 @@ class RemoveDishUseCase(
                     dishRepository.removeDish(it)
                 }
             } catch (exception: Exception) {
-                resultMessage = exception.message ?: "Unknown error"
+                resultMessage = exception.message ?: stringRepository.getStr(R.string.unknown_error)
             }
         }
 
-        if (resultMessage.isNotEmpty()) {
-            emit(Resource.Error(message = resultMessage))
-        } else {
-            emit(Resource.Success(message = "Removed successfully"))
-        }
+        if (resultMessage.isNotEmpty()) emit(Resource.Error(message = resultMessage))
+        else emit(Resource.Success(message = stringRepository.getStr(R.string.remove_success)))
     }
 }

@@ -1,10 +1,10 @@
 package com.bitebalance.data.db_repository
 
-import com.bitebalance.domain.model.fromEntity
-import com.bitebalance.domain.model.toEntity
-import com.bitebalance.domain.repository.GoalRepository
-import com.database.db.AppDaoDatabase
 import com.ui.model.GoalModel
+import com.database.db.AppDaoDatabase
+import com.bitebalance.domain.model.toEntity
+import com.bitebalance.domain.model.fromEntity
+import com.bitebalance.domain.repository.GoalRepository
 
 class GoalRepositoryImpl(
     private val appDaoDatabase: AppDaoDatabase

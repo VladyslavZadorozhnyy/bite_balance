@@ -1,21 +1,21 @@
 package com.bitebalance.domain.model
 
-import com.database.entities.DishEntity
 import com.ui.model.DishModel
+import com.database.entities.DishEntity
 
 fun DishModel.Companion.fromEntity(entity: DishEntity): DishModel {
     return DishModel(
-        entity.name,
-        entity.iconRes,
-        entity.nutritionModelId,
-        entity.id
+        name = entity.name,
+        iconRes = entity.iconRes,
+        nutritionValId = entity.nutritionModelId,
+        id = entity.id,
     )
 }
 
 fun DishModel.toEntity(): DishEntity {
     return DishEntity(
-        this.name,
-        this.iconRes,
-        this.nutritionValId
+        name = this.name,
+        iconRes = this.iconRes,
+        nutritionModelId = this.nutritionValId,
     )
 }

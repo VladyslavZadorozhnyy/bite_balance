@@ -1,12 +1,12 @@
 package com.bitebalance.data.db_repository
 
+import java.util.*
+import java.text.SimpleDateFormat
+import com.database.db.AppDaoDatabase
+import com.bitebalance.domain.model.toEntity
 import com.bitebalance.domain.model.DateModel
 import com.bitebalance.domain.model.fromEntity
-import com.bitebalance.domain.model.toEntity
 import com.bitebalance.domain.repository.DateRepository
-import com.database.db.AppDaoDatabase
-import java.text.SimpleDateFormat
-import java.util.*
 
 class DateRepositoryImpl(
     private val appDaoDatabase: AppDaoDatabase
@@ -21,15 +21,15 @@ class DateRepositoryImpl(
             hour = 0,
             day = 1,
             month = cal.get(Calendar.MONTH),
-            year = cal.get(Calendar.YEAR)
+            year = cal.get(Calendar.YEAR),
         )
     }
 
     override fun getCurrentDate(): DateModel {
         appDaoDatabase.getDateDao().getDate(
-            getCurrentDay(),
-            getCurrentMonth(),
-            getCurrentYear(),
+            day = getCurrentDay(),
+            month = getCurrentMonth(),
+            year = getCurrentYear(),
         )?.let { return DateModel.fromEntity(it) }
 
         val currentDateId = appDaoDatabase.getDateDao().insert(
@@ -42,12 +42,12 @@ class DateRepositoryImpl(
             ).toEntity())
 
         return DateModel(
-            getCurrentMinute(),
-            getCurrentHour(),
-            getCurrentDay(),
-            getCurrentMonth(),
-            getCurrentYear(),
-            id = currentDateId
+            minute = getCurrentMinute(),
+            hour = getCurrentHour(),
+            day = getCurrentDay(),
+            month = getCurrentMonth(),
+            year = getCurrentYear(),
+            id = currentDateId,
         )
     }
 

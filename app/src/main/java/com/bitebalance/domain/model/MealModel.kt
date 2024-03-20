@@ -11,17 +11,17 @@ data class MealModel(
 
 fun MealModel.Companion.fromEntity(entity: MealEntity): MealModel {
     return MealModel(
-        entity.mealTimeId,
-        entity.dishId,
-        entity.amount,
-        entity.id,
+        mealTimeId = entity.mealTimeId,
+        dishId = entity.dishId,
+        amount = entity.amount,
+        id = entity.id,
     )
 }
 
 fun MealModel.toEntity(): MealEntity {
     return MealEntity(
-        this.mealTimeId,
-        this.dishId,
-        this.amount,
+        mealTimeId = this.mealTimeId,
+        dishId = this.dishId,
+        amount = this.amount,
     )
 }

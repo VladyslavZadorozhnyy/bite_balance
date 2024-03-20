@@ -39,7 +39,7 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
     private fun setupHeader() {
         toolbarBinding.headline.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.appearance),
+                textValue = getString(R.string.appearance),
                 textSize = Constants.TEXT_SIZE_BIG,
                 textColor = primaryColor,
                 backgroundColor = secondaryColor,
@@ -67,7 +67,7 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
         }
         binding.color1TextView.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.primary_color),
+                textValue = getString(R.string.primary_color),
                 textSize = Constants.TEXT_SIZE,
                 textColor = primaryColor,
                 backgroundColor = secondaryColor,
@@ -92,7 +92,7 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
         }
         binding.color2TextView.setup(
             model = TextModel(
-                textValue = requireContext().getString(R.string.secondary_color),
+                textValue = getString(R.string.secondary_color),
                 textSize = Constants.TEXT_SIZE,
                 textColor = primaryColor,
                 backgroundColor = secondaryColor,

@@ -14,23 +14,23 @@ data class DateModel(
 
 fun DateModel.Companion.fromEntity(entity: DateEntity): DateModel {
     return DateModel(
-        entity.minute,
-        entity.hour,
-        entity.day,
-        entity.month,
-        entity.year,
-        entity.additions,
-        entity.id,
+        minute = entity.minute,
+        hour = entity.hour,
+        day = entity.day,
+        month = entity.month,
+        year = entity.year,
+        additions = entity.additions,
+        id = entity.id,
     )
 }
 
 fun DateModel.toEntity(): DateEntity {
     return DateEntity(
-        this.minute,
-        this.hour,
-        this.day,
-        this.month,
-        this.year,
-        this.additions
+        minute = this.minute,
+        hour = this.hour,
+        day = this.day,
+        month = this.month,
+        year = this.year,
+        additions = this.additions,
     )
 }
