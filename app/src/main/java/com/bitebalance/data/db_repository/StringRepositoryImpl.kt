@@ -12,6 +12,6 @@ class StringRepositoryImpl(
     }
 
     override fun getStr(id: Int, vararg formatArgs: String): String {
-        return context.getString(id, formatArgs)
+        return context.getString(id, *formatArgs)
     }
 }

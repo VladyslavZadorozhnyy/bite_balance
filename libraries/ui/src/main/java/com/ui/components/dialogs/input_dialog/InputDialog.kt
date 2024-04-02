@@ -53,7 +53,7 @@ class InputDialog(
         )
         binding.confirmButton.setup(
             model = ButtonModel(
-                labelTextRes = R.string.add,
+                labelTextRes = model.buttonText,
                 labelTextSize = Constants.TEXT_SIZE_SMALL,
                 foregroundColor = model.backgroundColor,
                 backgroundColor = model.textColor,

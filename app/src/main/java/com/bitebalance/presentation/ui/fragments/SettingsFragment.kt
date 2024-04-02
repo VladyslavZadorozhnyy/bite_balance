@@ -95,7 +95,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsScreenBinding>() {
             getString(R.string.language) ->
                 navigationVm.navigateTo(ChooseSettingFragment.newInstance(), NavigationAction.ADD)
             getString(R.string.measurement) ->
-                navigationVm.navigateTo(ChooseSettingFragment.newInstance(), NavigationAction.ADD)
+                navigationVm.navigateTo(MeasurementFragment.newInstance(), NavigationAction.ADD)
             getString(R.string.about_us) ->
                 navigationVm.navigateTo(AboutUsFragment.newInstance(), NavigationAction.ADD)
             getString(R.string.instruction) ->

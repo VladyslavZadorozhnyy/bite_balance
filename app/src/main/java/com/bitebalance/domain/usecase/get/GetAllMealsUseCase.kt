@@ -32,7 +32,7 @@ class GetAllMealsUseCase(
                 for (i in meals.indices) {
                     result.add(
                         element = MealModelUnboxed(
-                            iconRes = dishes[i]?.iconRes ?: -1, // AAADIP need some error image
+                            iconRes = dishes[i]?.iconRes ?: R.drawable.no_dish_icon,
                             dishId = dishes[i]?.id ?: -1,
                             dishName = dishes[i]?.name ?: stringRepository.getStr(R.string.dish_removed),
                             amount = meals[i].amount,

@@ -44,6 +44,8 @@ class CreateNewFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                     onConfirmClicked = { if (state.isSuccessful) navigationVm.popScreen() },
                 ),
             ).show()
+
+            if (state.isSuccessful) dishVm.getAllDishes()
         }
 
         mealVm.state.observe(this) { state ->

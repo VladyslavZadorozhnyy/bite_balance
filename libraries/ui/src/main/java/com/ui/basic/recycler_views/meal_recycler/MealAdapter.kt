@@ -28,7 +28,8 @@ class MealAdapter (
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         holder.bind(items[position], foregroundColor, backgroundColor)
-        holder.itemView.setOnClickListener { onClickListener(items[position]) }
+        holder.itemView.setOnClickListener {
+            if (items[position].dishId != -1L) onClickListener(items[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -48,11 +49,11 @@ class MealAdapter (
             (mealIcon.parent as? View)?.setBackgroundColor(foregroundColor)
             mealIcon.setup(
                 model = ButtonModel(
-                    iconRes = R.drawable.breakfast_icon,
+                    iconRes = item.iconRes,
                     iconSize = Constants.ICON_SIZE_LARGE,
                     foregroundColor = backgroundColor,
                     backgroundColor = foregroundColor,
-                    onClickListener = { itemView.callOnClick() }
+                    onClickListener = { callClick(item, itemView) }
                 )
             )
             clockIcon.setup(
@@ -61,7 +62,7 @@ class MealAdapter (
                     iconSize = Constants.MEAL_ICON_SIZE,
                     foregroundColor = backgroundColor,
                     backgroundColor = foregroundColor,
-                    onClickListener = { itemView.callOnClick() }
+                    onClickListener = { callClick(item, itemView) }
                 )
             )
             buttonView.setup(
@@ -84,11 +85,15 @@ class MealAdapter (
             timeView.setup(
                 model = TextModel(
                     textValue = item.mealTime,
-                    textSize = 17,
+                    textSize = Constants.TEXT_SIZE_SMALL,
                     textColor = backgroundColor,
                     backgroundColor = foregroundColor
                 )
             )
+        }
+
+        private fun callClick(item: MealModelUnboxed, itemView: View) {
+            if (item.dishId != -1L) itemView.callOnClick()
         }
     }
 }

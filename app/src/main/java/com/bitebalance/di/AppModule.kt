@@ -20,7 +20,7 @@ import com.bitebalance.domain.usecase.update.UpdateGoalUseCase
 import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
 import com.bitebalance.domain.usecase.remove.RemoveAllMealsUseCase
 import com.bitebalance.domain.usecase.update.UpdateNutritionValueUseCase
-import org.koin.android.ext.koin.androidContext
+import com.bitebalance.domain.usecase.update.UpdateConsumptionGoalUseCase
 
 val appModule = module {
 //  ViewModels
@@ -28,8 +28,8 @@ val appModule = module {
     viewModel { NavigationViewModel() }
     viewModel { StatsViewModel(get()) }
     viewModel { DateViewModel(get(), get()) }
-    viewModel { NutritionViewModel(get(), get(), get()) }
     viewModel { GoalViewModel(get(), get(), get(), get()) }
+    viewModel { NutritionViewModel(get(), get(), get(), get()) }
     viewModel { MealViewModel(get(), get(), get(), get(), get()) }
     viewModel { DishViewModel(get(), get(), get(), get(), get()) }
 
@@ -46,6 +46,7 @@ val appModule = module {
     single { RemoveDishUseCase(get(), get(), get()) }
     single { RemoveMealUseCase(get(), get(), get()) }
     single { AddNewGoalUseCase(get(), get(), get()) }
+    single { UpdateConsumptionGoalUseCase(get(), get()) }
     single { AddNewDishUseCase(get(), get(), get(), get()) }
     single { GetAllMealsUseCase(get(), get(), get(), get()) }
     single { UpdateNutritionValueUseCase(get(), get(), get()) }

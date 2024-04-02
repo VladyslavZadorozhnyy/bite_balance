@@ -17,13 +17,6 @@ class GetConsumedGoalUseCase(
     private val stringRepository: StringRepository,
     private val nutritionValueRepository: NutritionValueRepository,
 ) {
-    private val defaultGoalConsumption = NutritionValueModel(
-        prots = Constants.ST_PROTS_CONSUMPTION,
-        fats = Constants.ST_FATS_CONSUMPTION,
-        carbs = Constants.ST_CARBS_CONSUMPTION,
-        kcals = Constants.ST_KCALS_CONSUMPTION,
-    )
-
     operator fun invoke(): Flow<Resource<List<NutritionValueModel>>> = flow {
         emit(Resource.Loading())
 
@@ -56,7 +49,7 @@ class GetConsumedGoalUseCase(
                     }
                 }
                 goalConsumption = if (nutritionValueRepository.getGoalConsumption() == null) {
-                    nutritionValueRepository.setGoalConsumption(defaultGoalConsumption)
+                    nutritionValueRepository.setGoalConsumption(Constants.DEFAULT_GOAL_CONSUMPTION)
                     nutritionValueRepository.getGoalConsumption()!!
                 } else {
                     nutritionValueRepository.getGoalConsumption()!!
