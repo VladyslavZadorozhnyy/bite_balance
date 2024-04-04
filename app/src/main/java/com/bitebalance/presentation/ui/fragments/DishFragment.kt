@@ -86,8 +86,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                     BaseDialogModel(
                         title = state.message,
                         buttonText = R.string.done,
-                        textColor = secondaryColor,
-                        backgroundColor = primaryColor,
+                        textColor = primaryColor,
+                        backgroundColor = secondaryColor,
                         onConfirmClicked = {
                             if (state.isSuccessful)
                                 mActivity.backPressUntil(HomeFragment::class.java.name)

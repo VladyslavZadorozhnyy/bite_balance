@@ -10,6 +10,7 @@ object Constants {
     const val TEXT_SIZE_MD = 25
     const val TEXT_SIZE_BIG = 30
     const val TEXT_SIZE_SMALL = 15
+    const val TEXT_SIZE_EXTRA_SMALL = 10F
     const val TEXT_STROKE_WIDTH = 3F
 
 //    Icon constants
@@ -23,6 +24,7 @@ object Constants {
 
 //    Offset constants
     const val OFFSET_SMALL = 10f
+    const val OFFSET_MEDIUM = 15f
     const val OFFSET_LARGE = 30f
     const val GRANULARITY = 1f
     const val DURATION = 2000

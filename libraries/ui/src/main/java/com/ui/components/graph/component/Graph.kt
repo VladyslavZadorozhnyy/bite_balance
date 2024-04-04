@@ -31,13 +31,12 @@ class Graph(
             ) { activeIndex ->
                 ChartSubComponent(
                     context = context,
-                    barColor = graphModel.foregroundColor,
                     foregroundColor = graphModel.backgroundColor,
+                    backgroundColor = graphModel.foregroundColor,
                     chartView = binding.chartView,
                     goalConsumption = binding.goalConsumption,
                     actualConsumption = binding.actualConsumption,
                 ).setup(
-                    metricsLabel = indexToLabel(activeIndex),
                     barEntries = indexToConsumptionValues(activeIndex, graphModel),
                     lineEntries = indexToGoalValues(activeIndex, graphModel),
                 )
