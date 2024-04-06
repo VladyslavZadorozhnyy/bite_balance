@@ -12,7 +12,7 @@ import com.ui.basic.buttons.common.ButtonModel
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.basic.texts.slideable_text.SlideText
-
+import com.ui.basic.click_listeners.BaseClickListener
 
 class DishAdapter(
     private val items: List<DishModel>,
@@ -31,7 +31,9 @@ class DishAdapter(
 
     override fun onBindViewHolder(holder: DishViewHolder, position: Int) {
         holder.bind(items[position], primaryColor, secondaryColor)
-        holder.itemView.setOnClickListener { onClickListener(items[position]) }
+        holder.itemView.setOnClickListener {
+            BaseClickListener.processClick { onClickListener(items[position]) }
+        }
     }
 
     override fun getItemCount(): Int {

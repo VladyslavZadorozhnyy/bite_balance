@@ -8,7 +8,7 @@ data class NavigationBarModel(
     val navIcons: List<Int>,
     val foregroundColor: Int,
     val backgroundColor: Int,
-    val onItemSelected: (itemId: Int) -> Unit
+    val onItemSelected: (itemId: Int) -> Unit,
 ) : BaseUiComponentModel(
     componentType = Constants.ComponentUiType.NavBar
 ) {

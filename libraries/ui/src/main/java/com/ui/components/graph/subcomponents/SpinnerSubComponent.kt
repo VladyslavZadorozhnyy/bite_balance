@@ -25,7 +25,7 @@ class SpinnerSubComponent(
         spinnerItems: List<Int>,
         foregroundColor: Int,
         backgroundColor: Int,
-        onItemSelected: (Int) -> Unit = {}
+        onItemSelected: (Int) -> Unit = {},
     ) {
         CustomArrayAdapter(
             context = context,

@@ -11,6 +11,7 @@ import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.buttons.icon_button.IconButton
+import com.ui.basic.click_listeners.BaseClickListener
 
 class MealAdapter (
     private var items: List<MealModelUnboxed>,
@@ -29,7 +30,9 @@ class MealAdapter (
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
         holder.bind(items[position], foregroundColor, backgroundColor)
         holder.itemView.setOnClickListener {
-            if (items[position].dishId != -1L) onClickListener(items[position]) }
+            if (items[position].dishId != -1L)
+                BaseClickListener.processClick { onClickListener(items[position]) }
+        }
     }
 
     override fun getItemCount(): Int {

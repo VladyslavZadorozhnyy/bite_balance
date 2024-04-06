@@ -10,7 +10,7 @@ data class InputFormModel(
     val foregroundColor: Int,
     val backgroundColor: Int,
     val hintGravity: Int? = null,
-    val onInputChange: (input: String) -> Unit = {}
+    val onInputChange: (input: String) -> Unit = {},
 ) : BaseUiComponentModel(
     componentType = Constants.ComponentUiType.Input
 )

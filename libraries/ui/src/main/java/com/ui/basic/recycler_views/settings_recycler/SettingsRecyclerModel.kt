@@ -8,7 +8,7 @@ data class SettingsRecyclerModel(
     val items: List<InstructionModel>,
     val primaryColor: Int,
     val secondaryColor: Int,
-    val onClickListener: (InstructionModel) -> Unit
+    val onClickListener: (InstructionModel) -> Unit,
 ): BaseUiComponentModel(
     componentType = Constants.ComponentUiType.Recycler
 )
