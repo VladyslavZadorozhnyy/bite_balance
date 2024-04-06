@@ -7,6 +7,7 @@ import com.ui.model.MealModelUnboxed
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.bitebalance.common.Resource
+import com.bitebalance.domain.model.same
 import com.bitebalance.domain.repository.DateRepository
 import com.bitebalance.domain.repository.DishRepository
 import com.bitebalance.domain.repository.MealRepository
@@ -25,11 +26,13 @@ class GetAllMealsUseCase(
         var errorMessage = ""
         withContext(Dispatchers.IO) {
             try {
+                val todayDate = dateRepository.getCurrentDate()
                 val meals = mealRepository.getAllMeals()
                 val dates = meals.map { dateRepository.getDateById(it.mealTimeId) }
                 val dishes = meals.map { dishRepository.getDishById(it.dishId) }
 
                 for (i in meals.indices) {
+                    if (dates[i]?.same(todayDate) != true) { continue }
                     result.add(
                         element = MealModelUnboxed(
                             iconRes = dishes[i]?.iconRes ?: R.drawable.no_dish_icon,

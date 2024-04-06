@@ -130,7 +130,7 @@
     <string name="project_info">*Information about the project and application*</string>
 
 <!--    TodayMealsFragment-->
-    <string name="no_meals_yet">Seems that you have no meals yet. \n\n Start by adding one.</string>
+    <string name="no_meals_yet">Seems that you have no meals today yet. \n\n Start by adding one.</string>
     <string name="today_meals">Today\'s meals</string>
 
 <!--    UseCases-->

@@ -34,3 +34,9 @@ fun DateModel.toEntity(): DateEntity {
         additions = this.additions,
     )
 }
+
+fun DateModel.same(model: DateModel): Boolean {
+    return this.year == model.year
+            && this.month == model.month
+            && this.day == model.day
+}
