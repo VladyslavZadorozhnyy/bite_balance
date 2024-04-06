@@ -36,6 +36,8 @@ class Graph(
                     chartView = binding.chartView,
                     goalConsumption = binding.goalConsumption,
                     actualConsumption = binding.actualConsumption,
+                    goalConsumptionSign = binding.gConsLabel,
+                    actualConsumptionSign = binding.aConsLabel,
                 ).setup(
                     barEntries = indexToConsumptionValues(activeIndex, graphModel),
                     lineEntries = indexToGoalValues(activeIndex, graphModel),

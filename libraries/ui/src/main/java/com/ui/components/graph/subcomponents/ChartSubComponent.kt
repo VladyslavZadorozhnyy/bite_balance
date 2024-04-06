@@ -1,5 +1,6 @@
 package com.ui.components.graph.subcomponents
 
+import android.view.View
 import com.ui.components.R
 import android.graphics.Color
 import com.ui.common.Constants
@@ -27,6 +28,8 @@ class ChartSubComponent(
     private val chartView: CombinedChart,
     private val goalConsumption: SlideText,
     private val actualConsumption: SlideText,
+    private val goalConsumptionSign: View,
+    private val actualConsumptionSign: View,
 ) {
     private val lineColor = context.getColor(R.color.indicator_green)
     private val barColor = context.getColor(R.color.gray)
@@ -79,7 +82,7 @@ class ChartSubComponent(
             extraBottomOffset = Constants.OFFSET_LARGE
             legend.yOffset = Constants.OFFSET_SMALL
             legend.xOffset = -Constants.OFFSET_MEDIUM
-            legend.formSize = Constants.OFFSET_MEDIUM
+            legend.formSize = Constants.AXIS_MINIMUM
             legend.textSize = Constants.TEXT_SIZE_SMALL.toFloat()
             legend.textColor = foregroundColor
 
@@ -108,6 +111,7 @@ class ChartSubComponent(
                 backgroundColor = foregroundColor,
             ),
         )
+        goalConsumptionSign.setBackgroundColor(lineColor)
         actualConsumption.setup(
             model = TextModel(
                 textValue = barDataLabel,
@@ -116,6 +120,7 @@ class ChartSubComponent(
                 backgroundColor = foregroundColor,
             ),
         )
+        actualConsumptionSign.setBackgroundColor(barColor)
         setOnClickListener()
     }
 

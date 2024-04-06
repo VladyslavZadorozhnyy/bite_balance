@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
 
     override fun setupViewModelsObservation() {
         nutritionVm.state.observe(this) { state: BasicState<List<NutritionValueModel>> ->
-            state.data?.let { data -> setupCarousel(data) }
+            state.data?.let { setupCarousel(it) }
         }
         dateVm.state.observe(this) { state ->
             setupHeader(state)
@@ -49,12 +49,13 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
         mealVm.state.observe(this) { state ->
             if (state.message.isNotEmpty()) {
                 ConfirmDialog(
-                    requireActivity(),
-                    BaseDialogModel(
+                    activity = requireActivity(),
+                    model = BaseDialogModel(
                         backgroundColor = secondaryColor,
                         textColor = primaryColor,
                         title = state.message,
                         buttonText = R.string.done,
+                        onConfirmClicked = { mealVm.resetState() },
                     ),
                 ).show()
             }

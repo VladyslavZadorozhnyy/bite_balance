@@ -26,7 +26,7 @@
         android:paddingStart="5dp"
         android:visibility="gone"/>
 
-    <com.ui.basic.texts.text.Text
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_value_view_text"
         android:layout_height="match_parent"
         android:layout_width="100dp"

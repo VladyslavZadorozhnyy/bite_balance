@@ -101,7 +101,7 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
         binding.prvMonthButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = Constants.ICON_SIZE_BIG,
+                iconSize = Constants.ICON_SIZE_MEDIUM,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,
                 onClickListener = {
@@ -113,7 +113,7 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
         binding.nxtMonthButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = Constants.ICON_SIZE_BIG,
+                iconSize = Constants.ICON_SIZE_MEDIUM,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,
                 onClickListener = {

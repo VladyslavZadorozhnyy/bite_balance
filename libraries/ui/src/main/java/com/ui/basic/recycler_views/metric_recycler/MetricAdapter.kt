@@ -13,6 +13,7 @@ import com.ui.basic.texts.common.TextModel
 import com.ui.basic.checkbox.CheckBoxModel
 import com.ui.basic.input_form.InputFormModel
 import androidx.recyclerview.widget.RecyclerView
+import com.ui.basic.texts.slideable_text.SlideText
 
 class MetricAdapter(
     private val items: List<MetricModel>,
@@ -52,7 +53,7 @@ class MetricAdapter(
         private val checkBoxView = view.findViewById<Checkbox>(R.id.checkbox_view)
         private val metricNameView = view.findViewById<Text>(R.id.metric_name_view)
         private val metricValueViewInput = view.findViewById<InputForm>(R.id.metric_value_view_input)
-        private val metricValueViewText = view.findViewById<Text>(R.id.metric_value_view_text)
+        private val metricValueViewText = view.findViewById<SlideText>(R.id.metric_value_view_text)
         private val metricSuffixView = view.findViewById<Text>(R.id.metric_label_view)
 
         fun setPosition(value: Int) { position = value }

@@ -8,6 +8,7 @@
         android:id="@+id/button_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:stateListAnimator="@null"
         app:backgroundTint="@null"
         app:iconPadding="0dp"
         app:iconGravity="textStart" />
