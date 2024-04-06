@@ -1,7 +1,7 @@
 package com.bitebalance.domain.repository
 
-import com.bitebalance.domain.model.DateModel
 import java.text.SimpleDateFormat
+import com.bitebalance.domain.model.DateModel
 
 interface DateRepository {
     fun getDateFromString(dateFormat: SimpleDateFormat, dateValue: String): DateModel

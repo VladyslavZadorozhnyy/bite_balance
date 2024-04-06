@@ -1,42 +1,40 @@
 package com.ui.components.graph.subcomponents
 
-import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
-import android.view.LayoutInflater
 import android.view.View
+import com.ui.components.R
+import android.widget.Spinner
+import android.graphics.Color
 import android.view.ViewGroup
+import android.content.Context
+import com.ui.common.Constants
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import androidx.core.view.ViewCompat
-import com.ui.basic.buttons.common.ButtonModelNew
-import com.ui.basic.texts.common.TextModelNew
-import com.ui.components.R
+import android.view.LayoutInflater
+import android.content.res.ColorStateList
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
 import com.ui.components.databinding.SpinnerItemActiveLayoutBinding
 import com.ui.components.databinding.SpinnerItemNotActiveLayoutBinding
 
 
 class SpinnerSubComponent(
-    private val spinnerView: Spinner
+    private val spinnerView: Spinner,
 ) {
     fun setup(
         context: Context,
-        spinnerItems: List<String>,
+        spinnerItems: List<Int>,
         foregroundColor: Int,
         backgroundColor: Int,
-        onItemSelected: (Int) -> Unit = {}
+        onItemSelected: (Int) -> Unit = {},
     ) {
         CustomArrayAdapter(
-            context,
-            R.layout.spinner_item_active_layout,
-            spinnerItems,
-            foregroundColor,
-            backgroundColor,
+            context = context,
+            textViewResourceId = R.layout.spinner_item_active_layout,
+            items = spinnerItems,
+            foregroundColor = foregroundColor,
+            backgroundColor = backgroundColor,
         ).apply {
             spinnerView.adapter = this
-
             spinnerView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
 
@@ -45,9 +43,7 @@ class SpinnerSubComponent(
                     p1: View?,
                     chosenIndex: Int,
                     p3: Long,
-                ) {
-                    onItemSelected.invoke(chosenIndex)
-                }
+                ) { onItemSelected.invoke(chosenIndex) }
             }
         }
     }
@@ -55,51 +51,49 @@ class SpinnerSubComponent(
     inner class CustomArrayAdapter(
         context: Context,
         textViewResourceId: Int,
-        private val items: List<String>,
+        private val items: List<Int>,
         private val foregroundColor: Int,
         private val backgroundColor: Int,
-    ): ArrayAdapter<String> (context, textViewResourceId, items) {
+    ): ArrayAdapter<Int> (context, textViewResourceId, items) {
         private val layoutInflater = LayoutInflater.from(context)
+        private val binding = SpinnerItemActiveLayoutBinding.inflate(layoutInflater)
 
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
             SpinnerItemNotActiveLayoutBinding.inflate(layoutInflater).apply {
                 textView.setup(
-                    TextModelNew(
-                        textValue = items[position],
-                        textSize = 20,
+                    model = TextModel(
+                        textValue = context.getString(items[position]),
+                        textSize = Constants.TEXT_SIZE,
                         textColor = backgroundColor,
                         backgroundColor = foregroundColor,
-                    )
+                    ),
                 )
-
                 return root
             }
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            SpinnerItemActiveLayoutBinding.inflate(layoutInflater).apply {
+            binding.apply {
                 textView.setOnClickListener(null)
 
                 layoutStroke.backgroundTintList = ColorStateList.valueOf(foregroundColor)
                 layoutBody.backgroundTintList = ColorStateList.valueOf(backgroundColor)
-
                 textView.setup(
-                    TextModelNew(
-                        textValue = items[position],
-                        textSize = 25,
+                    model = TextModel(
+                        textValue = context.getString(items[position]),
+                        textSize = Constants.TEXT_SIZE_MD,
                         textColor = foregroundColor,
                         backgroundColor = Color.TRANSPARENT,
-                    )
+                    ),
                 )
-
                 dropdownButton.setup(
-                    ButtonModelNew(
+                    model = ButtonModel(
                         iconRes = R.drawable.arrow_down_icon,
-                        iconSize = 70,
+                        iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                         foregroundColor = backgroundColor,
                         backgroundColor = foregroundColor,
-                        onClickListener = { spinnerView.performClick() }
-                    )
+                        onClickListener = { spinnerView.performClick() },
+                    ),
                 )
                 return root
             }

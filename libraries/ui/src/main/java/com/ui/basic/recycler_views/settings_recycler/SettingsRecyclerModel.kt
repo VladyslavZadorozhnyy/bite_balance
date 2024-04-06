@@ -1,14 +1,14 @@
 package com.ui.basic.recycler_views.settings_recycler
 
+import com.ui.common.Constants
+import com.ui.model.InstructionModel
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
-import com.ui.mocks.MockInstructionModel
 
 data class SettingsRecyclerModel(
-    val items: List<MockInstructionModel>,
+    val items: List<InstructionModel>,
     val primaryColor: Int,
     val secondaryColor: Int,
-    val onClickListener: (MockInstructionModel) -> Unit
+    val onClickListener: (InstructionModel) -> Unit,
 ): BaseUiComponentModel(
-    componentType = ComponentUiType.Recycler
+    componentType = Constants.ComponentUiType.Recycler
 )

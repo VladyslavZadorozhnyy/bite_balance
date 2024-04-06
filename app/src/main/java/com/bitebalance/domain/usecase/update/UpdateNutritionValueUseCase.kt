@@ -1,29 +1,31 @@
 package com.bitebalance.domain.usecase.update
 
+import com.ui.components.R
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.Dispatchers
 import com.bitebalance.common.Resource
 import com.ui.model.NutritionValueModel
 import com.bitebalance.domain.repository.DishRepository
+import com.bitebalance.domain.repository.StringRepository
 import com.bitebalance.domain.repository.NutritionValueRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
+
 
 class UpdateNutritionValueUseCase(
     private val nutritionValueRepository: NutritionValueRepository,
-    private val dishRepository: DishRepository
+    private val dishRepository: DishRepository,
+    private val stringRepository: StringRepository,
 ) {
     operator fun invoke(dishName: String, inputValues: List<String>): Flow<Resource<NutritionValueModel?>> = flow {
         try {
             emit(Resource.Loading())
 
-            if (inputValues.any { it.isNotEmpty() && it.toFloat() < 0.0 }) {
-                throw Exception("Negative values are not allowed")
-            }
+            if (inputValues.any { it.isNotEmpty() && it.toFloat() < 0.0 })
+                throw Exception(stringRepository.getStr(R.string.negative_val_error))
 
             val nutritionValueData: NutritionValueModel?
             val nutritionValueId: Long?
-
             withContext(Dispatchers.IO) {
                 nutritionValueId = dishRepository.getDishByName(dishName)?.nutritionValId ?: -1
 
@@ -36,13 +38,11 @@ class UpdateNutritionValueUseCase(
                         kcals = if (inputValues[3].isNotEmpty()) inputValues[3].toFloat() else 0.0f,
                     )
                 )
-
                 nutritionValueData = nutritionValueRepository.getNutritionValueById(nutritionValueId)
             }
-
-            emit(Resource.Success("Dish updated successfully", nutritionValueData))
+            emit(Resource.Success(stringRepository.getStr(R.string.dish_update_success), nutritionValueData))
         } catch (e: Exception) {
-            emit(Resource.Error(message = "Error occurred: ${e.message}"))
+            emit(Resource.Error(message = e.message ?: stringRepository.getStr(R.string.unknown_error)))
         }
     }
 }

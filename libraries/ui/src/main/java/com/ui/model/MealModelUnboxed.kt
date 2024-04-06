@@ -7,5 +7,5 @@ data class MealModelUnboxed(
     val amount: Float,
     val mealTimeId: Long,
     val mealTime: String,
-    val id: Long = 0
+    val id: Long = 0,
 ) { companion object }

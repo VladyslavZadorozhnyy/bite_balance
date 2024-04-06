@@ -1,25 +1,20 @@
 package com.ui.basic.texts.text
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Paint
-import android.text.TextUtils
-import android.util.AttributeSet
+import com.ui.components.R
 import android.view.Gravity
+import android.text.TextUtils
+import android.graphics.Paint
+import android.content.Context
+import com.ui.common.Constants
+import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getDrawable
-import androidx.core.content.ContextCompat.getColor
-import androidx.core.content.res.ResourcesCompat.getFont
-import androidx.core.graphics.drawable.DrawableCompat
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiConstants
 import com.ui.basic.texts.common.TextModel
-import com.ui.basic.texts.common.TextModelNew
-import com.ui.basic.texts.common.TextModelNew2
-import com.ui.basic.texts.common.TextModelNew3
-import com.ui.components.R
 import com.ui.components.databinding.TextBinding
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.content.ContextCompat.getDrawable
+import androidx.core.content.res.ResourcesCompat.getFont
 
 class Text(
     context: Context,
@@ -29,85 +24,40 @@ class Text(
         TextBinding.inflate(LayoutInflater.from(context), this).textView
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun setup(model: BaseUiComponentModel) {
-        (model as? TextModel)?.let {
-            binding.text = model.textValue
-            binding.textSize = model.textSize.toFloat()
-            binding.setTextColor(getColor(context, model.textColorRes))
-            binding.typeface = getFont(context, R.font.ultra_regular_font)
+        if (model !is TextModel) return
 
-            binding.gravity = Gravity.CENTER
-            binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
+        binding.text = model.textValue
+        binding.textSize = model.textSize.toFloat()
+        binding.typeface = getFont(context, R.font.ultra_regular_font)
+        binding.setTextColor(model.textColor)
 
-            binding.background = if (it.backgroundRes != null) {
-                getDrawable(context, it.backgroundRes)
-            } else {
-                getDrawable(context, R.drawable.text_shape)
-            }
-            binding.background.setTint(getColor(context, model.backgroundColor))
-        }
+        binding.gravity = Gravity.CENTER
+        binding.paint.style = Paint.Style.STROKE
+        binding.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
 
-        (model as? TextModelNew)?.let {
-            binding.text = model.textValue
-            binding.textSize = model.textSize.toFloat()
-            binding.typeface = getFont(context, R.font.ultra_regular_font)
-            binding.setTextColor(model.textColor)
-
-            binding.gravity = Gravity.CENTER
-            binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
-
+        if (model.backgroundResDrawable == null) {
             binding.background = getDrawable(context, R.drawable.text_shape)
             binding.background.setTint(model.backgroundColor)
-
-            binding.isSelected = true
-        }
-
-        (model as? TextModelNew2)?.let {
-            binding.text = model.textValue
-            binding.textSize = model.textSize.toFloat()
-            binding.typeface = getFont(context, R.font.ultra_regular_font)
-            binding.setTextColor(model.textColor)
-
-            binding.gravity = Gravity.CENTER
-            binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
-
-            binding.background = getDrawable(context, R.drawable.text_shape)
-            binding.background = model.backgroundRes ?: getDrawable(context, R.drawable.text_shape)
+        } else if (model.isSingleLine) {
+            binding.background = model.backgroundResDrawable
             binding.marqueeRepeatLimit = -1
-
-            binding.ellipsize = TextUtils.TruncateAt.MARQUEE
-            binding.isSelected = true
             binding.isSingleLine = true
-        }
-
-        (model as? TextModelNew3)?.let {
-            binding.gravity = Gravity.CENTER
-            binding.paint.style = Paint.Style.STROKE
-            binding.paint.strokeWidth = ComponentUiConstants.TEXT_STROKE_WIDTH
-
-            val viewBackground = model.backgroundRes ?: getDrawable(context, R.drawable.text_shape)
-            val wrappedDrawable = DrawableCompat.wrap(viewBackground!!)
+            binding.ellipsize = TextUtils.TruncateAt.MARQUEE
+        } else {
+            val viewBackground = model.backgroundResDrawable
+            val wrappedDrawable = DrawableCompat.wrap(viewBackground)
             DrawableCompat.setTint(wrappedDrawable, model.backgroundColor)
-
             binding.background = viewBackground
-            binding.isSelected = true
-
-            binding.text = model.textValue
-            binding.textSize = model.textSize.toFloat()
-            binding.typeface = getFont(context, R.font.ultra_regular_font)
-            binding.setTextColor(model.textColor)
         }
+        binding.isSelected = true
     }
 
     fun strikeThrough() {
         binding.paintFlags = binding.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
     }
 
-    fun unstrikeThrough() {
+    fun clearThrough() {
         binding.paintFlags = binding.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
     }
 }

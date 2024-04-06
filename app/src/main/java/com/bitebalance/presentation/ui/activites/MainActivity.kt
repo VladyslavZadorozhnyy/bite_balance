@@ -1,14 +1,14 @@
 package com.bitebalance.presentation.ui.activites
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.ui.components.R
+import androidx.fragment.app.Fragment
 import com.bitebalance.common.NavigationAction
+import androidx.appcompat.app.AppCompatActivity
 import com.bitebalance.databinding.ActivityMainBinding
-import com.bitebalance.presentation.ui.fragments.NavigationFragment
-import com.bitebalance.presentation.viewmodels.NavigationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.bitebalance.presentation.viewmodels.NavigationViewModel
+import com.bitebalance.presentation.ui.fragments.NavigationFragment
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -25,21 +25,18 @@ class MainActivity : AppCompatActivity() {
     private fun setupNavigationObserving() {
         navigationVm.state.observe(this) { state ->
             supportFragmentManager.fragments.lastOrNull()?.onPause()
-            val transaction = supportFragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.slide_in, R.anim.slide_out)
+            val transaction = supportFragmentManager.beginTransaction().setCustomAnimations(
+                R.anim.slide_to_up, R.anim.slide_to_down, R.anim.slide_to_up, R.anim.slide_to_down)
 
             when (state.action) {
                 NavigationAction.POP ->
-                    supportFragmentManager.fragments.lastOrNull()?.let {
-                        transaction.remove(it) }
+                    onBackPressed()
                 NavigationAction.REPLACE ->
-                    state.fragment?.let {
-                        transaction.replace(binding.fragmentContainer.id, it) }
+                    state.fragment?.let { transaction.replace(binding.fragmentContainer.id, it) }
                 else ->
                     state.fragment?.let {
                         transaction.add(binding.fragmentContainer.id, it).addToBackStack(null) }
             }
-
             supportFragmentManager.fragments.lastOrNull()?.onStop()
             transaction.commit()
         }
@@ -48,19 +45,21 @@ class MainActivity : AppCompatActivity() {
     fun updateNavBarColors() {
         supportFragmentManager.fragments.forEach { backStackedFragment ->
             (backStackedFragment as? NavigationFragment)?.updateNavBarColors()
-//            Log.d("AAADIP", "fragment: $it and it is NavigationFragment: ${it is NavigationFragment}")
         }
     }
 
-    fun backPressUntilComponent(componentName: String) {
-        while (supportFragmentManager.fragments.lastOrNull()?.javaClass?.name != componentName) {
+    fun backPressUntil(componentName: String) {
+        while (supportFragmentManager.fragments.lastOrNull()?.javaClass?.name != componentName)
             onBackPressed()
-        }
     }
 
     override fun onBackPressed() {
         onBackPressedDispatcher.onBackPressed()
         supportFragmentManager.fragments.lastOrNull()?.onResume()
         supportFragmentManager.fragments.forEach { (it as? NavigationFragment)?.onResume() }
+    }
+
+    fun getCurrentFragment(): Fragment? {
+        return supportFragmentManager.fragments.lastOrNull()
     }
 }

@@ -1,81 +1,86 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.bitebalance.presentation.ui.fragments.HomeScreenFragment">
+    tools:context="com.bitebalance.presentation.ui.fragments.HomeFragment">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/toolbar"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="15dp"/>
-
-        <com.ui.components.progress.carousel.ProgressCarousel
-            android:id="@+id/progress_carousel"
-            android:layout_width="330dp"
-            android:layout_height="590dp"
-            android:layout_gravity="center"
-            android:background="@drawable/sublayout_shape"/>
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/buttons_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="26dp">
+            android:orientation="vertical">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+            <include layout="@layout/toolbar"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"/>
 
-            <com.ui.basic.buttons.icon_button.IconButton
-                android:id="@+id/info_button"
-                android:layout_width="55dp"
-                android:layout_height="60dp" />
+            <com.ui.components.progress.carousel.ProgressCarousel
+                android:id="@+id/progress_carousel"
+                android:layout_width="330dp"
+                android:layout_height="590dp"
+                android:layout_gravity="center"
+                android:background="@drawable/sublayout_shape"/>
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+            <LinearLayout
+                android:id="@+id/buttons_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="26dp">
 
-            <com.ui.basic.buttons.icon_button.IconButton
-                android:id="@+id/today_meals_button"
-                android:layout_width="55dp"
-                android:layout_height="60dp" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                <com.ui.basic.buttons.icon_button.IconButton
+                    android:id="@+id/info_button"
+                    android:layout_width="55dp"
+                    android:layout_height="60dp" />
 
-            <com.ui.basic.buttons.icon_button.IconButton
-                android:id="@+id/reset_progress_button"
-                android:layout_width="55dp"
-                android:layout_height="60dp" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                <com.ui.basic.buttons.icon_button.IconButton
+                    android:id="@+id/today_meals_button"
+                    android:layout_width="55dp"
+                    android:layout_height="60dp" />
 
-            <com.ui.basic.buttons.icon_button.IconButton
-                android:id="@+id/add_meal_button"
-                android:layout_width="55dp"
-                android:layout_height="60dp" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                <com.ui.basic.buttons.icon_button.IconButton
+                    android:id="@+id/reset_progress_button"
+                    android:layout_width="55dp"
+                    android:layout_height="60dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <com.ui.basic.buttons.icon_button.IconButton
+                    android:id="@+id/add_meal_button"
+                    android:layout_width="55dp"
+                    android:layout_height="60dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

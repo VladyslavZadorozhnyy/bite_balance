@@ -1,8 +1,8 @@
 package com.database.entities
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.ColumnInfo
 import com.database.common.Constants
 
 @Entity(tableName = Constants.GOAL_METRICS_TABLE_NAME)

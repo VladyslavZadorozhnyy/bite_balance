@@ -1,13 +1,12 @@
 package com.ui.components.progress.indicator
 
 import com.ui.components.R
+import com.ui.common.Constants.GREEN_COLOR_RANGE
+import com.ui.common.Constants.MAX_CONSUME_VALUE
+import com.ui.common.Constants.MAX_PROGRESS_VALUE
+import com.ui.common.Constants.YELLOW_COLOR_RANGE
 
 object IndicatorUtils {
-    private const val MAX_PROGRESS_VALUE = 999
-    private const val MAX_CONSUME_VALUE = 9999F
-
-    private val GREEN_COLOR_RANGE = (0 until 80)
-    private val YELLOW_COLOR_RANGE = (80 until 101)
 
     fun valueToLabel(value: Float?): String {
         value?.let {

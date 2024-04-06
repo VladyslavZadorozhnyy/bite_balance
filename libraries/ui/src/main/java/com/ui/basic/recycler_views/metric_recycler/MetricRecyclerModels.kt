@@ -1,24 +1,27 @@
 package com.ui.basic.recycler_views.metric_recycler
 
+import com.ui.components.R
+import android.content.Context
+import com.ui.common.Constants
+import com.ui.model.MetricModel
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
-import com.ui.mocks.MockMetricModel
 
 open class MetricRecyclerModel(
-    val items: List<MockMetricModel>,
+    val items: List<MetricModel>,
     open val foregroundColor: Int,
     open val backgroundColor: Int,
 ): BaseUiComponentModel(
-    componentType = ComponentUiType.Recycler
+    componentType = Constants.ComponentUiType.Recycler
 )
 
 data class DishNameMetricsModel(
-    var dishItems: List<MockMetricModel> = listOf(),
+    var dishItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             foregroundColor: Int,
             backgroundColor: Int,
             name: String = "",
@@ -29,35 +32,35 @@ data class DishNameMetricsModel(
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
-                        name = "Name:",
+                    MetricModel(
+                        name = context.getString(R.string.name_),
                         editable = true,
                         hint = name,
                     ),
-                    MockMetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = prots,
                     ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = fats,
                     ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = carbs,
                     ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = true,
                         onlyNumbers = true,
                         hint = kcal,
@@ -71,161 +74,167 @@ data class DishNameMetricsModel(
 }
 
 data class DishMetricsModel(
-    var dishItems: List<MockMetricModel> = listOf(),
+    var dishItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(dishItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             editable: Boolean,
             prots: String = "",
             fats: String = "",
             carbs: String = "",
             kcal: String = "",
+            foregroundColor: Int = 0,
+            backgroundColor: Int = 0,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = prots,
                     ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = fats,
                     ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = carbs,
                     ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = kcal,
-                    )
-                )
+                    ),
+                ),
+                foregroundColor = foregroundColor,
+                backgroundColor = backgroundColor,
             )
         }
     }
 }
 
 data class MealMetricsModel(
-    val mealItems: List<MockMetricModel> = listOf(),
+    val mealItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             editable: Boolean = true,
             prots: Float = 0F,
             fats: Float = 0F,
             carbs: Float = 0F,
             kcal: Float = 0F,
             eaten: Float = 0F,
+            backgroundColor: Int = 0,
+            foregroundColor: Int = 0,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
-                listOf(
-                    MockMetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                dishItems = listOf(
+                    MetricModel(
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${prots * eaten}"
                     ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${fats * eaten}"
                     ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${carbs * eaten}"
                     ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "${kcal * eaten}"
                     ),
-                    MockMetricModel(
-                        name = "Eaten:",
-                        suffix = "in g",
+                    MetricModel(
+                        name = context.getString(R.string.eaten_),
+                        suffix = context.getString(R.string.in_g),
                         editable = editable,
                         onlyNumbers = true,
                         hint = "$eaten"
-                    )
-                )
+                    ),
+                ),
+                foregroundColor = foregroundColor,
+                backgroundColor = backgroundColor,
             )
         }
     }
 }
 
 data class CreateMealMetricsModel(
-    val mealItems: List<MockMetricModel> = listOf(),
+    val mealItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             foregroundColor: Int,
             backgroundColor: Int,
             editable: Boolean = true,
-            prots: Float = 0F,
-            fats: Float = 0F,
-            carbs: Float = 0F,
-            kcal: Float = 0F,
-            eaten: Float = 0F,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
-                        name = "Name:",
+                    MetricModel(
+                        name = context.getString(R.string.name_),
                         editable = editable,
                         onlyNumbers = false,
                     ),
-                    MockMetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         editable = editable,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Eaten:",
-                        suffix = "in g",
+                    MetricModel(
+                        name = context.getString(R.string.eaten_),
+                        suffix = context.getString(R.string.in_g),
                         editable = editable,
                         onlyNumbers = true,
                     )
@@ -238,54 +247,59 @@ data class CreateMealMetricsModel(
 }
 
 data class CreateMealWithExistingDishModel(
-    val mealItems: List<MockMetricModel> = listOf(),
+    val mealItems: List<MetricModel> = listOf(),
     override val foregroundColor: Int = 0,
     override val backgroundColor: Int = 0,
 ) : MetricRecyclerModel(mealItems, foregroundColor, backgroundColor) {
     companion object {
         fun newInstance(
+            context: Context,
             prots: String = "",
             fats: String = "",
             carbs: String = "",
             kcal: String = "",
+            foregroundColor: Int = 0,
+            backgroundColor: Int = 0,
         ): DishNameMetricsModel {
             return DishNameMetricsModel(
                 listOf(
-                    MockMetricModel(
-                        name = "Prots:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.prots_),
+                        suffix = context.getString(R.string.g_in),
                         hint = prots,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Fats:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.fats_),
+                        suffix = context.getString(R.string.g_in),
                         hint = fats,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Carbs:",
-                        suffix = "g in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.carbs_),
+                        suffix = context.getString(R.string.g_in),
                         hint = carbs,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Kcal:",
-                        suffix = "kcal in 100g",
+                    MetricModel(
+                        name = context.getString(R.string.kcal_),
+                        suffix = context.getString(R.string.kcal_in),
                         hint = kcal,
                         editable = false,
                         onlyNumbers = true,
                     ),
-                    MockMetricModel(
-                        name = "Eaten:",
-                        suffix = "in g",
+                    MetricModel(
+                        name = context.getString(R.string.eaten_),
+                        suffix = context.getString(R.string.in_g),
                         editable = true,
                         onlyNumbers = true,
                     )
-                )
+                ),
+                foregroundColor = foregroundColor,
+                backgroundColor = backgroundColor,
             )
         }
     }

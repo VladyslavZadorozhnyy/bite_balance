@@ -1,17 +1,18 @@
 package com.ui.basic.recycler_views.goal_recycler
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.ui.basic.buttons.common.ButtonModelNew
-import com.ui.basic.buttons.icon_button.IconButton
-import com.ui.basic.checkbox.CheckBoxModel
-import com.ui.basic.checkbox.Checkbox
-import com.ui.basic.texts.common.TextModelNew
-import com.ui.basic.texts.text.Text
 import com.ui.components.R
+import android.view.ViewGroup
 import com.ui.model.GoalModel
+import com.ui.common.Constants
+import android.view.LayoutInflater
+import com.ui.basic.texts.text.Text
+import com.ui.basic.checkbox.Checkbox
+import com.ui.basic.checkbox.CheckBoxModel
+import com.ui.basic.texts.common.TextModel
+import com.ui.basic.buttons.common.ButtonModel
+import androidx.recyclerview.widget.RecyclerView
+import com.ui.basic.buttons.icon_button.IconButton
 
 
 class GoalAdapter(
@@ -38,7 +39,7 @@ class GoalAdapter(
 
     fun removeAt(position: Int) {
         items = items.subList(0, position) + items.subList(position + 1, items.size)
-        notifyDataSetChanged()
+        notifyItemRemoved(position)
     }
 
     fun getItemAt(position: Int): GoalModel {
@@ -60,21 +61,21 @@ class GoalAdapter(
             itemViewContainer.setBackgroundColor(backgroundColor)
 
             buttonView.setup(
-                model = ButtonModelNew(
+                model = ButtonModel(
                     iconRes = R.drawable.bin_icon,
-                    iconSize = 80,
-                    strokeWidth = 5,
+                    iconSize = Constants.ICON_SIZE_MEDIUM,
+                    strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
                     foregroundColor = backgroundColor,
                     backgroundColor = foregroundColor,
-                )
+                ),
             )
             textView.setup(
-                model = TextModelNew(
+                model = TextModel(
                     textValue = item.textValue,
-                    textSize = 30,
+                    textSize = Constants.TEXT_SIZE_BIG,
                     textColor = foregroundColor,
                     backgroundColor = backgroundColor,
-                )
+                ),
             )
             checkboxView.setup(
                 model = CheckBoxModel(
@@ -88,11 +89,10 @@ class GoalAdapter(
                     },
                     onUnchecked = {
                         listener.checkUncheckItem(item, false)
-                        textView.unstrikeThrough()
+                        textView.clearThrough()
                     },
-                )
+                ),
             )
-
             if (item.achieved || !item.active) { textView.strikeThrough() }
             checkboxView.bringToFront()
         }

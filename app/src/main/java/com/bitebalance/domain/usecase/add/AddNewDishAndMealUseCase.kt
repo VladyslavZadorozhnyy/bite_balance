@@ -1,24 +1,23 @@
 package com.bitebalance.domain.usecase.add
 
-import com.bitebalance.common.Resource
-import com.bitebalance.domain.model.MealModel
-import com.ui.model.NutritionValueModel
-import com.bitebalance.domain.repository.DateRepository
-import com.bitebalance.domain.repository.DishRepository
-import com.bitebalance.domain.repository.MealRepository
-import com.bitebalance.domain.repository.NutritionValueRepository
 import com.ui.components.R
 import com.ui.model.DishModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import com.bitebalance.common.Resource
+import com.bitebalance.common.Constants
+import com.ui.model.NutritionValueModel
+import com.bitebalance.domain.repository.*
+import com.bitebalance.domain.model.MealModel
 
 class AddNewDishAndMealUseCase(
     private val dishRepository: DishRepository,
     private val dateRepository: DateRepository,
     private val mealRepository: MealRepository,
-    private val nutritionValueRepository: NutritionValueRepository
+    private val stringRepository: StringRepository,
+    private val nutritionValueRepository: NutritionValueRepository,
 ) {
 
     operator fun invoke(
@@ -27,7 +26,7 @@ class AddNewDishAndMealUseCase(
         fats: Float,
         carbs: Float,
         kcals: Float,
-        eaten: Float
+        eaten: Float,
     ): Flow<Resource<List<DishModel>>> = flow {
         emit(Resource.Loading())
 
@@ -45,25 +44,23 @@ class AddNewDishAndMealUseCase(
                 val currentTimeId = dateRepository.addDate(dateRepository.getCurrentDate())
                 mealRepository.addMeal(MealModel(currentTimeId, dishModelId, eaten))
 
-                resultMessage = "Meal and dish created successfully"
+                resultMessage = stringRepository.getStr(R.string.meal_dish_created)
             } catch (exception: Exception) {
-                errorMessage = exception.message ?: "Unknown error"
+                errorMessage = exception.message ?: stringRepository.getStr(R.string.unknown_error)
             }
         }
-
-        if (errorMessage.isNotEmpty()) {
+        if (errorMessage.isNotEmpty())
             emit(Resource.Error(message = errorMessage))
-        } else {
+        else
             emit(Resource.Success(message = resultMessage))
-        }
     }
 
     private fun getDishIconRes(): Int {
         val currentHour = dateRepository.getCurrentDate().hour
 
-        return if (currentHour < 12) {
+        return if (currentHour < Constants.BREAKFAST_HOUR) {
             R.drawable.breakfast_icon
-        } else if (currentHour < 19){
+        } else if (currentHour < Constants.LUNCH_HOUR) {
             R.drawable.lunch_icon
         } else {
             R.drawable.dinner_icon

@@ -3,9 +3,9 @@ package com.ui.basic.recycler_views.dish_recycler
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.recyclerview.widget.GridLayoutManager
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
+import androidx.recyclerview.widget.GridLayoutManager
 import com.ui.components.databinding.RecyclerViewBinding
 
 class DishRecycler(
@@ -17,16 +17,16 @@ class DishRecycler(
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? DishRecyclerModel)?.let { recyclerModel ->
-            binding.recyclerView.apply {
-                adapter = DishAdapter(
-                    recyclerModel.items,
-                    recyclerModel.primaryColor,
-                    recyclerModel.secondaryColor,
-                    recyclerModel.onClickListener,
-                )
-                layoutManager = GridLayoutManager(context, 2)
-            }
+        if (model !is DishRecyclerModel) return
+
+        binding.recyclerView.apply {
+            adapter = DishAdapter(
+                model.items,
+                model.primaryColor,
+                model.secondaryColor,
+                model.onClickListener,
+            )
+            layoutManager = GridLayoutManager(context, 2)
         }
     }
 }

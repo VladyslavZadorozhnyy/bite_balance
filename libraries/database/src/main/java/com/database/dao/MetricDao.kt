@@ -11,19 +11,14 @@ import com.database.entities.MetricEntity
 interface MetricDao {
     @Insert
     fun insert(metricEntity: MetricEntity): Long
-
     @Update
     fun updateItem(metricEntity: MetricEntity)
-
     @Query("SELECT * FROM ${Constants.METRIC_TABLE_NAME}")
     fun getAll(): List<MetricEntity>
-
     @Query("SELECT * FROM ${Constants.METRIC_TABLE_NAME} WHERE id=:id")
     fun getById(id: Long): MetricEntity?
-
     @Query("DELETE FROM ${Constants.METRIC_TABLE_NAME} WHERE id=:id")
     fun deleteById(id: Long)
-
     @Query("DELETE FROM ${Constants.METRIC_TABLE_NAME}")
     fun deleteAll()
 }

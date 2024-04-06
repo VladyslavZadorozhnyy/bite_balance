@@ -1,7 +1,7 @@
 package com.ui.basic.checkbox
 
+import com.ui.common.Constants
 import com.ui.common.BaseUiComponentModel
-import com.ui.common.ComponentUiType
 
 data class CheckBoxModel(
     val checked: Boolean,
@@ -11,5 +11,5 @@ data class CheckBoxModel(
     val backgroundColor: Int,
     val foregroundColor: Int
 ) : BaseUiComponentModel(
-    componentType = ComponentUiType.Checkbox
+    componentType = Constants.ComponentUiType.Checkbox
 )

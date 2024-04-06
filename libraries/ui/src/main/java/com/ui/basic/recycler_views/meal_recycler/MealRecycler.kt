@@ -3,12 +3,11 @@ package com.ui.basic.recycler_views.meal_recycler
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.core.content.ContextCompat.getColor
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ui.components.databinding.RecyclerViewBinding
 
 class MealRecycler(
@@ -20,34 +19,33 @@ class MealRecycler(
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? MealRecyclerModel)?.let { recyclerModel ->
-            binding.recyclerView.apply {
-                setBackgroundColor(recyclerModel.backgroundColor)
-                adapter = MealAdapter(
-                    recyclerModel.items,
-                    recyclerModel.foregroundColor,
-                    recyclerModel.backgroundColor,
-                    recyclerModel.onClickListener,
-                )
-                layoutManager = LinearLayoutManager(context)
-            }
+        if (model !is MealRecyclerModel) return
 
-            val touchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-                override fun onMove(
-                    rV: RecyclerView, vH: RecyclerView.ViewHolder, t: RecyclerView.ViewHolder
-                ): Boolean {
-                    return false
-                }
-
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
-                    (binding.recyclerView.adapter as? MealAdapter)?.let {
-                        recyclerModel.onSwipeListener(it.getAt(viewHolder.adapterPosition))
-                    }
-                }
-            }
-
-            val touchHelper = ItemTouchHelper(touchCallback)
-            touchHelper.attachToRecyclerView(binding.recyclerView)
+        binding.recyclerView.apply {
+            setBackgroundColor(model.backgroundColor)
+            adapter = MealAdapter(
+                items = model.items,
+                foregroundColor = model.foregroundColor,
+                backgroundColor = model.backgroundColor,
+                onClickListener = model.onClickListener,
+            )
+            layoutManager = LinearLayoutManager(context)
         }
+
+        val touchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                rV: RecyclerView, vH: RecyclerView.ViewHolder, t: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
+                (binding.recyclerView.adapter as? MealAdapter)?.let {
+                    model.onSwipeListener(it.getAt(viewHolder.adapterPosition))
+                }
+            }
+        }
+        val touchHelper = ItemTouchHelper(touchCallback)
+        touchHelper.attachToRecyclerView(binding.recyclerView)
     }
 }

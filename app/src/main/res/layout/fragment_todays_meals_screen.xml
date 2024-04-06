@@ -5,9 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:clickable="true"
-    tools:context="com.bitebalance.presentation.ui.fragments.TodayMealsScreenFragment">
+    tools:context="com.bitebalance.presentation.ui.fragments.TodayMealsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sublayout_container_constraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
@@ -31,6 +32,11 @@
             android:background="@drawable/sublayout_shape"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent">
+
+            <include layout="@layout/no_items_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"/>
 
             <com.ui.basic.recycler_views.meal_recycler.MealRecycler
                 android:id="@+id/meal_recycler"

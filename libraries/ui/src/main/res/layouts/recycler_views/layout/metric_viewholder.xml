@@ -9,7 +9,6 @@
         android:id="@+id/checkbox_view"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="10dp"
         android:layout_gravity="center_vertical" />
 
     <com.ui.basic.texts.text.Text
@@ -27,7 +26,7 @@
         android:paddingStart="5dp"
         android:visibility="gone"/>
 
-    <com.ui.basic.texts.text.Text
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_value_view_text"
         android:layout_height="match_parent"
         android:layout_width="100dp"

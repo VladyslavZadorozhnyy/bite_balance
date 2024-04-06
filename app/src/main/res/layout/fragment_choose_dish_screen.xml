@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="com.bitebalance.presentation.ui.fragments.ChooseDishScreenFragment">
+    tools:context="com.bitebalance.presentation.ui.fragments.ChooseDishFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sublayout_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginVertical="10dp"
         android:background="@drawable/sublayout_shape">
 
         <include layout="@layout/toolbar"

@@ -1,32 +1,32 @@
 package com.bitebalance.domain.model
 
-import com.database.entities.NutritionValueEntity
 import com.ui.model.NutritionValueModel
+import com.database.entities.NutritionValueEntity
 
 fun NutritionValueModel.Companion.fromEntity(entity: NutritionValueEntity): NutritionValueModel {
     return NutritionValueModel(
-        entity.prots,
-        entity.fats,
-        entity.carbs,
-        entity.kcals,
+        prots = entity.prots,
+        fats = entity.fats,
+        carbs = entity.carbs,
+        kcals = entity.kcals,
     )
 }
 
 fun NutritionValueModel.toEntity(): NutritionValueEntity {
     return NutritionValueEntity(
-        this.prots,
-        this.fats,
-        this.carbs,
-        this.kcals,
+        prots = this.prots,
+        fats = this.fats,
+        carbs = this.carbs,
+        kcals = this.kcals,
     )
 }
 
 fun NutritionValueModel.toEntity(id: Long): NutritionValueEntity {
     return NutritionValueEntity(
-        this.prots,
-        this.fats,
-        this.carbs,
-        this.kcals,
-        id = id
+        prots = this.prots,
+        fats = this.fats,
+        carbs = this.carbs,
+        kcals = this.kcals,
+        id = id,
     )
 }

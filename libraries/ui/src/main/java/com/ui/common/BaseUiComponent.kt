@@ -9,4 +9,5 @@ abstract class BaseUiComponent(
     attrs: AttributeSet? = null,
 ) : ConstraintLayout(context, attrs) {
     abstract fun setup(model: BaseUiComponentModel)
+    open fun onResume() {}
 }

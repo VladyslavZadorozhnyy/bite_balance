@@ -1,71 +1,74 @@
 package com.bitebalance.presentation.ui.fragments
 
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.bitebalance.databinding.FragmentNavigationBinding
-import com.bitebalance.presentation.viewmodels.ThemeViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.ui.basic.nav_bar.NavigationBarModel
 import com.ui.components.R
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import com.ui.common.Constants
+import androidx.fragment.app.Fragment
+import com.ui.basic.nav_bar.NavigationBarModel
+import com.bitebalance.databinding.FragmentNavigationBinding
 
-class NavigationFragment : Fragment() {
-    private val binding by lazy { FragmentNavigationBinding.inflate(layoutInflater) }
-    private val themeViewModel by sharedViewModel<ThemeViewModel>()
+class NavigationFragment : BaseFragment<FragmentNavigationBinding>() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        setupNavigationComponent()
+    override fun onStartFragment(): View {
+        binding = FragmentNavigationBinding.inflate(layoutInflater)
+
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onResumeFragment() {
+        super.onResumeFragment()
         binding.navigationComponent.onResume()
     }
 
-    fun updateNavBarColors() {
-        Log.d("AAADIP", "updateNavBarColors() inside NavigationFragment")
-        binding.navigationComponent.updateBackgroundColor(themeViewModel.secondaryColor)
-        binding.navigationComponent.updateForegroundColor(themeViewModel.primaryColor)
-    }
-
-    private fun setupNavigationComponent() {
+    override fun setupViewModelsObservation() {
         binding.navigationComponent.setup(
             NavigationBarModel(
-                nonActiveIconsRes = listOf(
-                    R.drawable.nav_home_active,
-                    R.drawable.nav_stats_active,
-                    R.drawable.nav_menu_active,
-                    R.drawable.nav_settings_active
-                ),
-                activeIconsRes = listOf(
-                    R.drawable.nav_home_active,
-                    R.drawable.nav_stats_active,
-                    R.drawable.nav_menu_active,
-                    R.drawable.nav_settings_active
-                ),
-                backgroundColor = themeViewModel.state.value!!.secondaryColor,
-                foregroundColor = themeViewModel.state.value!!.primaryColor,
+                navIcons = Constants.NAVIGATION_ICONS_LIST,
+                backgroundColor = secondaryColor,
+                foregroundColor = primaryColor,
             ) { chosenItemId ->
                 val nextFragment = when (chosenItemId) {
-                    R.id.nav_home -> HomeScreenFragment()
-                    R.id.nav_stats -> StatsScreenFragment()
-                    R.id.nav_menu -> MenuScreenFragment.newInstance(creatingNewMeal = false)
-                    else -> SettingsScreenFragment()
+                    R.id.nav_home -> HomeFragment.newInstance()
+                    R.id.nav_stats -> StatsFragment.newInstance()
+                    R.id.nav_menu -> MenuFragment.newInstance(creatingNewMeal = false)
+                    else -> SettingsFragment.newInstance()
                 }
-                activity?.supportFragmentManager?.beginTransaction()?.apply {
-                    setCustomAnimations(R.anim.slide_in, R.anim.slide_out)
-                    replace(binding.contentFragment.id, nextFragment)
-                    commit()
-                }
-            }
+
+                val currFrIdx = fragmentToIndex(mActivity.getCurrentFragment())
+                val nxtFrIdx = fragmentToIndex(nextFragment)
+                changeFragment(nextFragment, currFrIdx > nxtFrIdx)
+            },
         )
+    }
+
+    private fun changeFragment(fragment: Fragment, leftToRightDirection: Boolean) {
+        val enterAnim: Int = if (leftToRightDirection) R.anim.slide_right else R.anim.slide_left_2
+        val exitAnim: Int = if (leftToRightDirection) R.anim.slide_right_2 else R.anim.slide_left
+        activity?.supportFragmentManager?.beginTransaction()?.apply {
+            setCustomAnimations(enterAnim, exitAnim)
+            replace(binding.contentFragment.id, fragment)
+            commit()
+        }
+    }
+
+    private fun fragmentToIndex(fragment: Fragment?): Int {
+        return when (fragment) {
+            is HomeFragment -> 0
+            is StatsFragment -> 1
+            is MenuFragment -> 2
+            is SettingsFragment -> 3
+            else -> -1
+        }
+    }
+
+    fun updateNavBarColors() {
+        binding.navigationComponent.updateBackgroundColor(secondaryColor)
+        binding.navigationComponent.updateForegroundColor(primaryColor)
+    }
+
+    companion object {
+        fun newInstance(): NavigationFragment {
+            return NavigationFragment()
+        }
     }
 }

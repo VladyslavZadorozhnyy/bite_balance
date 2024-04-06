@@ -3,9 +3,9 @@ package com.ui.basic.recycler_views.settings_recycler
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.ui.common.BaseUiComponent
 import com.ui.common.BaseUiComponentModel
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ui.components.databinding.RecyclerViewBinding
 
 class SettingsRecycler(
@@ -18,17 +18,17 @@ class SettingsRecycler(
     }
 
     override fun setup(model: BaseUiComponentModel) {
-        (model as? SettingsRecyclerModel)?.let { recyclerModel ->
-            binding.recyclerView.apply {
-                adapter = SettingsAdapter(
-                    recyclerModel.items,
-                    recyclerModel.primaryColor,
-                    recyclerModel.secondaryColor,
-                    model.onClickListener,
-                )
-                layoutManager = LinearLayoutManager(context)
-                setBackgroundColor(recyclerModel.primaryColor)
-            }
+        if (model !is SettingsRecyclerModel) return
+
+        binding.recyclerView.apply {
+            adapter = SettingsAdapter(
+                items = model.items,
+                primaryColor = model.primaryColor,
+                secondaryColor = model.secondaryColor,
+                onClickListener = model.onClickListener,
+            )
+            layoutManager = LinearLayoutManager(context)
+            setBackgroundColor(model.primaryColor)
         }
     }
 }

@@ -1,11 +1,11 @@
 package com.ui.components.progress.carousel
 
-import android.content.Context
 import android.view.View
-import android.view.ViewGroup
-import androidx.viewpager.widget.PagerAdapter
-import com.ui.common.ComponentUiConstants
 import com.ui.components.R
+import android.view.ViewGroup
+import android.content.Context
+import com.ui.common.Constants
+import androidx.viewpager.widget.PagerAdapter
 import com.ui.components.progress.indicator.ProgressIndicator
 import com.ui.components.progress.indicator.ProgressIndicatorModel
 
@@ -21,7 +21,7 @@ class CarouselAdapter(
     private val kcalLabel = context.getString(R.string.kcal_label)
     private val gramLabel = context.getString(R.string.grams_label)
 
-    override fun getCount(): Int { return ComponentUiConstants.CAROUSEL_SIZE }
+    override fun getCount(): Int { return Constants.CAROUSEL_SIZE }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean { return view == `object` }
 
@@ -39,31 +39,38 @@ class CarouselAdapter(
     private fun bindView(view: ProgressIndicator, position: Int, container: ViewGroup) {
         val progressModel = when (position) {
             0 -> ProgressIndicatorModel(
-                consumed = model.goalConsumption.kcals / 100f,
+                consumed = model.goalConsumption.kcals / Constants.GS_STANDARD,
                 goalConsumption = model.consumed.kcals,
                 indicatorLabel = kcalLabel,
                 indicatorName = kcalName,
+                primaryColor = model.primaryColor,
+                secondaryColor = model.secondaryColor
             )
             1 -> ProgressIndicatorModel(
-                consumed = model.goalConsumption.prots / 100f,
+                consumed = model.goalConsumption.prots / Constants.GS_STANDARD,
                 goalConsumption = model.consumed.prots,
                 indicatorLabel = gramLabel,
                 indicatorName = protsName,
+                primaryColor = model.primaryColor,
+                secondaryColor = model.secondaryColor
             )
             2 -> ProgressIndicatorModel(
-                consumed = model.goalConsumption.fats / 100f,
+                consumed = model.goalConsumption.fats / Constants.GS_STANDARD,
                 goalConsumption = model.consumed.fats,
                 indicatorLabel = gramLabel,
                 indicatorName = fatsName,
+                primaryColor = model.primaryColor,
+                secondaryColor = model.secondaryColor
             )
             else -> ProgressIndicatorModel(
-                consumed = model.goalConsumption.carbs / 100f,
+                consumed = model.goalConsumption.carbs / Constants.GS_STANDARD,
                 goalConsumption = model.consumed.carbs,
                 indicatorLabel = gramLabel,
                 indicatorName = carbsName,
+                primaryColor = model.primaryColor,
+                secondaryColor = model.secondaryColor
             )
         }
-
         view.apply {
             setup(progressModel)
             container.addView(this)

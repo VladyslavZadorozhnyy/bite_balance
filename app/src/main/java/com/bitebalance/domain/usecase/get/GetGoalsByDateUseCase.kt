@@ -1,15 +1,14 @@
 package com.bitebalance.domain.usecase.get
 
-import android.util.Log
-import com.bitebalance.common.Resource
-import com.bitebalance.domain.repository.DateRepository
-import com.bitebalance.domain.repository.GoalRepository
 import com.ui.model.GoalModel
-import kotlinx.coroutines.Dispatchers
+import java.text.SimpleDateFormat
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
+import kotlinx.coroutines.Dispatchers
+import com.bitebalance.common.Resource
+import com.bitebalance.domain.repository.DateRepository
+import com.bitebalance.domain.repository.GoalRepository
 
 class GetGoalsByDateUseCase(
     private val goalRepository: GoalRepository,
@@ -41,21 +40,8 @@ class GetGoalsByDateUseCase(
                         goalRepository.updateGoal(nonActiveModel)
                         result.add(nonActiveModel)
                     }
-//                    if (goalDate.month == requestedDate.month && goalDate.year == requestedDate.year) {
-//                        result.add(goal)
-//                        if (currentDate.month != goalDate.month || currentDate.year != goalDate.year) {
-//
-//                        }
-//                    }
                 }
             }
-//            Log.d("AAADIP", "dateRepository.getDateFromString(dateFormat, date): ${dateRepository.getDateFromString(dateFormat, date)}")
-//            Log.d("AAADIP", "goalRepository.getAllGoals().get(0).dateCreatedId: ${goalRepository.getAllGoals().get(0).dateCreatedId}")
-//            Log.d("AAADIP", "dateRepository.getDateById(goalRepository.getAllGoals().get(0).dateCreatedId): ${dateRepository.getDateById(goalRepository.getAllGoals().get(0).dateCreatedId)}")
-//
-//            Log.d("AAADIP", "currentDate: $currentDate")
-//            Log.d("AAADIP", "requestedDate: $requestedDate")
-
             return@withContext result
         }
         emit(Resource.Success(data = result))
