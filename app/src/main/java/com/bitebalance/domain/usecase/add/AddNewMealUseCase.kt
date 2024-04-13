@@ -25,7 +25,7 @@ class AddNewMealUseCase(
         var errorMessage = ""
         withContext(Dispatchers.IO) {
             try {
-                val currentTimeId = dateRepository.addDate(dateRepository.getCurrentDate())
+                val currentTimeId = dateRepository.getCurrentDate().id
 
                 dishRepository.getDishByName(dishName)?.let { dishModel ->
                     nutritionValueRepository.getNutritionValueById(dishModel.nutritionValId)?.let {

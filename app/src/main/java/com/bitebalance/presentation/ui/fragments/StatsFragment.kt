@@ -66,26 +66,9 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
     }
 
     private fun setupHeader() {
-        toolbarBinding.backButton.setup(
-            model = ButtonModel(
-                iconRes = R.drawable.question_mark_icon,
-                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = primaryColor,
-                backgroundColor = secondaryColor,
-                onClickListener = { showConfirmDialog() },
-            ),
-        )
-        toolbarBinding.forwardButton.setup(
-            model = ButtonModel(
-                iconRes = R.drawable.goal_icon,
-                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = primaryColor,
-                backgroundColor = secondaryColor,
-                onClickListener = {
-                    navigationVm.navigateTo(MyGoalsFragment.newInstance(), NavigationAction.ADD)
-                },
-            ),
-        )
+        toolbarBinding.backButton.visibility = View.INVISIBLE
+        toolbarBinding.forwardButton.visibility = View.INVISIBLE
+
         toolbarBinding.headline.setup(
             model = TextModel(
                 textValue = getString(R.string.statistics),
@@ -144,18 +127,6 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
                 mToast?.show()
             }
         }
-    }
-
-    private fun showConfirmDialog() {
-        ConfirmDialog(
-            activity = requireActivity(),
-            model = BaseDialogModel(
-                backgroundColor = secondaryColor,
-                textColor = primaryColor,
-                title = getString(R.string.your_stats_here),
-                buttonText = R.string.done,
-            ),
-        ).show()
     }
 
     companion object {

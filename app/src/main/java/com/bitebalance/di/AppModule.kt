@@ -10,13 +10,10 @@ import com.bitebalance.presentation.viewmodels.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.android.ext.koin.androidApplication
 import com.bitebalance.domain.usecase.add.AddNewDishUseCase
-import com.bitebalance.domain.usecase.add.AddNewGoalUseCase
 import com.bitebalance.domain.usecase.add.AddNewMealUseCase
 import com.bitebalance.presentation.viewmodels.ThemeViewModel
 import com.bitebalance.domain.usecase.remove.RemoveDishUseCase
-import com.bitebalance.domain.usecase.remove.RemoveGoalUseCase
 import com.bitebalance.domain.usecase.remove.RemoveMealUseCase
-import com.bitebalance.domain.usecase.update.UpdateGoalUseCase
 import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
 import com.bitebalance.domain.usecase.remove.RemoveAllMealsUseCase
 import com.bitebalance.domain.usecase.update.UpdateNutritionValueUseCase
@@ -28,7 +25,6 @@ val appModule = module {
     viewModel { NavigationViewModel() }
     viewModel { StatsViewModel(get()) }
     viewModel { DateViewModel(get(), get()) }
-    viewModel { GoalViewModel(get(), get(), get(), get()) }
     viewModel { NutritionViewModel(get(), get(), get(), get()) }
     viewModel { MealViewModel(get(), get(), get(), get(), get()) }
     viewModel { DishViewModel(get(), get(), get(), get(), get()) }
@@ -36,16 +32,12 @@ val appModule = module {
 //  UseCases
     single { GetMonthUseCase(get()) }
     single { GetAllDishesUseCase(get()) }
-    single { RemoveGoalUseCase(get(), get()) }
-    single { UpdateGoalUseCase(get(), get()) }
     single { GetGreetingsUseCase(get(), get()) }
     single { GetDishByNameUseCase(get(), get()) }
-    single { GetGoalsByDateUseCase(get(), get()) }
     single { RemoveAllMealsUseCase(get(), get()) }
     single { GetNutritionValueUseCase(get(), get()) }
     single { RemoveDishUseCase(get(), get(), get()) }
     single { RemoveMealUseCase(get(), get(), get()) }
-    single { AddNewGoalUseCase(get(), get(), get()) }
     single { UpdateConsumptionGoalUseCase(get(), get()) }
     single { AddNewDishUseCase(get(), get(), get(), get()) }
     single { GetAllMealsUseCase(get(), get(), get(), get()) }
