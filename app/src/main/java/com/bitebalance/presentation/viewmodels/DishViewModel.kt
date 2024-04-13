@@ -52,7 +52,7 @@ class DishViewModel(
                 data = result.data,
                 message = result.message,
                 isLoading = result.isLoading,
-                isSuccessful = result.isSuccessful
+                isSuccessful = result.isSuccessful,
             )
         }.launchIn(viewModelScope)
     }
