@@ -27,7 +27,6 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
             setupHeader()
             setupPrimaryColor()
             setupSecondaryColor()
-            setupFontLayout()
         }
     }
 
@@ -104,20 +103,6 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
                 changeSecondaryColor = true,
             )
         }
-    }
-
-    private fun setupFontLayout() {
-        binding.fontTextView.setup(
-            model = TextModel(
-                textValue = getString(R.string.font),
-                textSize = Constants.TEXT_SIZE,
-                textColor = primaryColor,
-                backgroundColor = secondaryColor,
-            ),
-        )
-        binding.fontLayout.setBackgroundColor(secondaryColor)
-        binding.fontBar.setBackgroundColor(primaryColor)
-        binding.fontIcon.setColorFilter(primaryColor)
     }
 
     private fun setupColorPickingDialog(

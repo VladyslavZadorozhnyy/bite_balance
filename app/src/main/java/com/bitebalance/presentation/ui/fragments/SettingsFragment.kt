@@ -57,28 +57,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsScreenBinding>() {
                         instructionText = getString(R.string.appearance),
                     ),
                     InstructionModel(
-                        iconRes = R.drawable.translate_icon,
-                        instructionText = getString(R.string.language),
-                    ),
-                    InstructionModel(
                         iconRes = R.drawable.measurement_icon,
                         instructionText = getString(R.string.measurement),
-                    ),
-                    InstructionModel(
-                        iconRes = R.drawable.people_icon,
-                        instructionText = getString(R.string.about_us),
-                    ),
-                    InstructionModel(
-                        iconRes = R.drawable.instruction_icon,
-                        instructionText = getString(R.string.instruction),
-                    ),
-                    InstructionModel(
-                        iconRes = R.drawable.support_icon,
-                        instructionText = getString(R.string.support_us),
-                    ),
-                    InstructionModel(
-                        iconRes = R.drawable.feedback_icon,
-                        instructionText = getString(R.string.feedback),
                     ),
                 ),
                 primaryColor = primaryColor,
@@ -92,18 +72,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsScreenBinding>() {
         when (instruction.instructionText) {
             getString(R.string.appearance) ->
                 navigationVm.navigateTo(AppearanceFragment.newInstance(), NavigationAction.ADD)
-            getString(R.string.language) ->
-                navigationVm.navigateTo(ChooseSettingFragment.newInstance(), NavigationAction.ADD)
             getString(R.string.measurement) ->
                 navigationVm.navigateTo(MeasurementFragment.newInstance(), NavigationAction.ADD)
-            getString(R.string.about_us) ->
-                navigationVm.navigateTo(AboutUsFragment.newInstance(), NavigationAction.ADD)
-            getString(R.string.instruction) ->
-                navigationVm.navigateTo(AboutUsFragment.newInstance(), NavigationAction.ADD)
-            getString(R.string.support_us) ->
-                navigationVm.navigateTo(SupportFeedbackFragment.newInstance(), NavigationAction.ADD)
-            getString(R.string.feedback) ->
-                navigationVm.navigateTo(SupportFeedbackFragment.newInstance(), NavigationAction.ADD)
         }
     }
 
