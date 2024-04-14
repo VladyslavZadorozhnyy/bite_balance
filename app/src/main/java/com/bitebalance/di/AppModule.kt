@@ -25,9 +25,9 @@ val appModule = module {
     viewModel { NavigationViewModel() }
     viewModel { StatsViewModel(get()) }
     viewModel { DateViewModel(get(), get()) }
+    viewModel { DishViewModel(get(), get(), get(), get()) }
     viewModel { NutritionViewModel(get(), get(), get(), get()) }
     viewModel { MealViewModel(get(), get(), get(), get(), get()) }
-    viewModel { DishViewModel(get(), get(), get(), get(), get()) }
 
 //  UseCases
     single { GetMonthUseCase(get()) }

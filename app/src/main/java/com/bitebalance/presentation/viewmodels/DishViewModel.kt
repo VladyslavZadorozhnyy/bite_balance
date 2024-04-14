@@ -1,21 +1,19 @@
 package com.bitebalance.presentation.viewmodels
 
+import com.ui.model.DishModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.launchIn
 import androidx.lifecycle.viewModelScope
-import com.bitebalance.domain.usecase.add.AddNewDishAndMealUseCase
+import androidx.lifecycle.MutableLiveData
+import com.bitebalance.presentation.states.BasicState
 import com.bitebalance.domain.usecase.add.AddNewDishUseCase
 import com.bitebalance.domain.usecase.get.GetAllDishesUseCase
 import com.bitebalance.domain.usecase.get.GetDishByNameUseCase
 import com.bitebalance.domain.usecase.remove.RemoveDishUseCase
-import com.bitebalance.presentation.states.BasicState
-import com.ui.model.DishModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 class DishViewModel(
-    private val addNewDishAndMealUseCase: AddNewDishAndMealUseCase,
     private val addNewDishUseCase: AddNewDishUseCase,
     private val getAllDishesUseCase: GetAllDishesUseCase,
     private val removeDishUseCase: RemoveDishUseCase,

@@ -13,6 +13,7 @@ import android.view.LayoutInflater
 import android.content.res.ColorStateList
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
+import android.graphics.drawable.ColorDrawable
 import com.ui.components.databinding.SpinnerItemActiveLayoutBinding
 import com.ui.components.databinding.SpinnerItemNotActiveLayoutBinding
 
@@ -35,6 +36,7 @@ class SpinnerSubComponent(
             backgroundColor = backgroundColor,
         ).apply {
             spinnerView.adapter = this
+            spinnerView.setPopupBackgroundDrawable(ColorDrawable(foregroundColor))
             spinnerView.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
 

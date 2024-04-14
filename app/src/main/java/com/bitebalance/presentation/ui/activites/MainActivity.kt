@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
             val transaction = supportFragmentManager.beginTransaction().setCustomAnimations(
                 R.anim.slide_to_up, R.anim.slide_to_down, R.anim.slide_to_up, R.anim.slide_to_down)
 
+            supportFragmentManager.fragments.lastOrNull()?.onStop()
             when (state.action) {
                 NavigationAction.POP ->
                     onBackPressed()
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
                     state.fragment?.let {
                         transaction.add(binding.fragmentContainer.id, it).addToBackStack(null) }
             }
-            supportFragmentManager.fragments.lastOrNull()?.onStop()
             transaction.commit()
         }
     }

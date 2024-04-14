@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:clickable="true"
-    tools:context=".presentation.ui.fragments.ChooseSettingFragment">
+    tools:context=".presentation.ui.fragments.MeasurementFragment">
 
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"
