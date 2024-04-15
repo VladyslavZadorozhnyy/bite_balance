@@ -11,7 +11,7 @@
     <string name="appearance">Appearance</string>
     <string name="toggle_check">Toggle check box for not including</string>
     <string name="some_fields_empty">Some fields are empty. They will be filled with \'0\'</string>
-    <string name="no_dishes_yet">Seems that you have no dishes yet. \n\n Start by adding one.</string>
+    <string name="no_dishes_yet">Seems that you have no dishes yet. \n Start by adding one.</string>
     <string name="name">Name:</string>
     <string name="prots_">Prots:</string>
     <string name="fats_">Fats:</string>

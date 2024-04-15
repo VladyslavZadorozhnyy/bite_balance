@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Vladyslav\\Desktop\\BiteBalanceProject\\signing_key\\key.jks')
+            storePassword '30122000vlad'
+            keyPassword '30122000vlad'
+            keyAlias 'key0'
+        }
+    }
     namespace 'com.example.database'
     compileSdk 32
 

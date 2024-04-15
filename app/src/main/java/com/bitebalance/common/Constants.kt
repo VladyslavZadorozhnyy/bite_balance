@@ -11,6 +11,11 @@ object Constants {
     private const val ST_CARBS_CONSUMPTION = 170F
     private const val ST_KCALS_CONSUMPTION = 2400F
 
+    const val PREF_PRIM_COLOR = "SHARED_PREFERENCE_PRIMARY_COLOR"
+    const val PREF_SEC_COLOR = "SHARED_PREFERENCE_SECONDARY_COLOR"
+    const val PREF_FONT = "SHARED_PREFERENCE_FONT"
+    const val PREF_KEY: String = "THEME_SHARED_PREFERENCE"
+
     val DEFAULT_GOAL_CONSUMPTION = NutritionValueModel(
         prots = ST_PROTS_CONSUMPTION,
         fats = ST_FATS_CONSUMPTION,

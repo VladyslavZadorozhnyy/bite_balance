@@ -1,10 +1,10 @@
 package com.bitebalance.presentation.viewmodels
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import com.bitebalance.common.NavigationAction
 import com.bitebalance.presentation.states.NavigationState
 

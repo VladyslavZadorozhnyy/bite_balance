@@ -8,14 +8,11 @@ import com.ui.model.NutritionValueModel
 import android.content.res.ColorStateList
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.bitebalance.common.NavigationAction
 import com.ui.components.graph.component.GraphModel
 import com.ui.components.databinding.ToolbarBinding
-import com.ui.components.dialogs.common.BaseDialogModel
 import com.bitebalance.presentation.viewmodels.DateViewModel
 import com.bitebalance.presentation.viewmodels.StatsViewModel
 import com.bitebalance.databinding.FragmentStatsScreenBinding
-import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
