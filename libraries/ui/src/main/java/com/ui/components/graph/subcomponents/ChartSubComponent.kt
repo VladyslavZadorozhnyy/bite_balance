@@ -102,6 +102,7 @@ class ChartSubComponent(
             setScaleEnabled(false)
             animateY(Constants.DURATION)
             setVisibleXRangeMaximum(Constants.GRAPH_SPAN_SIZE.toFloat())
+            chartView.visibility = View.VISIBLE
         }
         goalConsumption.setup(
             model = TextModel(

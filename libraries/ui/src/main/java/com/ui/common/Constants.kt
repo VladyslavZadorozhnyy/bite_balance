@@ -45,6 +45,7 @@ object Constants {
     const val GS_STANDARD = 100f
     const val DISH_ICON_SIZE = 270
     const val MEAL_ICON_SIZE = 90
+    const val POST_DELAYED_OFFSET = 500L
 
     val NAVIGATION_ICONS_LIST = listOf(
         R.drawable.nav_home,

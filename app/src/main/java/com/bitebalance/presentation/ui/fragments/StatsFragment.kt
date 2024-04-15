@@ -1,6 +1,8 @@
 package com.bitebalance.presentation.ui.fragments
 
+import android.os.Looper
 import android.view.View
+import android.os.Handler
 import com.ui.components.R
 import android.widget.Toast
 import com.ui.common.Constants
@@ -8,6 +10,7 @@ import com.ui.model.NutritionValueModel
 import android.content.res.ColorStateList
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
+import com.ui.common.Constants.POST_DELAYED_OFFSET
 import com.ui.components.graph.component.GraphModel
 import com.ui.components.databinding.ToolbarBinding
 import com.bitebalance.presentation.viewmodels.DateViewModel
@@ -110,14 +113,16 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
         monthNutritionValues: List<NutritionValueModel>,
         goalNutritionValue: NutritionValueModel,
     ) {
-        binding.chart.setup(
-            GraphModel(
-                consumption = monthNutritionValues,
-                consumptionGoal = goalNutritionValue,
-                foregroundColor = secondaryColor,
-                backgroundColor = primaryColor,
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.chart.setup(
+                model = GraphModel(
+                    consumption = monthNutritionValues,
+                    consumptionGoal = goalNutritionValue,
+                    foregroundColor = secondaryColor,
+                    backgroundColor = primaryColor,
+                )
             )
-        )
+        }, POST_DELAYED_OFFSET)
         monthNutritionValues.any { it == statsVm.emptyNutritionValue }.let { emptyValPresent ->
             if (emptyValPresent) {
                 mToast = Toast.makeText(activity, getString(R.string.days_empty), Toast.LENGTH_LONG)
