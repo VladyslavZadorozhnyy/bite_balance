@@ -43,7 +43,7 @@ object Constants {
     const val DOT_SIZE_DP = 12
     const val DOT_STROKE_PX = 10
     const val GS_STANDARD = 100f
-    const val DISH_ICON_SIZE = 270
+    const val DISH_ICON_SIZE = 260
     const val MEAL_ICON_SIZE = 90
     const val POST_DELAYED_OFFSET = 500L
 

@@ -14,6 +14,7 @@ data class ButtonModel(
     val foregroundColor: Int = Color.WHITE,
     val backgroundColor: Int = Color.BLACK,
     val onClickListener: View.OnClickListener? = null,
+    val isClickable: Boolean = true,
 ) : BaseUiComponentModel(
     componentType = Constants.ComponentUiType.Button
 )

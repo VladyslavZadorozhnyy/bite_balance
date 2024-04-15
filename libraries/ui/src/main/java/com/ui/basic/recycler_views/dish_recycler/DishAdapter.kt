@@ -3,6 +3,7 @@ package com.ui.basic.recycler_views.dish_recycler
 import android.view.View
 import com.ui.components.R
 import com.ui.model.DishModel
+import android.graphics.Color
 import android.view.ViewGroup
 import com.ui.common.Constants
 import android.view.LayoutInflater
@@ -50,7 +51,7 @@ class DishAdapter(
                     textValue = item.name,
                     textSize = Constants.TEXT_SIZE,
                     textColor = secondaryColor,
-                    backgroundColor = primaryColor,
+                    backgroundColor = Color.TRANSPARENT,
                 ),
             )
             dishIconView.setup(
@@ -62,7 +63,6 @@ class DishAdapter(
                     onClickListener = { itemView.callOnClick() },
                 ),
             )
-            dishIconView.rootView.findViewById<View>(R.id.button_view).stateListAnimator = null
         }
     }
 }

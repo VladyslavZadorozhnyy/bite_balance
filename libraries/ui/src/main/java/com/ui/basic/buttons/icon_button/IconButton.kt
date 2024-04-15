@@ -24,7 +24,7 @@ class IconButton(context: Context, attrs: AttributeSet? = null) : BaseUiComponen
         binding.cornerRadius = Constants.CORNER_RADIUS
         binding.strokeWidth = model.strokeWidth
         binding.iconSize = model.iconSize
-
+        binding.isClickable = model.isClickable
         model.iconRes?.let { binding.setIconResource(it) }
         model.onClickListener?.let { binding.setOnClickListener(it) }
     }
