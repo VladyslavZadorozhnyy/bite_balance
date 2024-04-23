@@ -67,7 +67,7 @@ class SpinnerSubComponent(
                         textValue = context.getString(items[position]),
                         textSize = Constants.TEXT_SIZE,
                         textColor = backgroundColor,
-                        backgroundColor = foregroundColor,
+                        backgroundColor = Color.TRANSPARENT,
                     ),
                 )
                 return root

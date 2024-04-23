@@ -5,7 +5,6 @@ import com.ui.components.R
 import androidx.fragment.app.Fragment
 import com.bitebalance.common.NavigationAction
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.bitebalance.databinding.ActivityMainBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.bitebalance.presentation.viewmodels.NavigationViewModel
@@ -19,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setupNavigationObserving()
         setContentView(binding.root)
     }

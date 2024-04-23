@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center_horizontal">
 
     <com.ui.basic.checkbox.Checkbox
         android:id="@+id/checkbox_view"
@@ -11,7 +12,7 @@
         android:layout_height="20dp"
         android:layout_gravity="center_vertical" />
 
-    <com.ui.basic.texts.text.Text
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_name_view"
         android:layout_height="40dp"
         android:layout_width="100dp"
@@ -35,12 +36,11 @@
         android:paddingStart="5dp"
         android:visibility="gone"/>
 
-    <com.ui.basic.texts.text.Text
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_label_view"
         android:layout_height="match_parent"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:paddingBottom="2dp"
         android:paddingStart="5dp"
         android:visibility="invisible"/>
-
 </LinearLayout>

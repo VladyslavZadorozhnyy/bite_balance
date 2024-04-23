@@ -53,7 +53,7 @@ class InputForm (
         }
         model.hintGravity?.let { binding.form.gravity = it }
         binding.form.setTextSize(TypedValue.COMPLEX_UNIT_SP, Constants.TEXT_SIZE.toFloat())
-        binding.form.setPadding(0,5,0,0)
+        binding.form.setPadding(10,5,0,0)
     }
 
     fun setupOnlyNumbers() {

@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import com.ui.common.Constants
 import com.ui.model.MetricModel
 import android.view.LayoutInflater
-import com.ui.basic.texts.text.Text
 import com.ui.basic.checkbox.Checkbox
 import com.ui.basic.input_form.InputForm
 import com.ui.basic.texts.common.TextModel
@@ -51,10 +50,10 @@ class MetricAdapter(
         private var position = -1
 
         private val checkBoxView = view.findViewById<Checkbox>(R.id.checkbox_view)
-        private val metricNameView = view.findViewById<Text>(R.id.metric_name_view)
+        private val metricNameView = view.findViewById<SlideText>(R.id.metric_name_view)
         private val metricValueViewInput = view.findViewById<InputForm>(R.id.metric_value_view_input)
         private val metricValueViewText = view.findViewById<SlideText>(R.id.metric_value_view_text)
-        private val metricSuffixView = view.findViewById<Text>(R.id.metric_label_view)
+        private val metricSuffixView = view.findViewById<SlideText>(R.id.metric_label_view)
 
         fun setPosition(value: Int) { position = value }
 
@@ -69,7 +68,7 @@ class MetricAdapter(
             else checkBoxView.visibility = View.INVISIBLE
 
             if (model.suffix.isNotEmpty()) setupMetricSuffix(model.suffix)
-            else metricSuffixView.visibility = View.GONE
+            else metricSuffixView.visibility = View.INVISIBLE
 
             if (model.editable) {
                 setupMetricValueInput(true, inputValues)
