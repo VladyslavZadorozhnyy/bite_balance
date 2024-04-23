@@ -129,7 +129,7 @@ class ChartSubComponent(
         return mutableListOf<BarEntry>().apply {
             for (i in barVal.indices) {
                 val normalizedValue = if (lineVal[i] == 0F) 0F else barVal[i] / lineVal[i] * 100F
-                add(BarEntry(i.toFloat() + 1, normalizedValue)) }
+                add(BarEntry(i.toFloat(), normalizedValue)) }
         }
     }
 
@@ -139,7 +139,7 @@ class ChartSubComponent(
 
             override fun onValueSelected(e: Entry?, h: Highlight?) {
                 e?.x?.toInt()?.let { entryX ->
-                    barDs.setValueTextColors(updateDataSetColors(entryX - 1, barDs.entryCount))
+                    barDs.setValueTextColors(updateDataSetColors(entryX, barDs.entryCount))
                 }
             }
 
