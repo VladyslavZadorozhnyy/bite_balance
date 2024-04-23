@@ -55,9 +55,9 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
 
     override fun onStopFragment() {
         super.onStopFragment()
-        mToast?.cancel()
         dateVm.state.removeObservers(this)
         statsVm.state.removeObservers(this)
+        mToast?.cancel()
     }
 
     private fun setupStyling() {
@@ -125,6 +125,7 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
         }, POST_DELAYED_OFFSET)
         monthNutritionValues.any { it == statsVm.emptyNutritionValue }.let { emptyValPresent ->
             if (emptyValPresent) {
+                mToast?.cancel()
                 mToast = Toast.makeText(activity, getString(R.string.days_empty), Toast.LENGTH_LONG)
                 mToast?.show()
             }
