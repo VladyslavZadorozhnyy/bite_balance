@@ -31,7 +31,7 @@ class MetricAdapter(
 
     override fun onBindViewHolder(holder: MetricViewHolder, position: Int) {
         holder.position = position
-        holder.bind(items[position], inputValues)
+        holder.bind(items[position], inputValues, items)
     }
 
     override fun getItemCount(): Int {
@@ -60,6 +60,7 @@ class MetricAdapter(
         fun bind(
             model: MetricModel,
             inputValues: MutableList<String>,
+            items: List<MetricModel>,
         ) {
             itemView.setBackgroundColor(backgroundColor)
             setupMetricName(model.name)
@@ -71,7 +72,7 @@ class MetricAdapter(
             else metricSuffixView.visibility = View.INVISIBLE
 
             if (model.editable) {
-                setupMetricValueInput(true, inputValues)
+                setupMetricValueInput(true, inputValues, items)
                 metricValueViewInput.visibility = View.VISIBLE
             } else {
                 setupMetricValueText(value = model.hint)
@@ -102,11 +103,15 @@ class MetricAdapter(
             )
         }
 
-        private fun setupMetricValueInput(active: Boolean, inputValues: MutableList<String>) {
+        private fun setupMetricValueInput(
+            active: Boolean,
+            inputValues: MutableList<String>,
+            items: List<MetricModel>  = emptyList(),
+        ) {
             metricValueViewInput.setup(
                 model = InputFormModel(
                     active = active,
-                    hint = inputValues[position],
+                    hint = items.getOrNull(position)?.hint ?: inputValues[position],
                     onInputChange = { inputValues[position] = it },
                     foregroundColor = foregroundColor,
                     backgroundColor = backgroundColor,

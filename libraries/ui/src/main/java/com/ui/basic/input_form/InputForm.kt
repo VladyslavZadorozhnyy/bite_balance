@@ -31,7 +31,6 @@ class InputForm (
         binding.form.paint.style = Paint.Style.STROKE
         binding.form.paint.strokeWidth = Constants.TEXT_STROKE_WIDTH
         binding.form.setTextColor(model.foregroundColor)
-        binding.form.hint = model.hint
 
         if (!model.active) {
             binding.formStroke.setBackgroundResource(R.drawable.input_form_not_active_shape)
@@ -51,6 +50,7 @@ class InputForm (
                 model.onInputChange.invoke(it?.toString() ?: "")
             }
         }
+        binding.form.setText(model.hint)
         model.hintGravity?.let { binding.form.gravity = it }
         binding.form.setTextSize(TypedValue.COMPLEX_UNIT_SP, Constants.TEXT_SIZE.toFloat())
         binding.form.setPadding(10,5,0,0)
