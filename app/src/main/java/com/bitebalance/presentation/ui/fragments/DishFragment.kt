@@ -205,6 +205,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
     }
 
     private fun setupRecycler() {
+        val inputValues = binding.metricRecycler.getInputValues()
+
         binding.metricRecycler.setup(
             if (createDish) {
                 CreateMealWithExistingDishModel.newInstance(
@@ -213,6 +215,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                     fats = dishNutritionValue.fats.toString(),
                     carbs = dishNutritionValue.carbs.toString(),
                     kcal = dishNutritionValue.kcals.toString(),
+                    hint = inputValues.getOrElse(4) { "" },
                     foregroundColor = primaryColor,
                     backgroundColor = secondaryColor,
                 )

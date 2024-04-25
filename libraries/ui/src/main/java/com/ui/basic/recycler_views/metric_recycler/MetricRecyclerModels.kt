@@ -270,6 +270,7 @@ data class CreateMealWithExistingDishModel(
             fats: String = "",
             carbs: String = "",
             kcal: String = "",
+            hint: String = "",
             foregroundColor: Int = 0,
             backgroundColor: Int = 0,
         ): DishNameMetricsModel {
@@ -306,6 +307,7 @@ data class CreateMealWithExistingDishModel(
                     MetricModel(
                         name = context.getString(R.string.eaten_),
                         suffix = context.getString(R.string.in_g),
+                        hint = hint,
                         editable = true,
                         onlyNumbers = true,
                     )
