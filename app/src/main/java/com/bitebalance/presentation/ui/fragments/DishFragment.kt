@@ -46,6 +46,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
     override fun setupViewModelsObservation() {
         nutritionVm.state.observe(this) { state ->
             if (state.message.isEmpty() && state.data == null) { return@observe }
+            if (state.data != null && state.data.size > 1) { return@observe }
+
             if (state.data != null) {
                 if (editButtonChecked) { binding.editButton.click() }
                 dishNutritionValue = state.data.first()
@@ -67,8 +69,10 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
             if (state.message.isEmpty() && state.data == null) { return@observe; }
 
             if (state.message.isEmpty()) {
-                setupHeader(state.data!!.first())
-                nutritionVm.getNutritionValue(state.data.first().nutritionValId)
+                if (state.data?.first()?.name == dishName) {
+                    setupHeader(state.data.first())
+                    nutritionVm.getNutritionValue(state.data.first().nutritionValId)
+                }
             } else {
                 ConfirmDialog(requireActivity(), BaseDialogModel(
                     title = state.message,
