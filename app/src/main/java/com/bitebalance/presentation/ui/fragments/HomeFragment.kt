@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment<FragmentHomeScreenBinding>() {
 
     override fun setupViewModelsObservation() {
         nutritionVm.state.observe(this) { state: BasicState<List<NutritionValueModel>> ->
-            state.data?.let { setupCarousel(it) }
+            state.data?.let { if (it.size > 1) setupCarousel(it) }
         }
         dateVm.state.observe(this) { state ->
             setupHeader(state)

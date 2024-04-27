@@ -38,8 +38,7 @@ class MealDetailsFragment : BaseFragment<FragmentMealDetailsScreenBinding>() {
             nutritionVm.getNutritionValue(dishState.data?.first()?.nutritionValId ?: -1)
         }
         nutritionVm.state.observe(this) { nutritionState ->
-            nutritionState.data?.first()?.let { setupRecycler(it) }
-        }
+            nutritionState.data?.let { if (it.size == 1) setupRecycler(it.first()) } }
         themeVm.state.observe(this) {
             setupStyling()
             setupSubtitles()

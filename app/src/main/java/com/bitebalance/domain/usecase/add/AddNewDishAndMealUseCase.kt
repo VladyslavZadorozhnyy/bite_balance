@@ -41,7 +41,7 @@ class AddNewDishAndMealUseCase(
                 val dishModel = DishModel(name, dishIcon, nutritionValueModelId)
                 val dishModelId = dishRepository.addDish(dishModel)
 
-                val currentTimeId = dateRepository.addDate(dateRepository.getCurrentDate())
+                val currentTimeId = dateRepository.getCurrentDate().id
                 mealRepository.addMeal(MealModel(currentTimeId, dishModelId, eaten))
 
                 resultMessage = stringRepository.getStr(R.string.meal_dish_created)

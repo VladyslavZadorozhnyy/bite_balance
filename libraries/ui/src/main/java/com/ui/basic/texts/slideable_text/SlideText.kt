@@ -43,4 +43,12 @@ class SlideText(
         binding.isSelected = true
         binding.isSingleLine = true
     }
+
+    fun strikeThrough() {
+        binding.paintFlags = binding.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
+    fun clearThrough() {
+        binding.paintFlags = binding.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+    }
 }

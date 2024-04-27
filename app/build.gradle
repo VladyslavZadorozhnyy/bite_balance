@@ -4,19 +4,27 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Vladyslav\\Desktop\\BiteBalanceProject\\signing_key\\key.jks')
+            storePassword '30122000vlad'
+            keyAlias 'key0'
+            keyPassword '30122000vlad'
+        }
+    }
     namespace 'com.bitebalance'
     compileSdk 33
 
     defaultConfig {
         applicationId "com.bitebalance"
-        minSdk 28
+        minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
-
     buildTypes {
         release {
             minifyEnabled false
@@ -36,7 +44,6 @@ android {
 }
 
 dependencies {
-
 //    Android basic dependencies
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'

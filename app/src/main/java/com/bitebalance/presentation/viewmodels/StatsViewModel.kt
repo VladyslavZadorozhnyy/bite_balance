@@ -1,16 +1,15 @@
 package com.bitebalance.presentation.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.bitebalance.domain.usecase.get.GetNutritionValuesByDateUseCase
-import com.bitebalance.presentation.states.BasicState
-import com.bitebalance.presentation.states.StatsState
-import com.ui.model.NutritionValueModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import java.text.SimpleDateFormat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.launchIn
+import com.ui.model.NutritionValueModel
+import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.MutableLiveData
+import com.bitebalance.presentation.states.StatsState
+import com.bitebalance.domain.usecase.get.GetNutritionValuesByDateUseCase
 
 class StatsViewModel(
     private val getNutritionValuesByDateUseCase: GetNutritionValuesByDateUseCase

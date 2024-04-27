@@ -34,7 +34,7 @@ class MeasurementFragment : BaseFragment<FragmentChooseSettingScreenBinding>() {
         nutritionVm.state.observe(this) { state ->
             if (state.isLoading) return@observe
 
-            if (state.data == null) {
+            if (state.data == null && state.message.isNotEmpty()) {
                 ConfirmDialog(
                     activity = requireActivity(),
                     model = BaseDialogModel(
@@ -46,6 +46,9 @@ class MeasurementFragment : BaseFragment<FragmentChooseSettingScreenBinding>() {
                 ).show()
 
                 if (state.isSuccessful) nutritionVm.getConsumedGoalValues()
+                else nutritionVm.resetState()
+            } else if (state.data == null) {
+                nutritionVm.getConsumedGoalValues()
             } else {
                 setupRecycler(state.data[0])
             }

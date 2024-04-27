@@ -26,28 +26,20 @@ class DateRepositoryImpl(
     }
 
     override fun getCurrentDate(): DateModel {
-        appDaoDatabase.getDateDao().getDate(
-            day = getCurrentDay(),
-            month = getCurrentMonth(),
-            year = getCurrentYear(),
-        )?.let { return DateModel.fromEntity(it) }
-
         val currentDateId = appDaoDatabase.getDateDao().insert(
-            DateModel(
+            dateEntity = DateModel(
                 minute = getCurrentMinute(),
                 hour = getCurrentHour(),
                 day = getCurrentDay(),
                 month = getCurrentMonth(),
                 year = getCurrentYear(),
-            ).toEntity())
+            ).toEntity()
+        )
 
-        return DateModel(
-            minute = getCurrentMinute(),
-            hour = getCurrentHour(),
-            day = getCurrentDay(),
-            month = getCurrentMonth(),
-            year = getCurrentYear(),
-            id = currentDateId,
+        return DateModel.fromEntity(
+            entity = appDaoDatabase.getDateDao().getById(
+                id = currentDateId,
+            )!!
         )
     }
 

@@ -1,6 +1,8 @@
 package com.bitebalance.presentation.ui.fragments
 
+import android.os.Looper
 import android.view.View
+import android.os.Handler
 import com.ui.components.R
 import android.widget.Toast
 import com.ui.common.Constants
@@ -8,14 +10,12 @@ import com.ui.model.NutritionValueModel
 import android.content.res.ColorStateList
 import com.ui.basic.texts.common.TextModel
 import com.ui.basic.buttons.common.ButtonModel
-import com.bitebalance.common.NavigationAction
+import com.ui.common.Constants.POST_DELAYED_OFFSET
 import com.ui.components.graph.component.GraphModel
 import com.ui.components.databinding.ToolbarBinding
-import com.ui.components.dialogs.common.BaseDialogModel
 import com.bitebalance.presentation.viewmodels.DateViewModel
 import com.bitebalance.presentation.viewmodels.StatsViewModel
 import com.bitebalance.databinding.FragmentStatsScreenBinding
-import com.ui.components.dialogs.confirm_dialog.ConfirmDialog
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
@@ -55,9 +55,9 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
 
     override fun onStopFragment() {
         super.onStopFragment()
-        mToast?.cancel()
         dateVm.state.removeObservers(this)
         statsVm.state.removeObservers(this)
+        mToast?.cancel()
     }
 
     private fun setupStyling() {
@@ -66,26 +66,9 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
     }
 
     private fun setupHeader() {
-        toolbarBinding.backButton.setup(
-            model = ButtonModel(
-                iconRes = R.drawable.question_mark_icon,
-                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = primaryColor,
-                backgroundColor = secondaryColor,
-                onClickListener = { showConfirmDialog() },
-            ),
-        )
-        toolbarBinding.forwardButton.setup(
-            model = ButtonModel(
-                iconRes = R.drawable.goal_icon,
-                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
-                foregroundColor = primaryColor,
-                backgroundColor = secondaryColor,
-                onClickListener = {
-                    navigationVm.navigateTo(MyGoalsFragment.newInstance(), NavigationAction.ADD)
-                },
-            ),
-        )
+        toolbarBinding.backButton.visibility = View.INVISIBLE
+        toolbarBinding.forwardButton.visibility = View.INVISIBLE
+
         toolbarBinding.headline.setup(
             model = TextModel(
                 textValue = getString(R.string.statistics),
@@ -130,32 +113,23 @@ class StatsFragment : BaseFragment<FragmentStatsScreenBinding>() {
         monthNutritionValues: List<NutritionValueModel>,
         goalNutritionValue: NutritionValueModel,
     ) {
-        binding.chart.setup(
-            GraphModel(
-                consumption = monthNutritionValues,
-                consumptionGoal = goalNutritionValue,
-                foregroundColor = secondaryColor,
-                backgroundColor = primaryColor,
+        Handler(Looper.getMainLooper()).postDelayed({
+            binding.chart.setup(
+                model = GraphModel(
+                    consumption = monthNutritionValues,
+                    consumptionGoal = goalNutritionValue,
+                    foregroundColor = secondaryColor,
+                    backgroundColor = primaryColor,
+                )
             )
-        )
+        }, POST_DELAYED_OFFSET)
         monthNutritionValues.any { it == statsVm.emptyNutritionValue }.let { emptyValPresent ->
             if (emptyValPresent) {
+                mToast?.cancel()
                 mToast = Toast.makeText(activity, getString(R.string.days_empty), Toast.LENGTH_LONG)
                 mToast?.show()
             }
         }
-    }
-
-    private fun showConfirmDialog() {
-        ConfirmDialog(
-            activity = requireActivity(),
-            model = BaseDialogModel(
-                backgroundColor = secondaryColor,
-                textColor = primaryColor,
-                title = getString(R.string.your_stats_here),
-                buttonText = R.string.done,
-            ),
-        ).show()
     }
 
     companion object {

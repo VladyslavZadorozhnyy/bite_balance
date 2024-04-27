@@ -46,6 +46,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
     override fun setupViewModelsObservation() {
         nutritionVm.state.observe(this) { state ->
             if (state.message.isEmpty() && state.data == null) { return@observe }
+            if (state.data != null && state.data.size > 1) { return@observe }
+
             if (state.data != null) {
                 if (editButtonChecked) { binding.editButton.click() }
                 dishNutritionValue = state.data.first()
@@ -67,8 +69,10 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
             if (state.message.isEmpty() && state.data == null) { return@observe; }
 
             if (state.message.isEmpty()) {
-                setupHeader(state.data!!.first())
-                nutritionVm.getNutritionValue(state.data.first().nutritionValId)
+                if (state.data?.first()?.name == dishName) {
+                    setupHeader(state.data.first())
+                    nutritionVm.getNutritionValue(state.data.first().nutritionValId)
+                }
             } else {
                 ConfirmDialog(requireActivity(), BaseDialogModel(
                     title = state.message,
@@ -201,6 +205,8 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
     }
 
     private fun setupRecycler() {
+        val inputValues = binding.metricRecycler.getInputValues()
+
         binding.metricRecycler.setup(
             if (createDish) {
                 CreateMealWithExistingDishModel.newInstance(
@@ -209,6 +215,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
                     fats = dishNutritionValue.fats.toString(),
                     carbs = dishNutritionValue.carbs.toString(),
                     kcal = dishNutritionValue.kcals.toString(),
+                    hint = inputValues.getOrElse(4) { "" },
                     foregroundColor = primaryColor,
                     backgroundColor = secondaryColor,
                 )

@@ -133,12 +133,23 @@ class CreateNewFragment : BaseFragment<FragmentCreateNewScreenBinding>() {
                     context = requireContext(),
                     foregroundColor = primaryColor,
                     backgroundColor = secondaryColor,
+                    name = binding.metricRecycler.getInputValues().getOrElse(0) { "" },
+                    prots = binding.metricRecycler.getInputValues().getOrElse(1) { "" },
+                    fats = binding.metricRecycler.getInputValues().getOrElse(2) { "" },
+                    carbs = binding.metricRecycler.getInputValues().getOrElse(3) { "" },
+                    kcal = binding.metricRecycler.getInputValues().getOrElse(4) { "" },
                 )
             } else {
                 CreateMealMetricsModel.newInstance(
                     context = requireContext(),
                     foregroundColor = primaryColor,
                     backgroundColor = secondaryColor,
+                    name = binding.metricRecycler.getInputValues().getOrElse(0) { "" },
+                    prots = binding.metricRecycler.getInputValues().getOrElse(1) { "" },
+                    fats = binding.metricRecycler.getInputValues().getOrElse(2) { "" },
+                    carbs = binding.metricRecycler.getInputValues().getOrElse(3) { "" },
+                    kcal = binding.metricRecycler.getInputValues().getOrElse(4) { "" },
+                    eaten = binding.metricRecycler.getInputValues().getOrElse(5) { "" },
                 )
             }
         )

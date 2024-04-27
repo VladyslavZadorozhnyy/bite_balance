@@ -4,14 +4,14 @@
     <string name="app_name">BiteBalance</string>
     <string name="empty_line" />
     <string name="done">Done</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="kcal">kcal</string>
     <string name="g">g</string>
     <string name="support_us">Support Us</string>
     <string name="appearance">Appearance</string>
     <string name="toggle_check">Toggle check box for not including</string>
     <string name="some_fields_empty">Some fields are empty. They will be filled with \'0\'</string>
-    <string name="no_dishes_yet">Seems that you have no dishes yet. \n\n Start by adding one.</string>
+    <string name="no_dishes_yet">Seems that you have no dishes yet. \n Start by adding one.</string>
     <string name="name">Name:</string>
     <string name="prots_">Prots:</string>
     <string name="fats_">Fats:</string>
@@ -25,6 +25,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="add">Add</string>
+    <string name="measurement">Measurement</string>
 
 <!--    ChooseDishFragment-->
     <string name="choose_dish">Choose dish</string>
@@ -43,14 +44,6 @@
     <string name="font">Font</string>
     <string name="choose_primary_color">Choose primary color</string>
     <string name="choose_secondary_color">Choose secondary color</string>
-
-<!--    ChooseSettingFragment-->
-    <string name="choosings">Choosings</string>
-    <string name="language">Language</string>
-    <string name="measurement">Measurement</string>
-    <string name="about_us">About Us</string>
-    <string name="instruction">Instruction</string>
-    <string name="feedback">Feedback</string>
 
 <!--    CreateNewFragment-->
     <string name="new_dish">New dish</string>
@@ -87,12 +80,6 @@
     <string name="add_new">Add new</string>
     <string name="menu">Menu</string>
 
-<!--    MyGoalsFragment-->
-    <string name="goal_removed">Goal was removed</string>
-    <string name="my_goals">My Goals</string>
-    <string name="next_goal">My next goal is to :</string>
-    <string name="no_goals_yet">Seems that you have no goals for this month. \n\n You can create one for current month.</string>
-
 <!--    SettingsFragment-->
     <string name="settings">Settings</string>
 
@@ -118,13 +105,6 @@
     <string name="fats_consumption">Fats consumption</string>
     <string name="carbs_consumption">Carbs consumption</string>
     <string name="out_of_label">%.1f / %.1f (%.1f %%)</string>
-
-<!--     SupportFeedbackFragment-->
-    <string name="commit">Commit</string>
-    <string name="donated">Donated successfully!</string>
-    <string name="donation_text">*Donation text*</string>
-    <string name="message_to_developers">*Message to developers*</string>
-    <string name="donation_plan">*Donation plan*</string>
 
 <!--    TextFragment-->
     <string name="project_info">*Information about the project and application*</string>

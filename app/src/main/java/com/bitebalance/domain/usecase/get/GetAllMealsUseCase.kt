@@ -33,6 +33,11 @@ class GetAllMealsUseCase(
 
                 for (i in meals.indices) {
                     if (dates[i]?.same(todayDate) != true) { continue }
+                    val mealTime = if ((dates[i]?.minute ?: 0) < 10)
+                            "${dates[i]?.hour}:0${dates[i]?.minute}"
+                        else
+                            "${dates[i]?.hour}:${dates[i]?.minute}"
+
                     result.add(
                         element = MealModelUnboxed(
                             iconRes = dishes[i]?.iconRes ?: R.drawable.no_dish_icon,
@@ -40,7 +45,7 @@ class GetAllMealsUseCase(
                             dishName = dishes[i]?.name ?: stringRepository.getStr(R.string.dish_removed),
                             amount = meals[i].amount,
                             mealTimeId = dates[i]?.id ?: -1,
-                            mealTime = "${dates[i]?.hour}:${dates[i]?.minute}",
+                            mealTime = mealTime,
                             id = meals[i].id,
                         ),
                     )

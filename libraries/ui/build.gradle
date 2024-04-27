@@ -4,11 +4,19 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Vladyslav\\Desktop\\BiteBalanceProject\\signing_key\\key.jks')
+            storePassword '30122000vlad'
+            keyAlias 'key0'
+            keyPassword '30122000vlad'
+        }
+    }
     namespace 'com.ui.components'
     compileSdk 32
 
     defaultConfig {
-        minSdk 28
+        minSdk 29
         targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

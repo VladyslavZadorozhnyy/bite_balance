@@ -53,8 +53,6 @@ class SettingsAdapter(
                     onClickListener = { itemView.callOnClick() },
                 ),
             )
-            settingIconButton.rootView.findViewById<View>(R.id.button_view).stateListAnimator = null
-
             settingText.setup(
                 model = TextModel(
                     textValue = model.instructionText,

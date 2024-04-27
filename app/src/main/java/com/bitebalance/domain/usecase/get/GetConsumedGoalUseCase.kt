@@ -27,7 +27,6 @@ class GetConsumedGoalUseCase(
         withContext(Dispatchers.IO) {
             try {
                 val currentDate = dateRepository.getCurrentDate()
-
                 val todayMeals = mealRepository.getAllMeals().filter {
                     dateRepository.getDateById(it.mealTimeId)?.day == currentDate.day
                             && dateRepository.getDateById(it.mealTimeId)?.month == currentDate.month

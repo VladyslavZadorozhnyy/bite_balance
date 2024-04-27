@@ -41,7 +41,6 @@ class GetNutritionValuesByDateUseCase(
                     .filter { dateRepository.getDateById(it.mealTimeId)?.month == dateModel.month &&
                             dateRepository.getDateById(it.mealTimeId)?.year == dateModel.year }
                     .groupBy {
-                        summedNutr = emptyNutritionValue
                         dateRepository.getDateById(it.mealTimeId)?.day
                     }.asIterable().forEach { mapEntry ->
                         mapEntry.value.map { mealModel ->
@@ -50,7 +49,10 @@ class GetNutritionValuesByDateUseCase(
 
                             nutModel?.let { summedNutr = summedNutr.plus(nutModel, mealModel.amount) }
                         }
-                        mapEntry.key?.let { dayConsumptionMap[it] = summedNutr }
+                        mapEntry.key?.let {
+                            dayConsumptionMap[it] = summedNutr
+                            summedNutr = emptyNutritionValue
+                        }
                     }
                 nutrRepository.getGoalConsumption()?.let { goalConsumption = it }
             } catch (exception: Throwable) {

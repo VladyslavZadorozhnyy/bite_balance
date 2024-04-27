@@ -44,6 +44,7 @@ class InstructionAdapter(
                     iconSize = Constants.ICON_SIZE_BIG,
                     foregroundColor = backgroundColor,
                     backgroundColor = foregroundColor,
+                    isClickable = false,
                 ),
             )
             buttonInstruction.setup(
