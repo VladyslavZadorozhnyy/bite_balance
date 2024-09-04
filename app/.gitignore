@@ -2,6 +2,7 @@
 /gradle
 /.gradle
 /.idea
+/local.properties
 /libraries/ui/build
 /libraries/ui/.gitignore
 /libraries/database/build
