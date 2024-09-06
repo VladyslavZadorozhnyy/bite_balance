@@ -33,11 +33,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.ui.basic.texts.text.Text
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/text_view"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:paddingTop="8dp"
+        android:paddingHorizontal="8dp"
         android:paddingBottom="12dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/dropdown_button"
