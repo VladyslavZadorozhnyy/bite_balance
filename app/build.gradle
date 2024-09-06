@@ -3,7 +3,30 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+project.ext {
+    releaseVersionCode = 2
+    debugVersionCode = 2
+}
+
+def getLastVersionName(versionCode) {
+    return "0.0." + versionCode
+}
+
+def getReleaseVersionCode() {
+    def version = project.releaseVersionCode + 1
+    project.releaseVersionCode = version
+    return version
+}
+
+def getDebugVersionCode() {
+    def version = project.debugVersionCode + 1
+    project.debugVersionCode = version
+    return version
+}
+
 android {
+    flavorDimensions "default"
+
     signingConfigs {
         release {
             storeFile file('C:\\Users\\Vladyslav\\Desktop\\BiteBalanceProject\\signing_key\\key.jks')
@@ -23,21 +46,36 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.debug
+        signingConfig signingConfigs.release
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        rc {
+            versionCode getReleaseVersionCode()
+            versionName getLastVersionName(project.releaseVersionCode)
+        }
+        dbg {
+            versionCode getDebugVersionCode()
+            versionName getLastVersionName(project.debugVersionCode)
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     viewBinding {
         enabled = true
     }
