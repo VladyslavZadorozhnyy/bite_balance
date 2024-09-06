@@ -87,11 +87,8 @@ class MenuFragment : BaseFragment<FragmentMenuScreenBinding>() {
             model = ButtonModel(
                 iconRes = R.drawable.add_icon,
                 iconSize = Constants.ICON_SIZE_MEDIUM,
-                strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
-                labelTextSize = Constants.TEXT_SIZE_SMALL,
-                labelTextRes = R.string.add_new,
-                foregroundColor = primaryColor,
-                backgroundColor = secondaryColor,
+                foregroundColor = secondaryColor,
+                backgroundColor = primaryColor,
                 onClickListener =  {
                     navigationVm.navigateTo(
                         CreateNewFragment.newInstance(createDish = true),
