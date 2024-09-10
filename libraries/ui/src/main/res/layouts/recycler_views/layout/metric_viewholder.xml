@@ -8,13 +8,13 @@
 
     <com.ui.basic.checkbox.Checkbox
         android:id="@+id/checkbox_view"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
         android:layout_gravity="center_vertical" />
 
     <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_name_view"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_width="100dp"
         android:paddingBottom="2dp"
         android:paddingStart="5dp" />
