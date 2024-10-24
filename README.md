@@ -1,3 +1,5 @@
+Available on Google Play: https://play.google.com/store/apps/details?id=com.bitebalance
+
 This project implements an Android application for calorie counting, adhering to the principles of MVVM architecture, imperative UI development, Clean Architecture, SQLite for data storage, and reactive programming.
 
 Features
