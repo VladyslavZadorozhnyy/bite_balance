@@ -4,8 +4,8 @@ plugins {
 }
 
 project.ext {
-    releaseVersionCode = 21
-    debugVersionCode = 21
+    releaseVersionCode = 23
+    debugVersionCode = 23
 }
 
 def getLastVersionName(versionCode) {
