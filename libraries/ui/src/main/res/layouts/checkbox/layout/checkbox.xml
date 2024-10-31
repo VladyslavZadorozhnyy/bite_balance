@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:layout_margin="2dp"
             android:layout_gravity="center"
-            android:contentDescription="@string/empty_line"
+            android:contentDescription="@string/checkbox_cd"
             android:background="@drawable/checkbox_shape"/>
 
     </FrameLayout>
