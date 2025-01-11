@@ -8,33 +8,30 @@
 
     <com.ui.basic.checkbox.Checkbox
         android:id="@+id/checkbox_view"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_gravity="center_vertical" />
 
     <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_name_view"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:layout_width="100dp"
         android:paddingBottom="2dp"
         android:paddingStart="5dp" />
 
     <com.ui.basic.input_form.InputForm
         android:id="@+id/metric_value_view_input"
         android:layout_height="match_parent"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:paddingStart="5dp"
         android:visibility="gone"/>
 
     <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_value_view_text"
         android:layout_height="match_parent"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
         android:paddingBottom="4dp"
         android:paddingStart="5dp"
         android:visibility="gone"/>
@@ -42,9 +39,8 @@
     <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/metric_label_view"
         android:layout_height="match_parent"
-        android:layout_width="0dp"
+        android:layout_width="120dp"
         android:paddingBottom="2dp"
         android:paddingStart="5dp"
-        android:layout_weight="1"
         android:visibility="invisible"/>
 </LinearLayout>

@@ -30,16 +30,13 @@ class MainActivity : AppCompatActivity() {
 
             supportFragmentManager.fragments.lastOrNull()?.onStop()
             when (state.action) {
-                NavigationAction.POP -> {
+                NavigationAction.POP ->
                     onBackPressed()
-                }
-                NavigationAction.REPLACE -> {
-                    state.fragment?.let { transaction.replace(binding.container.id, it) }
-                }
-                else -> {
-                    state.fragment?.let { transaction.add(binding.container.id, it).addToBackStack(null) }
-                    supportFragmentManager.fragments.forEach { (it as? NavigationFragment)?.onStop() }
-                }
+                NavigationAction.REPLACE ->
+                    state.fragment?.let { transaction.replace(binding.fragmentContainer.id, it) }
+                else ->
+                    state.fragment?.let {
+                        transaction.add(binding.fragmentContainer.id, it).addToBackStack(null) }
             }
             transaction.commit()
         }

@@ -38,7 +38,6 @@ class InstructionAdapter(
         private val buttonInstruction = view.findViewById<Text>(R.id.button_instruction)
 
         fun bind(item: InstructionModel, foregroundColor: Int, backgroundColor: Int) {
-            buttonIcon.contentDescription = item.instructionText
             buttonIcon.setup(
                 model = ButtonModel(
                     iconRes = item.iconRes,

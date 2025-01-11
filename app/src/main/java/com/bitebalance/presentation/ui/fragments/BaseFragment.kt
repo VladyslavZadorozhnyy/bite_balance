@@ -33,15 +33,9 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     protected abstract fun setupViewModelsObservation()
 
-    protected open fun onResumeFragment() {
-        binding.root.isClickable = true
-        binding.root.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
-        setupViewModelsObservation()
-    }
+    protected open fun onResumeFragment() { setupViewModelsObservation() }
 
     protected open fun onStopFragment() {
-        binding.root.isClickable = false
-        binding.root.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
         themeVm.state.removeObservers(this)
         navigationVm.state.removeObservers(this)
     }

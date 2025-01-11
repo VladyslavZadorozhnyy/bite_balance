@@ -13,11 +13,11 @@ android {
         }
     }
     namespace 'com.ui.components'
-    compileSdk 34
+    compileSdk 32
 
     defaultConfig {
         minSdk 29
-        targetSdk 34
+        targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
