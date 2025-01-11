@@ -43,6 +43,7 @@
 
                 <com.ui.basic.buttons.icon_button.IconButton
                     android:id="@+id/info_button"
+                    android:contentDescription="@string/info_button_cd"
                     android:layout_width="55dp"
                     android:layout_height="60dp" />
 
@@ -53,6 +54,7 @@
 
                 <com.ui.basic.buttons.icon_button.IconButton
                     android:id="@+id/today_meals_button"
+                    android:contentDescription="@string/today_meals_button_cd"
                     android:layout_width="55dp"
                     android:layout_height="60dp" />
 
@@ -63,6 +65,7 @@
 
                 <com.ui.basic.buttons.icon_button.IconButton
                     android:id="@+id/reset_progress_button"
+                    android:contentDescription="@string/reset_progress_button_cd"
                     android:layout_width="55dp"
                     android:layout_height="60dp" />
 
@@ -73,6 +76,7 @@
 
                 <com.ui.basic.buttons.icon_button.IconButton
                     android:id="@+id/add_meal_button"
+                    android:contentDescription="@string/add_meal_button_button_cd"
                     android:layout_width="55dp"
                     android:layout_height="60dp" />
 

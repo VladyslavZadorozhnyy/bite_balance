@@ -14,6 +14,7 @@ import com.ui.basic.input_form.InputFormModel
 import androidx.recyclerview.widget.RecyclerView
 import com.ui.basic.texts.slideable_text.SlideText
 
+
 class MetricAdapter(
     private val items: List<MetricModel>,
     private val foregroundColor: Int,

@@ -19,7 +19,6 @@ object Constants {
     const val ICON_SIZE_BIG = 100
     const val ICON_SIZE_LARGE = 120
     const val CORNER_RADIUS = 20
-    const val BACK_BUTTON_ICON_SIZE = 70
     const val COLOR_ICON_STROKE_WIDTH = 5
 
 //    Offset constants
