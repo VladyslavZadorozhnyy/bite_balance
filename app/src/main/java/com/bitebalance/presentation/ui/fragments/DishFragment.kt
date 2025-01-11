@@ -135,7 +135,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = Constants.ICON_SIZE_BIG,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,
                 onClickListener = { navigationVm.popScreen() }
@@ -162,7 +162,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
         binding.deleteButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.bin_icon,
-                iconSize = Constants.ICON_SIZE_BIG,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
                 foregroundColor = if (editButtonChecked) secondaryColor else primaryColor,
                 backgroundColor = if (editButtonChecked) primaryColor else secondaryColor,
@@ -185,7 +185,7 @@ class DishFragment : BaseFragment<FragmentDishScreenBinding>() {
         binding.editButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.edit_icon,
-                iconSize = Constants.ICON_SIZE_BIG,
+                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
                 strokeWidth = Constants.COLOR_ICON_STROKE_WIDTH,
                 foregroundColor = if (editButtonChecked) secondaryColor else primaryColor,
                 backgroundColor = if (editButtonChecked) primaryColor else secondaryColor,

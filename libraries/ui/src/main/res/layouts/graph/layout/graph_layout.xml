@@ -44,7 +44,7 @@
     <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/goal_consumption"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         app:layout_constraintHorizontal_weight="1"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="15dp"
@@ -55,7 +55,7 @@
     <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/actual_consumption"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         app:layout_constraintHorizontal_weight="1"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="15dp"
