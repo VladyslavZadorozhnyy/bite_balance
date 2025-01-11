@@ -139,5 +139,6 @@
     <string name="today_meals_button_cd">Today meals</string>
     <string name="reset_progress_button_cd">Reset progress</string>
     <string name="add_meal_button_button_cd">Add meal</string>
-    <string name="back_button_cd">Back button</string>
+    <string name="back_button_cd">Back</string>
+    <string name="checkbox_cd">Checkbox</string>
 </resources>

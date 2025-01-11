@@ -127,6 +127,7 @@ class AppearanceFragment : BaseFragment<FragmentAppearanceScreenBinding>() {
             }
         }).apply {
             this.dialog.setTitle(dialogTitleRes)
+            this.dialog.window?.setBackgroundDrawableResource(R.color.dialog_bkg)
             this.show()
         }
     }
