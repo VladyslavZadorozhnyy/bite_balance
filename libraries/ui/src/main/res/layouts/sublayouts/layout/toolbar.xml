@@ -6,9 +6,10 @@
 
     <com.ui.basic.buttons.icon_button.IconButton
         android:id="@+id/back_button"
-        android:layout_width="40dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="60dp"
         android:layout_marginHorizontal="20dp"
+        android:contentDescription="@string/back_button_cd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/headline"
         app:layout_constraintTop_toTopOf="parent"

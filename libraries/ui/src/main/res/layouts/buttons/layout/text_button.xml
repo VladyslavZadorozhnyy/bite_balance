@@ -6,6 +6,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_view"
         android:letterSpacing="0.3"
+        android:label="@string/empty_line"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </merge>
