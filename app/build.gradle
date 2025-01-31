@@ -5,8 +5,8 @@ plugins {
 }
 
 project.ext {
-    releaseVersionCode = 29
-    debugVersionCode = 29
+    releaseVersionCode = 30
+    debugVersionCode = 30
 }
 
 def getLastVersionName(versionCode) {
@@ -88,6 +88,8 @@ android {
 }
 
 play {
+//    terminal command to publish automatically:  ./gradlew publishBundle
+    track.set("production")
     serviceAccountCredentials.set(file("polished-scope-447522-p4-3ca9088034e9.json"))
 }
 
