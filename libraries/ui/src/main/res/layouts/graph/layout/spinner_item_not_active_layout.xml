@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.ui.basic.texts.text.Text
+    <com.ui.basic.texts.slideable_text.SlideText
         android:id="@+id/text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

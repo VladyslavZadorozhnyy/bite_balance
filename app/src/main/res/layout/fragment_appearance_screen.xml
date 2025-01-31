@@ -35,11 +35,12 @@
         <LinearLayout
             android:id="@+id/color_1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="3dp"
             android:padding="10dp"
             android:background="@color/white"
             android:orientation="horizontal"
+            app:flow_verticalAlign="center"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -65,7 +66,7 @@
         <LinearLayout
             android:id="@+id/color_2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="3dp"
             android:padding="10dp"
             android:background="@color/white"

@@ -52,7 +52,7 @@ class AddMealFragment : BaseFragment<FragmentAddMealScreenBinding>() {
         toolbarBinding.backButton.setup(
             model = ButtonModel(
                 iconRes = R.drawable.back_button_icon,
-                iconSize = Constants.BACK_BUTTON_ICON_SIZE,
+                iconSize = Constants.ICON_SIZE_BIG,
                 foregroundColor = primaryColor,
                 backgroundColor = secondaryColor,
                 onClickListener = { navigationVm.popScreen() },

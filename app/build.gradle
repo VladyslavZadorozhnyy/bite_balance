@@ -1,9 +1,33 @@
 plugins {
     id 'com.android.application'
+    id 'com.github.triplet.play' version '3.12.1'
     id 'org.jetbrains.kotlin.android'
 }
 
+project.ext {
+    releaseVersionCode = 30
+    debugVersionCode = 30
+}
+
+def getLastVersionName(versionCode) {
+    return "1.0." + versionCode
+}
+
+def getReleaseVersionCode() {
+    def version = project.releaseVersionCode + 1
+    project.releaseVersionCode = version
+    return version
+}
+
+def getDebugVersionCode() {
+    def version = project.debugVersionCode + 1
+    project.debugVersionCode = version
+    return version
+}
+
 android {
+    flavorDimensions "default"
+
     signingConfigs {
         release {
             storeFile file('C:\\Users\\Vladyslav\\Desktop\\BiteBalanceProject\\signing_key\\key.jks')
@@ -13,21 +37,23 @@ android {
         }
     }
     namespace 'com.bitebalance'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.bitebalance"
         minSdk 29
-        targetSdk 31
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.debug
+        signingConfig signingConfigs.release
     }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         benchmark {
@@ -36,17 +62,43 @@ android {
             debuggable false
         }
     }
+
+    productFlavors {
+        rc {
+            versionCode getReleaseVersionCode()
+            versionName getLastVersionName(project.releaseVersionCode)
+        }
+        dbg {
+            versionCode getDebugVersionCode()
+            versionName getLastVersionName(project.debugVersionCode)
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     viewBinding {
         enabled = true
     }
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
 }
+
+play {
+//    terminal command to publish automatically:  ./gradlew publishBundle
+    track.set("production")
+    serviceAccountCredentials.set(file("polished-scope-447522-p4-3ca9088034e9.json"))
+}
+
+
 
 dependencies {
 //    Android basic dependencies
@@ -71,6 +123,9 @@ dependencies {
 
 //    Color picker dependencies
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
+
+    //    Android GPP
+    implementation 'com.github.triplet.gradle:play-publisher:4.0.0-SNAPSHOT'
 
 //    Android test dependencies
     testImplementation 'junit:junit:4.13.2'

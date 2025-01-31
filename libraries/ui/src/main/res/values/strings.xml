@@ -77,7 +77,6 @@
     <string name="back">Back</string>
 
 <!--    MenuFragment-->
-    <string name="add_new">Add new</string>
     <string name="menu">Menu</string>
 
 <!--    SettingsFragment-->
@@ -100,10 +99,10 @@
     <string name="act_consumption">Actual consumption lab</string>
     <string name="days_empty">Some days do not have data</string>
     <string name="your_stats_here">Your statistics data located here. Switch months and nutrition indicators to explore</string>
-    <string name="kcal_consumption">Kcal consumption</string>
-    <string name="prots_consumption">Prots consumption</string>
+    <string name="kcal_consumption">Calories consumption</string>
+    <string name="prots_consumption">Proteins consumption</string>
     <string name="fats_consumption">Fats consumption</string>
-    <string name="carbs_consumption">Carbs consumption</string>
+    <string name="carbs_consumption">Carbohydrates consumption</string>
     <string name="out_of_label">%.1f / %.1f (%.1f %%)</string>
 
 <!--    TextFragment-->
@@ -134,4 +133,12 @@
     <string name="component_update_success">Component updated successfully</string>
     <string name="num_format_exception">Invalid value: only numbers allowed</string>
     <string name="value_out_of_bounds">Entered value is invalid. Must be between %s and %s</string>
+
+    <!--    Content description strings-->
+    <string name="info_button_cd">Information</string>
+    <string name="today_meals_button_cd">Today meals</string>
+    <string name="reset_progress_button_cd">Reset progress</string>
+    <string name="add_meal_button_button_cd">Add meal</string>
+    <string name="back_button_cd">Back</string>
+    <string name="checkbox_cd">Checkbox</string>
 </resources>
