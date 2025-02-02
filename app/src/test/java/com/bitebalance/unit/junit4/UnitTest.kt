@@ -2,29 +2,21 @@ package com.bitebalance.unit.junit4
 
 import android.content.Context
 import android.graphics.Color
+import com.bitebalance.presentation.ui.activites.MainActivity
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
 import org.hamcrest.CoreMatchers.*
-import org.junit.*
-import org.junit.Assert.*
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.Assert.*
+import org.junit.Test
+import org.mockito.Mock
+import org.mockito.Mockito.mock
 
 class UiTest {
-    companion object {
-        private var mContext: Context? = null
-
-//        @Before
-//        fun initContext() {
-//            mContext = ApplicationProvider.getApplicationContext()
-//        }
-//
-//        @After
-//        fun removeContext() {
-//            mContext = null
-//        }
-    }
+    @Mock
+    private val mockContext = mock(Context::class.java)
 
     @Test
     fun basic_buttons_common_button_model_test() {
@@ -59,7 +51,7 @@ class UiTest {
     }
 
     @Test
-    fun basic_buttons_common_icon_button_test() {
+    fun basic_buttons_common_button_model_matcher_test() {
         val buttonModel1 = ButtonModel()
         val buttonModel2 = ButtonModel(
             iconRes = null,
@@ -85,5 +77,17 @@ class UiTest {
         assertThat(Color.BLACK, anyOf(equalTo(buttonModel1.backgroundColor), equalTo(buttonModel2.backgroundColor)))
         assertThat(buttonModel1, sameInstance(buttonModel1))
         assertThat(buttonModel2, not(sameInstance(buttonModel1)))
+    }
+
+    @Test
+    fun basic_buttons_common_icon_button_test() {
+        val buttonModel = ButtonModel(
+            iconRes = null,
+            iconSize = Constants.ICON_SIZE_LARGE,
+            foregroundColor = Color.BLACK,
+            backgroundColor = Color.WHITE,
+            onClickListener = {},
+        )
+        IconButton(mockContext)
     }
 }
