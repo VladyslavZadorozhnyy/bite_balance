@@ -124,7 +124,7 @@ dependencies {
 //    Color picker dependencies
     implementation 'com.github.yukuku:ambilwarna:2.0.1'
 
-    //    Android GPP
+//    Android GPP
     implementation 'com.github.triplet.gradle:play-publisher:4.0.0-SNAPSHOT'
 
 //    Android test dependencies
