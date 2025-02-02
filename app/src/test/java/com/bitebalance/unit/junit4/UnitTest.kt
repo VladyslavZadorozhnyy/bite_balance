@@ -1,15 +1,34 @@
 package com.bitebalance.unit.junit4
 
+import android.content.Context
 import android.graphics.Color
 import com.ui.basic.buttons.common.ButtonModel
+import com.ui.basic.buttons.icon_button.IconButton
+import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
+import org.hamcrest.CoreMatchers.*
+import org.junit.*
 import org.junit.Assert.*
-import org.junit.Test
+import org.hamcrest.MatcherAssert.assertThat
 
 class UiTest {
+    companion object {
+        private var mContext: Context? = null
+
+//        @Before
+//        fun initContext() {
+//            mContext = ApplicationProvider.getApplicationContext()
+//        }
+//
+//        @After
+//        fun removeContext() {
+//            mContext = null
+//        }
+    }
+
     @Test
     fun basic_buttons_common_button_model_test() {
-        var buttonModel = ButtonModel()
+        val buttonModel = ButtonModel()
 
         assertNull(buttonModel.iconRes)
         assertNotNull(buttonModel.iconSize)
@@ -37,5 +56,34 @@ class UiTest {
 
         assertTrue(buttonModel.isClickable)
         assertNotNull(buttonModel.isClickable)
+    }
+
+    @Test
+    fun basic_buttons_common_icon_button_test() {
+        val buttonModel1 = ButtonModel()
+        val buttonModel2 = ButtonModel(
+            iconRes = null,
+            iconSize = Constants.DISH_ICON_SIZE,
+            foregroundColor = Color.BLACK,
+            backgroundColor = Color.WHITE,
+            onClickListener = {},
+        )
+
+        try {
+            assertTrue(buttonModel1 is BaseUiComponentModel)
+        } catch (e: java.lang.Exception) {
+            fail("buttonModel1 !is BaseUiComponentModel")
+        }
+
+        try {
+            buttonModel1 as IconButton
+            fail("buttonModel1 as IconButton")
+        } catch (e: java.lang.Exception) {}
+
+        assertThat(null, allOf(equalTo(buttonModel1.iconRes), equalTo(buttonModel2.iconRes)))
+        assertThat(Color.WHITE, not(allOf(equalTo(buttonModel1.foregroundColor), equalTo(buttonModel2.foregroundColor))))
+        assertThat(Color.BLACK, anyOf(equalTo(buttonModel1.backgroundColor), equalTo(buttonModel2.backgroundColor)))
+        assertThat(buttonModel1, sameInstance(buttonModel1))
+        assertThat(buttonModel2, not(sameInstance(buttonModel1)))
     }
 }

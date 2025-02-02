@@ -126,6 +126,8 @@ dependencies {
 
 //    Android GPP
     implementation 'com.github.triplet.gradle:play-publisher:4.0.0-SNAPSHOT'
+    implementation 'androidx.test:core-ktx:1.6.1'
+    implementation 'androidx.test.ext:junit-ktx:1.2.1'
 
 //    Android test dependencies
     testImplementation 'junit:junit:4.13.2'
