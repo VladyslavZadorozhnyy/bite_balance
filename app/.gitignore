@@ -1,9 +1,11 @@
+/.idea
 /build
 /gradle
 /.gradle
 /.idea
 /local.properties
 /libraries/ui/build
+/benchmark_test/build
 /libraries/ui/.gitignore
 /libraries/database/build
 /libraries/database/.gitignore
