@@ -2,22 +2,37 @@ package com.bitebalance.unit.junit4
 
 import android.content.Context
 import android.graphics.Color
-import com.bitebalance.presentation.ui.activites.MainActivity
 import com.ui.basic.buttons.common.ButtonModel
 import com.ui.basic.buttons.icon_button.IconButton
 import com.ui.common.BaseUiComponentModel
 import com.ui.common.Constants
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
+import org.junit.AfterClass
 import org.junit.Assert.*
-import org.junit.Ignore
+import org.junit.BeforeClass
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 
 class UiTest {
-    @Mock
-    private val mockContext = mock(Context::class.java)
+    companion object {
+        @Mock
+        private var mockContext: Context? = null
+
+        @BeforeClass
+        @JvmStatic
+        fun initContext() {
+            mockContext = mock(Context::class.java)
+        }
+
+        @AfterClass
+        @JvmStatic
+        fun removeContext() {
+            println("mockContext = null, AAADIP")
+            mockContext = null
+        }
+    }
 
     @Test
     fun basic_buttons_common_button_model_test() {
@@ -80,7 +95,6 @@ class UiTest {
         assertThat(buttonModel2, not(sameInstance(buttonModel1)))
     }
 
-    @Ignore("This test is not ready yet")
     @Test
     fun basic_buttons_common_icon_button_test() {
         val buttonModel = ButtonModel(
