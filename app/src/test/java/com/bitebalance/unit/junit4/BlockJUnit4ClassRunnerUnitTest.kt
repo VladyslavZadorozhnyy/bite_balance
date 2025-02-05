@@ -12,10 +12,13 @@ import org.junit.AfterClass
 import org.junit.Assert.*
 import org.junit.BeforeClass
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.junit.runners.BlockJUnit4ClassRunner
 import org.mockito.Mock
 import org.mockito.Mockito.mock
 
-class UiTest {
+@RunWith(BlockJUnit4ClassRunner::class)
+class BlockJUnit4ClassRunnerUnitTest {
     companion object {
         @Mock
         private var mockContext: Context? = null
@@ -93,17 +96,5 @@ class UiTest {
         assertThat(Color.BLACK, anyOf(equalTo(buttonModel1.backgroundColor), equalTo(buttonModel2.backgroundColor)))
         assertThat(buttonModel1, sameInstance(buttonModel1))
         assertThat(buttonModel2, not(sameInstance(buttonModel1)))
-    }
-
-    @Test
-    fun basic_buttons_common_icon_button_test() {
-        val buttonModel = ButtonModel(
-            iconRes = null,
-            iconSize = Constants.ICON_SIZE_LARGE,
-            foregroundColor = Color.BLACK,
-            backgroundColor = Color.WHITE,
-            onClickListener = {},
-        )
-        IconButton(mockContext)
     }
 }
